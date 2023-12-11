@@ -8,6 +8,7 @@ import ProfilePage from "./Profile/ProfilePage";
 import PageError404 from "./Error/PageError404";
 import SettingsPage from "./Settings/SettingsPage";
 import FavorisPage from "./Favoris/FavorisPage";
+import AdminPage from "./Admin/AdminPage";
 
 function Router({ user, userRole }) {
     // user is a boolean to know if he's connected or no 
@@ -19,7 +20,7 @@ function Router({ user, userRole }) {
             {user ? (
                 userRole === "client" ? (
                     // client part 
-                    <Route path="/" element={<Layout />}>
+                    <Route path="/" element={<Layout userRole={"client"} />}>
                         <>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/profile" element={<ProfilePage />} />
@@ -27,20 +28,23 @@ function Router({ user, userRole }) {
                             <Route path="/settings" element={<SettingsPage />} />
                         </>
                     </Route>
-                ) : (
+                ) : userRole === "moderator" ? (
                     // moderators part 
-                    <Route path="/" element={<Layout />}>
+                    <Route path="/" element={<Layout userRole={"moderator"} />}>
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/saved" element={<FavorisPage />} />
                         <Route path="/settings" element={<SettingsPage />} />
                     </Route>
+                ) : (
+                    // admins part 
+                    <Route path="/" element={<Layout userRole={"admin"} />}>
+                        <Route path="/" element={<AdminPage />} />
+                    </Route>
                 )
             ) : (
                 <Route>
-                    <Route path="/" element={<Layout />}>
-                        <Route index path="/" element={<WelcomePage />} />
-                    </Route>
+                    <Route index path="/" element={<WelcomePage />} />
                     <Route index path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
                 </Route>

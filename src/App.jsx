@@ -5,7 +5,7 @@ import './App.css'
 export default function App() {
   return (
     <BrowserRouter>
-      <Router />
+      <Router user={true} userRole={"client"} />
     </BrowserRouter>
   );
 }

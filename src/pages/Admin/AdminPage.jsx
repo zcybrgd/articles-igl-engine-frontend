@@ -1,14 +1,14 @@
 import React from "react"
 
-function SettingsPage() {
+function AdminPage() {
 
     return (
         <div className="">
             <h1>
-                Settings Page
+                Admin Page
             </h1>
         </div>
     )
 }
 
-export default SettingsPage
+export default AdminPage
