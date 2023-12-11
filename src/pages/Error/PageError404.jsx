@@ -1,14 +1,14 @@
 import React from "react"
 
-function LogIn() {
+function PageError404() {
 
     return (
         <div>
             <h1>
-                LogIn Page
+                Error Page
             </h1>
         </div>
     )
 }
 
-export default LogIn
+export default PageError404

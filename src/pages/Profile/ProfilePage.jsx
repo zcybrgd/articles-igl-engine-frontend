@@ -1,14 +1,14 @@
 import React from "react"
 
-function LogIn() {
+function ProfilePage() {
 
     return (
         <div>
             <h1>
-                LogIn Page
+                Profile Page
             </h1>
         </div>
     )
 }
 
-export default LogIn
+export default ProfilePage

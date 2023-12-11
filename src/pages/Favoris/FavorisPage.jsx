@@ -1,14 +1,14 @@
 import React from "react"
 
-function LogIn() {
+function FavorisPage() {
 
     return (
         <div>
             <h1>
-                LogIn Page
+                Favoris Page
             </h1>
         </div>
     )
 }
 
-export default LogIn
+export default FavorisPage
