@@ -1,6 +1,6 @@
 import React from "react"
 
-function FavorisPage() {
+function CollectionsPage() {
 
     return (
         <div>
@@ -11,4 +11,4 @@ function FavorisPage() {
     )
 }
 
-export default FavorisPage
+export default CollectionsPage

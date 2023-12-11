@@ -39,7 +39,7 @@ const Layout = ({ userRole }) => {
                 <>
                     <Navbar userRole={userRole} />
 
-                    <div className="pt-16 pl-0 md:pl-72">
+                    <div className="pt-16 pl-0">
                         <div className="p-10">
                             <Outlet />
                         </div>

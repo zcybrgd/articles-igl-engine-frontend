@@ -7,8 +7,9 @@ import SignUp from "./Authentification/SignUp";
 import ProfilePage from "./Profile/ProfilePage";
 import PageError404 from "./Error/PageError404";
 import SettingsPage from "./Settings/SettingsPage";
-import FavorisPage from "./Favoris/FavorisPage";
+import CollectionsPage from "./Collections/CollectionsPage";
 import AdminPage from "./Admin/AdminPage";
+import ModeratorPage from "./Moderators/ModeratorPage";
 
 function Router({ user, userRole }) {
     // user is a boolean to know if he's connected or no 
@@ -24,17 +25,14 @@ function Router({ user, userRole }) {
                         <>
                             <Route path="/" element={<HomePage />} />
                             <Route path="/profile" element={<ProfilePage />} />
-                            <Route path="/saved" element={<FavorisPage />} />
+                            <Route path="/saved" element={<CollectionsPage />} />
                             <Route path="/settings" element={<SettingsPage />} />
                         </>
                     </Route>
                 ) : userRole === "moderator" ? (
                     // moderators part 
                     <Route path="/" element={<Layout userRole={"moderator"} />}>
-                        <Route path="/home" element={<HomePage />} />
-                        <Route path="/profile" element={<ProfilePage />} />
-                        <Route path="/saved" element={<FavorisPage />} />
-                        <Route path="/settings" element={<SettingsPage />} />
+                        <Route path="/" element={<ModeratorPage />} />
                     </Route>
                 ) : (
                     // admins part 
