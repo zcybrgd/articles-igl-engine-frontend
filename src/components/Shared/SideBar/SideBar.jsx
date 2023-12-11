@@ -37,9 +37,9 @@ function Sidebar() {
             {/* ***Large screens version*** */}
             <div className="hidden lg:flex">
                 {/* Drawer init and show */}
-                <div className="text-center">
+                <div className="absolute start-3 top-12 pt-10 text-center">
                     <button
-                        className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+                        className="text-white bg-[#707F65] focus:ring-4 focus:ring-[#707F65] font-medium rounded-lg text-sm focus:outline-none"
                         type="button"
                         onClick={openSidebar}
                         aria-controls="drawer-navigation"
