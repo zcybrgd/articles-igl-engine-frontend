@@ -3,7 +3,7 @@ import React from "react"
 function SettingsPage() {
 
     return (
-        <div className="">
+        <div className="text-black">
             <h1>
                 Settings Page
             </h1>

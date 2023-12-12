@@ -3,7 +3,7 @@ import React from "react"
 function WelcomePage() {
 
     return (
-        <div>
+        <div className="text-black">
             <h1>
                 Welcome Page
             </h1>

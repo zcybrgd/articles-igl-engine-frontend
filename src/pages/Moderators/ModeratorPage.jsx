@@ -3,7 +3,7 @@ import React from "react"
 function ModeratorPage() {
 
     return (
-        <div className="">
+        <div className="text-black">
             <h1>
                 Moderator Page
             </h1>
