@@ -24,7 +24,7 @@ function Router({ user, userRole }) {
                 userRole === "client" ? (
                     // client part 
                     <>
-                        <Route path="/home" element={<LayoutHome userRole={"client"} />}>
+                        <Route path="/" element={<LayoutHome userRole={"client"} />}>
                             <Route path="/home" element={<HomePage />} />
                         </Route>
                         <Route path="/" element={<Layout userRole={"client"} />}>
@@ -38,12 +38,12 @@ function Router({ user, userRole }) {
                     </>
                 ) : userRole === "moderator" ? (
                     // moderators part 
-                    <Route path="/" element={<Layout userRole={"moderator"} />}>
+                    <Route path="/" element={<LayoutHome userRole={"moderator"} />}>
                         <Route path="/" element={<ModeratorPage />} />
                     </Route>
                 ) : (
                     // admins part 
-                    <Route path="/" element={<Layout userRole={"admin"} />}>
+                    <Route path="/" element={<LayoutHome userRole={"admin"} />}>
                         <Route path="/" element={<AdminPage />} />
                     </Route>
                 )

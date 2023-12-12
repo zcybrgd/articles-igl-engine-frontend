@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { IoMenu } from "react-icons/io5";
 import avatar from "../../../assets/image.jpg"
 
 const NavbarHome = ({ userRole }) => {
-
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
     return (
@@ -53,12 +51,15 @@ const NavbarHome = ({ userRole }) => {
                                     user name
                                 </b>
                             </div>
-                            <Link to="/profile" className="p-0 mr-6">
+                            <div className="p-0 mr-6 ">
                                 <img
                                     className="w-10 h-10 rounded-full mx-3 cursor-pointer"
                                     src={avatar}
                                 />
-                            </Link>
+                            </div>
+
+                            {/* dropMenu part  */}
+
                         </>
                     ) : userRole === "admin" ? (
                         <>
