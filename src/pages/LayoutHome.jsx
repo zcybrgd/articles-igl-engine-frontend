@@ -17,8 +17,8 @@ const LayoutHome = ({ userRole }) => {
                         <SidebarHome />
                     </openSidebarContext.Provider>
 
-                    <div className="pt-16 pl-0">
-                        <div className="md:p-10 pt-10">
+                    <div className="pt-10 lg:pt-5">
+                        <div>
                             <Outlet />
                         </div>
                     </div>

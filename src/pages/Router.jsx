@@ -25,7 +25,7 @@ function Router({ user, userRole }) {
                     // client part 
                     <>
                         <Route path="/" element={<LayoutHome userRole={"client"} />}>
-                            <Route path="/home" element={<HomePage />} />
+                            <Route path="/" element={<HomePage />} />
                         </Route>
                         <Route path="/" element={<Layout userRole={"client"} />}>
                             <>

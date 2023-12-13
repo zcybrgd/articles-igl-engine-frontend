@@ -1,10 +1,18 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
-import { IoMenu } from "react-icons/io5";
+import { FaUser } from "react-icons/fa6";
+import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import avatar from "../../../assets/image.jpg"
 
 const NavbarHome = ({ userRole }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
         <nav class="bg-[#FFFFFF] bg-opacity-50 rounded-lg fixed w-full z-20 top-0 start-0 border-b-2 border-[#F1F1F1]">
@@ -54,11 +62,41 @@ const NavbarHome = ({ userRole }) => {
                             <div className="p-0 mr-6 ">
                                 <img
                                     className="w-10 h-10 rounded-full mx-3 cursor-pointer"
+                                    onClick={toggleDropdown}
                                     src={avatar}
                                 />
                             </div>
 
-                            {/* dropMenu part  */}
+                            {isOpen && (
+                                <div className="absolute right-5 top-10 mt-10 w-44 p-1 bg-[#FFFFFF] text-base z-40 divide-gray-100 rounded shadow">
+                                    <ul className="py-1" aria-labelledby="dropdownLargeButton">
+                                        <li>
+                                            <Link to="/profile" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
+                                                {/* profile icon */}
+                                                <FaUser className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">User Info</span>
+                                            </Link>
+                                            <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
+                                        </li>
+                                        <li>
+                                            <Link to="/collections" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
+                                                {/* saved icon */}
+                                                <IoBookmarkOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Saved</span>
+                                            </Link>
+                                            <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
+                                        </li>
+                                        <li>
+                                            <Link to="/settings" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
+                                                {/* settings icon */}
+                                                <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Settings</span>
+                                            </Link>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            )}
 
                         </>
                     ) : userRole === "admin" ? (
