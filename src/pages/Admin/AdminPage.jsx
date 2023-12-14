@@ -1,12 +1,182 @@
-import React from "react"
+import React, { useState } from "react";
+import { IoIosSearch } from "react-icons/io";
+import { FiUpload } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+import ArticleIcon from "../../assets/articleIcon.svg"
+import avatar from "../../assets/image.jpg"
+import quotesRight from "../../assets/QuotesRight.svg"
+import quotesLeft from "../../assets/QuotesLeft.svg"
+import { uploadPDF } from '../../services/uploadApi';
 
 function AdminPage() {
 
+    const [fileType, setFileType] = useState('file');
+    const [file, setFile] = useState(null);
+    const [url, setUrl] = useState('');
+    const [error, setError] = useState(null);
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile && selectedFile.type === 'application/pdf') {
+            setFile(selectedFile);
+            setError(null);
+        } else {
+            setFile(null);
+            setError('Please select a valid PDF file.');
+        }
+    };
+
+    const handleUrlChange = (e) => {
+        setUrl(e.target.value);
+    };
+
+    const handleUpload = async () => {
+        try {
+            if ((fileType === 'file' && file) || (fileType === 'url' && url)) {
+                console.log("inside the iff")
+                const response = await uploadPDF(fileType === 'file' ? file : url);
+                // Check if the response has a 'message' property
+                if (response && response.message) {
+                    console.log("Here is our response message: " + response.message);
+                } else {
+                    console.log("Unexpected response structure:", response);
+                }
+            }
+        } catch (error) {
+            console.error('Error during upload:', error);
+            setError('Error during upload. Please try again.');
+        }
+    };
+
+    ///iodhfwefhw9efwegf8weg
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch();
+        }
+    };
+
+    const handleSearch = () => {
+        console.log("User searched for:", searchQuery);
+
+        //partie integration avec la recherche
+    };
     return (
-        <div className="text-black">
-            <h1>
-                Admin Page
-            </h1>
+        <div className="flex flex-col">
+            {/* upload Section */}
+            <div className="flex flex-col">
+                <div className="flex flex-row rounded-t-3xl bg-[#707F65] p-2 items-center justify-start">
+                    <div className="flex w-1/6 justify-start ml-1">
+                        <img src={ArticleIcon} alt="article icon" className="w-[55px] h[55px]" />
+                    </div>
+                    <div className="flex w-5/6 justify-center">
+                        <p className="text-white font-bold">Administrator Welcome Portal</p>
+                    </div>
+                </div>
+
+                <div className="flex flex-row p-5 border-x pb-10 pt-10 pl-10 pr-10">
+                    {/* got new files part */}
+                    <div className="flex  md:w-3/4 items-center">
+                        <div>
+                            <div className="flex flex-row w-full justify-center">
+                                <div className="flex items-start justify-center pb-20 pr-10 md:w-1/4">
+                                    <img src={quotesRight} alt="right quotes" className="w-[60px] h[60px] md:w-[80px] md:h[80px]" />
+                                </div>
+                                <div className="flex flex-row items-center justify-center md:w-1/2">
+                                    <p className="text-[30px] md:text-[50px] text-[#181818] font-bold whitespace-nowrap">
+                                        Got New
+                                    </p>
+                                    <p className="bg-[#707F65] text-[30px] md:text-[50px] font-bold text-[#F1F1F1] ml-1 mr-1">Files</p>
+                                    <p className="text-[30px] md:text-[50px] text-[#181818] font-bold whitespace-no-wrap">
+                                        ?
+                                    </p>
+                                </div>
+                                <div className="flex items-end justify-center pt-20 pl-10 md:w-1/4">
+                                    <img src={quotesLeft} alt="left quotes" className="w-[60px] h[60px] md:w-[80px] md:h[80px]" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* logo part  */}
+                    <div className="hidden md:flex w-1/4 p-5 justify-end">
+                        <img
+                            className="w-25 h-25 "
+                            src={avatar}
+                        />
+                    </div>
+                </div>
+
+                {/* upload part  */}
+                <div className="flex flex-col items-center justify-center pt-3 pb-5 border-x border-b rounded-b-3xl">
+                    <div className="flex flex-row items-center">
+                        {/* upload file  */}
+                        <div className="flex flex-row mr-10 items-center">
+                            <label className="mr-5 flex items-center ">
+                                <input
+                                    type="radio"
+                                    value="file"
+                                    checked={fileType === 'file'}
+                                    onChange={() => setFileType('file')}
+                                    className="mr-2 cursor-pointer"
+                                />
+                                <span className="text-[12px] md:text-[15px] text-[#181818] font-semibold">Upload File</span>
+                            </label>
+                            <label className="max-h-[40px] w-1/3 items-center rounded-xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center py-1 px-4 ">
+                                <span>Choose a PDF file</span>
+                                <input
+                                    type="file"
+                                    accept=".pdf"
+                                    onChange={handleFileChange}
+                                    disabled={fileType !== 'file'}
+                                    className={`opacity-0 ${fileType !== 'file' ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                />
+                            </label>
+                        </div>
+
+                        {/* upload URL */}
+                        <div className="flex flex-row flex-grow flex-shrink pl-5 pr-5 pt-2 pb-2 mt-5 mb-5 bg-[#707F65] rounded-2xl items-center justify-center shadow-xl">
+                            <label className="mr-5 flex items-center ">
+                                <input
+                                    type="radio"
+                                    value="url"
+                                    checked={fileType === 'url'}
+                                    onChange={() => setFileType('url')}
+                                    className="mr-2 cursor-pointer"
+                                />
+                                <span className="text-[12px] md:text-[15px] text-[#181818] font-semibold">Upload URL</span>
+                            </label>
+                            <label className=" rounded-lg bg-[#F0F0F0] text-white text-[12px] md:text-[15px] text-center py-2 px-4 cursor-pointer">
+                                <input
+                                    type="text"
+                                    onChange={handleFileChange}
+                                    disabled={fileType !== 'url'}
+                                    placeholder="Enter PDF URL"
+                                    className={`text-black bg-transparent focus:outline-none ${fileType !== 'url' ? 'cursor-not-allowed' : 'cursor-pointe'}`}
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    {error && <div style={{ color: 'red', marginBottom: 2 }}>{error}</div>}
+
+                    {/* upload button  */}
+                    <button
+                        onClick={handleUpload}
+                        disabled={!file && !url}
+                        className="rounded-2xl bg-[#707F65] text-white text-[12px] cursor-pointer md:text-[15px] text-center pt-0.5 pb-0.5 w-40 h-10 "
+                    >
+                        <div className="flex flex-row items-center justify-center">
+                            Upload
+                            <FiUpload className="text-[20px] font-semibold text-[#FFFFFF] mr-1 ml-5" />
+                        </div>
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }

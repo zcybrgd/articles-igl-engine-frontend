@@ -22,7 +22,7 @@ function HomePage() {
     };
 
     return (
-        <div className="flex items-center justify-center mt-16">
+        <div className="flex items-center justify-center mt-20 p-5">
             <div
                 className="flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-10 md:p-20 rounded-xl shadow-lg"
                 style={{ backgroundImage: `url(${newsPaperImage})`, }}
