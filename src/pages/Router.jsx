@@ -12,6 +12,7 @@ import CollectionsPage from "./Collections/CollectionsPage";
 import AdminPage from "./Admin/AdminPage";
 import ModeratorPage from "./Moderators/ModeratorPage";
 import FavoriArticlesListPage from "./Collections/FavoriArticlesPage";
+import SearchPage from "./Search Results/SearchPage";
 
 function Router({ user, userRole }) {
     // user is a boolean to know if he's connected or no 
@@ -26,6 +27,7 @@ function Router({ user, userRole }) {
                     <>
                         <Route path="/" element={<LayoutHome userRole={"client"} />}>
                             <Route path="/" element={<HomePage />} />
+                            <Route path="/search" element={<SearchPage />} />
                         </Route>
                         <Route path="/" element={<Layout userRole={"client"} />}>
                             <>

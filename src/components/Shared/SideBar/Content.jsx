@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { TiHomeOutline } from "react-icons/ti";
 import { FaUser } from "react-icons/fa6";
 import { IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import { VscSignOut } from "react-icons/vsc";
+import { openSidebarContext } from '../../../context/openSidebarContext';
 import Cookies from "js-cookie";
 
 function Content() {
     const navigate = useNavigate();
-
+    const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
     const logOutHandler = async () => {
         try {
@@ -23,12 +24,15 @@ function Content() {
     return (
         <div class="py-4 overflow-y-auto items-center">
             <ul class="space-y-2 font-medium">
-                {/* <li>
-                    <Link to="/" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
-                        <TiHomeOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Home</span>
-                    </Link>
-                </li> */}
+                {/* butto to come back to home page added in the sidebar for mobile/tabelette version, for large screens, the button is in the navbar */}
+                {mobileOpen && (
+                    <li>
+                        <Link to="/" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
+                            <TiHomeOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                            <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Home</span>
+                        </Link>
+                    </li>
+                )}
                 <li>
                     <Link to="/profile" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                         {/* profile icon */}

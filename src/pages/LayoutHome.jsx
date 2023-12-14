@@ -17,10 +17,8 @@ const LayoutHome = ({ userRole }) => {
                         <SidebarHome />
                     </openSidebarContext.Provider>
 
-                    <div className="pt-10 lg:pt-5">
-                        <div>
-                            <Outlet />
-                        </div>
+                    <div className="absolute top-0 left-0 right-0">
+                        <Outlet />
                     </div>
                 </>
             ) : (

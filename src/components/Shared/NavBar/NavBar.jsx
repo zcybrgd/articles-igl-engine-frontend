@@ -2,11 +2,21 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { IoMenu } from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 import avatar from "../../../assets/image.jpg"
 
 const NavBar = ({ userRole }) => {
-
+    const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
+
+    function backToHome() {
+        try {
+            navigate(`/`);
+        } catch (error) {
+            console.error("Error loading home page:", error);
+        }
+    }
 
     return (
         <nav class="bg-[#FFFFFF] fixed w-full z-20 top-0 start-0 border-b-2 border-[#F1F1F1]">
@@ -23,9 +33,13 @@ const NavBar = ({ userRole }) => {
                                 </button>
                             </div>
                             <div className='hidden lg:flex'>
-                                <b className=" xl:px-[40px] mr-3 font-bold text-black text-[20px] lg:text-[30px] xl:text-[32px]">
-                                    User profile
-                                </b>
+                                <p
+                                    className="rounded-3xl bg-transparent md:text-[15px] text-center p-2  w-25 h-10 cursor-pointer"
+                                    onClick={backToHome}
+                                >
+                                    <IoArrowBack className="text-[#707F65] text-2xl " />
+
+                                </p>
                             </div>
                         </>
                     ) : userRole === "admin" ? (

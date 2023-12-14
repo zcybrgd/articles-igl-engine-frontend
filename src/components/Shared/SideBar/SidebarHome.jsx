@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { openSidebarContext } from '../../../context/openSidebarContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IoMenu } from "react-icons/io5";
 
 
@@ -25,21 +25,21 @@ function SidebarHome() {
                 {/* sideBar content */}
                 {/* button to close the sideBar */}
                 <div className="flex mb-10">
-                    <button
+                    <p
                         type="button"
                         onClick={closeSidebar}
                         aria-controls="drawer-navigation"
-                        className="bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center"
+                        className="bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center cursor-pointer"
                     >
                         <IoMenu className="text-[#797D8C] text-3xl mt-3" />
-                    </button>
+                    </p>
                 </div>
 
                 <div class="py-4 overflow-y-auto mt-5">
                     <ul class="space-y-2 font-medium">
                         <li>
                             {/* change the routing */}
-                            <Link to="/profile" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
+                            <Link to="/search" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
                                 <span className="whitespace-nowrap transition-colors group-hover:text-white">Home</span>
                             </Link>
                             <div class="border-b-2 text-[#F1F1F1]"></div>

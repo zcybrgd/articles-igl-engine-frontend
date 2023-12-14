@@ -1,14 +1,17 @@
 import React from "react"
-import { articles } from "../../testing Data/ArticlesData";
 import { CiCalendarDate } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa6";
-import { FaBookmark } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Paper from "../../assets/paper.svg"
 
-const Article = ({ article }) => {
+const Article = ({ article, isfav }) => {
 
     function deleteArticleFromCollection() {
         console.log("article deleted id:", article.articleId)
+    }
+
+    function addArticleToCollection() {
+        console.log("article added id:", article.articleId)
     }
 
     function openArticle() {
@@ -55,8 +58,20 @@ const Article = ({ article }) => {
             {/* buttons part  */}
             <div className="flex flex-col items-end justify-center w-1/4 md:w-3/10">
                 <div className="flex flex-row mb-2">
-                    <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={deleteArticleFromCollection}>Delete from collection</p>
-                    <FaBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
+                    {isfav ? (
+                        <>
+                            <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={deleteArticleFromCollection}>Delete from collection</p>
+                            <FaBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
+                        </>
+                    ) : (
+                        <>
+                            <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={addArticleToCollection}>Add to collection</p>
+                            <FaRegBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
+
+                        </>
+
+                    )}
+
                 </div>
                 <button
                     className="rounded-3xl bg-transparent text-[#43BE83] text-[10px] md:text-[15px] text-center pt-0.5 pb-0.5 border-2 border-[#43BE83] w-25 h-10 mb-2"

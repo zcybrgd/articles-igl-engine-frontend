@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import newsPaperImage from "../../assets/NewsPaper.svg"
+import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
 
 function HomePage() {
@@ -22,7 +22,7 @@ function HomePage() {
     };
 
     return (
-        <div className="flex items-center justify-center mt-10">
+        <div className="flex items-center justify-center mt-16">
             <div
                 className="flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-10 md:p-20 rounded-xl shadow-lg"
                 style={{ backgroundImage: `url(${newsPaperImage})`, }}

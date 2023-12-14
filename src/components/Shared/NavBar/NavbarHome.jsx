@@ -15,7 +15,7 @@ const NavbarHome = ({ userRole }) => {
     };
 
     return (
-        <nav class="bg-[#FFFFFF] bg-opacity-50 rounded-lg fixed w-full z-20 top-0 start-0 border-b-2 border-[#F1F1F1]">
+        <nav class="bg-[#FFFFFF] bg-opacity-80 rounded-lg fixed w-full z-20 top-0 start-0 border-b-2 border-[#F1F1F1]">
             <div class="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
                 <div class="flex items-start justify-between md:w-auto order-1" id="navbar-sticky">
                     {userRole === "client" ? (
