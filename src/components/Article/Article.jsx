@@ -4,7 +4,7 @@ import { FaUserTie } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Paper from "../../assets/paper.svg"
 
-const Article = ({ article, isfav }) => {
+const Article = ({ article, isfav, userRole }) => {
 
     function deleteArticleFromCollection() {
         console.log("article deleted id:", article.articleId)
@@ -57,34 +57,56 @@ const Article = ({ article, isfav }) => {
 
             {/* buttons part  */}
             <div className="flex flex-col items-end justify-center w-1/4 md:w-3/10">
-                <div className="flex flex-row mb-2">
-                    {isfav ? (
-                        <>
-                            <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={deleteArticleFromCollection}>Delete from collection</p>
-                            <FaBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
-                        </>
-                    ) : (
-                        <>
-                            <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={addArticleToCollection}>Add to collection</p>
-                            <FaRegBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
+                {userRole === "client" ? (
+                    // for clients 
+                    <>
+                        <div className="flex flex-row mb-2">
+                            {isfav ? (
+                                <>
+                                    <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={deleteArticleFromCollection}>Delete from collection</p>
+                                    <FaBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
+                                </>
+                            ) : (
+                                <>
+                                    <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={addArticleToCollection}>Add to collection</p>
+                                    <FaRegBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
 
-                        </>
+                                </>
 
-                    )}
+                            )}
 
-                </div>
-                <button
-                    className="rounded-3xl bg-transparent text-[#43BE83] text-[10px] md:text-[15px] text-center pt-0.5 pb-0.5 border-2 border-[#43BE83] w-25 h-10 mb-2"
-                    onClick={openArticle}
-                >
-                    View Details
-                </button>
-                <button
-                    className="rounded-3xl bg-[#43BE83] text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 w-35 h-10 "
-                    onClick={openArticlesPdf}
-                >
-                    View PDF
-                </button>
+                        </div>
+                        <button
+                            className="rounded-3xl bg-transparent text-[#43BE83] text-[10px] md:text-[15px] text-center pt-0.5 pb-0.5 border-2 border-[#43BE83] w-25 h-10 mb-2"
+                            onClick={openArticle}
+                        >
+                            View Details
+                        </button>
+                        <button
+                            className="rounded-3xl bg-[#43BE83] text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 w-35 h-10 "
+                            onClick={openArticlesPdf}
+                        >
+                            View PDF
+                        </button>
+                    </>
+                ) : (
+                    // for moderators
+                    <>
+                        <button
+                            className="rounded-3xl bg-transparent text-[#43BE83] text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 border-2 border-[#43BE83] h-10 mb-2 px-6"
+                            onClick={openArticle}
+                        >
+                            Consult
+                        </button>
+                        <button
+                            className="rounded-3xl bg-[#43BE83] text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-5 h-10 "
+                            onClick={openArticlesPdf}
+                        >
+                            View PDF
+                        </button>
+                    </>
+                )}
+
             </div>
         </div>
     )

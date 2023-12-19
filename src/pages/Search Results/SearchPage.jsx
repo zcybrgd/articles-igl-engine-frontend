@@ -104,7 +104,7 @@ function SearchPage() {
                         {articles && articles.length > 0 ? (
                             articles.map((article, index) => (
                                 <div key={index} className="flex mb-5">
-                                    <Article article={article} isfav={false} />
+                                    <Article article={article} isfav={false} userRole={"client"} />
                                 </div>
                             ))
                         ) : (
