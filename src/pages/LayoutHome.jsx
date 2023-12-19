@@ -24,10 +24,8 @@ const LayoutHome = ({ userRole }) => {
             ) : (
                 <>
                     <NavbarHome userRole={userRole} />
-                    <div className="">
-                        <div className="pt-16">
-                            <Outlet />
-                        </div>
+                    <div className="pt-16 md:p-16">
+                        <Outlet />
                     </div>
                 </>
             )}

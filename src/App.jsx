@@ -13,8 +13,9 @@ import {
 export default function App() {
   return (
     <BrowserRouter>
-      <Router user={true} userRole={"admin"} />
+      <Router user={true} userRole={"moderator"} />
     </BrowserRouter>
+
     // <ReactiveBase
     //   url="https://appbase-demo-ansible-abxiydt-arc.searchbase.io"
     //   app="good-books-ds"

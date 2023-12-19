@@ -64,3 +64,67 @@
 .read-the-docs {
   color: #888;
 }
+
+/*DMSans font face*/
+@font-face {
+  font-family: "DMSans";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Regular.ttf);
+}
+
+/*DMSansLight font face*/
+@font-face {
+  font-family: "DMSansLight";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Light.ttf);
+}
+
+/*DMSansMedium font face*/
+@font-face {
+  font-family: "DMSansMedium";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Medium.ttf);
+}
+
+/*DMSansBold font face*/
+@font-face {
+  font-family: "DMSansBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Bold.ttf);
+}
+
+/*OpenSans font face*/
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Regular.ttf);
+}
+
+/*OpenSansLight font face*/
+@font-face {
+  font-family: "OpenSansLight";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Light.ttf);
+}
+
+/*OpenSansMedium font face*/
+@font-face {
+  font-family: "OpenSansMedium";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Medium.ttf);
+}
+
+/*OpenSansBold font face*/
+@font-face {
+  font-family: "OpenSansBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Bold.ttf);
+}
