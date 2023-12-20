@@ -1,9 +1,10 @@
  
-import Welcome from "./pages/WelcomePage/Welcome"; // Adjust the path based on your project structure
+ 
+import SignUpPage from "./pages/Authentification/SignUp"; // Adjust the path based on your project structure
 const App = () => {
   return (
     <>
-      <Welcome/>
+      <SignUpPage/>
     </>
   );
 };
