@@ -12,17 +12,18 @@ function UploadSection() {
     const [file, setFile] = useState(null);
     const [url, setUrl] = useState('');
     const [error, setError] = useState(null);
+    const [files, setFiles] = useState([]);
+
 
     const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        if (selectedFile && selectedFile.type === 'application/pdf') {
-            setFile(selectedFile);
-            setError(null);
-        } else {
-            setFile(null);
-            setError('Please select a valid PDF file.');
-        }
+        const selectedFiles = e.target.files;
+        const validFiles = Array.from(selectedFiles).filter(files => files.type === 'application/pdf');
+    
+        setFiles(validFiles);
+        setError(validFiles.length === 0 ? 'Please select at least one valid PDF file.' : null);
     };
+    
+
 
     const handleUrlChange = (e) => {
         setUrl(e.target.value);
@@ -35,9 +36,11 @@ function UploadSection() {
             setIsSearchActive(true);
         } else {
             try {
-                if ((fileType === 'file' && file) || (fileType === 'url' && url)) {
-                    console.log("inside the iff")
-                    const response = await uploadPDF(fileType === 'file' ? file : url);
+                if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
+                    console.log("inside the iff");
+                    
+                    const response = await uploadPDF(fileType === 'file' ? files : url);
+                    
                     // Check if the response has a 'message' property
                     if (response && response.message) {
                         console.log("Here is our response message: " + response.message);
@@ -51,7 +54,7 @@ function UploadSection() {
             }
         }
     };
-
+    
     return (
         <div className="flex flex-col pb-10 border-2 rounded-3xl">
             <div className="flex flex-row rounded-t-3xl bg-[#707F65] p-2 items-center justify-start">
@@ -118,6 +121,7 @@ function UploadSection() {
                                 accept=".pdf"
                                 onChange={handleFileChange}
                                 disabled={fileType !== 'file'}
+                                multiple
                                 className={`opacity-0 ${fileType !== 'file' ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                             />
                         </label>
