@@ -11,9 +11,9 @@ const SignUpPage = () => {
    
           
             
-             
-            <div className="max-sm:mt-0 max-sm:hidd max-sm:justify-start absolute inset-y-0  right-0 w-3/5 md:w-3/5 bg-white max-sm:white max-sm:w-full max-sm:h-screen   h-screen md:h-screen  justify-center place-content-center space-y-6 lg:justify-center max-sm:rounded-none lg:rounded-l-lg"  >
-            
+      
+   <div className="max-sm:mt-0 max-sm:hidd max-sm:justify-start absolute inset-y-0 right-0 w-3/5 md:w-3/5 bg-white max-sm:bg-white max-sm:w-full max-sm:h-screen h-screen md:h-screen justify-center place-content-center space-y-6 lg:justify-center max-sm:rounded-none lg:rounded-s-[20px] md:rounded-s-[20px] sm:rounded-s-[20px] md:rounded-bl-lg">
+   
             <div className="lg:flex max-sm:grid max-sm:top-0 max-sm:left-0 top-0 max-sm:ml-8 max-sm:mt-4 max-sm:text-white  text-sm   max-sm:text-2xl    mb-0 mt-10 ml-52 space-y-0 ">
             <h1 className="max-sm:hidden  text-black font-bold text-xl mb-8 lg:left-6">Create Account </h1>  
             <img
