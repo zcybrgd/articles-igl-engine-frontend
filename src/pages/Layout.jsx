@@ -10,7 +10,7 @@ const Layout = ({ userRole }) => {
     return (
         <div className="flex">
             <openSidebarContext.Provider value={{ mobileOpen, setMobileOpen }}>
-                <Navbar userRole={userRole} />
+                <Navbar userRole={userRole} article={false} />
                 <Sidebar />
             </openSidebarContext.Provider>
 

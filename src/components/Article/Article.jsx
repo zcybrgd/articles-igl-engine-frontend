@@ -1,10 +1,27 @@
 import React from "react"
+import { useNavigate } from 'react-router-dom';
 import { CiCalendarDate } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Paper from "../../assets/paper.svg"
 
 const Article = ({ article, isfav, userRole }) => {
+    const navigate = useNavigate();
+
+    function openArticle() {
+        try {
+            navigate(`/article/${article.articleId}`,
+                {
+                    state: {
+                        article: article,
+                        role: userRole,
+                    },
+                },  //pass the article as a prop
+            );
+        } catch (error) {
+            console.error("Error loading article:", error);
+        }
+    }
 
     function deleteArticleFromCollection() {
         console.log("article deleted id:", article.articleId)
@@ -12,10 +29,6 @@ const Article = ({ article, isfav, userRole }) => {
 
     function addArticleToCollection() {
         console.log("article added id:", article.articleId)
-    }
-
-    function openArticle() {
-        console.log("article opened id:", article.articleId)
     }
 
     function openArticlesPdf() {
@@ -70,9 +83,7 @@ const Article = ({ article, isfav, userRole }) => {
                                 <>
                                     <p className="text-[12px] md:text-[15px] text-[#F7941D] mr-1 cursor-pointer hover:underline" onClick={addArticleToCollection}>Add to collection</p>
                                     <FaRegBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
-
                                 </>
-
                             )}
 
                         </div>

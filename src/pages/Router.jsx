@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import LayoutHome from "./LayoutHome";
+import LayoutArticle from "./LayoutArticle";
 import WelcomePage from "./Welcome page/WelcomePage";
 import HomePage from "./Welcome page/HomePage";
 import LogIn from "./Authentification/LogIn";
@@ -13,6 +14,7 @@ import AdminPage from "./Admin/AdminPage";
 import ModeratorPage from "./Moderators/ModeratorPage";
 import FavoriArticlesListPage from "./Collections/FavoriArticlesPage";
 import SearchPage from "./Search Results/SearchPage";
+import ArticleDetails from "./Article/ArticleDetails";
 
 function Router({ user, userRole }) {
     // user is a boolean to know if he's connected or no 
@@ -37,12 +39,20 @@ function Router({ user, userRole }) {
                                 <Route path="/settings" element={<SettingsPage />} />
                             </>
                         </Route>
+                        <Route path="/" element={<LayoutArticle userRole={"client"} />}>
+                            <Route path="/article/:articleId" element={<ArticleDetails />} />
+                        </Route>
                     </>
                 ) : userRole === "moderator" ? (
                     // moderators part 
-                    <Route path="/" element={<LayoutHome userRole={"moderator"} />}>
-                        <Route path="/" element={<ModeratorPage />} />
-                    </Route>
+                    <>
+                        <Route path="/" element={<LayoutHome userRole={"moderator"} />}>
+                            <Route path="/" element={<ModeratorPage />} />
+                        </Route>
+                        <Route path="/" element={<LayoutArticle userRole={"moderator"} />}>
+                            <Route path="/article/:articleId" element={<ArticleDetails />} />
+                        </Route>
+                    </>
                 ) : (
                     // admins part 
                     <Route path="/" element={<LayoutHome userRole={"admin"} />}>

@@ -5,7 +5,6 @@ import Paper from "../../assets/paper.svg"
 import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/QuotesRight.svg"
 import quotesLeft from "../../assets/QuotesLeft.svg"
-import newsPaperImage from "../../assets/NewsPaper.svg"
 import { articles } from "../../testing Data/ArticlesData";
 
 function ModeratorPage() {

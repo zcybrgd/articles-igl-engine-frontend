@@ -13,7 +13,7 @@ import {
 export default function App() {
   return (
     <BrowserRouter>
-      <Router user={true} userRole={"moderator"} />
+      <Router user={true} userRole={"client"} />
     </BrowserRouter>
 
     // <ReactiveBase
