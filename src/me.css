@@ -1,0 +1,36 @@
+ /* .slide img {
+    width: 20rem;
+    margin: 0 auto;
+    transform: scale(0.75); 
+  }  */
+   
+  .activeSlide {
+    transform: scale(1.2);
+    opacity: 1;
+  } 
+    
+  .arrow {
+    background-color: #fff;
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .arrow svg {
+    transition: color 300ms;
+  }
+  
+  .arrow svg:hover {
+    color: #68edff;
+  }
+  
+  .next {
+    right: 0%;
+    top: 50%;
+  }
+  
+  .prev {
+    left: 0%;
+    top: 50%;
+  }
+  
