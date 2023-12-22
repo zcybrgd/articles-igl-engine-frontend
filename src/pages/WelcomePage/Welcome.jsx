@@ -1,5 +1,5 @@
  
- import OurTeam from '../../components/Welcome/ourTeam.jsx';
+ import Animation from '../../components/Welcome/animation.jsx';
  //import Hero from '../../components/Welcome/heroSection.jsx';
  
  
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
        
-        <OurTeam/>
+        <Animation/>
        
        
     </div>

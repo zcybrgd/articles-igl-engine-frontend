@@ -6,8 +6,9 @@
   };
 
   return (
-     
-     
+    <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
+   
+    <div className='flex max-sm:flex'>
     <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
        
     <div className='w-screen h-screen  grid-rows-2 max-sm:h-full sm:hidden '> 
@@ -66,8 +67,8 @@
                       Log in
                     </button>
                     <div className="mt-2 text-sm flex items-center justify-center ">
-                      <p className="text-black md:text-white">Already have an account? </p>
-                      <p className="text-blue-800 hover:underline">Login</p>
+                      <p className="text-black md:text-white"> Do not have an account yet? </p>
+                      <p className="text-blue-800 hover:underline">Sign up</p>
 
                        
         </div>
@@ -81,7 +82,7 @@
         
     
     </div>
-    <div className="  lg:text-white font-bold text-7xl absolute top-8  max-sm:text-5xl max-sm:mt-8 max-sm:hidden max-md:text-5xl max-sm:ml-4 md:text-transparent ml-96 left-60 sm:text-transparent">
+    <div className="  lg:text-white font-bold text-7xl absolute top-8  max-sm:text-5xl max-sm:mt-8 max-sm:hidden max-md:text-5xl max-sm:ml-4 md:text-transparent ml-96 left-60 sm:text-transparent md:hidden-block">
     log
   </div>
    {/* // White part for other content  */}
@@ -94,6 +95,8 @@
      
     </div>
     
+  </div>
+  </div>
   </div>
   )
 }

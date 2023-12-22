@@ -7,7 +7,7 @@ import arrowNext from '../.././assets/icons/arrowNext.svg';
  
 import 'slick-carousel/slick/slick.css';
 import Karou from '../.././assets/icons/Karou.png';
-import '../.././me.css';
+ 
 
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -19,8 +19,8 @@ import 'slick-carousel/slick/slick-theme.css';
   // eslint-disable-next-line react/prop-types
   const NextArrow = ({ onClick }) => (
     <div className="bg-black top-0">
-      <div className=" bg-blue-500   "></div>
-      <div className="arrow next bg-transparent lg:top-32 md:top-20 -right-6 max-sm:-right-2 max-sm:top-32" onClick={onClick}>
+      
+      <div className="arrow next bg-transparent lg:top-32 md:top-20 -right-6 max-sm:-right-2 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
            <img src={arrowNext}  alt="Next "  />
     </div>
     </div>
@@ -29,8 +29,8 @@ import 'slick-carousel/slick/slick-theme.css';
   //eslint-disable-next-line react/prop-types
   const PrevArrow = ({ onClick }) => (
     <div className="bg-black top-0">
-      <div className=" bg-blue-500   ">
-      <div className="arrow prev bg-transparent lg:top-32 -left-6 top-20 max-sm:-left-2 max-sm:top-32" onClick={onClick}>
+      <div className=" bg-transparent  ">
+      <div className="arrow prev bg-transparent lg:top-32 -left-6 top-20 max-sm:-left-2 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
         <img src={arrowPrev} alt="Previous" />
         </div>
       </div>
@@ -50,7 +50,7 @@ import 'slick-carousel/slick/slick-theme.css';
     beforeChange: (current, next) => setImgIndex(next),
     responsive: [
         {
-          breakpoint: 640, // For smaller screens like mobile devices
+          breakpoint: 640,  
           settings: {
             slidesToShow: 1,
           },
@@ -68,9 +68,9 @@ import 'slick-carousel/slick/slick-theme.css';
       
         <Slider {...settings} className="w-4/5 h-4/5 max-sm:w-4/5">
           {images.map((img, idx) => (
-            <div className={idx === imgIndex ? 'slide activeSlide ' : 'slide'} key={idx}>
+            <div className={idx === imgIndex ? 'slide activeSlide scale-125' : 'slide'} key={idx}>
               <div
-                className="w-4/5 slide m-auto space-x-0 transform: idx === imgIndex ? 'scale-75' : 'scale-125"
+                className="w-4/5 slide m-auto space-x-0 transform: idx === imgIndex ? 'scale-125' : 'scale-75"
                 key={idx}
                  
               >
