@@ -6,10 +6,10 @@
   };
 
   return (
-    <div className='w-full  h-full grid grid-cols-2 max-sm:h-full  bg-blue-500'>
+    <div className='w-full  h-full grid grid-cols-2 max-sm:h-full  bg-black'>
    
     <div className='flex max-sm:flex'>
-    <div className='w-screen h-screen grid   max-sm:h-screen bg-red-500'>
+    <div className='w-screen h-screen grid   max-sm:h-screen bg-black'>
        
     <div className='w-full h-full  grid-rows-2 max-sm:h-full sm:hidden '> 
     <div className=" max-sm: text-white max-sm: font-bold  max-sm:text-5xl max-sm: mt-8 md:hidden lg:hidden max-md:text-5xl max-sm:ml-4 sm-hidden">
