@@ -3,8 +3,8 @@ import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import avatar from "../../assets/image.jpg"
-import quotesRight from "../../assets/QuotesRight.svg"
-import quotesLeft from "../../assets/QuotesLeft.svg"
+import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
+import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { articles } from "../../testing Data/ArticlesData";
 
 function ModeratorPage() {

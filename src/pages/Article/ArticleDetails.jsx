@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ArticleMainIcon from "../../assets/ArticlemainIcon.svg"
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import FulldetailsPopUp from "./FulldetailsPopUp";
 
 function ArticleDetails() {
     const location = useLocation();
@@ -10,6 +11,15 @@ function ArticleDetails() {
 
     const [isEditing, setIsEditing] = useState(false);
     const [bookMarkClicked, setBookMarkClicked] = useState(false);
+    const [isFullModeOpen, setFullModeOpen] = useState(false);
+
+    const viewFullArticle = () => {
+        setFullModeOpen(true);
+    };
+
+    const closeCard = () => {
+        setFullModeOpen(false);
+    };
 
     //Data edited
     const [editedKeywords, setEditedKeywords] = useState(article.keywords);
@@ -154,11 +164,18 @@ function ArticleDetails() {
                             <div className="flex items-center justify-end">
                                 <p
                                     className="text-[12px] md:text-[15px] text-black font-semibold cursor-pointer hover:underline"
-                                // onClick={viewFullArticle}
+                                    onClick={viewFullArticle}
                                 >
                                     view the full article
                                 </p>
                             </div>
+                            {/* Render the popup if isPopupOpen is true */}
+                            {isFullModeOpen && (
+                                <FulldetailsPopUp
+                                    onClose={closeCard}
+                                    articleContent={article.content}
+                                />
+                            )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
 
                         </div>

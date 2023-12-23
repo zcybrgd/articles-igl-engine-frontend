@@ -9,11 +9,12 @@ import {
   ReactiveList,
   ResultCard,
 } from '@appbaseio/reactivesearch';
+import WelcomPage from "./pages/Welcome page/WelcomePage";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Router user={true} userRole={"client"} />
+      <Router user={true} userRole={"admin"} />
     </BrowserRouter>
 
     // <ReactiveBase
