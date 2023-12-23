@@ -17,7 +17,7 @@ const NavbarHome = ({ userRole }) => {
     return (
         <nav className="bg-[#FFFFFF] bg-opacity-80 rounded-lg fixed w-full z-20 top-0 start-0 border-b-2 border-[#F1F1F1]">
             <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
-                <div className="flex items-start justify-between md:w-auto order-1" id="navbar-sticky">
+                <div className="flex mr-auto items-start justify-between md:w-auto order-1" id="navbar-sticky">
                     {userRole === "client" ? (
                         <>
                             <button
@@ -49,7 +49,7 @@ const NavbarHome = ({ userRole }) => {
                 </div>
 
                 {/* profile part  */}
-                <div className="flex order-2 md:space-x-0 rtl:space-x-reverse">
+                <div className="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
                     {userRole === "client" ? (
                         <>
                             {/* font DM sans */}

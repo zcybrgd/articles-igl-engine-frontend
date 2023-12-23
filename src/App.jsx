@@ -14,7 +14,7 @@ import WelcomPage from "./pages/Welcome page/WelcomePage";
 export default function App() {
   return (
     <BrowserRouter>
-      <Router user={true} userRole={"admin"} />
+      <Router user={true} userRole={"client"} />
     </BrowserRouter>
 
     // <ReactiveBase

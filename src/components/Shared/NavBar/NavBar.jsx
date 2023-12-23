@@ -37,7 +37,7 @@ const NavBar = ({ userRole, article }) => {
     return (
         <nav className={`${!article ? 'bg-[#FFFFFF]' : 'bg-[#707F65] bg-opacity-120'} border-b-2 border-[#F1F1F1] fixed w-full z-20 top-0 start-0 `}>
             <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
-                <div className="flex items-start justify-between md:w-auto order-1" id="navbar-sticky">
+                <div className="flex mr-auto items-start justify-between md:w-auto order-1" id="navbar-sticky">
                     {userRole === "client" ? (
                         <>
                             <div >
@@ -74,7 +74,7 @@ const NavBar = ({ userRole, article }) => {
                 </div>
 
                 {/* profile part  */}
-                <div class="flex order-2 md:space-x-0 rtl:space-x-reverse">
+                <div class="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
                     {userRole === "client" ? (
                         <>
                             {/* font DM sans */}
