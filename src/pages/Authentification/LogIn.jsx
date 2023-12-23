@@ -6,12 +6,13 @@
   };
 
   return (
-    <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
+    <div className='w-full  h-full grid grid-cols-2 max-sm:h-full  bg-red-500'>
    
-    <div className='flex max-sm:flex'>
-    <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
+    <div className='w-full h-full flex max-sm:flex'>
+      
+    <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-blue-500 '>
        
-    <div className='w-screen h-screen  grid-rows-2 max-sm:h-full sm:hidden '> 
+    <div className='w-full h-full  grid-rows-2 max-sm:h-full sm:hidden '> 
     <div className=" max-sm: text-white max-sm: font-bold  max-sm:text-5xl max-sm: mt-8 md:hidden lg:hidden max-md:text-5xl max-sm:ml-4 sm-hidden">
    login 
     
@@ -32,7 +33,7 @@
     
     
     
-    <div className="absolute inset-y-0 left-16 w-3/5 md:w-2/5 h-screen md:h-full flex flex-col justify-center items-center  max-sm:h-4/5 max-sm:mt-28">
+    <div className="absolute inset-y-0 left-16 w-3/5 md:w-2/5 h-full md:h-full flex flex-col justify-center items-center  max-sm:h-4/5 max-sm:mt-28">
       
     
       
@@ -86,7 +87,7 @@
     log
   </div>
    {/* // White part for other content  */}
-     <div className="lg:text-black font-bold text-7xl   absolute inset-y-0 right-0 w-3/5 md:w-2/5 bg-white h-screen md:h-screen   hidden md:block md:text-transparent" style={leftBorderRadius} >
+     <div className="lg:text-black font-bold text-7xl   absolute inset-y-0 right-0 w-3/5 md:w-2/5 bg-white h-full md:h-full   hidden md:block md:text-transparent" style={leftBorderRadius} >
      <div className="lg:text-black mt-8 md:text-transparent">in</div>
     
     
