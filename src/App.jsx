@@ -18,7 +18,7 @@ import Settings from "./components/Profile/settings";
 export default function App() {
   return (
     <BrowserRouter>
-      <Router user={true} userRole={"client"} />
+      <Router user={false} userRole={"client"} />
     </BrowserRouter>
     // <Settings />
 
