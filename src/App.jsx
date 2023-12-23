@@ -10,12 +10,17 @@ import {
   ResultCard,
 } from '@appbaseio/reactivesearch';
 import WelcomPage from "./pages/Welcome page/WelcomePage";
+import LoginPage from "./pages/Authentification/LogIn";
+import UserProfile from "./components/Profile/UserInfo";
+import Settings from "./components/Profile/settings";
+
 
 export default function App() {
   return (
     <BrowserRouter>
       <Router user={true} userRole={"client"} />
     </BrowserRouter>
+    // <Settings />
 
     // <ReactiveBase
     //   url="https://appbase-demo-ansible-abxiydt-arc.searchbase.io"

@@ -1,9 +1,23 @@
 // import googleIcon from '../.././assets/icons/google.svg'; 
+import React, { useState } from "react"
+import { useNavigate } from 'react-router-dom';
+
+
 const LoginPage = () => {
+    const navigate = useNavigate();
+
     const leftBorderRadius = {
         borderTopLeftRadius: '20px',
         borderBottomLeftRadius: '20px',
     };
+
+    function openSignUpPage() {
+        try {
+            navigate(`/signup`);
+        } catch (error) {
+            console.error("Error loading SignUp Page:", error);
+        }
+    }
 
     return (
         <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
@@ -45,7 +59,7 @@ const LoginPage = () => {
                                     </button>
                                     <div className="mt-2 text-sm flex items-center justify-center ">
                                         <p className="text-black md:text-white"> Do not have an account yet? </p>
-                                        <p className="text-blue-800 hover:underline">Sign up</p>
+                                        <p className="text-blue-800 hover:underline cursor-pointer" onClick={openSignUpPage}>Sign up</p>
                                     </div>
                                 </div>
                             </div>

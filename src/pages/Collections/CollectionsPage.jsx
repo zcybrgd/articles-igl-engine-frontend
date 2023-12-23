@@ -19,7 +19,8 @@ function CollectionsPage() {
     }
 
     return (
-        <div className="flex flex-col items-start">
+
+        <div className="flex flex-col items-start pt-15 pl-0 lg:pl-60">
             <div className="flex flex-col mb-8 justify-start items-start">
                 <div className="flex flex-row ">
                     <p className="text-black text-[35px] font-semibold">

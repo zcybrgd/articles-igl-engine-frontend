@@ -33,13 +33,13 @@ const UserProfile = () => {
         }
     };
     return (
-        <div className="flex w-screen">
-            <div className=" w-screen p-6 bg-white rounded-md   justify-center left-0 ml-52 mt-4 ">
+        <div className="flex">
+            <div className="flex flex-col w-auto p-6 rounded-md justify-start mt-4 ">
                 <label htmlFor="profilePic" className="mb-2 cursor-pointer ">
                     <img
                         src={user.imageUrl}
                         alt="User Profile"
-                        className="rounded-full h-24 w-24 mb-2 bg-black"
+                        className="rounded-full h-30 w-30 mb-2 bg-black shadow-xl"
                     />
                 </label>
                 <input
@@ -49,9 +49,9 @@ const UserProfile = () => {
                     onChange={handleImageChange}
                     className="hidden"
                 />
-                <div className="flex flex-col mb-4 md:flex-row border-[#707F65] mt-12">
-                    <div className="mb-4 md:w-1/2 md:pr-2 border-[#707F65]">
-                        <label className="block text-gray-700 text-sm font-bold mb-2 " htmlFor="userName ">
+                <div className="flex flex-col w-[100%] mb-4 md:flex-row border-[#707F65] mt-5">
+                    <div className="mb-4 mr-auto items-start justify-start md:w-1/2 md:pr-2 border-[#707F65]">
+                        <label className="block items-start justify-start text-gray-700 text-sm font-bold mb-2 " htmlFor="userName ">
                             User Name
                         </label>
                         <input
@@ -61,11 +61,11 @@ const UserProfile = () => {
                             value={user.userName}
                             readOnly={!editing}
                             onChange={handleChange}
-                            className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                            className="border-2 rounded-md border-[#707F65] text-black px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                         />
                     </div>
 
-                    <div className="mb-4 md:w-1/2 md:pl-2">
+                    <div className="mb-4 ml-auto md:w-1/2 md:pl-2">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="firstName">
                             First Name
                         </label>
@@ -76,13 +76,13 @@ const UserProfile = () => {
                             value={user.firstName}
                             readOnly={!editing}
                             onChange={handleChange}
-                            className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
+                            className="border-2 rounded-md border-[#707F65] text-black px-4 py-2 w-full focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
                         />
                     </div>
 
                 </div>
                 <div className="flex flex-col mb-4 md:flex-row">
-                    <div className="mb-4 md:w-1/2 md:pr-2">
+                    <div className="mb-4 mr-auto md:w-1/2 md:pr-2">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                             Email
                         </label>
@@ -93,10 +93,10 @@ const UserProfile = () => {
                             value={user.email}
                             readOnly={!editing}
                             onChange={handleChange}
-                            className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
+                            className="border-2 rounded-md border-[#707F65] text-black px-4 py-2 focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
                         />
                     </div>
-                    <div className="mb-4 md:w-1/2 md:pl-2">
+                    <div className="mb-4 ml-auto md:w-1/2 md:pl-2">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
                             Last Name
                         </label>
@@ -107,7 +107,7 @@ const UserProfile = () => {
                             value={user.lastName}
                             readOnly={!editing}
                             onChange={handleChange}
-                            className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
+                            className="border-2 rounded-md border-[#707F65] text-black px-4 py-2  focus:outline-none focus:ring focus:border-blue-300 bg-[#F1F1F1]"
                         />
 
                     </div>

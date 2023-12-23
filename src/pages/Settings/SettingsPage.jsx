@@ -1,12 +1,11 @@
 import React from "react"
+import Settings from "../../components/Profile/settings"
 
 function SettingsPage() {
 
     return (
-        <div className="text-black">
-            <h1>
-                Settings Page
-            </h1>
+        <div>
+            <Settings />
         </div>
     )
 }

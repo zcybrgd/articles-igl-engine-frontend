@@ -29,10 +29,10 @@ const Settings = () => {
     };
 
     return (
-        <div className="flex w-screen ">
-            <div className=" w-screen p-6 bg-white rounded-md   justify-center left-8  mt-4 mr-36 ml-80 ">
+        <div className="flex flex-col items-start">
+            <div className="flex flex-col mb-8 justify-start items-start">
 
-                <h1 className="text-3xl font-bold mb-4">Settings
+                <h1 className="text-3xl text-black font-semibold mb-4">Settings
                     <br />
                     <br />
                     <h1 className="text-3xl font-bold mb-4 text-[#707F65]"> Password</h1>
@@ -49,7 +49,7 @@ const Settings = () => {
                                 type="text"
                                 value={username}
                                 readOnly
-                                className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                                className="border-2 text-black rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                             />
                         </div>
                         <div className="mb-4">
@@ -61,7 +61,7 @@ const Settings = () => {
                                 type="password"
                                 value={password}
                                 readOnly
-                                className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                                className="border-2 text-black rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                             />
                         </div>
                         <div className="flex justify-center">
@@ -84,7 +84,7 @@ const Settings = () => {
                                 type="password"
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
-                                className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                                className="border-2 text-black rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                             />
                         </div>
                         <div className="mb-4">
@@ -96,7 +96,7 @@ const Settings = () => {
                                 type="password"
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
-                                className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                                className="border-2 text-black rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                             />
                         </div>
                         <div className="mb-4">
@@ -108,7 +108,7 @@ const Settings = () => {
                                 type="password"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                className="border-2 rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
+                                className="border-2 text-black rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-[#F1F1F1]"
                             />
                         </div>
                         <div className="flex justify-center">

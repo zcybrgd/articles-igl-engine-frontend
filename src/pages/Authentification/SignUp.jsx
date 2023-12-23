@@ -1,6 +1,18 @@
+import React, { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import articleIcon from '../.././assets/icons/article.svg';
 // import googleIcon from '../.././assets/icons/google.svg'; 
+
 const SignUpPage = () => {
+    const navigate = useNavigate();
+
+    function openLogInPage() {
+        try {
+            navigate(`/login`);
+        } catch (error) {
+            console.error("Error loading SignUp Page:", error);
+        }
+    }
 
     return (
         <div className='w-screen h-screen grid grid-cols-2 max-sm:h-screen bg-black'>
@@ -44,28 +56,28 @@ const SignUpPage = () => {
                                 <input
                                     type="text"
                                     placeholder="User name"
-                                    className="  h-6      focus:outline-none   text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
+                                    className="  h-6 focus:outline-none text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
                                 />
 
                                 <input
                                     type="email"
                                     placeholder="email"
-                                    className="  h-6  focus:outline-none      text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
+                                    className="  h-6 focus:outline-none text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
                                 />
 
                                 <input
                                     type="password"
                                     placeholder="Password "
-                                    className="  h-6      focus:outline-none   text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
+                                    className="  h-6 focus:outline-none text-sm text-black placeholder-black  border-b-2  border-[#EAEAEA] max-sm:ml-10 max-sm:mr-6 max-sm:bg-black max-sm:placeholder:text-white max-sm:text-white"
                                 />
 
                                 <button className="my-1 rounded-full max-sm:text-base max-sm:font-bold max-sm:ml-8 bg-[#434343] hover:white text-white font-bold py-2 px-4 w-full  max-sm:mr-6 ml-6 max-sm:w-3/4 max-sm:bg-white max-sm:placeholder:text-white   max-sm:text-black">
                                     Create an account
                                 </button>
 
-                                <div className="mt-0 text-sm    flex justify-center  ">
+                                <div className="mt-0 text-sm flex justify-center  ">
                                     <p className="text-black flex justify-center max-sm:mt-0 max-sm:text-white">Already have an account? </p>
-                                    <p className="text-[#707F65] font-bold hover:underline flex justify-center">Login</p>
+                                    <p className="text-[#707F65] font-bold hover:underline flex justify-center cursor-pointer" onClick={openLogInPage}>Login</p>
                                 </div>
 
                                 <div className="flex w-72 ml-32 flex-col gap-6 space-y-0 mt-16 max-sm:left-0 top-0 max-sm:mt-16 max-sm:space-y-0 max-sm:bg-white max-sm:justify-center max-sm:rounded-lg sm:mt-16 sm:space-y-0 md:space-y-0 sm:bg-white  lg:bg-white sm:rounded-lg">
