@@ -9,13 +9,12 @@ export const uploadPDF = async (pdfFiles) => {
     const formData = new FormData();
     if (typeof pdfFiles === 'string') {
         // If pdfFile is a URL, add it to the formData
-        formData.append('pdf_url', pdfFiles);
-    }
+        formData.append('pdf_url', pdfFiles);} 
     else {
         pdfFiles.forEach(pdfFile => {
             // If pdfFile is a file, add it to the formData using the key 'pdf_file'
-            formData.append('pdf_file', pdfFile)
-        });
+        formData.append('pdf_file', pdfFile)
+    });
 
     }
 
@@ -43,3 +42,4 @@ const getCSRFToken = async () => {
         throw error;
     }
 };
+

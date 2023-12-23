@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import ArticleIcon from "../../assets/articleIcon.svg"
 import avatar from "../../assets/image.jpg"
-import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
-import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
+import quotesRight from "../../assets/QuotesRight.svg"
+import quotesLeft from "../../assets/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
 
 function UploadSection() {
@@ -18,11 +18,11 @@ function UploadSection() {
     const handleFileChange = (e) => {
         const selectedFiles = e.target.files;
         const validFiles = Array.from(selectedFiles).filter(files => files.type === 'application/pdf');
-
+    
         setFiles(validFiles);
         setError(validFiles.length === 0 ? 'Please select at least one valid PDF file.' : null);
     };
-
+    
 
 
     const handleUrlChange = (e) => {
@@ -38,9 +38,9 @@ function UploadSection() {
             try {
                 if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
                     console.log("inside the iff");
-
+                    
                     const response = await uploadPDF(fileType === 'file' ? files : url);
-
+                    
                     // Check if the response has a 'message' property
                     if (response && response.message) {
                         console.log("Here is our response message: " + response.message);
@@ -54,7 +54,7 @@ function UploadSection() {
             }
         }
     };
-
+    
     return (
         <div className="flex flex-col pb-10 border-2 rounded-3xl">
             <div className="flex flex-row rounded-t-3xl bg-[#707F65] p-2 items-center justify-start">
