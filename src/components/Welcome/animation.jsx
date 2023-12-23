@@ -28,11 +28,11 @@ const Animation = () => {
         <style>
           {`
          .slider-up .slide-track {
-            animation: scroll-up 6s linear infinite;
+            animation: scroll-up 10s linear infinite;
           }
           
           .slider-down .slide-track {
-            animation: scroll-down 6s linear infinite;
+            animation: scroll-down 10s linear infinite;
           }
           
           @keyframes scroll-up {
@@ -55,7 +55,7 @@ const Animation = () => {
           
           `}
         </style>
-        <div className="flex h-80 overflow-hidden ">
+        <div className="flex overflow-hidden h-screen">
   {/* First Slider on the Left */}
   <div className="wrapper flex-1 overflow-hidden">
     <div className="slider slider-up">

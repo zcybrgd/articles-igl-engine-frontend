@@ -1,15 +1,23 @@
  
- import Animation from '../../components/Welcome/animation.jsx';
- //import Hero from '../../components/Welcome/heroSection.jsx';
+ //import Animation from '../../components/Welcome/animation.jsx';
+ import ContactUs from '../../components/Welcome/contact.jsx';
+ import OurTeam from '../../components/Welcome/ourTeam.jsx';
+ import Hero from '../../components/Welcome/heroSection.jsx';
+ 
+ 
  
  
 function App() {
   return (
-    <div className="App">
+    <div className='w-screen  h-screen grid grid-cols-2 max-sm:h-full  '>
+     <div className="App w-screen">
+       < Hero/>
+        <ContactUs/>
+        < OurTeam/>
+
        
-        <Animation/>
        
-       
+    </div>
     </div>
   );
 }

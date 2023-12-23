@@ -7,7 +7,7 @@ import articleIcon from '../.././assets/icons/article.svg';
 const SignUpPage = () => {
    
     return (
-      <div className='bg-black   w-full h-full grid grid-cols-2 max-sm:h-full '>
+      <div className='bg-black   w-screen h-screen grid grid-cols-2 max-sm:h-full '>
    
           
             
