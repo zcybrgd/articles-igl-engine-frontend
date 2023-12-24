@@ -36,20 +36,20 @@ const Article = ({ article, isfav, userRole }) => {
     }
 
     return (
-        <div className="flex flex-row rounded-3xl bg-[#F1F1F1] justify-center shadow-md p-3 ">
+        <div className="flex flex-row w-full rounded-3xl bg-[#F1F1F1] justify-center shadow-md p-3 ">
             {/* icon part  */}
             <div className="hidden md:flex mr-8 w-1/10 items-center justify-center">
                 <img src={Paper} alt="papers icon" className="w-[80px] h-[80px]" />
             </div>
 
             {/* article's part */}
-            <div className="flex flex-col items-start justify-start w-3/4 md:w-3/5">
+            <div className="flex flex-col items-start justify-start w-3/4 md:w-3/5 mr-auto">
                 <p className="text-black text-[25px] font-semibold mb-2">{article.title}</p>
                 <div className="flex flex-row">
                     <CiCalendarDate className="text-[#707F65] mt-0.5 mr-1 text-[20px]" />
                     <p className="text-black text-[15px] mb-2">
                         <span className="font-semibold">Date: </span>
-                        {article.releaseDate}
+                        {article.date}
                     </p>
                 </div>
                 <div className="flex flex-row">
@@ -64,12 +64,12 @@ const Article = ({ article, isfav, userRole }) => {
                     </p>
                 </div>
                 <div className="flex justify-start items-start">
-                    <p className="text-black text-[15px] font-semibold mt-1 line-clamp-2 text-start">{article.summary}</p>
+                    <p className="text-black text-[15px] font-semibold mt-1 line-clamp-2 text-start">{article.text}</p>
                 </div>
             </div>
 
             {/* buttons part  */}
-            <div className="flex flex-col items-end justify-center w-1/4 md:w-3/10">
+            <div className="flex flex-col items-end justify-center w-1/4 md:w-3/10 ml-auto">
                 {userRole === "client" ? (
                     // for clients 
                     <>

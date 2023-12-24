@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import newsPaperImage from "../../assets/NewsPaper.svg"
@@ -8,7 +10,10 @@ import { articles } from "../../testing Data/ArticlesData";
 
 function SearchPage() {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [searchQuery, setSearchQuery] = useState("");
+    const [results, setResults] = useState(location.state);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -20,10 +25,19 @@ function SearchPage() {
         }
     };
 
-    const handleSearch = () => {
-        console.log("User searched for:", searchQuery);
-
-        //partie integration avec la recherche
+    const handleSearch = async () => {
+        try {
+            console.log("you searched for: ", searchQuery);
+            const encodedQuery = encodeURIComponent(searchQuery);
+            const response = await fetch(`http://localhost:8000/nadi/?q=${encodedQuery}`);
+            // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
+            const data = await response.json();
+            setResults(data.results);
+            console.log(results)
+            goToResultsPage()
+        } catch (error) {
+            console.error('Error searching articles:', error);
+        }
     };
 
     function openFilter() {
@@ -41,6 +55,7 @@ function SearchPage() {
     return (
         <div>
             {/* Hero Section */}
+            {console.log("results: ", results)}
             <div
                 className="flex -mt-10 p-10 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${newsPaperImage})` }}
@@ -55,16 +70,21 @@ function SearchPage() {
                 <div className="flex h-full bg-transparent rounded overflow-hidden shadow-lg">
                     <div className="w-full md:w-1/3 flex flex-row flex-grow flex-shrink pt-5 pb-5 pl-20 pr-20 mt-20 bg-[#181818] rounded-2xl items-center justify-center shadow-xl">
                         <div className="flex flex-row md:w-2/3 p-1 pl-2 pr-2 items-center justify-start rounded-2xl bg-[#F0F0F0]">
-                            <IoIosSearch className="mr-2 text-black text-[20px]" />
-                            <input
-                                type="text"
-                                id="searchBar"
-                                className="text-black bg-transparent focus:outline-none"
-                                value={searchQuery}
-                                onChange={handleInputChange}
-                                onKeyDown={handleKeyDown}
-                                placeholder="Search"
-                            />
+                            <div className="flex flex-row mr-auto">
+                                <IoIosSearch className="mr-2 text-black text-[20px]" />
+                                <input
+                                    type="text"
+                                    id="searchBar"
+                                    className="text-black bg-transparent focus:outline-none"
+                                    value={searchQuery}
+                                    onChange={handleInputChange}
+                                    onKeyDown={handleKeyDown}
+                                    placeholder="Search"
+                                />
+                            </div>
+                            <div className="flex ml-auto">
+                                <FaRegArrowAltCircleRight className="text-black text-[20px] cursor-pointer" onClick={handleSearch} />
+                            </div>
                         </div>
                         <div className="ml-5">
                             <p className="text-[12px] md:text-[15px] font-semibold text-[#FFFFFF] mr-1 cursor-pointer hover:underline" onClick={openFilter}>Filtrer</p>
@@ -94,15 +114,15 @@ function SearchPage() {
                             </span>
                         </div>
                         {/* number of results found  */}
-                        <p className="text-[#43BE83] font-semibold text-[15px]">{articles.length} result found</p>
+                        <p className="text-[#43BE83] font-semibold text-[15px]">{results.length} result found</p>
                     </div>
                     <div class="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                     {/* displaying results */}
-                    <div className="flex flex-col">
-                        {articles && articles.length > 0 ? (
-                            articles.map((article, index) => (
+                    <div className="flex flex-col w-[98%]">
+                        {results && results.length > 0 ? (
+                            results.map((article, index) => (
                                 <div key={index} className="flex mb-5">
                                     <Article article={article} isfav={false} userRole={"client"} />
                                 </div>

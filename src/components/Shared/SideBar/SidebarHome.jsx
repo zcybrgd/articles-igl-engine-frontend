@@ -35,28 +35,28 @@ function SidebarHome() {
                     </p>
                 </div>
 
-                <div class="py-4 overflow-y-auto mt-5">
-                    <ul class="space-y-2 font-medium">
+                <div className="py-4 overflow-y-auto mt-5">
+                    <ul className="space-y-2 font-medium">
                         <li>
                             {/* change the routing */}
                             <Link to="/search" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
                                 <span className="whitespace-nowrap transition-colors group-hover:text-white">Home</span>
                             </Link>
-                            <div class="border-b-2 text-[#F1F1F1]"></div>
+                            <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
                         <li>
                             {/* change the routing */}
                             <Link to="/collections" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
                                 <span className="whitespace-nowrap transition-colors group-hover:text-white">About Us</span>
                             </Link>
-                            <div class="border-b-2 text-[#F1F1F1]"></div>
+                            <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
                         <li>
                             {/* change the routing */}
                             <Link to="/settings" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
                                 <span className="whitespace-nowrap transition-colors group-hover:text-white">Contact Us</span>
                             </Link>
-                            <div class="border-b-2 text-[#F1F1F1]"></div>
+                            <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
 
                     </ul>
