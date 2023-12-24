@@ -2,9 +2,12 @@ import React, { useState } from "react"
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { logIn } from "../../services/authApi";
 import Router from "../Router";
+import { useAuth } from "../../context/AuthContext";
 
-const LoginPage = ({ connectUser }) => {
+const LoginPage = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [erreur, setErreur] = useState(null);
@@ -23,24 +26,34 @@ const LoginPage = ({ connectUser }) => {
         setErreur("Password is missing.");
         return;
       }
+
       const userData = {
         userName: username,
         password: password,
       }
-      const response = await logIn(userData)
 
-      if (response && response.data && response.data.token) {
-        setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
-        // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
-        //  navigate(`/${response.data.user.role.toLowerCase()}`);
-        const userRole = response.data.user.role.toLowerCase();
-        connectUser(userRole);
-        // navigate("/", { state: { userRole } });
-      } else {
-        if (response && response.data && response.data.error) {
-          setErreur(`Login failed. ${response.data.error}`);
-        }
-      }
+
+      // const response = await logIn(userData)
+
+      // if (response && response.data && response.data.token) {
+      //   setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
+      //   // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
+      //   //  navigate(`/${response.data.user.role.toLowerCase()}`);
+      //   const userRole = response.data.user.role.toLowerCase();
+      const userDataAndRole = {
+        username: username,
+        password: password,
+        userRole: "client", // edliha b userRole
+      };
+
+      await login(userDataAndRole);
+
+      navigate(`/`);
+      // } else {
+      //   if (response && response.data && response.data.error) {
+      //     setErreur(`Login failed. ${response.data.error}`);
+      //   }
+      // }
     } catch (error) {
       console.error("Error in handleLogin:", error);
       setErreur("An unexpected error occurred.");

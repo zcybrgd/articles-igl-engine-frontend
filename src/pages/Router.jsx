@@ -17,15 +17,10 @@ import SearchPage from "./Search Results/SearchPage";
 import ArticleDetails from "./Article/ArticleDetails";
 import SignUpPage from "./Authentification/SignUp";
 import LoginPage from "./Authentification/LogIn";
+import { useAuth } from "../context/AuthContext";
 
 function Router() {
-  // user is a boolean to know if he's connected or no 
-  // userRole (moderator, client)
-  const [userRole, setUserRole] = useState("");
-
-  const connectUser = (role) => {
-    setUserRole(role)
-  }
+  const { userRole } = useAuth();
 
   return (
     <Routes>
@@ -71,7 +66,7 @@ function Router() {
           <Route path="/" element={<LayoutWelcome />}>
             <Route path="/" element={<WelcomePage />} />
           </Route>
-          <Route path="/login" element={<LoginPage connectUser={connectUser} />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
         </Route>
       )}
