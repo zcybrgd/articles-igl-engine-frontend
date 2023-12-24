@@ -50,10 +50,10 @@ const SignUpPage = () => {
       if (profilePicture) {
         userData.append('profile_picture', profilePicture);
       }
-  
+
       const response = await signUp(userData);
-  
-  
+
+
       if (response && response.data && response.data.token) {
         setSuccessfulMessage(`Successfully Signed Up! Welcome Abroad, ${firstName}, You are going to be redirected to the login page`);
         localStorage.setItem('authToken', response.data.token);
@@ -67,9 +67,6 @@ const SignUpPage = () => {
       console.error('Error signing up:', error);
     }
   };
-  
-  
-  
 
   return (
     <div className='bg-black absolute right-0 top-0 w-full h-full grid grid-cols-2 '>
@@ -104,24 +101,24 @@ const SignUpPage = () => {
               <div className="flex w-72 ml-32 flex-col gap-6 space-y-0 mt-16 max-sm:left-0 top-0 max-sm:mt-16 max-sm:space-y-0 max-sm:bg-black max-sm:justify-center max-sm:rounded-lg sm:mt-16 sm:space-y-0 md:space-y-0 sm:bg-white  lg:bg-white sm:rounded-lg">
                 {/* This div will be hidden on medium and larger screens */}
                 <label htmlFor="profilePicture" className="text-black text-sm mb-2">
-                    Choose Your Profile Picture
-                          </label>
+                  Choose Your Profile Picture
+                </label>
                 <input
-                 type="file"
-                 id="profilePicture"
-                 name="profilePicture"
-                 accept="image/*"
-                 onChange={handleProfilePictureChange}
-                 />
-                 {profilePicture ? (
-                 <p className="text-black mt-2">
+                  type="file"
+                  id="profilePicture"
+                  name="profilePicture"
+                  accept="image/*"
+                  onChange={handleProfilePictureChange}
+                />
+                {profilePicture ? (
+                  <p className="text-black mt-2">
                     Profile Picture: {profilePicture.name}
-                                             </p>
-                                              ) : (
-                           <p className="text-black mt-2">
-                                  You can upload a profile picture (optional)
-                                 </p>
-                  )}
+                  </p>
+                ) : (
+                  <p className="text-black mt-2">
+                    You can upload a profile picture (optional)
+                  </p>
+                )}
                 <input
                   type="text"
                   placeholder="First Name"
@@ -166,18 +163,18 @@ const SignUpPage = () => {
                   Create an account
                 </button>
 
-                 <div>
-                 {successfulMessage && (
-                <p className="text-green-500 mt-2">{successfulMessage || 'successful'}</p>
-                   )}
+                <div>
+                  {successfulMessage && (
+                    <p className="text-green-500 mt-2">{successfulMessage || 'successful'}</p>
+                  )}
 
-                 {erreur && (
-                 <p className="text-red-500 mt-2">
-                    {erreur || 'An error occurred'} 
-                   </p>
-                 )}
+                  {erreur && (
+                    <p className="text-red-500 mt-2">
+                      {erreur || 'An error occurred'}
+                    </p>
+                  )}
 
-                 </div>
+                </div>
                 <div className="mt-0 text-sm flex justify-center  ">
                   <p className="text-black flex justify-center max-sm:mt-0 max-sm:text-white">Already have an account? </p>
                   <p className="text-[#707F65] font-bold hover:underline flex justify-center cursor-pointer" onClick={openLogInPage}>Login</p>

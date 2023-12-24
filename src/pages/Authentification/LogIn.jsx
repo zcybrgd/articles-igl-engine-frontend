@@ -1,15 +1,14 @@
 import React, { useState } from "react"
 import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { logIn } from "../../services/authApi";
-import Router from "../../routers/Router";
+import Router from "../Router";
 
-const LoginPage = () => {
+const LoginPage = ({ connectUser }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [erreur, setErreur] = useState(null);
   const [successfulMessage, setSuccessfulMessage] = useState(null)
-
 
   const handleLogin = async () => {
     try {
@@ -19,11 +18,11 @@ const LoginPage = () => {
         setErreur("Username is missing.");
         return;
       }
-  
+
       if (!password) {
         setErreur("Password is missing.");
         return;
-      }  
+      }
       const userData = {
         userName: username,
         password: password,
@@ -33,19 +32,21 @@ const LoginPage = () => {
       if (response && response.data && response.data.token) {
         setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
         // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
-      //  navigate(`/${response.data.user.role.toLowerCase()}`);
-      const userRole = response.data.user.role.toLowerCase();
-      navigate("/", { state: { userRole } });
+        //  navigate(`/${response.data.user.role.toLowerCase()}`);
+        const userRole = response.data.user.role.toLowerCase();
+        connectUser(userRole);
+        // navigate("/", { state: { userRole } });
       } else {
         if (response && response.data && response.data.error) {
-        setErreur(`Login failed. ${response.data.error}`);}
+          setErreur(`Login failed. ${response.data.error}`);
+        }
       }
     } catch (error) {
       console.error("Error in handleLogin:", error);
       setErreur("An unexpected error occurred.");
     }
   };
- 
+
 
   const leftBorderRadius = {
     borderTopLeftRadius: '20px',
@@ -102,14 +103,14 @@ const LoginPage = () => {
                     Log in
                   </button>
                   <div>
-                  {successfulMessage && (
-                <p className="text-green-500 mt-2">{successfulMessage || 'successful'}</p>
-                   )}
-                 {erreur && (
-                 <p className="text-red-500 mt-2">
-                    {erreur || 'An error occurred'} 
-                   </p>
-                 )}
+                    {successfulMessage && (
+                      <p className="text-green-500 mt-2">{successfulMessage || 'successful'}</p>
+                    )}
+                    {erreur && (
+                      <p className="text-red-500 mt-2">
+                        {erreur || 'An error occurred'}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-2 text-sm flex items-center justify-center ">
                     <p className="text-black md:text-white"> Do not have an account yet? </p>
