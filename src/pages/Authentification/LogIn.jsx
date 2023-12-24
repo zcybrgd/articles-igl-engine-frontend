@@ -1,9 +1,62 @@
-// import googleIcon from '../.././assets/icons/google.svg'; 
 import React, { useState } from "react"
 import { useNavigate } from 'react-router-dom';
+import { logIn } from "../../services/authApi";
 
-// import googleIcon from '../.././assets/icons/google.svg'; 
 const LoginPage = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [erreur, setErreur] = useState(null);
+  const [successfulMessage, setSuccessfulMessage] = useState(null)
+
+  const redirectBasedOnRole = (response) => {
+    switch (response.data.user.role) {
+      case "Administrator":
+        navigate('/admin-dashboard');
+        break;
+      case "Moderator":
+        navigate('/moderator-dashboard');
+        break;
+      case "Client":
+        navigate('/client-dashboard');
+        break;
+      default:
+        // other roles or unexpected cases
+        navigate('/');
+        break;
+    }
+  }
+  const handleLogin = async () => {
+    try {
+      setErreur(null);
+      setSuccessfulMessage(null)
+      if (!username) {
+        setErreur("Username is missing.");
+        return;
+      }
+  
+      if (!password) {
+        setErreur("Password is missing.");
+        return;
+      }  
+      const userData = {
+        userName: username,
+        password: password,
+      }
+      const response = await logIn(userData)
+
+      if (response && response.data && response.data.token) {
+        setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
+        // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
+        redirectBasedOnRole(response)
+      } else {
+        if (response && response.data && response.data.error) {
+        setErreur(`Login failed. ${response.data.error}`);}
+      }
+    } catch (error) {
+      console.error("Error in handleLogin:", error);
+      setErreur("An unexpected error occurred.");
+    }
+  };
   const navigate = useNavigate();
 
   const leftBorderRadius = {
@@ -44,19 +97,32 @@ const LoginPage = () => {
                   <input
                     type="text"
                     placeholder="username"
-
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className=" lg:bg-black h-6 sm:placeholder:text-black sm:text-black focus:outline-none   w-5/5  text-sm text-white placeholder-white mt-20 border-b-2 max-sm:border-black   max-sm:mt-0 max-sm:w-4/5 max-sm:ml-6 max-sm:mr-6 max-sm:bg-white   placeholder:text-white max-sm:placeholder:bg-white max-sm:placeholder:text-black max-sm:text-black sm:mr-6 sm:ml-6 lg:text-white lg:placeholder:text-white sm:border-black lg:border-white"
                   />
 
                   <input
                     type="password"
                     placeholder="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="  border-b-2 h-6 lg:bg-black sm:text-black sm:placeholder:text-black    focus:outline-none   text-sm text-white max-sm:border-black   max-sm:mt-0 max-sm:w-4/5 max-sm:ml-6 max-sm:mr-6 max-sm:bg-white max-sm:text-black sm:mr-6 sm:ml-6  lg:text-white lg:placeholder:text-white sm:border-black lg:border-white"
                   />
                   <div className="w-4/5 flex flex-col justify-start items-center mt-8 space-y-8"></div>
-                  <button className="my-1 rounded-full bg-white  text-black font-bold py-2 px-4 w-full max-sm:w-4/5 max-sm:ml-6 max-sm:mr-6 max-sm:bg-[#1C1A1A]  max-sm:text-white sm:bg-black lg:bg-white sm:mr-6 sm:ml-6 sm:w-4/5 sm:text-white lg:text-black">
+                  <button onClick={handleLogin} className="my-1 rounded-full bg-white  text-black font-bold py-2 px-4 w-full max-sm:w-4/5 max-sm:ml-6 max-sm:mr-6 max-sm:bg-[#1C1A1A]  max-sm:text-white sm:bg-black lg:bg-white sm:mr-6 sm:ml-6 sm:w-4/5 sm:text-white lg:text-black">
                     Log in
                   </button>
+                  <div>
+                  {successfulMessage && (
+                <p className="text-green-500 mt-2">{successfulMessage || 'successful'}</p>
+                   )}
+                 {erreur && (
+                 <p className="text-red-500 mt-2">
+                    {erreur || 'An error occurred'} 
+                   </p>
+                 )}
+                  </div>
                   <div className="mt-2 text-sm flex items-center justify-center ">
                     <p className="text-black md:text-white"> Do not have an account yet? </p>
                     <p className="text-blue-800 hover:underline cursor-pointer" onClick={openSignUpPage}>Sign up</p>

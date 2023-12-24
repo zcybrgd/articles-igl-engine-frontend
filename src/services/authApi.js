@@ -10,15 +10,24 @@ const authApi = axios.create({
   });
   
 
-  export const signUp = async (userData) => {
-    try {
+export const signUp = async (userData) => {
+ try {
       const response = await authApi.post('signup/', userData);
       return response; 
-    } catch (error) {
+ } catch (error) {
       console.error('Error in signUp:', error);
       throw error; 
     }
   };
-  
+
+export const logIn = async(userData) => {
+    try {
+        const response = await authApi.post('login/',userData)
+        return response
+    } catch(error){
+        console.error('Error in login: ', error);
+        throw error; 
+    }
+}
 
 export default authApi;
