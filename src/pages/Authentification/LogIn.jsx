@@ -83,11 +83,15 @@
         
     
     </div>
-    <div className="  lg:text-white font-bold text-7xl absolute top-8  max-sm:text-5xl max-sm:mt-8 max-sm:hidden max-md:text-5xl max-sm:ml-4 md:text-transparent ml-96 left-60 sm:text-transparent md:hidden-block">
-    log
+    {/* <div className="  lg:text-white font-bold text-7xl absolute top-8  max-sm:text-5xl max-sm:mt-8 max-sm:hidden max-md:text-5xl max-sm:ml-4 md:text-transparent ml-96  sm:text-transparent md:hidden-block left-1/5">
+    <p className="  md:text-white ">Log</p> */}
+    <div className=" lg:text-white font-bold text-7xl   absolute  right-0 w-3/5 md:w-2/5  h-full md:h-full   hidden md:block md:text-transparent  inset-x-2/4" style={leftBorderRadius} >
+     <div className="lg:text-white mt-8 md:text-transparent">Log</div>
+    
+                     
   </div>
    {/* // White part for other content  */}
-     <div className=" lg:text-black font-bold text-7xl   absolute inset-y-0 right-0 w-3/5 md:w-2/5 bg-blue-500 h-full md:h-full   hidden md:block md:text-transparent" style={leftBorderRadius} >
+     <div className=" lg:text-black font-bold text-7xl   absolute inset-y-0 right-0 w-3/5 md:w-2/5 bg-white h-full md:h-full   hidden md:block md:text-transparent" style={leftBorderRadius} >
      <div className="lg:text-black mt-8 md:text-transparent">in</div>
     
     

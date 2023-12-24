@@ -6,9 +6,9 @@ const ContactUs = () => {
    
     
 
-    <div className="  w-screen  flex items-center justify-center bg-white">
+    <div className="   w-full  flex items-center justify-center bg-white">
          <div className="flex">
-         <div className="  w-16 bg-black h-screen md:h-screen flex ">
+         <div className="  w-16 bg-black     h-full md:h-screen  flex max-sm:h-screen">
          </div>
         </div>
       <div className="w-full   p-6 bg-white rounded-lg   flex flex-col items-center">
