@@ -7,7 +7,7 @@ import articleIcon from '../.././assets/icons/article.svg';
 const SignUpPage = () => {
    
     return (
-      <div className='bg-black   w-screen h-screen grid grid-cols-2 max-sm:h-full '>
+      <div className='bg-black   absolute w-full h-full   top-0 grid grid-cols-2 max-sm:h-full '>
    
           
             
@@ -40,14 +40,14 @@ const SignUpPage = () => {
       
    <div className="max-sm:justify-start mt-0 max-sm:text-white  text-sm max-sm:ml-0 max-sm:text-2xl max-sm:mt-6    mb-0 space-y-0">
    
-            <div className="flex w-72 flex-col gap-6 max-sm:hidden space-y-0 mt-16 max-sm:mt-16 max-sm:space-y-0 max-sm:justify-center  sm:mt-16 max-sm:h-full sm:space-y-0  md:space-y-0  sm:bg-white sm:h-3/4 lg:bg-black sm:rounded-lg">
+            <div className="flex w-72 flex-col gap-6 max-sm:hidden  mt-16 max-sm:mt-16  max-sm:justify-center  sm:mt-16 max-sm:h-full sm:space-y-0  md:space-y-0  sm:bg-white sm:h-3/4 lg:bg-black sm:rounded-lg">
                {/* This div will be hidden on medium and larger screens */}
        
               </div>
-            <div className="absolute inset-y-8  w-2/5 md:w-5/5       h-4 md:h-4/5 flex place-content-center mt-16 space-y-0 ">
+            <div className="absolute inset-y-8  w-2/5 md:w-5/5       h-4 md:h-4/5 flex place-content-center mt-16  ">
             <div className="flex w-72 flex-col max-sm:h-full gap-6 space-y-0  ">
       
-            <div className="flex w-72 ml-32 flex-col gap-6 space-y-0 mt-16 max-sm:left-0 top-0 max-sm:mt-16 max-sm:space-y-0 max-sm:bg-black max-sm:justify-center max-sm:rounded-lg sm:mt-16 sm:space-y-0 md:space-y-0 sm:bg-white  lg:bg-white sm:rounded-lg">
+            <div className="flex w-72 ml-32 flex-col gap-6 space-y-0 mt-16 max-sm:left-0 top-0 max-sm:mt-16 max-sm:bg-black max-sm:justify-center max-sm:rounded-lg    sm:bg-white  lg:bg-white sm:rounded-lg">
    {/* This div will be hidden on medium and larger screens */}
        
             <input

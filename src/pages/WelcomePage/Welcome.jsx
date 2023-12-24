@@ -8,7 +8,12 @@
  
  
 function App() {
+  
   return (
+
+    // <div className="absolute w-full h-full  bg-black top-0">
+    // {/* Your app content */}
+    //  </div>
     <div className='w-screen  h-screen grid grid-cols-2 max-sm:h-full  '>
      <div className="App w-screen">
        < Hero/>
@@ -18,7 +23,9 @@ function App() {
        
        
     </div>
-    </div>
+     </div>
+
+     
   );
 }
 

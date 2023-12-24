@@ -28,11 +28,11 @@ const Animation = () => {
         <style>
           {`
          .slider-up .slide-track {
-            animation: scroll-up 10s linear infinite;
+            animation: scroll-up 14s linear infinite;
           }
           
           .slider-down .slide-track {
-            animation: scroll-down 10s linear infinite;
+            animation: scroll-down 14s linear infinite;
           }
           
           @keyframes scroll-up {

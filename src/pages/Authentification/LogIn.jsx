@@ -10,7 +10,7 @@
     <div className='bg-black w-full  h-full grid grid-cols-2 max-sm:h-full  '>
    
     <div className='flex max-sm:flex'>
-    <div className='w-screen h-screen grid   max-sm:h-screen bg-black lg:w-4/5'>
+    <div className='absolute w-full h-full  bg-black top-0  grid   max-sm:absolute max-sm:w-full max-sm:h-full  max-sm:bg-black max-sm:top-0  '>
        
     <div className='w-full h-full  grid-rows-2 max-sm:h-full sm:hidden '> 
     <div className=" max-sm: text-white max-sm: font-bold  max-sm:text-5xl max-sm: mt-8 md:hidden lg:hidden max-md:text-5xl max-sm:ml-4 sm-hidden">
