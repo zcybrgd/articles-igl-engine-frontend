@@ -9,10 +9,6 @@ import {
   ReactiveList,
   ResultCard,
 } from '@appbaseio/reactivesearch';
-import WelcomPage from "./pages/Welcome page/WelcomePage";
-import LoginPage from "./pages/Authentification/LogIn";
-import UserProfile from "./components/Profile/UserInfo";
-import Settings from "./components/Profile/settings";
 
 
 export default function App() {
