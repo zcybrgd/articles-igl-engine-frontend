@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
@@ -37,10 +37,6 @@ function HomePage() {
             console.error('Error searching articles:', error);
         }
     };
-
-    useEffect(() => {
-        console.log("Results updated:", results);
-    }, [results]);
 
     function goToResultsPage() {
         try {
