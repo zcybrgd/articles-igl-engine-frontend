@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
@@ -9,7 +9,7 @@ function HomePage() {
     const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(null);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -30,11 +30,17 @@ function HomePage() {
             const data = await response.json();
             setResults(data.results);
             console.log(results)
-            goToResultsPage()
+            if (results) {
+                goToResultsPage();
+            }
         } catch (error) {
             console.error('Error searching articles:', error);
         }
     };
+
+    useEffect(() => {
+        console.log("Results updated:", results);
+    }, [results]);
 
     function goToResultsPage() {
         try {
@@ -42,7 +48,7 @@ function HomePage() {
                 { state: results },
             );
         } catch (error) {
-            console.error("Error loading home page:", error);
+            console.error("Error loading results page:", error);
         }
     }
 
