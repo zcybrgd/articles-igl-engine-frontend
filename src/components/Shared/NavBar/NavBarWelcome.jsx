@@ -23,7 +23,7 @@ const NavBarWelcome = () => {
                 </div>
 
                 {/* profile part  */}
-                <div class="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
+                <div className="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
                     <Link to="/signup" className="p-2 mr-6">
                         {/* signup button  */}
                         <p className="text-[12px] md:text-[15px] text-black mr-1 cursor-pointer hover:underline">Sign Up</p>

@@ -1,30 +1,16 @@
 import React, { useState } from "react"
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import { logIn } from "../../services/authApi";
+import Router from "../../routers/Router";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [erreur, setErreur] = useState(null);
   const [successfulMessage, setSuccessfulMessage] = useState(null)
 
-  const redirectBasedOnRole = (response) => {
-    switch (response.data.user.role) {
-      case "Administrator":
-        navigate('/admin-dashboard');
-        break;
-      case "Moderator":
-        navigate('/moderator-dashboard');
-        break;
-      case "Client":
-        navigate('/client-dashboard');
-        break;
-      default:
-        // other roles or unexpected cases
-        navigate('/');
-        break;
-    }
-  }
+
   const handleLogin = async () => {
     try {
       setErreur(null);
@@ -47,7 +33,9 @@ const LoginPage = () => {
       if (response && response.data && response.data.token) {
         setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
         // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
-        redirectBasedOnRole(response)
+      //  navigate(`/${response.data.user.role.toLowerCase()}`);
+      const userRole = response.data.user.role.toLowerCase();
+      navigate("/", { state: { userRole } });
       } else {
         if (response && response.data && response.data.error) {
         setErreur(`Login failed. ${response.data.error}`);}
@@ -57,7 +45,7 @@ const LoginPage = () => {
       setErreur("An unexpected error occurred.");
     }
   };
-  const navigate = useNavigate();
+ 
 
   const leftBorderRadius = {
     borderTopLeftRadius: '20px',

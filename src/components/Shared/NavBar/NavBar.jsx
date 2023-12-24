@@ -12,7 +12,7 @@ const NavBar = ({ userRole, article }) => {
 
     function backToHome() {
         try {
-            navigate(`/`);
+            navigate("/", { state: { userRole } });
         } catch (error) {
             console.error("Error loading home page:", error);
         }
@@ -20,7 +20,7 @@ const NavBar = ({ userRole, article }) => {
 
     function backToModPage() {
         try {
-            navigate(`/`);
+        navigate("/", { state: { userRole } });
         } catch (error) {
             console.error("Error loading moderator page:", error);
         }
@@ -28,7 +28,7 @@ const NavBar = ({ userRole, article }) => {
 
     function backtoSearchPage() {
         try {
-            navigate(`/search`);
+            navigate("/search", { state: { userRole } });
         } catch (error) {
             console.error("Error loading home page:", error);
         }
