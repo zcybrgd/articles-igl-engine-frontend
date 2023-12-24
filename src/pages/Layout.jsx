@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { openSidebarContext } from "../context/openSidebarContext";
 import Sidebar from "../components/Shared/SideBar/SideBar";
 import Navbar from "../components/Shared/NavBar/NavBar";
 
 const Layout = ({ userRole }) => {
+    
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (

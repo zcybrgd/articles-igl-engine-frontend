@@ -33,27 +33,26 @@ const LoginPage = () => {
       }
 
 
-      // const response = await logIn(userData)
+       const response = await logIn(userData)
 
-      // if (response && response.data && response.data.token) {
-      //   setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
-      //   // Redirect to the client acc if the role is a client, and the moderator if its a mod and the admin if its an admin
-      //   //  navigate(`/${response.data.user.role.toLowerCase()}`);
-      //   const userRole = response.data.user.role.toLowerCase();
+       if (response && response.data && response.data.token) {
+        setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
+    
+      const userRole = response.data.user.role.toLowerCase();
       const userDataAndRole = {
-        username: username,
+        userName: username,
         password: password,
-        userRole: "client", // edliha b userRole
+        userRole: userRole,
       };
 
       await login(userDataAndRole);
 
       navigate(`/`);
-      // } else {
-      //   if (response && response.data && response.data.error) {
-      //     setErreur(`Login failed. ${response.data.error}`);
-      //   }
-      // }
+       } else {
+         if (response && response.data && response.data.error) {
+           setErreur(`Login failed. ${response.data.error}`);
+        }
+       }
     } catch (error) {
       console.error("Error in handleLogin:", error);
       setErreur("An unexpected error occurred.");

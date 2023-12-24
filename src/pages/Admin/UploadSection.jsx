@@ -5,15 +5,16 @@ import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
+import { useAuth } from "../../context/AuthContext";
 
 function UploadSection() {
 
     const [fileType, setFileType] = useState('file');
-    const [file, setFile] = useState(null);
     const [url, setUrl] = useState('');
     const [error, setError] = useState(null);
     const [files, setFiles] = useState([]);
-
+   
+    const { userRole, userName } = useAuth();
 
     const handleFileChange = (e) => {
         const selectedFiles = e.target.files;
@@ -37,7 +38,6 @@ function UploadSection() {
         } else {
             try {
                 if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
-                    console.log("inside the iff");
 
                     const response = await uploadPDF(fileType === 'file' ? files : url);
 
@@ -62,7 +62,7 @@ function UploadSection() {
                     <img src={ArticleIcon} alt="article icon" className="w-[55px] h[55px]" />
                 </div>
                 <div className="flex w-5/6 justify-center">
-                    <p className="text-white font-bold">Administrator Welcome Portal</p>
+                    <p className="text-white font-bold">Administrator Welcome Portal {userName} {userRole}</p>
                 </div>
             </div>
 

@@ -53,16 +53,15 @@ const Article = ({ article, isfav, userRole }) => {
                     </p>
                 </div>
                 <div className="flex flex-row">
-                    <FaUserTie className="text-[#707F65] mt-0.5 mr-1.5 ml-0.5 text-[15px]" />
-                    <p className="text-black text-[15px] mb-2">
-                        <span className="font-semibold">Authors: </span>
-                        {article.authors && article.authors.map((author, index) => (
-                            <>
-                                <span className="mr-1"></span>{author},
-                            </>
-                        ))}
-                    </p>
-                </div>
+    <FaUserTie className="text-[#707F65] mt-0.5 mr-1.5 ml-0.5 text-[15px]" />
+    <p className="text-black text-[15px] mb-2">
+        <span className="font-semibold">Authors: </span>
+        {article.authors && article.authors.map((author, index) => (
+            <span key={index} className="mr-1">{author},</span>
+        ))}
+    </p>
+</div>
+
                 <div className="flex justify-start items-start">
                     <p className="text-black text-[15px] font-semibold mt-1 line-clamp-2 text-start">{article.summary}</p>
                 </div>

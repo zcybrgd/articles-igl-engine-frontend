@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
@@ -8,6 +8,10 @@ import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { articles } from "../../testing Data/ArticlesData";
 
 function ModeratorPage() {
+    const [moderatorData, setModeratorData] = useState(null);
+    const userRole = location.state && location.state.userRole;
+   
+     
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleInputChange = (event) => {
@@ -91,7 +95,7 @@ function ModeratorPage() {
                     {/* number of articles added by admins  */}
                     <p className="text-[#707F65] font-semibold text-[15px]">{articles.length} articles</p>
                 </div>
-                <div class="border border-[#D8DAD7] w-full mb-3"></div>
+                <div className="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                 {/* displaying articles */}
