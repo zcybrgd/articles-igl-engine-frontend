@@ -7,6 +7,7 @@ import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import newsPaperImage from "../../assets/NewsPaper.svg"
 import { articles } from "../../testing Data/ArticlesData";
+import sorryAnimation from "../../assets/gifs/SorryAnimation.gif"
 
 function SearchPage() {
     const navigate = useNavigate();
@@ -128,10 +129,11 @@ function SearchPage() {
                                 </div>
                             ))
                         ) : (
-                            <div className="flex justify-center items-center text-center p-20">
+                            <div className="flex flex-col space-y-10 justify-center items-center text-center p-20">
                                 <p className="text-black text-[20px] font-semibold"> Oups ! No results found for your search query  :(
                                     Please try again with different keywords  or refine your search criteria
                                 </p>
+                                <img src={sorryAnimation} alt="no results gif" />
                             </div>
                         )}
                     </div>

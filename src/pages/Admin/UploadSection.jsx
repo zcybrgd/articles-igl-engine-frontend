@@ -5,6 +5,7 @@ import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
+import uploadAnimation from "../../assets/gifs/UploadAnimation.gif"
 
 function UploadSection() {
 
