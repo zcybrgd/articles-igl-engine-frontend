@@ -1,9 +1,23 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
-import { moderators } from "../../testing Data/ModeratorsList"
+//import { moderators } from "../../testing Data/ModeratorsList"
+import fetchModerators from "../../services/modApi";
 
 function ModeratorsSection() {
-
+    const [moderators, setModerators] = useState([]);
+    useEffect(() => {
+        const fetchModeratorsData = async () => {
+          try {
+            const mods = await fetchModerators();
+            setModerators(mods);
+            console.log("moderators: ", mods)
+          } catch (error) {
+            console.error("Error fetching moderators:", error);
+          }
+        };
+    
+        fetchModeratorsData();
+      }, []); 
     const renderModerators = () => {
         if (moderators && moderators.length <= 5) {
             // If there are 5 or fewer tasks, render them all.

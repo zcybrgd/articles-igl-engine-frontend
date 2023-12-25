@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { FaUser } from "react-icons/fa6";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
-import avatar from "../../../assets/image.jpg"
+import avatar from "../../../assets/avataranon.jpg"
+import { useAuth } from '../../../context/AuthContext';
 
 const NavbarHome = ({ userRole }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
+    const { userName } = useAuth()
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,17 +33,14 @@ const NavbarHome = ({ userRole }) => {
                         <>
                             {/* Logo part  */}
                             <div className="p-0 mr-6">
-                                <img
-                                    className="w-12 h-12 mx-3 mt-1.5"
-                                    src={avatar}
-                                />
+                              <p className='text-black font-bold text-lg'>Articles Web Engine</p>
                             </div>
                         </>
                     ) : (
                         <>
                             <div className='flex'>
                                 <b className=" xl:px-[40px] mr-3 font-bold text-black text-[20px] lg:text-[30px] xl:text-[32px]">
-                                    website name
+                                    Articles Web Engine
                                 </b>
                             </div>
                         </>
@@ -103,10 +102,10 @@ const NavbarHome = ({ userRole }) => {
                         <>
                             <div className='flex flex-col'>
                                 <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                    user name
+                                    {userName}
                                 </b>
                                 <b className="ml-12 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
-                                    Admin
+                                    Adminstrator
                                 </b>
                             </div>
                             <div className="p-0 mr-6">
@@ -114,6 +113,7 @@ const NavbarHome = ({ userRole }) => {
                                     className="w-12 h-12 rounded-full mx-3 mt-1.5"
                                     src={avatar}
                                 />
+    
                             </div>
                         </>
                     ) : (

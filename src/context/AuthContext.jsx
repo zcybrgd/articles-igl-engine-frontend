@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setUserRole(null);  //hedi jsp ila tmshi
+    setUserRole(null);  
   };
 
   return (

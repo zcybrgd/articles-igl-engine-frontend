@@ -5,7 +5,7 @@ import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
-import { useAuth } from "../../context/AuthContext";
+
 
 function UploadSection() {
 
@@ -14,7 +14,7 @@ function UploadSection() {
     const [error, setError] = useState(null);
     const [files, setFiles] = useState([]);
    
-    const { userRole, userName } = useAuth();
+   
 
     const handleFileChange = (e) => {
         const selectedFiles = e.target.files;
@@ -61,8 +61,8 @@ function UploadSection() {
                 <div className="flex w-1/6 justify-start ml-1">
                     <img src={ArticleIcon} alt="article icon" className="w-[55px] h[55px]" />
                 </div>
-                <div className="flex w-5/6 justify-center">
-                    <p className="text-white font-bold">Administrator Welcome Portal {userName} {userRole}</p>
+                <div className="flex w-3/5 justify-center">
+                    <p className="text-white font-bold">Administrator Welcome Portal </p>
                 </div>
             </div>
 
@@ -92,10 +92,7 @@ function UploadSection() {
 
                 {/* logo part  */}
                 <div className="hidden md:flex w-1/4 p-5 justify-end">
-                    <img
-                        className="w-25 h-25 "
-                        src={avatar}
-                    />
+                    
                 </div>
             </div>
 
@@ -114,7 +111,7 @@ function UploadSection() {
                             />
                             <span className="text-[12px] md:text-[15px] text-[#181818] font-semibold">Upload File</span>
                         </label>
-                        <label className="max-h-[40px] w-1/3 items-center rounded-xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center py-1 px-4 ">
+                        <label className="max-h-[40px] w-1/3 items-center rounded-xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center py-2 px-4 ">
                             <span>Choose a PDF file</span>
                             <input
                                 type="file"
