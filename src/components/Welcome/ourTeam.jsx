@@ -20,7 +20,7 @@ import 'slick-carousel/slick/slick-theme.css';
   const NextArrow = ({ onClick }) => (
     <div className="bg-black top-0">
       
-      <div className="arrow next bg-transparent lg:top-32 md:top-20 -right-6 max-sm:-right-2 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
+      <div className="arrow next bg-transparent lg:top-32 md:top-20 -right-6 max-sm:-right-8 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
            <img src={arrowNext}  alt="Next "  />
     </div>
     </div>
@@ -30,7 +30,7 @@ import 'slick-carousel/slick/slick-theme.css';
   const PrevArrow = ({ onClick }) => (
     <div className="bg-black top-0">
       <div className=" bg-transparent  ">
-      <div className="arrow prev bg-transparent lg:top-32 -left-6 top-20 max-sm:-left-2 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
+      <div className="arrow prev bg-transparent lg:top-32 -left-6 top-24 max-sm:-left-8 max-sm:top-32 cursor-pointer absolute z-10" onClick={onClick}>
         <img src={arrowPrev} alt="Previous" />
         </div>
       </div>
@@ -48,6 +48,7 @@ import 'slick-carousel/slick/slick-theme.css';
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     beforeChange: (current, next) => setImgIndex(next),
+    
     responsive: [
         {
           breakpoint: 640,  
@@ -59,14 +60,22 @@ import 'slick-carousel/slick/slick-theme.css';
   };
 
   return (
-    <div className="  w-screen  flex items-center   bg-white space-x-16 max-sm:space-x-0">
-         <div className="flex">
-         <div className="  w-16 bg-black h-screen md:h-screen flex ">
-         </div>
-     </div>
-         
+    
+    <div className="  flex items-center    max-sm:space-x-0">
       
-        <Slider {...settings} className="w-4/5 h-4/5 max-sm:w-4/5">
+     
+    <div className="flex">
+    <div className="  w-16 bg-black h-screen md:h-screen flex">
+   
+    </div>
+    
+</div>
+      {/* <h2 className="text-3xl font-semibold mb-6 text-[#707F65]">Contact Us</h2> */}
+      <div className="  w-5/6 h-full flex flex-col justify-center items-center max-sm:space-x-0  ml-16">
+      <h2 className="text-3xl font-semibold  text-[#707F65] mb-20">Meet our team</h2>
+
+        <Slider {...settings} className="w-full h-full max-sm:w-4/5 bg-blue">
+       
           {images.map((img, idx) => (
             <div className={idx === imgIndex ? 'slide activeSlide scale-125' : 'slide'} key={idx}>
               <div
@@ -79,7 +88,11 @@ import 'slick-carousel/slick/slick-theme.css';
               </div>
           ))}
         </Slider>  
-      </div>
+        </div>
+        </div>
+        
+      
+      
        
     
     

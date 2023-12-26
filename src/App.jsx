@@ -12,7 +12,7 @@
 // };
 // export default App;
 
-import Welcome from "./pages/Authentification/LogIn"; // Adjust the path based on your project structure
+import Welcome from "./pages/WelcomePage/Welcome"; // Adjust the path based on your project structure
   // Adjust the path based on your project structure
 const App = () => {
   return (

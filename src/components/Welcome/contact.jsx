@@ -8,7 +8,7 @@ const ContactUs = () => {
 
     <div className="   w-full  flex items-center justify-center bg-white">
          <div className="flex">
-         <div className="  w-16 bg-black     h-full md:h-screen  flex max-sm:h-screen">
+         <div className="  w-16 bg-black    h-full md:h-screen  flex max-sm:h-screen">
          </div>
         </div>
       <div className="w-full   p-6 bg-white rounded-lg   flex flex-col items-center">
@@ -50,6 +50,7 @@ const ContactUs = () => {
         <button className="bg-[#707F65] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#707F65] transition-colors">
           Send Message
         </button>
+        
       </div>
     </div>
     
