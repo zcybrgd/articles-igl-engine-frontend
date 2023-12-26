@@ -1,16 +1,22 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { openSidebarContext } from '../../../context/openSidebarContext';
-import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 import { IoMenu } from "react-icons/io5";
 
 
 function SidebarHome() {
+    const navigate = useNavigate()
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
     const closeSidebar = () => {
         setMobileOpen(false);
-    };
+    }; handleWelcome
 
+    function handleWelcome() {
+        closeSidebar();
+        navigate("/welcome")
+    };
     return (
         <div>
 
@@ -38,27 +44,42 @@ function SidebarHome() {
                 <div className="py-4 overflow-y-auto mt-5">
                     <ul className="space-y-2 font-medium">
                         <li>
-                            {/* change the routing */}
-                            <Link to="/search" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
-                                <span className="whitespace-nowrap transition-colors group-hover:text-white">Home</span>
-                            </Link>
+                            {/* To home section  */}
+                            <ScrollLink
+                                to="home"
+                                smooth={true}
+                                duration={500}
+                                className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
+                                onClick={handleWelcome}
+                            >
+                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">Home</span>
+                            </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
                         <li>
-                            {/* change the routing */}
-                            <Link to="/collections" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
-                                <span className="whitespace-nowrap transition-colors group-hover:text-white">About Us</span>
-                            </Link>
+                            {/* To about section  */}
+                            <ScrollLink
+                                to="about"
+                                smooth={true}
+                                duration={500}
+                                className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
+                                onClick={handleWelcome}
+                            >                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">About Us</span>
+                            </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
                         <li>
-                            {/* change the routing */}
-                            <Link to="/settings" className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white">
-                                <span className="whitespace-nowrap transition-colors group-hover:text-white">Contact Us</span>
-                            </Link>
+                            {/* To contact section  */}
+                            <ScrollLink
+                                to="contact"
+                                smooth={true}
+                                duration={500}
+                                className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
+                                onClick={handleWelcome}
+                            >                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">Contact Us</span>
+                            </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
-
                     </ul>
                 </div>
             </div>

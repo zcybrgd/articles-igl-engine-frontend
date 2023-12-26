@@ -2,10 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import LayoutHome from "./LayoutHome";
 import LayoutArticle from "./LayoutArticle";
+import LayoutWelcome from "./LayoutWelcome";
 import WelcomePage from "./Welcome page/WelcomePage";
 import HomePage from "./Welcome page/HomePage";
-import LogIn from "./Authentification/LogIn";
-import SignUp from "./Authentification/SignUp";
 import ProfilePage from "./Profile/ProfilePage";
 import PageError404 from "./Error/PageError404";
 import SettingsPage from "./Settings/SettingsPage";
@@ -15,6 +14,8 @@ import ModeratorPage from "./Moderators/ModeratorPage";
 import FavoriArticlesListPage from "./Collections/FavoriArticlesPage";
 import SearchPage from "./Search Results/SearchPage";
 import ArticleDetails from "./Article/ArticleDetails";
+import SignUpPage from "./Authentification/SignUp";
+import LoginPage from "./Authentification/LogIn";
 
 function Router({ user, userRole }) {
     // user is a boolean to know if he's connected or no 
@@ -29,6 +30,7 @@ function Router({ user, userRole }) {
                     <>
                         <Route path="/" element={<LayoutHome userRole={"client"} />}>
                             <Route path="/" element={<HomePage />} />
+                            <Route path="/welcome" element={<WelcomePage />} />
                             <Route path="/search" element={<SearchPage />} />
                         </Route>
                         <Route path="/" element={<Layout userRole={"client"} />}>
@@ -61,9 +63,11 @@ function Router({ user, userRole }) {
                 )
             ) : (
                 <Route>
-                    <Route index path="/" element={<WelcomePage />} />
-                    <Route index path="/login" element={<LogIn />} />
-                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/" element={<LayoutWelcome />}>
+                        <Route path="/" element={<WelcomePage />} />
+                    </Route>
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignUpPage />} />
                 </Route>
             )}
         </Routes>
