@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import ArticleMainIcon from "../../assets/ArticlemainIcon.svg"
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteArticle } from "../../services/articlesApi";
 
 function ArticleDetails() {
+    
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
-
+    const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [bookMarkClicked, setBookMarkClicked] = useState(false);
     const [isFullModeOpen, setFullModeOpen] = useState(false);
@@ -36,8 +40,27 @@ function ArticleDetails() {
         setIsEditing(true);
     };
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = async () => {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
+            try {
+                const isSuccess = await deleteArticle(article.id);
+        
+                if (isSuccess) {  
+            toast.success('Article deleted successfully', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000, 
+            });
+
+            setTimeout(() => {
+                navigate("/",{ state: { userRole} });
+            }, 2000); 
+                } else {
+                    // Handle failure
+                }
+            } catch (error) {
+                console.error('Error handling delete click', error);
+            }
+     // j'ajoute deleted count        
     };
 
     const handleSaveClick = () => {
@@ -256,6 +279,17 @@ function ArticleDetails() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+    position="top-center"
+    autoClose={2000}
+    hideProgressBar
+    newestOnTop
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+/>
         </div>
     )
 }

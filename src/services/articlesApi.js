@@ -25,3 +25,27 @@ export const fetchArticles = async () => {
       throw error; 
     }
   };
+
+  const deleteArticle = async (articleId) => {
+    try {
+        const response = await fetch(`${BASE_URL}${articleId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            console.log('Article deleted successfully');
+            return true; 
+        } else {
+            console.error('Failed to delete article');
+            return false;
+        }
+    } catch (error) {
+        console.error('Error deleting article', error);
+        return false; 
+    }
+};
+
+export { deleteArticle };
