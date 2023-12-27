@@ -10,7 +10,7 @@ const ContactUs = () => {
             <div className="w-full px-8 bg-white rounded-lg flex flex-col items-center">
                 <div class="border-b-2 border-[#707F65] w-1/2 mb-10"></div>
 
-                <h2 className="text-3xl font-semibold mb-6 text-[#707F65]">Contact Us</h2>
+                <h2 className="text-4xl font-semibold mb-6 text-[#707F65]">Contact Us</h2>
 
                 <div className="mb-6 w-full">
                     <input

@@ -54,22 +54,29 @@ const OurTeam = () => {
     };
 
     return (
-        <div id="about" className="flex items-center bg-white space-x-16 max-sm:space-x-0">
-            <div className="flex flex-row">
-                <div className="flex w-16 bg-black h-screen md:h-screen"> </div>
+        <div id="about" className="flex items-center max-sm:space-x-0">
+            <div className="flex">
+                <div className="  w-16 bg-black h-screen md:h-screen flex">
+                </div>
             </div>
-            <Slider {...settings} className="w-4/5 h-4/5 max-sm:w-4/5">
-                {images.map((img, idx) => (
-                    <div className={idx === imgIndex ? 'slide activeSlide scale-125' : 'slide'} key={idx}>
-                        <div
-                            className="w-4/5 slide m-auto space-x-0 transform: idx === imgIndex ? 'scale-125' : 'scale-75"
-                            key={idx}
-                        >
-                            <img src={img} alt={`Image ${idx}`} className="w-20rem mx-auto transform scale-75" />
+            <div className="  w-5/6 h-full flex flex-col justify-center items-center max-sm:space-x-0  ml-16">
+                <h2 className="text-4xl font-semibold  text-[#707F65] mb-20">Meet our team</h2>
+
+                <Slider {...settings} className="w-full h-full max-sm:w-4/5 bg-blue">
+
+                    {images.map((img, idx) => (
+                        <div className={idx === imgIndex ? 'slide activeSlide scale-125' : 'slide'} key={idx}>
+                            <div
+                                className="w-4/5 slide m-auto space-x-0 transform: idx === imgIndex ? 'scale-125' : 'scale-75"
+                                key={idx}
+
+                            >
+                                <img src={img} alt={`Image ${idx}`} className="w-20rem mx-auto transform scale-75" />
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </Slider>
+                    ))}
+                </Slider>
+            </div>
         </div>
     );
 };

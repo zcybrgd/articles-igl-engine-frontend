@@ -30,12 +30,12 @@ function SearchPage() {
         try {
             console.log("you searched for: ", searchQuery);
             const encodedQuery = encodeURIComponent(searchQuery);
-            const response = await fetch(`http://localhost:8000/nadi/?q=${encodedQuery}`);
+            const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
+            // const response = await fetch(`http://localhost:8000/nadi/?q=${encodedQuery}`);
             // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
             const data = await response.json();
             setResults(data.results);
             console.log(results)
-            goToResultsPage()
         } catch (error) {
             console.error('Error searching articles:', error);
         }
