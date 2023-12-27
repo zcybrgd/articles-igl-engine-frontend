@@ -7,14 +7,14 @@ import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import newsPaperImage from "../../assets/NewsPaper.svg"
 import { articles } from "../../testing Data/ArticlesData";
-import sorryAnimation from "../../assets/gifs/SorryAnimation.gif"
+import sorryAnimation from "../../assets/gifs/Noresults.gif"
 
 function SearchPage() {
     const navigate = useNavigate();
-    const location = useLocation();
+    // const location = useLocation();
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [results, setResults] = useState(location.state);
+    // const [results, setResults] = useState(location.state);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -56,7 +56,7 @@ function SearchPage() {
     return (
         <div>
             {/* Hero Section */}
-            {console.log("results: ", results)}
+            {/* {console.log("results: ", results)} */}
             <div
                 className="flex -mt-10 p-10 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${newsPaperImage})` }}
@@ -76,7 +76,7 @@ function SearchPage() {
                                 <input
                                     type="text"
                                     id="searchBar"
-                                    className="text-black bg-transparent focus:outline-none"
+                                    className="text-black font-dmsansmedium bg-transparent focus:outline-none"
                                     value={searchQuery}
                                     onChange={handleInputChange}
                                     onKeyDown={handleKeyDown}
@@ -88,7 +88,7 @@ function SearchPage() {
                             </div>
                         </div>
                         <div className="ml-5">
-                            <p className="text-[12px] md:text-[15px] font-semibold text-[#FFFFFF] mr-1 cursor-pointer hover:underline" onClick={openFilter}>Filtrer</p>
+                            <p className="text-[12px] md:text-[15px] font-dmsansmedium text-[#FFFFFF] mr-1 cursor-pointer hover:underline" onClick={openFilter}>Filtrer</p>
                         </div>
                     </div>
                 </div>
@@ -100,14 +100,14 @@ function SearchPage() {
                         className="rounded-3xl bg-transparent text-[#43BE83] text-[10px] md:text-[15px] text-center pt-0.5 pb-0.5 border-2 border-[#43BE83] w-25 h-10 mb-2"
                         onClick={backToHome}
                     >
-                        <div className="flex flex-row text-lg">
+                        <div className="flex font-dmsansmedium flex-row text-lg">
                             <IoIosArrowBack className="text-[#43BE83] text-lg mt-1.5 mr-1" />
                             Back
                         </div>
                     </button>
                     <div className="flex flex-col mb-8 justify-start items-start">
                         <div className="flex flex-row ">
-                            <p className="text-black text-[35px] font-semibold">
+                            <p className="text-black font-dmsansmedium text-[35px] font-semibold">
                                 Search Result
                             </p>
                             <span className="ml-3">
@@ -115,22 +115,22 @@ function SearchPage() {
                             </span>
                         </div>
                         {/* number of results found  */}
-                        <p className="text-[#43BE83] font-semibold text-[15px]">{results.length} result found</p>
+                        <p className="text-[#43BE83] font-dmsansbold text-[15px]">{articles.length} result found</p>
                     </div>
                     <div class="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                     {/* displaying results */}
                     <div className="flex flex-col w-[98%]">
-                        {results && results.length > 0 ? (
-                            results.map((article, index) => (
+                        {articles && articles.length > 0 ? (
+                            articles.map((article, index) => (
                                 <div key={index} className="flex mb-5">
                                     <Article article={article} isfav={false} userRole={"client"} />
                                 </div>
                             ))
                         ) : (
                             <div className="flex flex-col space-y-10 justify-center items-center text-center p-20">
-                                <p className="text-black text-[20px] font-semibold"> Oups ! No results found for your search query  :(
+                                <p className="text-black text-[20px] font-dmsansmedium"> Oups ! No results found for your search query  :(
                                     Please try again with different keywords  or refine your search criteria
                                 </p>
                                 <img src={sorryAnimation} alt="no results gif" />

@@ -34,7 +34,7 @@ function ModeratorsSection() {
         <div className="flex flex-col pb-10 border rounded-t-3xl w-[100%] bg-[#181818]">
             {/* Moderators part  */}
             <div className="flex flex-col items-center justify-center p-5 mb-5">
-                <p className="text-[#FFFFFF] text-[32px] font-bold ">Moderators</p>
+                <p className="text-[#FFFFFF] text-[32px] font-dmsansbold ">Moderators</p>
             </div>
 
             {/* list of moderators part  */}

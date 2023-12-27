@@ -55,8 +55,8 @@ function HomePage() {
                 style={{ backgroundImage: `url(${newsPaperImage})`, }}
             >
                 <div className=" p-10 md:p-20 mb-5">
-                    <p className="text-[35px] md:text-[50px] font-semibold text-[#FFFFFF]">What are you searching for ?</p>
-                    <p className="text-[15px] text-[#FFFFFF]">Search for an author, title or any other keyword !</p>
+                    <p className="text-[35px] md:text-[50px] font-dmsansmedium text-[#FFFFFF]">What are you searching for ?</p>
+                    <p className="text-[15px] font-dmsans text-[#FFFFFF]">Search for an author, title or any other keyword !</p>
                 </div>
                 <div className="flex flex-row md:w-1/2 p-1 pl-2 pr-2 items-center justify-start border-4 border-[#000000] rounded-2xl bg-[#F0F0F0]">
                     <div className="flex flex-row mr-auto">

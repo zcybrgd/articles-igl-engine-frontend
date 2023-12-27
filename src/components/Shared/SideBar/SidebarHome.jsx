@@ -52,7 +52,7 @@ function SidebarHome() {
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
                                 onClick={handleWelcome}
                             >
-                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">Home</span>
+                                <span className="whitespace-nowrap cursor-pointer font-dmsansbold transition-colors group-hover:text-white">Home</span>
                             </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
@@ -64,7 +64,8 @@ function SidebarHome() {
                                 duration={500}
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
                                 onClick={handleWelcome}
-                            >                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">About Us</span>
+                            >
+                                <span className="whitespace-nowrap font-dmsansbold cursor-pointer transition-colors group-hover:text-white">About Us</span>
                             </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>
@@ -76,7 +77,8 @@ function SidebarHome() {
                                 duration={500}
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
                                 onClick={handleWelcome}
-                            >                                <span className="whitespace-nowrap cursor-pointer transition-colors group-hover:text-white">Contact Us</span>
+                            >
+                                <span className="whitespace-nowrap cursor-pointer font-dmsansbold transition-colors group-hover:text-white">Contact Us</span>
                             </ScrollLink>
                             <div className="border-b-2 text-[#F1F1F1]"></div>
                         </li>

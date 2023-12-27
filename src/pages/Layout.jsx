@@ -14,8 +14,8 @@ const Layout = ({ userRole }) => {
                 <Sidebar />
             </openSidebarContext.Provider>
 
-            <div className="pt-15 pl-0 lg:pl-60">
-                <div className="md:p-10 pt-10 mt-5 ">
+            <div className="absolute top-0 right-0 left-0 items-center justify-center pt-12 pl-0 lg:pl-60 ">
+                <div className="md:p-10 pt-10 mt-5 w-[100%]">
                     <Outlet />
                 </div>
             </div>

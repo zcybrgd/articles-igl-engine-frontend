@@ -29,7 +29,7 @@ function Content() {
                     <li>
                         <Link to="/" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                             <TiHomeOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                            <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Home</span>
+                            <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Home</span>
                         </Link>
                     </li>
                 )}
@@ -37,21 +37,21 @@ function Content() {
                     <Link to="/profile" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                         {/* profile icon */}
                         <FaUser className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">User Info</span>
+                        <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">User Info</span>
                     </Link>
                 </li>
                 <li>
                     <Link to="/collections" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                         {/* saved icon */}
                         <IoBookmarkOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Saved</span>
+                        <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Saved</span>
                     </Link>
                 </li>
                 <li>
                     <Link to="/settings" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                         {/* settings icon */}
                         <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Settings</span>
+                        <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Settings</span>
                     </Link>
                 </li>
                 {/**  empty buttons to put space between buttons **/}
@@ -90,7 +90,7 @@ function Content() {
                         {/* logOut icon */}
                         <VscSignOut className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
                         <span
-                            className="ms-3 whitespace-nowrap transition-colors group-hover:text-white cursor-pointer"
+                            className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white cursor-pointer"
                             onClick={() => {
                                 logOutHandler();
                             }}

@@ -10,14 +10,14 @@ const ContactUs = () => {
             <div className="w-full px-8 bg-white rounded-lg flex flex-col items-center">
                 <div class="border-b-2 border-[#707F65] w-1/2 mb-10"></div>
 
-                <h2 className="text-4xl font-semibold mb-6 text-[#707F65]">Contact Us</h2>
+                <h2 className="text-4xl md:text-5xl font-dmsansmedium mb-6 text-[#707F65]">Contact Us</h2>
 
                 <div className="mb-6 w-full">
                     <input
                         type="text"
                         id="name"
                         name="name"
-                        className="w-full border-gray-300 bg-[#F1F1F1] rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full font-dmsans border-gray-300 bg-[#F1F1F1] rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your name"
                     />
                 </div>
@@ -28,7 +28,7 @@ const ContactUs = () => {
                         type="email"
                         id="email"
                         name="email"
-                        className="w-full bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your email"
                     />
                 </div>
@@ -39,12 +39,12 @@ const ContactUs = () => {
                         id="message"
                         name="message"
                         rows="4"
-                        className="w-full bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your message"
                     ></textarea>
                 </div>
 
-                <button className="bg-[#707F65] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#707F65] transition-colors">
+                <button className="bg-[#707F65] text-white font-dmsansmedium py-2 px-4 rounded-md hover:bg-[#707F65] transition-colors">
                     Send Message
                 </button>
             </div>

@@ -37,7 +37,7 @@ function ModeratorPage() {
                             <img src={quotesRight} alt="right quotes" className="w-[60px] h[60px] lg:w-[80px] lg:h[80px]" />
                         </div>
                         <div className="flex flex-row items-center justify-center md:w-1/2">
-                            <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-bold whitespace-nowrap">
+                            <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-dmsansbold whitespace-nowrap">
                                 MODERATOR <br />
                                 WELCOME <br />
                                 PORTAL
@@ -66,7 +66,7 @@ function ModeratorPage() {
                         <input
                             type="text"
                             id="searchBar"
-                            className="text-black bg-transparent focus:outline-none"
+                            className="text-black font-dmsans bg-transparent focus:outline-none"
                             value={searchQuery}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
@@ -81,7 +81,7 @@ function ModeratorPage() {
             <div className="flex flex-col items-start mt-10">
                 <div className="flex flex-col mb-8 justify-start items-start">
                     <div className="flex flex-row ">
-                        <p className="text-black text-[35px] font-semibold">
+                        <p className="text-black text-[35px] font-dmsansmedium">
                             Recently added
                         </p>
                         <span className="ml-3">
@@ -89,7 +89,7 @@ function ModeratorPage() {
                         </span>
                     </div>
                     {/* number of articles added by admins  */}
-                    <p className="text-[#707F65] font-semibold text-[15px]">{articles.length} articles</p>
+                    <p className="text-[#707F65] font-dmsansbold text-[15px]">{articles.length} articles</p>
                 </div>
                 <div class="border border-[#D8DAD7] w-full mb-3"></div>
 
@@ -104,7 +104,7 @@ function ModeratorPage() {
                         ))
                     ) : (
                         <div className="flex justify-center items-center text-center p-20">
-                            <p className="text-black text-[20px] font-semibold"> Oups ! No results found for your search query  :(
+                            <p className="text-black text-[20px] font-dmsansmedium"> Oups ! No results found for your search query  :(
                                 Please try again with different keywords  or refine your search criteria
                             </p>
                         </div>

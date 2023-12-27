@@ -63,7 +63,7 @@ function UploadSection() {
                     <img src={ArticleIcon} alt="article icon" className="w-[55px] h[55px]" />
                 </div>
                 <div className="flex w-5/6 justify-center">
-                    <p className="text-white font-bold">Administrator Welcome Portal</p>
+                    <p className="text-white font-dmsansmedium">Administrator Welcome Portal</p>
                 </div>
             </div>
 
@@ -76,11 +76,11 @@ function UploadSection() {
                                 <img src={quotesRight} alt="right quotes" className="w-[60px] h[60px] lg:w-[80px] lg:h[80px]" />
                             </div>
                             <div className="flex flex-row items-center justify-center md:w-1/2">
-                                <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-bold whitespace-nowrap">
+                                <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-dmsansbold whitespace-nowrap">
                                     Got New
                                 </p>
-                                <p className="bg-[#707F65] text-[25px] md:text-[40px] lg:text-[50px] font-bold text-[#F1F1F1] ml-1 mr-1">Files</p>
-                                <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-bold whitespace-no-wrap">
+                                <p className="bg-[#707F65] text-[25px] md:text-[40px] lg:text-[50px] font-dmsansbold text-[#F1F1F1] ml-1 mr-1">Files</p>
+                                <p className="text-[25px] md:text-[40px] lg:text-[50px] text-[#181818] font-dmsansbold whitespace-no-wrap">
                                     ?
                                 </p>
                             </div>
@@ -113,17 +113,17 @@ function UploadSection() {
                                 onChange={() => setFileType('file')}
                                 className="mr-2 cursor-pointer"
                             />
-                            <span className="text-[12px] md:text-[15px] text-[#181818] font-semibold">Upload File</span>
+                            <span className="text-[12px] md:text-[15px] text-[#181818] font-dmsansbold">Upload File</span>
                         </label>
-                        <label className="max-h-[40px] w-1/3 items-center rounded-xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center py-1 px-4 ">
-                            <span>Choose a PDF file</span>
+                        <label className="max-h-[40px] items-center rounded-xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center py-2 px-4 ">
+                            <span className={`font-dmsansmedium ${fileType !== 'file' ? 'cursor-not-allowed' : 'cursor-pointer'}`}>Choose a PDF file</span>
                             <input
                                 type="file"
                                 accept=".pdf"
                                 onChange={handleFileChange}
                                 disabled={fileType !== 'file'}
                                 multiple
-                                className={`opacity-0 ${fileType !== 'file' ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                                style={{ display: 'none' }}
                             />
                         </label>
                     </div>
@@ -138,7 +138,7 @@ function UploadSection() {
                                 onChange={() => setFileType('url')}
                                 className="mr-2 cursor-pointer"
                             />
-                            <span className="text-[12px] md:text-[15px] text-[#181818] font-semibold">Upload URL</span>
+                            <span className="text-[12px] md:text-[15px] text-[#181818] font-dmsansbold">Upload URL</span>
                         </label>
                         <label className=" rounded-lg bg-[#F0F0F0] text-white text-[12px] md:text-[15px] text-center py-2 px-4 cursor-pointer">
                             <input
@@ -146,7 +146,7 @@ function UploadSection() {
                                 onChange={handleUrlChange}
                                 disabled={fileType !== 'url'}
                                 placeholder="Enter PDF URL"
-                                className={`text-black bg-transparent focus:outline-none ${fileType !== 'url' ? 'cursor-not-allowed' : 'cursor-pointe'}`}
+                                className={`text-black bg-transparent font-dmsansmedium focus:outline-none ${fileType !== 'url' ? 'cursor-not-allowed' : 'cursor-pointe'}`}
                             />
                         </label>
                     </div>
@@ -164,7 +164,7 @@ function UploadSection() {
                     className={`rounded-2xl bg-[#707F65] text-white text-[12px] cursor-pointer md:text-[15px] text-center pt-0.5 pb-0.5 w-40 h-10 
                     ${isSearchActive ? 'animate__slideInDown duration-500' : ''}`}
                 >
-                    <div className="flex flex-row items-center justify-center">
+                    <div className="flex flex-row font-dmsansmedium items-center justify-center">
                         {isSearchActive ? (
                             <>
                                 Upload

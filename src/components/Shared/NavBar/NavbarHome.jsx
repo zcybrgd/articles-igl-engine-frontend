@@ -40,7 +40,7 @@ const NavbarHome = ({ userRole }) => {
                     ) : (
                         <>
                             <div className='flex'>
-                                <b className=" xl:px-[40px] mr-3 font-bold text-black text-[20px] lg:text-[30px] xl:text-[32px]">
+                                <b className="font-dmsansmedium xl:px-[40px] mr-3 text-black text-[20px] lg:text-[30px] xl:text-[32px]">
                                     website name
                                 </b>
                             </div>
@@ -55,7 +55,7 @@ const NavbarHome = ({ userRole }) => {
                             {/* font DM sans */}
                             <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                             <div className='flex'>
-                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-dmsansmedium text-black text-[20px] lg:text-[24px] xl:text-[32px]">
                                     user name
                                 </b>
                             </div>
@@ -74,7 +74,7 @@ const NavbarHome = ({ userRole }) => {
                                             <Link to="/profile" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                                                 {/* profile icon */}
                                                 <FaUser className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">User Info</span>
+                                                <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">User Info</span>
                                             </Link>
                                             <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
                                         </li>
@@ -82,7 +82,7 @@ const NavbarHome = ({ userRole }) => {
                                             <Link to="/collections" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                                                 {/* saved icon */}
                                                 <IoBookmarkOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Saved</span>
+                                                <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Saved</span>
                                             </Link>
                                             <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
                                         </li>
@@ -90,7 +90,7 @@ const NavbarHome = ({ userRole }) => {
                                             <Link to="/settings" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                                                 {/* settings icon */}
                                                 <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                                                <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">Settings</span>
+                                                <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Settings</span>
                                             </Link>
                                         </li>
                                     </ul>
@@ -102,12 +102,12 @@ const NavbarHome = ({ userRole }) => {
                     ) : userRole === "admin" ? (
                         <>
                             <div className='flex flex-col'>
-                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semipold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
                                     user name
-                                </b>
-                                <b className="ml-12 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
+                                </p>
+                                <p className="ml-12 xl:px-[40px] font-dmsansmedium  lg:mt-0 font-semipold text-[#969796] text-[15px]">
                                     Admin
-                                </b>
+                                </p>
                             </div>
                             <div className="p-0 mr-6">
                                 <img
@@ -119,12 +119,12 @@ const NavbarHome = ({ userRole }) => {
                     ) : (
                         <>
                             <div className='flex flex-col'>
-                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semipold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
                                     user name
-                                </b>
-                                <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
+                                </p>
+                                <p className="ml-7 xl:px-[40px] font-dmsansmedium lg:mt-0 font-semipold text-[#969796] text-[15px]">
                                     Moderator
-                                </b>
+                                </p>
                             </div>
                             <div className="p-0 mr-6">
                                 <img

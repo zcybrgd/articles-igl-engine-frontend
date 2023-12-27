@@ -80,9 +80,9 @@ const NavBar = ({ userRole, article }) => {
                             {/* font DM sans */}
                             <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                             <div className='flex'>
-                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
                                     user name
-                                </b>
+                                </p>
                             </div>
                             <Link to="/profile" className="p-0 mr-6">
                                 <img
@@ -94,12 +94,12 @@ const NavBar = ({ userRole, article }) => {
                     ) : userRole === "moderator" && (
                         <>
                             <div className='flex flex-col'>
-                                <b className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold ${!article ? 'text-black' : 'text-[#F1F1F1]'} text-[20px] lg:text-[24px] xl:text-[32px]`}>
+                                <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
                                     user name
-                                </b>
-                                <b className={`ml-7 xl:px-[40px]  lg:mt-0 font-semibold ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} text-[15px]`}>
+                                </p>
+                                <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
                                     Moderator
-                                </b>
+                                </p>
                             </div>
                             <div className="p-0 mr-6">
                                 <img

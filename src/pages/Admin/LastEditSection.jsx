@@ -34,8 +34,8 @@ function LastEditSection() {
         <div className="flex flex-col border-2 rounded-3xl w-[100%]">
             {/* title part  */}
             <div className="flex flex-col items-start justify-start p-5 mb-5">
-                <p className="text-black text-[32px] font-bold ">Last edit</p>
-                <p className="text-[#797D8C] text-[16px] font-bold ">Representative of the files modifications</p>
+                <p className="text-black text-[32px] font-dmsansbold ">Last edit</p>
+                <p className="text-[#797D8C] text-[16px] font-dmsansbold ">Representative of the files modifications</p>
             </div>
 
             {/* history part  */}
