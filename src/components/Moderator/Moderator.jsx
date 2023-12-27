@@ -3,7 +3,7 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 
 function Moderator({ moderator }) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const profilePictureUrl = moderator.profile_picture || '/media/profile_pics/default_profile_picture.jpg';
+    const profilePictureUrl = moderator.profile_picture || '/media/profile_pics/default_profile_pic.jpg';
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };

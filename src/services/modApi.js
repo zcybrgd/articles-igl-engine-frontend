@@ -8,4 +8,14 @@ const fetchModerators = async () => {
     }
   };
 
-export default fetchModerators
+const fetchModeratorByUsername = async (username) => {
+  const moderators = await fetchModerators();
+  const foundModerator = moderators.find((moderator) => moderator.userName === username);
+  if (foundModerator) {
+    return foundModerator;
+  } else {
+    console.warn(`Moderator with username '${username}' not found.`);
+    return null;
+  }
+}
+export { fetchModerators, fetchModeratorByUsername };

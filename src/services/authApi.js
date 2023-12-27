@@ -30,4 +30,5 @@ export const logIn = async(userData) => {
     }
 }
 
+
 export default authApi;

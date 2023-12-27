@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
 //import { moderators } from "../../testing Data/ModeratorsList"
-import fetchModerators from "../../services/modApi";
+import {fetchModerators} from "../../services/modApi";
 
 function ModeratorsSection() {
     const [moderators, setModerators] = useState([]);

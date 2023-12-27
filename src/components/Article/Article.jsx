@@ -10,7 +10,7 @@ const Article = ({ article, isfav, userRole }) => {
 
     function openArticle() {
         try {
-            navigate(`/article/${article.articleId}`,
+            navigate(`/article/${article.id}`,
                 {
                     state: {
                         article: article,
@@ -49,7 +49,7 @@ const Article = ({ article, isfav, userRole }) => {
                     <CiCalendarDate className="text-[#707F65] mt-0.5 mr-1 text-[20px]" />
                     <p className="text-black text-[15px] mb-2">
                         <span className="font-semibold">Date: </span>
-                        {article.releaseDate}
+                        {article.date}
                     </p>
                 </div>
                 <div className="flex flex-row">
@@ -57,13 +57,13 @@ const Article = ({ article, isfav, userRole }) => {
     <p className="text-black text-[15px] mb-2">
         <span className="font-semibold">Authors: </span>
         {article.authors && article.authors.map((author, index) => (
-            <span key={index} className="mr-1">{author},</span>
+            <span key={index} className="mr-1">{author}, </span>
         ))}
     </p>
 </div>
 
                 <div className="flex justify-start items-start">
-                    <p className="text-black text-[15px] font-semibold mt-1 line-clamp-2 text-start">{article.summary}</p>
+                    <p className="text-black text-[15px] font-semibold mt-1 line-clamp-2 text-start">{article.abstract}</p>
                 </div>
             </div>
 

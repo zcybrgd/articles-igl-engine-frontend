@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import UploadSection from "./UploadSection";
 import LastEditSection from "./LastEditSection";
 import ModeratorsSection from "./ModeratorsSection";
@@ -27,5 +28,4 @@ function AdminPage() {
         </div>
     )
 }
-
-export default AdminPage
+export default AdminPage;

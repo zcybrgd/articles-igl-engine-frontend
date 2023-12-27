@@ -76,11 +76,11 @@ function ArticleDetails() {
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
-        console.log("article added id:", article.articleId)
+        console.log("article added id:", article.id)
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
     }
 
     return (
@@ -115,7 +115,7 @@ function ArticleDetails() {
                     {/* summary column */}
                     <div className="order-2 md:order-1 flex flex-col justify-start items-start pl-5 md:w-1/2 md:p-3 md:pt-[150px] space-y-3">
                         <p className="text-black text-[22px] font-semibold underline">Résumé :</p>
-                        <p className="pl-2 text-black text-[20px] text-start">{article.summary}</p>
+                        <p className="pl-2 text-black text-[20px] text-start">{article.abstract}</p>
                     </div>
 
                     {/* other information column  */}
@@ -173,7 +173,7 @@ function ArticleDetails() {
                             {isFullModeOpen && (
                                 <FulldetailsPopUp
                                     onClose={closeCard}
-                                    articleContent={article.content}
+                                    articleContent={article.text}
                                 />
                             )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
@@ -200,7 +200,7 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline">Auteurs:</p>
+                                <p className="text-black text-[22px] font-semibold underline">Authors:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
@@ -221,7 +221,7 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedInstitutions.split("\n").length)}
+                                        rows={Math.max(1, editedInstitutions.length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedInstitutions}
@@ -234,12 +234,12 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline">Mots clé:</p>
+                                <p className="text-black text-[22px] font-semibold underline">Keywords:</p>
                                 {/* <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{article.keywords}</p> */}
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedKeywords.split("\n").length)}
+                                        rows={Math.max(1, editedKeywords.length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedKeywords}

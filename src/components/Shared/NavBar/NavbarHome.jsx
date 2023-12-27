@@ -1,15 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { FaUser } from "react-icons/fa6";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import avatar from "../../../assets/avataranon.jpg"
 import { useAuth } from '../../../context/AuthContext';
+import { fetchModeratorByUsername } from '../../../services/modApi';
+
 
 const NavbarHome = ({ userRole }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
     const { userName } = useAuth()
+    const [mod, setMod] = useState(null);
+    useEffect(() => {
+        const fetchModeratorData = async () => {
+            if (userRole === 'moderator') {
+                try {
+                    const modData = await fetchModeratorByUsername(userName);
+                    setMod(modData);
+                } catch (error) {
+                    console.error("Error fetching moderator:", error);
+                }
+            }
+        };
 
+        fetchModeratorData();
+    }, [userRole, userName]);
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -118,20 +134,16 @@ const NavbarHome = ({ userRole }) => {
                         </>
                     ) : (
                         <>
-                            <div className='flex flex-col'>
-                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                    user name
-                                </b>
-                                <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
-                                    Moderator
-                                </b>
-                            </div>
-                            <div className="p-0 mr-6">
-                                <img
-                                    className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                    src={avatar}
-                                />
-                            </div>
+                             {mod && ( 
+                                <div className='flex flex-col'>
+                                    <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                        {mod.firstName} {mod.familyName} 
+                                    </b>
+                                    <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
+                                        Moderator
+                                    </b>
+                                </div>
+                            )}
                         </>
                     )}
                 </div>

@@ -38,6 +38,7 @@ const LoginPage = () => {
       if (response && response.data && response.data.token) {
         setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
 
+
         const userRole = response.data.user.role.toLowerCase();
         const userDataAndRole = {
           userName: username,
@@ -47,7 +48,9 @@ const LoginPage = () => {
 
         await login(userDataAndRole);
 
-        navigate(`/`);
+
+      navigate("/", { state: { userRole, user: response.data.user} });
+
       } else {
         if (response && response.data && response.data.error) {
           setErreur(`Login failed. ${response.data.error}`);

@@ -6,11 +6,28 @@ import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { articles } from "../../testing Data/ArticlesData";
-
+import { fetchArticles } from "../../services/articlesApi";
 function ModeratorPage() {
     const [moderatorData, setModeratorData] = useState(null);
     const userRole = location.state && location.state.userRole;
-   
+    
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const articlesData = await fetchArticles();
+            setArticles(articlesData);
+          } catch (error) {
+            setError(error.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, []);
      
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -62,7 +79,7 @@ function ModeratorPage() {
                 </div>
             </div>
 
-            {/* search bar part  */}
+            {/* search bar part  
             <div className="flex bg-transparent rounded overflow-hidden ">
                 <div className="w-full md:w-1/3 flex flex-row flex-grow flex-shrink pt-5 pb-5 pl-20 pr-20 mt-20 bg-[#181818] rounded-2xl items-center justify-center shadow-xl">
                     <div className="flex flex-row md:w-2/3 p-1 pl-2 pr-2 items-center justify-start rounded-2xl bg-[#F0F0F0]">
@@ -79,7 +96,7 @@ function ModeratorPage() {
                     </div>
                 </div>
             </div>
-            {/* /search bar part */}
+            /search bar part */}
 
             {/* Results Section */}
             <div className="flex flex-col items-start mt-10">
@@ -98,22 +115,30 @@ function ModeratorPage() {
                 <div className="border border-[#D8DAD7] w-full mb-3"></div>
 
 
-                {/* displaying articles */}
-                <div className="flex flex-col">
-                    {articles && articles.length > 0 ? (
-                        articles.map((article, index) => (
-                            <div key={index} className="flex mb-5">
-                                <Article article={article} isfav={false} userRole={"moderator"} />
-                            </div>
-                        ))
-                    ) : (
-                        <div className="flex justify-center items-center text-center p-20">
-                            <p className="text-black text-[20px] font-semibold"> Oups ! No results found for your search query  :(
-                                Please try again with different keywords  or refine your search criteria
-                            </p>
-                        </div>
-                    )}
-                </div>
+               {/* displaying articles */}
+        <div className="flex flex-col">
+          {loading && <p>Loading...</p>}
+          {error && (
+            <div className="flex justify-center items-center text-center p-20">
+              <p className="text-black text-[20px] font-semibold">
+                Error loading articles: {error}
+              </p>
+            </div>
+          )}
+          {!loading && !error && articles.length > 0 ? (
+            articles.map((article, index) => (
+              <div key={index} className="flex mb-5">
+                <Article article={article} isfav={false} userRole={"moderator"} />
+              </div>
+            ))
+          ) : (
+            <div className="flex justify-center items-center text-center p-20">
+              <p className="text-black text-[20px] font-semibold">
+                Oups! No results found for your search query :( Please try again with different keywords or refine your search criteria
+              </p>
+            </div>
+          )}
+        </div>
             </div>
             {/* /Results Section */}
         </div>

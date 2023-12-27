@@ -13,9 +13,7 @@ const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     setUserRole(userData.userRole);
     setUserName(userData.userName);
-    console.log("on set le role! ", userData.userRole)
-    console.log("on set l admin! ", userData.userName)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   const logout = () => {
