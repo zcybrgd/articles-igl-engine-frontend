@@ -71,7 +71,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className='bg-black absolute right-0 top-0 w-full h-full justify-start items-center grid grid-cols-2 '>
+    <div className='bg-[#181818] absolute right-0 top-0 w-full h-full justify-start items-center grid grid-cols-2 '>
       <div className="flex h-3/5 justify-center items-center">
         <img
           src={SignupAnimation}

@@ -144,7 +144,7 @@ const LoginPage = () => {
               <img
                 src={LoginAnimation}
                 alt="Login Animation"
-                className="inline h-[150px] w-[150px]"
+                className="inline h-[180px] w-[180px]"
               />
             </div>
           </div>
