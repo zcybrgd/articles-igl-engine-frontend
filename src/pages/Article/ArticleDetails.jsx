@@ -5,7 +5,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { deleteArticle } from "../../services/articlesApi";
+import { deleteArticle, validateArticle } from "../../services/articlesApi";
 
 function ArticleDetails() {
     
@@ -33,7 +33,26 @@ function ArticleDetails() {
 
 
     const handleValidateArticle = () => {
-        console.log("article validated")  //nbdlo etat tae l'article beli "approved" besh n'affichiwh f admin page
+        console.log("article validated") 
+        try {
+        const isSuccess = validateArticle(article.id)
+    
+        if (isSuccess) {  
+        toast.success('Article validated successfully', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000, 
+        });
+
+        setTimeout(() => {
+            navigate("/",{ state: {userRole} });
+        }, 2000); 
+            } else {
+                // stay in the page or idk
+            }
+        } catch (error) {
+            console.error('Error handling delete click', error);
+        }
+ // j'ajoute validated count     
     };
 
     const handleEditClick = () => {
@@ -41,7 +60,7 @@ function ArticleDetails() {
     };
 
     const handleDeleteClick = async () => {
-        console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
+        console.log("article deleted")    
             try {
                 const isSuccess = await deleteArticle(article.id);
         

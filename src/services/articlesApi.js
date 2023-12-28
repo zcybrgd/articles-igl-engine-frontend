@@ -3,7 +3,7 @@ import axios from "axios";
 
 const BASE_URL = 'http://127.0.0.1:8000/api/articles/';
 
-// Function to fetch articles from the API
+
 export const fetchArticles = async () => {
     try {
       const response = await fetch(`${BASE_URL}`, {
@@ -48,4 +48,28 @@ export const fetchArticles = async () => {
     }
 };
 
-export { deleteArticle };
+const validateArticle = async (id) => {
+    try {
+      const response = await fetch(`${BASE_URL}`, {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          articleId: id, 
+        }),
+      });
+  
+      if (response.ok) {
+        console.log('Article validated successfully');
+        return true;
+      } else {
+        console.error('Failed to validate article');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error validating article', error);
+      return false;
+    }
+  };
+export { deleteArticle, validateArticle };
