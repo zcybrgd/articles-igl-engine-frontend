@@ -32,10 +32,10 @@ function ArticleDetails() {
     const [editedTitle, setEditedTitle] = useState(article.title);
 
 
-    const handleValidateArticle = () => {
+    const handleValidateArticle = async () => {
         console.log("article validated") 
         try {
-        const isSuccess = validateArticle(article.id)
+        const isSuccess = await validateArticle(article.id)
     
         if (isSuccess) {  
         toast.success('Article validated successfully', {
@@ -47,7 +47,10 @@ function ArticleDetails() {
             navigate("/",{ state: {userRole} });
         }, 2000); 
             } else {
-                // stay in the page or idk
+                toast.error('Failed to validate article', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000, 
+                });
             }
         } catch (error) {
             console.error('Error handling delete click', error);

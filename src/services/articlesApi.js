@@ -60,11 +60,10 @@ const validateArticle = async (id) => {
         }),
       });
   
-      if (response.ok) {
+      if (response.ok) { 
         console.log('Article validated successfully');
         return true;
       } else {
-        console.error('Failed to validate article');
         return false;
       }
     } catch (error) {
