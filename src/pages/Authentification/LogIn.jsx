@@ -33,35 +33,37 @@ const LoginPage = () => {
                 password: password,
             }
 
-            // const response = await logIn(userData)
+            const response = await logIn(userData)
 
-            // if (response && response.data && response.data.token) {
-            //     setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
+            if (response && response.data && response.data.token) {
+                setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
 
-            //     const userRole = response.data.user.role.toLowerCase();
-            //     const userDataAndRole = {
-            //         userName: username,
-            //         password: password,
-            //         userRole: userRole,
-            //     };
+                const userRole = response.data.user.role.toLowerCase();
+                const userDataAndRole = {
+                    userName: username,
+                    password: password,
+                    userRole: userRole,
+                };
 
 
-            // hihi :)
-            const userDataAndRole = {
-                userName: 'nadadjg',
-                password: 'password',
-                userRole: 'client',
-            };
-            await login(userDataAndRole);
-            navigate("/", { state: { userRole: userDataAndRole.userRole, user: userDataAndRole } });
+                // hihi :)
+                // const userDataAndRole = {
+                //     userName: 'nadadjg',
+                //     password: 'password',
+                //     userRole: 'client',
+                // };
 
-            //     navigate("/", { state: { userRole, user: response.data.user } });
+                await login(userDataAndRole);
 
-            // } else {
-            //     if (response && response.data && response.data.error) {
-            //         setErreur(`Login failed. ${response.data.error}`);
-            //     }
-            // }
+                // navigate("/", { state: { userRole: userDataAndRole.userRole, user: userDataAndRole } });
+
+                navigate("/", { state: { userRole, user: response.data.user } });
+
+            } else {
+                if (response && response.data && response.data.error) {
+                    setErreur(`Login failed. ${response.data.error}`);
+                }
+            }
         } catch (error) {
             console.error("Error in handleLogin:", error);
             setErreur("An unexpected error occurred.");

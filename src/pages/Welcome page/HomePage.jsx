@@ -4,11 +4,14 @@ import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
+import { HashLoader } from "react-spinners"
+import { articles } from "../../testing Data/ArticlesData";
 
 function HomePage() {
     const navigate = useNavigate();
     const { results, setResultsData } = useSearchContext();
 
+    const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleInputChange = (event) => {
@@ -23,6 +26,7 @@ function HomePage() {
 
     const handleSearch = async () => {
         try {
+            setIsLoading(true);
             console.log("you searched for: ", searchQuery);
             const encodedQuery = encodeURIComponent(searchQuery);
             const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
@@ -30,11 +34,13 @@ function HomePage() {
             const data = await response.json();
             setResultsData(data.results);
             console.log(results)
+            setIsLoading(false);
             if (results) {
                 goToResultsPage();
             }
         } catch (error) {
             console.error('Error searching articles:', error);
+            setIsLoading(false);
         }
     };
 
@@ -44,6 +50,14 @@ function HomePage() {
         } catch (error) {
             console.error("Error loading results page:", error);
         }
+    }
+
+    if (isLoading) {
+        return (
+            <div className="fixed top-0 right-0 left-0 bottom-0 flex items-center justify-center">
+                <HashLoader color="#707F65" />
+            </div>
+        );
     }
 
     return (

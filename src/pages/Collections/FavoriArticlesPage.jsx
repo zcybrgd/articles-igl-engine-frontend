@@ -4,7 +4,6 @@ import Paper from "../../assets/paper.svg"
 import Article from "../../components/Article/Article";
 import { articles } from "../../testing Data/ArticlesData";
 
-
 function FavoriArticlesListPage() {
     const location = useLocation();
     const collection = location.state;
