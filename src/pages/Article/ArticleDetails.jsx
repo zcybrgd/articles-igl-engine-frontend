@@ -5,7 +5,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { deleteArticle } from "../../services/articlesApi";
+import { deleteArticle, validateArticle, updateArticle } from "../../services/articlesApi";
 
 function ArticleDetails() {
 
@@ -33,28 +33,37 @@ function ArticleDetails() {
     const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
     const [editedTitle, setEditedTitle] = useState(article.title);
     const [editedAbstract, setEditedAbstract] = useState(article.abstract);
+    const [editedDate, setEditedDate] = useState(article.date);
+    const [newText, setnewText] = useState('');
+    const getText = (text) => {
+        setnewText(text)
+        console.log('new text:', newText)
+    }
+    const handleValidateArticle = async () => {
+        console.log("article validated") 
+        try {
+        const isSuccess = await validateArticle(article.id)
+    
+        if (isSuccess) {  
+        toast.success('Article validated successfully', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000, 
+        });
 
-    //Data to save in Elasticsearch
-    const [newInstitutions, setnewInstitutions] = useState([]);
-    const [newAuthors, setnewAuthors] = useState([]);
-    const [newKeywords, setnewKeywords] = useState('');
-    const [newTitle, setnewTitle] = useState('');
-    const [newAbstract, setnewAbstract] = useState('');
-
-
-    const handleValidateArticle = () => {
-        console.log("article validated")  //nbdlo etat tae l'article beli "approved" besh n'affichiwh f admin page
-
-        // create json fih les attribus tae article hado:
-        //newtitle
-        //newAbstract
-        //newAuthors
-        //newInstitutions
-        // newKeywords
-
-        // Go l elasticsearch 
+        setTimeout(() => {
+            navigate("/",{ state: {userRole} });
+        }, 2000); 
+            } else {
+                toast.error('Failed to validate article', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000, 
+                });
+            }
+        } catch (error) {
+            console.error('Error handling delete click', error);
+        }
+ // j'ajoute validated count     
     };
-
     const handleEditClick = () => {
         setIsEditing(true);
     };
@@ -82,31 +91,36 @@ function ArticleDetails() {
         // j'ajoute deleted count        
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
         console.log("data saved")
 
         // saving authors as an array again
         const newAuthorsArray = editedAuthors.split(',').map((author) => author.trim());
         console.log('new authors: ', newAuthorsArray);
-        setnewAuthors(newAuthorsArray)
 
         // saving institutions as an array again
         const newInstitutionsArray = editedInstitutions.split(',').map((institution) => institution.trim());
         console.log('new institutions: ', newInstitutionsArray);
-        setnewInstitutions(newInstitutionsArray)
-
-        // saving keywords as a string
-        setnewKeywords(editedKeywords)
-
-        // saving title as a string
-        setnewTitle(editedTitle)
-
-        // saving abstract as a string
-        setnewAbstract(editedAbstract)
-
+        const editedData = {
+            authors: newAuthorsArray,
+            institutions: newInstitutionsArray,
+            keywords: editedKeywords,
+            title: editedTitle,
+            abstract: editedAbstract,
+            date: editedDate,
+        };
+        const isSuccess = await updateArticle(article.id, editedData);
+        if (isSuccess) {
+            console.log('Article updated successfully');
+            toast.success('Article updated successfully', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            console.error('Failed to update article');
+        }
         setIsEditing(false);
     };
-
     const handleCancelClick = () => {
         console.log("editing cancelled")
 
@@ -116,6 +130,7 @@ function ArticleDetails() {
         setEditedInstitutions(article.institutions);
         setEditedAuthors(article.authors);
         setEditedTitle(article.title);
+        setEditedDate(article.date)
     };
 
     const handleKeywordsChange = (event) => {
@@ -137,6 +152,10 @@ function ArticleDetails() {
     const handleAbstractChange = (event) => {
         setEditedAbstract(event.target.value);
     };
+    const handleDateChange = (event) => {
+        setEditedDate(event.target.value);
+    };
+    
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
@@ -250,6 +269,9 @@ function ArticleDetails() {
                                 <FulldetailsPopUp
                                     onClose={closeCard}
                                     articleContent={article.text}
+                                    userRole={userRole}
+                                    getText={getText}
+                                    articleId={article.id}
                                 />
                             )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
@@ -326,6 +348,21 @@ function ArticleDetails() {
                                     <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedKeywords}</p>
                                 )}
                             </div>
+                            <div className="flex flex-col items-start justify-start text-start space-y-1">
+                          <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
+                          {isEditing ? (
+                              <input
+                              type="text"
+                              className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                              style={{ width: '100%' }}
+                              value={editedDate}
+                              onChange={handleDateChange}
+                             />
+                          ) : (
+                               <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedDate}</p>
+                               )}
+                          </div>
+
                         </div>
                         <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
                     </div>
