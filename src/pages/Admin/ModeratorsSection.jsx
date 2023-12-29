@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
-// import { moderators } from "../../testing Data/ModeratorsList"
+import { moderators } from "../../testing Data/ModeratorsList"
 import { useNavigate } from 'react-router-dom';
 import { fetchModerators } from "../../services/modApi";
 
 function ModeratorsSection() {
     const navigate = useNavigate();
 
-    const [moderators, setModerators] = useState([]);
-    useEffect(() => {
-        const fetchModeratorsData = async () => {
-            try {
-                const mods = await fetchModerators();
-                setModerators(mods);
-                console.log("moderators: ", mods)
-            } catch (error) {
-                console.error("Error fetching moderators:", error);
-            }
-        };
+    // const [moderators, setModerators] = useState([]);
+    // useEffect(() => {
+    //     const fetchModeratorsData = async () => {
+    //         try {
+    //             const mods = await fetchModerators();
+    //             setModerators(mods);
+    //             console.log("moderators: ", mods)
+    //         } catch (error) {
+    //             console.error("Error fetching moderators:", error);
+    //         }
+    //     };
 
-        fetchModeratorsData();
-    }, []);
+    //     fetchModeratorsData();
+    // }, []);
 
     const renderModerators = () => {
         if (moderators && moderators.length <= 5) {

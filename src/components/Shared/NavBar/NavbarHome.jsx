@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { FaUser } from "react-icons/fa6";
+import { VscSignOut } from "react-icons/vsc";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import avatar from "../../../assets/image.jpg"
 import { useAuth } from '../../../context/AuthContext';
@@ -9,9 +10,14 @@ import { fetchModeratorByUsername } from '../../../services/modApi';
 
 const NavbarHome = ({ userRole }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
-    const { userName } = useAuth()
     const [mod, setMod] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const { logout } = useAuth()
+    const { userName } = useAuth()
+
+    const handleLogout = () => {
+        logout();
+    };
 
     useEffect(() => {
         const fetchModeratorData = async () => {
@@ -125,9 +131,23 @@ const NavbarHome = ({ userRole }) => {
                             <div className="p-0 mr-6">
                                 <img
                                     className="w-12 h-12 rounded-full mx-3 mt-1.5"
+                                    onClick={toggleDropdown}
                                     src={avatar}
                                 />
                             </div>
+
+                            {isOpen && (
+                                <div className="absolute right-5 top-10 mt-10 w-44 h-16 p-3 items-center justify-center bg-[#FFFFFF] text-base z-40 divide-gray-100 rounded shadow">
+                                    {/* logout button  */}
+                                    <div
+                                        onClick={handleLogout}
+                                        className="flex items-center p-2 pl-8 cursor-pointer border-2 border-[#707F65] text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white"
+                                    >
+                                        <VscSignOut className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                                        <p className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Logout</p>
+                                    </div>
+                                </div>
+                            )}
                         </>
                     ) : (
                         //moderator part

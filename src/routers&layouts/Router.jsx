@@ -64,7 +64,6 @@ function Router() {
                             <Route path="/" element={<AdminPage />} />
                         </Route>
                         <Route path="/newModerator" element={<AddNewModeratorPage />} />
-
                     </>
                 )
             ) : (

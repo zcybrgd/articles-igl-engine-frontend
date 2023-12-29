@@ -54,7 +54,6 @@ const NavBar = ({ userRole, article }) => {
                                     onClick={article ? backtoSearchPage : backToHome}
                                 >
                                     <IoArrowBack className={`${!article ? 'text-[#707F65]' : 'text-[#F1F1F1]'} text-2xl `} />
-
                                 </p>
                             </div>
                         </>
