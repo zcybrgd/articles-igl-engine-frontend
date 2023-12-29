@@ -149,7 +149,10 @@ function ArticleDetails() {
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.id)
+        console.log("article opened pdf id:", article.articleId)
+
+        const url = article.urlPdf;
+        window.open(url, '_blank', 'noopener noreferrer');
     }
 
     return (

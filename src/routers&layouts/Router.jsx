@@ -35,6 +35,9 @@ function Router() {
                             <Route path="/welcome" element={<WelcomePage />} />
                             <Route path="/search" element={<SearchPage />} />
                         </Route>
+                        <Route path="/" element={<LayoutArticle userRole={"client"} page={'home'} />}>
+                            <Route path="/searchedArticle/:articleId" element={<ArticleDetails />} />
+                        </Route>
                         <Route path="/" element={<Layout userRole={"client"} />}>
                             <>
                                 <Route path="/profile" element={<ProfilePage />} />
@@ -43,8 +46,8 @@ function Router() {
                                 <Route path="/settings" element={<SettingsPage />} />
                             </>
                         </Route>
-                        <Route path="/" element={<LayoutArticle userRole={"client"} />}>
-                            <Route path="/article/:articleId" element={<ArticleDetails />} />
+                        <Route path="/" element={<LayoutArticle userRole={"client"} page={'saved'} />}>
+                            <Route path="/savedArticle/:articleId" element={<ArticleDetails />} />
                         </Route>
                     </>
                 ) : userRole === "moderator" ? (

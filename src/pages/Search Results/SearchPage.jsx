@@ -91,7 +91,6 @@ function SearchPage() {
     return (
         <div>
             {/* Hero Section */}
-            {/* {console.log("results: ", results)} */}
             <div
                 className="flex -mt-10 p-10 bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${newsPaperImage})` }}
@@ -267,7 +266,7 @@ function SearchPage() {
                         {results && results.length > 0 ? (
                             results.map((article, index) => (
                                 <div key={index} className="flex mb-5">
-                                    <Article article={article} isfav={false} userRole={"client"} />
+                                    <Article article={article} isfav={false} userRole={"client"} page={'home'} />
                                 </div>
                             ))
                         ) : (

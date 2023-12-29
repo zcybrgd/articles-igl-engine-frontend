@@ -26,7 +26,7 @@ function FavoriArticlesListPage() {
             <div className="flex flex-col w-[100%]">
                 {articles && articles.map((article, index) => (
                     <div key={index} className="flex mb-5">
-                        <Article article={article} isfav={true} userRole={"client"} />
+                        <Article article={article} isfav={true} userRole={"client"} page={'saved'} />
                     </div>
                 ))}
 

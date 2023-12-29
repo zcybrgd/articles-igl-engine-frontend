@@ -5,7 +5,6 @@ import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
 
-
 function HomePage() {
     const navigate = useNavigate();
     const { results, setResultsData } = useSearchContext();
@@ -24,7 +23,6 @@ function HomePage() {
 
     const handleSearch = async () => {
         try {
-            // goToResultsPage();
             console.log("you searched for: ", searchQuery);
             const encodedQuery = encodeURIComponent(searchQuery);
             const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);

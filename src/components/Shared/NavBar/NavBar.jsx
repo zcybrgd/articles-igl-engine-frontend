@@ -6,7 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import avatar from "../../../assets/image.jpg"
 
-const NavBar = ({ userRole, article }) => {
+const NavBar = ({ userRole, article, pageCallingArticle }) => {
     const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
@@ -34,6 +34,13 @@ const NavBar = ({ userRole, article }) => {
         }
     }
 
+    function backtoCollectionPage() {
+        try {
+            navigate(`/collections`);
+        } catch (error) {
+            console.error("Error loading home page:", error);
+        }
+    }
     return (
         <nav className={`${!article ? 'bg-[#FFFFFF]' : 'bg-[#707F65] bg-opacity-120'} border-b-2 border-[#F1F1F1] fixed w-full z-20 top-0 start-0 `}>
             <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
@@ -51,7 +58,7 @@ const NavBar = ({ userRole, article }) => {
                             <div className='hidden lg:flex'>
                                 <p
                                     className="rounded-3xl bg-transparent md:text-[15px] text-center p-2 w-25 h-10 cursor-pointer"
-                                    onClick={article ? backtoSearchPage : backToHome}
+                                    onClick={article ? (pageCallingArticle === 'home' ? backtoSearchPage : backtoCollectionPage) : backToHome}
                                 >
                                     <IoArrowBack className={`${!article ? 'text-[#707F65]' : 'text-[#F1F1F1]'} text-2xl `} />
                                 </p>
