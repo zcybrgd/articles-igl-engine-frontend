@@ -66,7 +66,7 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
 
 
     return (
-        <div className="fixed inset-0 w-[100%] flex items-center justify-center bg-black bg-opacity-80">
+        <div className="fixed inset-0 w-[100%] h-[100%] flex items-center justify-center bg-black bg-opacity-80">
             {/* Close button */}
             <div className="absolute top-20 right-0 m-1 md:m-4 md:p-2 cursor-pointer">
                 <IoClose
@@ -75,8 +75,8 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
                 />
             </div>
 
-            <div className="flex mt-20 pt-10">
-                <div className="flex flex-row space-x-2">
+            <div className={`flex w-[100%] ${isEditing && 'h-5/6'} mt-20 pt-10`}>
+                <div className="flex flex-row w-[100%] space-x-2">
                     <div className="flex w-1/8 md:w-1/4 items-start justify-end text-end">
                         <img
                             src={RightQuotes}
@@ -84,7 +84,8 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
                             className="w-[40px] h[40px] lg:w-[60px] lg:h[60px]"
                         />
                     </div>
-                    <div className="flex flex-col relative rounded-3xl bg-white p-8 w-3/4 md:w-1/2 items-center justify-center text-center">
+
+                    <div className={`flex flex-col relative rounded-3xl bg-white p-8 w-3/4 md:w-1/2 items-center justify-center text-center`}>
                         {userRole === 'moderator' && (
                             <>
                                 {/* edit button */}
@@ -115,10 +116,10 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
                         </div>
 
                         {/* Content of the full article */}
-                        <div className="flex w-[100%] h-3/4 mt-[35px] md:mt-[50px] mb-2">
+                        <div className={`flex w-full h-3/4 mt-[35px] md:mt-[50px] mb-2`}>
                             {isEditing ? (
                                 <textarea
-                                    // rows={Math.max(1, editedTitle.split("\n").length)}
+                                    rows={15}
                                     className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                     style={{ width: '100%' }}
                                     value={pages[currentPage]}
@@ -131,7 +132,7 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
                             )}
                         </div>
                         {/* Navigation buttons */}
-                        <div className="flex flex-row w-[100%] h-1/8">
+                        <div className={`flex flex-row w-[100%] h-1/8`}>
                             <div className="flex mr-auto">
                                 {currentPage > 0 && (
                                     <MdFirstPage className="cursor-pointer text-[#707F65] text-[30px]" onClick={handlePrevPage} />
