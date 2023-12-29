@@ -1,12 +1,11 @@
 import React from "react"
+import UserProfile from "../../components/Profile/UserInfo"
 
 function ProfilePage() {
 
     return (
-        <div className="text-black">
-            <h1>
-                Profile Page
-            </h1>
+        <div className="flex">
+            < UserProfile />
         </div>
     )
 }

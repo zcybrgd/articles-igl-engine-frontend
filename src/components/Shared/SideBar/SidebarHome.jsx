@@ -5,7 +5,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { IoMenu } from "react-icons/io5";
 
 
-function SidebarHome() {
+function SidebarHome({ connected }) {
     const navigate = useNavigate()
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
@@ -50,7 +50,7 @@ function SidebarHome() {
                                 smooth={true}
                                 duration={500}
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
-                                onClick={handleWelcome}
+                                onClick={() => connected && handleWelcome()}
                             >
                                 <span className="whitespace-nowrap cursor-pointer font-dmsansbold transition-colors group-hover:text-white">Home</span>
                             </ScrollLink>
@@ -63,7 +63,7 @@ function SidebarHome() {
                                 smooth={true}
                                 duration={500}
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
-                                onClick={handleWelcome}
+                                onClick={() => connected && handleWelcome()}
                             >
                                 <span className="whitespace-nowrap font-dmsansbold cursor-pointer transition-colors group-hover:text-white">About Us</span>
                             </ScrollLink>
@@ -76,7 +76,7 @@ function SidebarHome() {
                                 smooth={true}
                                 duration={500}
                                 className="flex p-2 pl-8 text-[#F1F1F1] rounded-lg group transition-colors hover:bg-[#434343] hover:text-white"
-                                onClick={handleWelcome}
+                                onClick={() => connected && handleWelcome()}
                             >
                                 <span className="whitespace-nowrap cursor-pointer font-dmsansbold transition-colors group-hover:text-white">Contact Us</span>
                             </ScrollLink>

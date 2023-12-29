@@ -10,6 +10,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 120,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Updated",
     },
     {
@@ -20,6 +21,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 500,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     },
     {
@@ -30,6 +32,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 25,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     },
     {
@@ -40,6 +43,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 12,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "updated",
     },
     {
@@ -50,6 +54,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 1,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     },
     {
@@ -60,6 +65,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 1,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     },
     {
@@ -70,6 +76,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 1,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     },
     {
@@ -80,6 +87,7 @@ export const moderators = [
         imgUrl: image,
         numberedits: 1,
         lasteditedArticle: articles[0].title,
+        editedArticles: articles,
         changes: "Deleted",
     }
 ] 

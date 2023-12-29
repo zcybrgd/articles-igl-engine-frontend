@@ -11,10 +11,10 @@ import sorryAnimation from "../../assets/gifs/Noresults.gif"
 
 function SearchPage() {
     const navigate = useNavigate();
-    // const location = useLocation();
+    const location = useLocation();
 
     const [searchQuery, setSearchQuery] = useState("");
-    // const [results, setResults] = useState(location.state);
+    const [results, setResults] = useState(location.state);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -107,7 +107,7 @@ function SearchPage() {
                     </button>
                     <div className="flex flex-col mb-8 justify-start items-start">
                         <div className="flex flex-row ">
-                            <p className="text-black font-dmsansmedium text-[35px] font-semibold">
+                            <p className="text-black font-dmsansmedium text-[35px]">
                                 Search Result
                             </p>
                             <span className="ml-3">
@@ -115,15 +115,15 @@ function SearchPage() {
                             </span>
                         </div>
                         {/* number of results found  */}
-                        <p className="text-[#43BE83] font-dmsansbold text-[15px]">{articles.length} result found</p>
+                        <p className="text-[#43BE83] font-dmsansbold text-[15px]">{results.length} result found</p>
                     </div>
                     <div class="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                     {/* displaying results */}
                     <div className="flex flex-col w-[98%]">
-                        {articles && articles.length > 0 ? (
-                            articles.map((article, index) => (
+                        {results && results.length > 0 ? (
+                            results.map((article, index) => (
                                 <div key={index} className="flex mb-5">
                                     <Article article={article} isfav={false} userRole={"client"} />
                                 </div>

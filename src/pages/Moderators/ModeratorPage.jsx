@@ -1,30 +1,37 @@
-import React, { useState } from "react";
-import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
+import React, { useState, useEffect } from "react";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
-import { articles } from "../../testing Data/ArticlesData";
+import { fetchArticles } from "../../services/articlesApi";
+// import { articles } from "../../testing Data/ArticlesData";
+import sorryAnimation from "../../assets/gifs/Noresults.gif"
 
 function ModeratorPage() {
-    const [searchQuery, setSearchQuery] = useState("");
+    const [moderatorData, setModeratorData] = useState(null);
 
-    const handleInputChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const handleKeyDown = (event) => {
-        if (event.key === "Enter") {
-            handleSearch();
-        }
-    };
+    // const [loading, setLoading] = useState(false);
 
-    const handleSearch = () => {
-        console.log("User searched for:", searchQuery);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const articlesData = await fetchArticles();
+                setArticles(articlesData);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        //partie integration avec la recherche
-    };
+        fetchData();
+    }, []
+    );
 
     return (
         <div>
@@ -58,26 +65,7 @@ function ModeratorPage() {
                 </div>
             </div>
 
-            {/* search bar part  */}
-            <div className="flex bg-transparent rounded overflow-hidden ">
-                <div className="w-full md:w-1/3 flex flex-row flex-grow flex-shrink pt-5 pb-5 pl-20 pr-20 mt-20 bg-[#181818] rounded-2xl items-center justify-center shadow-xl">
-                    <div className="flex flex-row md:w-2/3 p-1 pl-2 pr-2 items-center justify-start rounded-2xl bg-[#F0F0F0]">
-                        <IoIosSearch className="mr-2 text-black text-[20px]" />
-                        <input
-                            type="text"
-                            id="searchBar"
-                            className="text-black font-dmsans bg-transparent focus:outline-none"
-                            value={searchQuery}
-                            onChange={handleInputChange}
-                            onKeyDown={handleKeyDown}
-                            placeholder="Search"
-                        />
-                    </div>
-                </div>
-            </div>
-            {/* /search bar part */}
-
-            {/* Results Section */}
+            {/* Articles Section */}
             <div className="flex flex-col items-start mt-10">
                 <div className="flex flex-col mb-8 justify-start items-start">
                     <div className="flex flex-row ">
@@ -95,18 +83,27 @@ function ModeratorPage() {
 
 
                 {/* displaying articles */}
-                <div className="flex flex-col">
-                    {articles && articles.length > 0 ? (
+                <div className="flex flex-col w-[98%]">
+                    {loading && <p>Loading...</p>}
+                    {error && (
+                        <div className="flex justify-center items-center text-center p-20">
+                            <p className="text-black text-[20px] font-semibold">
+                                Error loading articles: {error}
+                            </p>
+                        </div>
+                    )}
+                    {!loading && !error && articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div key={index} className="flex mb-5">
                                 <Article article={article} isfav={false} userRole={"moderator"} />
                             </div>
                         ))
                     ) : (
-                        <div className="flex justify-center items-center text-center p-20">
-                            <p className="text-black text-[20px] font-dmsansmedium"> Oups ! No results found for your search query  :(
-                                Please try again with different keywords  or refine your search criteria
+                        <div className="flex flex-col justify-center items-center text-center p-10">
+                            <p className="text-black text-[20px] font-dmsansmedium">
+                                Oups! No results found for your search query :( Please try again with different keywords or refine your search criteria
                             </p>
+                            <img src={sorryAnimation} alt="no results gif" />
                         </div>
                     )}
                 </div>

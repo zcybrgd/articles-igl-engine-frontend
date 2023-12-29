@@ -64,7 +64,7 @@ const Article = ({ article, isfav, userRole }) => {
                     </p>
                 </div>
                 <div className="flex justify-start items-start">
-                    <p className="text-black text-[15px] font-dmsansbold mt-1 line-clamp-2 text-start">{article.text}</p>
+                    <p className="text-black text-[15px] font-dmsansbold mt-1 line-clamp-2 text-start">{article.abstract}</p>
                 </div>
             </div>
 

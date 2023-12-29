@@ -3,6 +3,7 @@ export default {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+
   theme: {
     extend: {
       fontFamily: {
@@ -16,10 +17,9 @@ export default {
         'opensansbold': ['OpenSansBold', 'sans-serif'],
       },
     },
-
   },
+
   plugins: [
     require("tailwindcss-animate"),
   ],
-
 }

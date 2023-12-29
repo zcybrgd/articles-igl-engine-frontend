@@ -1,14 +1,32 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { FaUser } from "react-icons/fa6";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import avatar from "../../../assets/image.jpg"
+import { useAuth } from '../../../context/AuthContext';
+import { fetchModeratorByUsername } from '../../../services/modApi';
 
 const NavbarHome = ({ userRole }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
-
+    const { userName } = useAuth()
+    const [mod, setMod] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const fetchModeratorData = async () => {
+            if (userRole === 'moderator') {
+                try {
+                    const modData = await fetchModeratorByUsername(userName);
+                    setMod(modData);
+                } catch (error) {
+                    console.error("Error fetching moderator:", error);
+                }
+            }
+        };
+
+        fetchModeratorData();
+    }, [userRole, userName]);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -24,24 +42,20 @@ const NavbarHome = ({ userRole }) => {
                                 className='bg-transparent'
                                 onClick={() => setMobileOpen(!mobileOpen)}
                             >
-                                <IoMenu className="text-[#797D8C] text-3xl " />
+                                <IoMenu className="text-[#797D8C] text-3xl" />
                             </button>
                         </>
                     ) : userRole === "admin" ? (
                         <>
-                            {/* Logo part  */}
                             <div className="p-0 mr-6">
-                                <img
-                                    className="w-12 h-12 mx-3 mt-1.5"
-                                    src={avatar}
-                                />
+                                <p className='text-black font-bold text-lg'>Articles Web Engine</p>
                             </div>
                         </>
                     ) : (
                         <>
                             <div className='flex'>
-                                <b className="font-dmsansmedium xl:px-[40px] mr-3 text-black text-[20px] lg:text-[30px] xl:text-[32px]">
-                                    website name
+                                <b className=" xl:px-[40px] mr-3 font-bold text-black text-[20px] lg:text-[30px] xl:text-[32px]">
+                                    Articles Web Engine
                                 </b>
                             </div>
                         </>
@@ -94,19 +108,18 @@ const NavbarHome = ({ userRole }) => {
                                             </Link>
                                         </li>
                                     </ul>
-
                                 </div>
                             )}
 
                         </>
                     ) : userRole === "admin" ? (
                         <>
-                            <div className='flex flex-col'>
-                                <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semipold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                    user name
+                            <div className='flex flex-col text-end'>
+                                <p className="xl:px-[40px] font-dmsansmedium mt-1 lg:mt-0 font-semipold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                    {userName}
                                 </p>
-                                <p className="ml-12 xl:px-[40px] font-dmsansmedium  lg:mt-0 font-semipold text-[#969796] text-[15px]">
-                                    Admin
+                                <p className=" xl:px-[40px] font-dmsansmedium lg:mt-0 font-semipold text-[#969796] text-[15px]">
+                                    Adminstrator
                                 </p>
                             </div>
                             <div className="p-0 mr-6">
@@ -117,21 +130,26 @@ const NavbarHome = ({ userRole }) => {
                             </div>
                         </>
                     ) : (
+                        //moderator part
                         <>
-                            <div className='flex flex-col'>
-                                <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semipold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                    user name
-                                </p>
-                                <p className="ml-7 xl:px-[40px] font-dmsansmedium lg:mt-0 font-semipold text-[#969796] text-[15px]">
-                                    Moderator
-                                </p>
-                            </div>
-                            <div className="p-0 mr-6">
-                                <img
-                                    className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                    src={avatar}
-                                />
-                            </div>
+                            {mod && (
+                                <>
+                                    <div className='flex flex-col'>
+                                        <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                            {mod.firstName} {mod.familyName}
+                                        </b>
+                                        <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
+                                            Moderator
+                                        </b>
+                                    </div>
+                                    <div className="p-0 mr-6">
+                                        <img
+                                            className="w-12 h-12 rounded-full mx-3 mt-1.5"
+                                            src={avatar}
+                                        />
+                                    </div>
+                                </>
+                            )}
                         </>
                     )}
                 </div>

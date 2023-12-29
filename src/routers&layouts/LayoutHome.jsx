@@ -14,7 +14,7 @@ const LayoutHome = ({ userRole }) => {
                 <>
                     <openSidebarContext.Provider value={{ mobileOpen, setMobileOpen }}>
                         <NavbarHome userRole={userRole} />
-                        <SidebarHome />
+                        <SidebarHome connected={true} />
                     </openSidebarContext.Provider>
 
                     <div className="absolute top-0 left-0 right-0">

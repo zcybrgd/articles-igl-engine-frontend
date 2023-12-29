@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import ArticleMainIcon from "../../assets/ArticlemainIcon.svg"
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteArticle } from "../../services/articlesApi";
 
 function ArticleDetails() {
+
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
+    const navigate = useNavigate();
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [bookMarkClicked, setBookMarkClicked] = useState(false);
-    const [isFullModeOpen, setFullModeOpen] = useState(false);
-
+    //open and close full article popup
     const viewFullArticle = () => {
         setFullModeOpen(true);
     };
@@ -21,30 +23,88 @@ function ArticleDetails() {
         setFullModeOpen(false);
     };
 
+    const [isEditing, setIsEditing] = useState(false);
+    const [bookMarkClicked, setBookMarkClicked] = useState(false);
+    const [isFullModeOpen, setFullModeOpen] = useState(false);
+
     //Data edited
     const [editedKeywords, setEditedKeywords] = useState(article.keywords);
-    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions);
-    const [editedAuthors, setEditedAuthors] = useState(article.authors);
+    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(', '));
+    const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
     const [editedTitle, setEditedTitle] = useState(article.title);
+    const [editedAbstract, setEditedAbstract] = useState(article.abstract);
+
+    //Data to save in Elasticsearch
+    const [newInstitutions, setnewInstitutions] = useState([]);
+    const [newAuthors, setnewAuthors] = useState([]);
+    const [newKeywords, setnewKeywords] = useState('');
+    const [newTitle, setnewTitle] = useState('');
+    const [newAbstract, setnewAbstract] = useState('');
 
 
     const handleValidateArticle = () => {
         console.log("article validated")  //nbdlo etat tae l'article beli "approved" besh n'affichiwh f admin page
+
+        // create json fih les attribus tae article hado:
+        //newtitle
+        //newAbstract
+        //newAuthors
+        //newInstitutions
+        // newKeywords
+
+        // Go l elasticsearch 
     };
 
     const handleEditClick = () => {
         setIsEditing(true);
     };
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = async () => {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
+        try {
+            const isSuccess = await deleteArticle(article.id);
+
+            if (isSuccess) {
+                toast.success('Article deleted successfully', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+
+                setTimeout(() => {
+                    navigate("/", { state: { userRole } });
+                }, 2000);
+            } else {
+                // Handle failure
+            }
+        } catch (error) {
+            console.error('Error handling delete click', error);
+        }
+        // j'ajoute deleted count        
     };
 
     const handleSaveClick = () => {
         console.log("data saved")
-        setIsEditing(false);
 
-        // data edited nbaetoha ttsauvegarda f BDD
+        // saving authors as an array again
+        const newAuthorsArray = editedAuthors.split(',').map((author) => author.trim());
+        console.log('new authors: ', newAuthorsArray);
+        setnewAuthors(newAuthorsArray)
+
+        // saving institutions as an array again
+        const newInstitutionsArray = editedInstitutions.split(',').map((institution) => institution.trim());
+        console.log('new institutions: ', newInstitutionsArray);
+        setnewInstitutions(newInstitutionsArray)
+
+        // saving keywords as a string
+        setnewKeywords(editedKeywords)
+
+        // saving title as a string
+        setnewTitle(editedTitle)
+
+        // saving abstract as a string
+        setnewAbstract(editedAbstract)
+
+        setIsEditing(false);
     };
 
     const handleCancelClick = () => {
@@ -74,21 +134,25 @@ function ArticleDetails() {
         setEditedTitle(event.target.value);
     };
 
+    const handleAbstractChange = (event) => {
+        setEditedAbstract(event.target.value);
+    };
+
     function addArticleToCollection() {
         setBookMarkClicked(true)
-        console.log("article added id:", article.articleId)
+        console.log("article added id:", article.id)
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
     }
 
     return (
-        <div className="flex p-10 md:p-20 md:pl-20">
-            <div className="flex flex-col relative">
+        <div className="flex w-[100%] p-10 md:p-20 md:pl-20">
+            <div className="flex flex-col relative w-[100%]">
                 {/* icon part  */}
                 <div class="hidden md:flex absolute inset-0 top-0 left-10 w-[225px] h-[271px]">
-                    <img src={ArticleMainIcon} alt="" />
+                    <img src={ArticleMainIcon} alt="main article icon" />
                 </div>
 
                 {/* relative */}
@@ -96,12 +160,12 @@ function ArticleDetails() {
                 <div class="flex flex-row md:pl-[280px] py-5 md:p-10 items-center justify-start">
                     {/* article title  */}
                     <div class=" justify-center items-center mr-auto">
-                        <p className="text-[#FFFFFF] text-[25px] lg:text-[32px] font-semibold">{article.title}</p>
+                        <p className="text-[#FFFFFF] text-[25px] lg:text-[32px] font-dmsansbold">{article.title}</p>
                     </div>
                     {userRole === "moderator" && (
                         <div className="justify-center items-center ml-auto">
                             <button
-                                className="rounded-3xl bg-[#F1F1F1] border border-[#43BE83] text-[#707F65] text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
+                                className="rounded-3xl font-dmsansmedium bg-[#F1F1F1] border border-[#43BE83] text-[#707F65] text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
                                 onClick={handleValidateArticle}
                             >
                                 Validate
@@ -112,10 +176,22 @@ function ArticleDetails() {
 
                 {/* article part  */}
                 <div className="flex flex-col md:flex-row items-start justify-start bg-[#F1F1F1] rounded-2xl p-5 pb-10">
-                    {/* summary column */}
-                    <div className="order-2 md:order-1 flex flex-col justify-start items-start pl-5 md:w-1/2 md:p-3 md:pt-[150px] space-y-3">
-                        <p className="text-black text-[22px] font-semibold underline">Résumé :</p>
-                        <p className="pl-2 text-black text-[20px] text-start">{article.summary}</p>
+                    {/* abstract column */}
+                    <div className="order-2 w-[100%] md:order-1 flex flex-col justify-start items-start pl-5 md:w-1/2 md:p-3 md:pt-[150px] space-y-3">
+                        <p className="text-black text-[22px] font-dmsansmedium underline">Résumé :</p>
+                        {isEditing ? (
+                            // Render input field when editing
+                            <textarea
+                                rows={15}
+                                className="pl-2 bg-[#F1F1F1] text-black font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                style={{ width: '100%' }}
+                                value={editedAbstract}
+                                onChange={handleAbstractChange}
+                            />
+                        ) : (
+                            // Render paragraph when not editing
+                            <p className="px-2 text-black text-[20px] text-start">{editedAbstract}</p>
+                        )}
                     </div>
 
                     {/* other information column  */}
@@ -126,13 +202,13 @@ function ArticleDetails() {
                                 {userRole === "moderator" ? (
                                     <>
                                         <button
-                                            className="mr-auto rounded-3xl bg-[#707F65] text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
+                                            className="mr-auto rounded-3xl bg-[#707F65] font-dmsansmedium text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
                                             onClick={isEditing ? handleSaveClick : handleEditClick}
                                         >
                                             {isEditing ? 'Save' : 'Edit'}
                                         </button>
                                         <button
-                                            className="ml-auto rounded-3xl bg-transparent border border-[#707F65] text-[#707F65] text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
+                                            className="ml-auto rounded-3xl bg-transparent font-dmsansmedium border border-[#707F65] text-[#707F65] text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-10 h-10 "
                                             onClick={isEditing ? handleCancelClick : handleDeleteClick}
                                         >
                                             {isEditing ? 'Cancel' : 'Delete'}
@@ -141,7 +217,7 @@ function ArticleDetails() {
                                 ) : (
                                     <>
                                         <button
-                                            className="mr-auto rounded-3xl bg-[#43BE83] text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-8 h-10 "
+                                            className="mr-auto rounded-3xl bg-[#43BE83] font-dmsansmedium text-white text-[12px] md:text-[15px] text-center pt-0.5 pb-0.5 px-10 md:px-5 lg:px-8 h-10 "
                                             onClick={openArticlesPdf}
                                         >
                                             View PDF
@@ -163,7 +239,7 @@ function ArticleDetails() {
                             {/* view the full article button */}
                             <div className="flex items-center justify-end">
                                 <p
-                                    className="text-[12px] md:text-[15px] text-black font-semibold cursor-pointer hover:underline"
+                                    className="text-[12px] md:text-[15px] text-black font-dmsansmedium cursor-pointer hover:underline"
                                     onClick={viewFullArticle}
                                 >
                                     view the full article
@@ -173,7 +249,7 @@ function ArticleDetails() {
                             {isFullModeOpen && (
                                 <FulldetailsPopUp
                                     onClose={closeCard}
-                                    articleContent={article.content}
+                                    articleContent={article.text}
                                 />
                             )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
@@ -183,12 +259,12 @@ function ArticleDetails() {
                         {/* article's information part  */}
                         <div className="flex flex-col space-y-3 w-[100%]">
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline ">Titre:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline ">Titre:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedTitle.split("\n").length)}
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        // rows={Math.max(1, editedTitle.split("\n").length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedTitle}
                                         onChange={handleTitleChange}
@@ -200,12 +276,12 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline">Auteurs:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Authors:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedAuthors.length)}
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        // rows={Math.max(1, editedAuthors.length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedAuthors}
                                         onChange={handleAuthorsChange}
@@ -217,12 +293,12 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline">Institutions:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Institutions:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedInstitutions.split("\n").length)}
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        // rows={Math.max(1, editedInstitutions.length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedInstitutions}
                                         onChange={handleInstitutionsChange}
@@ -234,13 +310,12 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-semibold underline">Mots clé:</p>
-                                {/* <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{article.keywords}</p> */}
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Keywords:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={Math.max(1, editedKeywords.split("\n").length)}
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        // rows={Math.max(1, editedKeywords.length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedKeywords}
                                         onChange={handleKeywordsChange}
@@ -256,6 +331,17 @@ function ArticleDetails() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }

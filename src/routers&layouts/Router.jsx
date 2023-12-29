@@ -1,30 +1,32 @@
+import React from "react"
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import LayoutHome from "./LayoutHome";
 import LayoutArticle from "./LayoutArticle";
 import LayoutWelcome from "./LayoutWelcome";
-import WelcomePage from "./Welcome page/WelcomePage";
-import HomePage from "./Welcome page/HomePage";
-import ProfilePage from "./Profile/ProfilePage";
-import PageError404 from "./Error/PageError404";
-import SettingsPage from "./Settings/SettingsPage";
-import CollectionsPage from "./Collections/CollectionsPage";
-import AdminPage from "./Admin/AdminPage";
-import ModeratorPage from "./Moderators/ModeratorPage";
-import FavoriArticlesListPage from "./Collections/FavoriArticlesPage";
-import SearchPage from "./Search Results/SearchPage";
-import ArticleDetails from "./Article/ArticleDetails";
-import SignUpPage from "./Authentification/SignUp";
-import LoginPage from "./Authentification/LogIn";
+import WelcomePage from "../pages/Welcome page/WelcomePage";
+import HomePage from "../pages/Welcome page/HomePage";
+import ProfilePage from "../pages/Profile/ProfilePage";
+import PageError404 from "../pages/Error/PageError404";
+import SettingsPage from "../pages/Settings/SettingsPage";
+import CollectionsPage from "../pages/Collections/CollectionsPage";
+import AdminPage from "../pages/Admin/AdminPage";
+import ModeratorPage from "../pages/Moderators/ModeratorPage";
+import FavoriArticlesListPage from "../pages/Collections/FavoriArticlesPage";
+import SearchPage from "../pages/Search Results/SearchPage";
+import ArticleDetails from "../pages/Article/ArticleDetails";
+import SignUpPage from "../pages/Authentification/SignUp";
+import LoginPage from "../pages/Authentification/LogIn";
+import AddNewModeratorPage from "../pages/Admin/AddNewModeratorPage";
+import { useAuth } from "../context/AuthContext";
 
-function Router({ user, userRole }) {
-    // user is a boolean to know if he's connected or no 
-    // userRole (moderator, client)
+function Router() {
+    const { userRole } = useAuth();
 
     return (
         <Routes>
             <Route path="/404error" element={<PageError404 />} />
-            {user ? (
+            {userRole ? (
                 userRole === "client" ? (
                     // client part 
                     <>
@@ -57,11 +59,16 @@ function Router({ user, userRole }) {
                     </>
                 ) : (
                     // admins part 
-                    <Route path="/" element={<LayoutHome userRole={"admin"} />}>
-                        <Route path="/" element={<AdminPage />} />
-                    </Route>
+                    <>
+                        <Route path="/" element={<LayoutHome userRole={"admin"} />}>
+                            <Route path="/" element={<AdminPage />} />
+                        </Route>
+                        <Route path="/newModerator" element={<AddNewModeratorPage />} />
+
+                    </>
                 )
             ) : (
+
                 <Route>
                     <Route path="/" element={<LayoutWelcome />}>
                         <Route path="/" element={<WelcomePage />} />

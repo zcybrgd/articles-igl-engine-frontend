@@ -1,5 +1,5 @@
 import React from "react"
-import Moderator from "../../components/Moderator/Moderator"
+import ModeratorHistory from "../../components/Moderator/ModeratorHistory"
 import { moderators } from "../../testing Data/ModeratorsList"
 
 function LastEditSection() {
@@ -10,7 +10,7 @@ function LastEditSection() {
             return (
                 <div className="flex flex-col items-center justify-center space-y-5 mb-5">
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} />
+                        <ModeratorHistory key={index} moderator={moderator} />
                     ))}
                 </div>
             );
@@ -23,7 +23,7 @@ function LastEditSection() {
                         overflowY: 'scroll',
                     }}>
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} />
+                        <ModeratorHistory key={index} moderator={moderator} />
                     ))}
                 </div>
             );

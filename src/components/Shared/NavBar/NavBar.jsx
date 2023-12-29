@@ -50,7 +50,7 @@ const NavBar = ({ userRole, article }) => {
                             </div>
                             <div className='hidden lg:flex'>
                                 <p
-                                    className="rounded-3xl bg-transparent md:text-[15px] text-center p-2  w-25 h-10 cursor-pointer"
+                                    className="rounded-3xl bg-transparent md:text-[15px] text-center p-2 w-25 h-10 cursor-pointer"
                                     onClick={article ? backtoSearchPage : backToHome}
                                 >
                                     <IoArrowBack className={`${!article ? 'text-[#707F65]' : 'text-[#F1F1F1]'} text-2xl `} />
@@ -74,7 +74,7 @@ const NavBar = ({ userRole, article }) => {
                 </div>
 
                 {/* profile part  */}
-                <div class="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
+                <div className="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
                     {userRole === "client" ? (
                         <>
                             {/* font DM sans */}
