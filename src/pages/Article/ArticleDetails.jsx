@@ -40,7 +40,7 @@ function ArticleDetails() {
     const [newKeywords, setnewKeywords] = useState('');
     const [newTitle, setnewTitle] = useState('');
     const [newAbstract, setnewAbstract] = useState('');
-
+    const [newText, setnewText] = useState('');
 
     const handleValidateArticle = () => {
         console.log("article validated")  //nbdlo etat tae l'article beli "approved" besh n'affichiwh f admin page
@@ -137,6 +137,11 @@ function ArticleDetails() {
     const handleAbstractChange = (event) => {
         setEditedAbstract(event.target.value);
     };
+
+    const getText = (text) => {
+        setnewText(text)
+        console.log('new text:', newText)
+    }
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
@@ -250,6 +255,8 @@ function ArticleDetails() {
                                 <FulldetailsPopUp
                                     onClose={closeCard}
                                     articleContent={article.text}
+                                    userRole={userRole}
+                                    getText={getText}
                                 />
                             )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>

@@ -3,6 +3,8 @@ import { IoClose } from "react-icons/io5";
 import RightQuotes from "../../assets/whiteQuotes/RightQuotesW.svg";
 import LeftQuotes from "../../assets/whiteQuotes/LeftQuotesW.svg";
 import { MdFirstPage, MdLastPage } from "react-icons/md";
+import { BiEditAlt } from "react-icons/bi";
+import { FaRegSave } from "react-icons/fa";
 import AffichageAnimation from "../../assets/gifs/AffichageAnimation.gif"
 
 function calculateMaxLength() {
@@ -19,7 +21,26 @@ function calculateMaxLength() {
     }
 }
 
-function FulldetailsPopUp({ onClose, articleContent }) {
+function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedText, setEditedText] = useState(articleContent);
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleTextChange = (event) => {
+        setEditedText(event.target.value);
+    };
+
+    const handleSaveClick = () => {
+        console.log("text saved")
+
+        //send the text to parent component
+        getText(editedText)
+        setIsEditing(false);
+    };
+
     const [currentPage, setCurrentPage] = useState(0);
 
     const maxLength = calculateMaxLength();
@@ -31,7 +52,7 @@ function FulldetailsPopUp({ onClose, articleContent }) {
         return parts;
     }
 
-    const pages = splitString(articleContent, maxLength);
+    const pages = splitString(editedText, maxLength);
 
     const handleNextPage = () => {
         setCurrentPage((prevPage) =>
@@ -64,6 +85,27 @@ function FulldetailsPopUp({ onClose, articleContent }) {
                         />
                     </div>
                     <div className="flex flex-col relative rounded-3xl bg-white p-8 w-3/4 md:w-1/2 items-center justify-center text-center">
+                        {userRole === 'moderator' && (
+                            <>
+                                {/* edit button */}
+                                < div className="absolute top-5 left-2">
+                                    <div className="flex flex-row cursor-pointer p-2" onClick={isEditing ? handleSaveClick : handleEditClick}>
+                                        {!isEditing ? (
+                                            <>
+                                                <BiEditAlt className="text-[#43BE83] mt-1" />
+                                                <p className="text-[#43BE83] text-[18px] font-dmsansmedium">edit</p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <FaRegSave className="text-[#43BE83] mt-1" />
+                                                <p className="text-[#43BE83] text-[18px] font-dmsansmedium">save</p>
+                                            </>)}
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {/* animation  */}
                         <div className="absolute top-2 right-2">
                             <img
                                 src={AffichageAnimation}
@@ -74,9 +116,19 @@ function FulldetailsPopUp({ onClose, articleContent }) {
 
                         {/* Content of the full article */}
                         <div className="flex w-[100%] h-3/4 mt-[35px] md:mt-[50px] mb-2">
-                            <p className="text-black text-[18px] lg:text-[20px] font-dmsans">
-                                {pages[currentPage]}
-                            </p>
+                            {isEditing ? (
+                                <textarea
+                                    // rows={Math.max(1, editedTitle.split("\n").length)}
+                                    className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                    style={{ width: '100%' }}
+                                    value={pages[currentPage]}
+                                    onChange={handleTextChange}
+                                />
+                            ) : (
+                                <p className="text-black text-[18px] lg:text-[20px] font-dmsans">
+                                    {pages[currentPage]}
+                                </p>
+                            )}
                         </div>
                         {/* Navigation buttons */}
                         <div className="flex flex-row w-[100%] h-1/8">
@@ -103,7 +155,7 @@ function FulldetailsPopUp({ onClose, articleContent }) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
