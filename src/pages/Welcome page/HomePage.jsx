@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { useSearchContext } from "../../context/SearchContext"
 
 
 function HomePage() {
     const navigate = useNavigate();
+    const { results, setResultsData } = useSearchContext();
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [results, setResults] = useState(null);
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -23,12 +24,13 @@ function HomePage() {
 
     const handleSearch = async () => {
         try {
+            // goToResultsPage();
             console.log("you searched for: ", searchQuery);
             const encodedQuery = encodeURIComponent(searchQuery);
             const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
             // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
             const data = await response.json();
-            setResults(data.results);
+            setResultsData(data.results);
             console.log(results)
             if (results) {
                 goToResultsPage();
@@ -40,9 +42,7 @@ function HomePage() {
 
     function goToResultsPage() {
         try {
-            navigate(`/search`,
-                { state: results },
-            );
+            navigate(`/search`);
         } catch (error) {
             console.error("Error loading results page:", error);
         }

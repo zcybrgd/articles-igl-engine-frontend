@@ -3,18 +3,53 @@ import { useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { IoTriangle, IoClose } from "react-icons/io5";
+import { FaUser } from "react-icons/fa6";
+import { HiOutlineKey } from "react-icons/hi";
+import { RiBankLine } from "react-icons/ri";
+import { BsCalendarEvent } from "react-icons/bs";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import newsPaperImage from "../../assets/NewsPaper.svg"
 import { articles } from "../../testing Data/ArticlesData";
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
+import DatePicker from "../../components/filters/DatePicker";
+import { useSearchContext } from "../../context/SearchContext"
+
 
 function SearchPage() {
     const navigate = useNavigate();
-    const location = useLocation();
+    const { results, setResultsData } = useSearchContext();
 
     const [searchQuery, setSearchQuery] = useState("");
-    const [results, setResults] = useState(location.state);
+    const [openfilter, setopenfilter] = useState(false);
+
+    // saving filters
+    const [authors, setauthors] = useState("");
+    const [keywords, setkeywords] = useState("");
+    const [institutions, setinstitutions] = useState("");
+    const [startdate, setstartdate] = useState(null);
+    const [enddate, setenddate] = useState(null);
+
+    const handleStartDateSelect = (date) => {
+        if (date) {
+            const formattedDate = date.toISOString().split('T')[0];  //to only get the date, not the time 
+            console.log('Selected start date:', formattedDate);
+            setstartdate(formattedDate);
+        } else {
+            console.log("no date yet")
+        }
+    };
+
+    const handleEndDateSelect = (date) => {
+        if (date) {
+            const formattedDate = date.toISOString().split('T')[0];  //to only get the date, not the time
+            console.log('Selected end date:', formattedDate);
+            setenddate(formattedDate);
+        } else {
+            console.log("no date yet")
+        }
+    };
 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
@@ -32,9 +67,8 @@ function SearchPage() {
             const encodedQuery = encodeURIComponent(searchQuery);
             const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
             // const response = await fetch(`http://localhost:8000/nadi/?q=${encodedQuery}`);
-            // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
             const data = await response.json();
-            setResults(data.results);
+            setResultsData(data.results);
             console.log(results)
         } catch (error) {
             console.error('Error searching articles:', error);
@@ -43,6 +77,7 @@ function SearchPage() {
 
     function openFilter() {
         console.log("filter opened")
+        setopenfilter(true)
     }
 
     function backToHome() {
@@ -68,8 +103,8 @@ function SearchPage() {
             <div className="container w-5/6 md:w-3/4 px-0 mx-auto -mt-32">
 
                 {/* search bar part  */}
-                <div className="flex h-full bg-transparent rounded overflow-hidden shadow-lg">
-                    <div className="w-full md:w-1/3 flex flex-row flex-grow flex-shrink pt-5 pb-5 pl-20 pr-20 mt-20 bg-[#181818] rounded-2xl items-center justify-center shadow-xl">
+                <div className="flex h-full bg-transparent rounded shadow-lg">
+                    <div className="relative w-full md:w-1/3 flex flex-row flex-grow py-5 px-20 mt-20 bg-[#181818] rounded-2xl items-center justify-center shadow-xl">
                         <div className="flex flex-row md:w-2/3 p-1 pl-2 pr-2 items-center justify-start rounded-2xl bg-[#F0F0F0]">
                             <div className="flex flex-row mr-auto">
                                 <IoIosSearch className="mr-2 text-black text-[20px]" />
@@ -87,9 +122,116 @@ function SearchPage() {
                                 <FaRegArrowAltCircleRight className="text-black text-[20px] cursor-pointer" onClick={handleSearch} />
                             </div>
                         </div>
-                        <div className="ml-5">
+                        <div className="flex relative ml-5">
                             <p className="text-[12px] md:text-[15px] font-dmsansmedium text-[#FFFFFF] mr-1 cursor-pointer hover:underline" onClick={openFilter}>Filtrer</p>
+
+                            {/*mini triangle to filters part  */}
+                            {openfilter && (
+                                <div className="absolute top-7 left-1 justify-end">
+                                    <IoTriangle className="text-[#F9F9F9] text-[30px]" />
+                                </div>
+                            )}
                         </div>
+                        {/* ****filters part****  */}
+                        {openfilter && (
+                            <div className="absolute top-20 z-10 w-[100%] bg-[#F9F9F9] rounded-md shadow-lg p-5">
+                                <div className="relative flex flex-col items-center justify-center">
+                                    {/* close button  */}
+                                    <div className="absolute top-0 right-0 cursor-pointer">
+                                        <IoClose
+                                            className="text-[#797D8C] text-[50px] font-bold"
+                                            onClick={() => setopenfilter(false)}
+                                        />
+                                    </div>
+
+                                    {/* title "Filters" */}
+                                    <p className="text-[35px] text-[#434343] font-dmsansbold">Filters</p>
+
+                                    {/* choosing filters */}
+                                    <div className="flex flex-col lg:flex-row w-[100%] mt-2">
+                                        {/* first column  */}
+                                        <div className="flex flex-col lg:w-1/2 items-start justify-start text-start p-2">
+                                            <p className="text-[17px] text-[#9D9E9D] font-dmsansmedium">You can use the filters below to affine your search: </p>
+                                            <div className="flex flex-col space-y-4 items-center text-start justify-start">
+                                                {/* authors */}
+                                                <div className="flex flex-col space-y-2 items-start justify-start text-start py-5">
+                                                    <div className="flex flex-row space-x-2 py-0.5">
+                                                        <FaUser className="text-lg text-[#707F65] mt-1" />
+                                                        <p className="text-[18px] text-[#707F65] font-dmsansbold underline">Authors :</p>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Ex : Nada"
+                                                        value={authors}
+                                                        onChange={(e) => setauthors(e.target.value)}
+                                                        className="text-md font-dmsansmedium bg-[#F1F1F1] text-[#434343] placeholder-[#AEAEAE] border-2 border-[#707F65] focus:outline-none rounded-xl px-8 py-2"
+                                                    />
+                                                </div>
+
+                                                {/* keywords */}
+                                                <div className="flex flex-col space-y-2 items-start justify-start text-start py-5">
+                                                    <div className="flex flex-row space-x-2 py-0.5">
+                                                        <HiOutlineKey className="text-lg text-[#707F65] mt-1" />
+                                                        <p className="text-[18px] text-[#707F65] font-dmsansbold underline">Keywords : </p>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Ex : Dina,Azazga"
+                                                        value={keywords}
+                                                        onChange={(e) => setkeywords(e.target.value)}
+                                                        className="text-md font-spacemono bg-[#F1F1F1] text-[#434343] placeholder-[#AEAEAE] border-2 border-[#707F65] focus:outline-none rounded-xl px-8 py-2"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* second column  */}
+                                        <div className="flex flex-col lg:w-1/2 items-start justify-start text-start p-2">
+                                            <div className="lg:hidden">
+                                                <p className="text-[17px] text-[#F9F9F9] font-dmsansmedium">empty, juste pour l'espace</p>
+                                            </div>
+                                            <div className="flex flex-col space-y-4 items-center text-start justify-start">
+                                                {/* institutions */}
+                                                <div className="flex flex-col space-y-2 items-start justify-start text-start py-5">
+                                                    <div className="flex flex-row space-x-2 py-0.5">
+                                                        <RiBankLine className="text-lg text-[#707F65] mt-1" />
+                                                        <p className="text-[18px] text-[#707F65] font-dmsansbold  underline">Institution : </p>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Ex: ESI"
+                                                        value={institutions}
+                                                        onChange={(e) => setinstitutions(e.target.value)}
+                                                        className="text-md font-spacemono bg-[#F1F1F1] text-[#434343] placeholder-[#AEAEAE] border-2 border-[#707F65] focus:outline-none rounded-xl px-8 py-2"
+                                                    />
+                                                </div>
+
+                                                {/* period */}
+                                                <div className="flex flex-col space-y-2 items-start justify-start text-start py-5">
+                                                    <div className="flex flex-row space-x-2 py-0.5">
+                                                        <BsCalendarEvent className="text-lg text-[#707F65] mt-1" />
+                                                        <p className="text-[18px] text-[#707F65] font-dmsansbold underline">Period between two dates :</p>
+                                                    </div>
+
+                                                    {/* start date  */}
+                                                    <div className="flex flex-col items-start justify-start text-start">
+                                                        <p className="text-[14px] text-[#181818] font-dmsansbold mb-2 underline">Start date :</p>
+                                                        <DatePicker onDateSelect={handleStartDateSelect} />
+                                                    </div>
+
+                                                    {/* end date  */}
+                                                    <div className="flex flex-col items-start justify-start text-start">
+                                                        <p className="text-[14px] text-[#181818] font-dmsansbold mb-2 mt-5 underline">End date :</p>
+                                                        <DatePicker onDateSelect={handleEndDateSelect} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        {/* ***************  */}
                     </div>
                 </div>
                 {/* /search bar part */}

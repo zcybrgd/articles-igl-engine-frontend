@@ -50,7 +50,7 @@ const LoginPage = () => {
             const userDataAndRole = {
                 userName: 'nadadjg',
                 password: 'password',
-                userRole: 'admin',
+                userRole: 'client',
             };
             await login(userDataAndRole);
             navigate("/", { state: { userRole: userDataAndRole.userRole, user: userDataAndRole } });
