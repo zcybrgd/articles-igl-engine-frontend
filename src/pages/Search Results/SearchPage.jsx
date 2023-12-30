@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from "react-router-dom";
 import { IoIosSearch, IoIosArrowBack } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { IoTriangle, IoClose } from "react-icons/io5";
@@ -11,7 +10,6 @@ import { BsCalendarEvent } from "react-icons/bs";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
 import newsPaperImage from "../../assets/NewsPaper.svg"
-import { articles } from "../../testing Data/ArticlesData";
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
 import DatePicker from "../../components/filters/DatePicker";
 import { useSearchContext } from "../../context/SearchContext"
@@ -20,6 +18,7 @@ import { useSearchContext } from "../../context/SearchContext"
 function SearchPage() {
     const navigate = useNavigate();
     const { results, setResultsData } = useSearchContext();
+    const [Error, setError] = useState(null)
 
     const [searchQuery, setSearchQuery] = useState("");
     const [openfilter, setopenfilter] = useState(false);
@@ -51,6 +50,36 @@ function SearchPage() {
         }
     };
 
+    function handleValidateFilters() {
+        if (Error) {
+            setError(null)
+        }
+
+        if (authors.length > 0) {
+            console.log("filter by author: ", authors)
+        }
+        if (keywords.length > 0) {
+            console.log("filter by keywords: ", keywords)
+        }
+        if (institutions.length > 0) {
+            console.log("filter by institutions: ", institutions)
+        }
+
+        if (startdate && !enddate) {
+            setError("the end date is missing! ")
+        } else if (!startdate && enddate) {
+            setError("the start date is missing! ")
+        } else if (startdate && enddate) {
+            console.log("filter by period: ", startdate, " - ", enddate)
+        }
+
+        // if (!Error) {
+        //     setopenfilter(false)
+        // }
+    }
+
+
+    // search controlers 
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
@@ -74,6 +103,7 @@ function SearchPage() {
             console.error('Error searching articles:', error);
         }
     };
+    // **************
 
     function openFilter() {
         console.log("filter opened")
@@ -227,6 +257,18 @@ function SearchPage() {
                                             </div>
                                         </div>
                                     </div>
+
+                                    {/* validate button  */}
+                                    {Error && (
+                                        <p className="text-red-500 mt-2">{Error}</p>
+                                    )}
+
+                                    <button
+                                        className="rounded-3xl bg-[#43BE83] text-white text-[12px] font-dmsansmedium md:text-[15px] text-center py-0.5 px-10 h-10 mt-8"
+                                        onClick={handleValidateFilters}
+                                    >
+                                        Validate
+                                    </button>
                                 </div>
                             </div>
                         )}
