@@ -43,7 +43,7 @@ function Moderator({ moderator, deleteModerator }) {
 
             {/* total edits part  */}
             <div className="flex w-1/5 items-center justify-center">
-                <p className="text-black text-[13px] font-dmsansbold md:text-[16px] ">{moderator.numberedits} edit</p>
+                <p className="text-black text-[13px] font-dmsansbold md:text-[16px] ">{moderator.edit_count} edit</p>
             </div>
 
             {/* user name part */}

@@ -32,4 +32,16 @@ const addModerator = async (token,signdata) => {
         return error.response ? error.response.data : { error: 'An error occurred' };
     }
 }
-export { fetchModerators, fetchModeratorByUsername, addModerator };
+const AdmdeleteModerator = async (token,modId) => {
+    try {
+        const response = await axios.delete(`${api}/mod/delete/${modId}`, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
+        return response.data     
+    } catch (error) {
+        return error.response ? error.response.data : { error: 'An error occurred' };
+    }
+}
+export { fetchModerators, fetchModeratorByUsername, addModerator, AdmdeleteModerator };
