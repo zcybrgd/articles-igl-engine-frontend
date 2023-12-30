@@ -29,7 +29,7 @@ function ModeratorsSection() {
             return (
                 <div className="flex flex-col items-center justify-center space-y-5 mb-5">
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} />
+                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} modifierModerator={() => modifierModerator(moderator.id)} />
                     ))}
                 </div>
             );
@@ -42,7 +42,7 @@ function ModeratorsSection() {
                         overflowY: 'scroll',
                     }}>
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} />
+                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} modifierModerator={() => modifierModerator(moderator.id)} />
                     ))}
                 </div>
             );
@@ -77,6 +77,14 @@ function ModeratorsSection() {
             });
         }
     };
+    
+    const modifierModerator = async (modid) => {
+        try {
+            navigate(`/modifyModerator/${modid}`,  { state: { modid } });
+        } catch (error) {
+            console.error("Error loading Add new moderator page:", error);
+        }
+     }
 
     function addModerator() {
         try {
