@@ -1,7 +1,8 @@
 import axios from "axios";
+const api = 'http://127.0.0.1:8000/us';
 const fetchModerators = async () => {
     try {
-        const response = await axios.get("http://127.0.0.1:8000/us/mods");
+        const response = await axios.get(`${api}/mods`);
         return response.data.mods
     } catch (error) {
         console.error("Error fetching moderators:", error);
@@ -18,4 +19,17 @@ const fetchModeratorByUsername = async (username) => {
         return null;
     }
 }
-export { fetchModerators, fetchModeratorByUsername };
+
+const addModerator = async (token,signdata) => {
+    try {
+        const response = await axios.post(`${api}/mod/add`, signdata, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
+        return response.data     
+    } catch (error) {
+        return error.response ? error.response.data : { error: 'An error occurred' };
+    }
+}
+export { fetchModerators, fetchModeratorByUsername, addModerator };

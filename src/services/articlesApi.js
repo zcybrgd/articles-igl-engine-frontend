@@ -74,7 +74,6 @@ const validateArticle = async (id) => {
 
   const updateArticle = async (articleId, data) => {
     try {
-        console.log("data: ",data)
         const response = await axios.patch(`${BASE_URL}${articleId}/update/`, data, {
             headers: {
                 'Content-Type': 'application/json',

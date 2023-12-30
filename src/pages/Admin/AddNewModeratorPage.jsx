@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import RightQuotes from "../../assets/whiteQuotes/RightQuotesW.svg";
 import LeftQuotes from "../../assets/whiteQuotes/LeftQuotesW.svg";
 import { IoArrowBack } from "react-icons/io5";
+import { addModerator } from "../../services/modApi";
+import { useAuth } from "../../context/AuthContext";
 
 function AddNewModeratorPage() {
+    const { token } = useAuth()
     const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState('');
@@ -15,8 +18,23 @@ function AddNewModeratorPage() {
     const [erreur, setErreur] = useState(null);
     const [successfulMessage, setSuccessfulMessage] = useState(null);
 
-    function AddModerator() {
-        console.log("moderator added")
+    const AddModerator = async () => {
+        const moddata = {
+            userName: userName,
+            firstName: firstName,
+            familyName: familyName,
+            email: email,
+            password: password
+        }
+
+        const responsedata = await addModerator(token,moddata)
+        if(!responsedata.error) {
+            setSuccessfulMessage('Moderator added successfully!');
+            setErreur(null); 
+        } else {
+             setSuccessfulMessage(null); 
+             setErreur(responsedata.error ? responsedata.error : 'An error occurred :(');
+        }
     }
 
     function backtoAdminPage() {
