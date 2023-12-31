@@ -76,6 +76,7 @@ const BarChart = ({ data, labels }) => {
             <canvas ref={chartRef} />
         </div>
     );
+
 };
 
 export default BarChart;

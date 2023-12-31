@@ -59,6 +59,7 @@ const HalfDonutChart = ({ data, labels }) => {
             <canvas ref={chartRef} />
         </div>
     );
+
 };
 
 export default HalfDonutChart;
