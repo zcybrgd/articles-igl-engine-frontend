@@ -19,6 +19,19 @@
   background: #707F65;
 }
 
+.special-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.special-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #797D8C;
+  border-radius: 10px;
+}
+
+.special-scrollbar::-webkit-scrollbar-track {
+  background-color: #BCBCBC;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

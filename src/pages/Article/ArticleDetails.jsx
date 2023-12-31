@@ -273,7 +273,6 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        // rows={Math.max(1, editedTitle.split("\n").length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedTitle}
@@ -282,7 +281,7 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedTitle}</p>
+                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedTitle}</p>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
@@ -290,7 +289,6 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        // rows={Math.max(1, editedAuthors.length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedAuthors}
@@ -299,7 +297,7 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedAuthors}</p>
+                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedAuthors}</p>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
@@ -307,16 +305,17 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        // rows={Math.max(1, editedInstitutions.length)}
+                                        rows={5}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedInstitutions}
                                         onChange={handleInstitutionsChange}
                                     />
-
                                 ) : (
-                                    // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedInstitutions}</p>
+                                    // Render paragraph when not editing  
+                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
+                                        {editedInstitutions}
+                                    </div>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
@@ -324,7 +323,7 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        // rows={Math.max(1, editedKeywords.length)}
+                                        rows={5}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedKeywords}
@@ -332,8 +331,10 @@ function ArticleDetails() {
                                     />
 
                                 ) : (
-                                    // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedKeywords}</p>
+                                    // Render paragraph when not editing  
+                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
+                                        {editedKeywords}
+                                    </div>
                                 )}
                             </div>
                         </div>
