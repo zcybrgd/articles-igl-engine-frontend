@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 const UserProfile = () => {
     // You would typically get these user details from props or state
     const [editing, setEditing] = useState(false);
+
+    //for testing
     const [user, setUser] = useState({
         userName: 'Maroumarou',
         firstName: 'Noneed',
@@ -22,6 +24,7 @@ const UserProfile = () => {
 
 
     };
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -39,7 +42,7 @@ const UserProfile = () => {
                     <img
                         src={user.imageUrl}
                         alt="User Profile"
-                        className="rounded-full h-30 w-30 mb-2 bg-black shadow-xl"
+                        className="rounded-full max-h-30 max-w-30 overflow-hidden mb-2 bg-black shadow-xl"
                     />
                 </label>
                 <input

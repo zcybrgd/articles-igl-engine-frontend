@@ -1,6 +1,6 @@
 import React from "react";
 import UploadSection from "./UploadSection";
-import LastEditSection from "./LastEditSection";
+import StatsSection from "./StatsSection";
 import ModeratorsSection from "./ModeratorsSection";
 import Footer from '../../components/Shared/Footer/Footer';
 
@@ -11,8 +11,8 @@ function AdminPage() {
                 {/* upload Section */}
                 <UploadSection />
 
-                {/* last edit section  */}
-                <LastEditSection />
+                {/* statistics section  */}
+                <StatsSection />
 
                 {/* moderators section */}
                 <ModeratorsSection />
