@@ -56,7 +56,7 @@ const validateArticle = async (id) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          articleId: id, 
+          id: id, 
         }),
       });
   
