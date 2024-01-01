@@ -32,8 +32,9 @@ function SearchPage() {
 
     const handleStartDateSelect = (date) => {
         if (date) {
-            const formattedDate = date.toISOString().split('T')[0];  //to only get the date, not the time 
-            console.log('Selected start date:', formattedDate);
+            console.log("selected start date: ", date)
+            const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+            console.log('formattedDate start date:', formattedDate);
             setstartdate(formattedDate);
         } else {
             console.log("no date yet")
@@ -42,7 +43,8 @@ function SearchPage() {
 
     const handleEndDateSelect = (date) => {
         if (date) {
-            const formattedDate = date.toISOString().split('T')[0];  //to only get the date, not the time
+            console.log("selected end date: ", date)
+            const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
             console.log('Selected end date:', formattedDate);
             setenddate(formattedDate);
         } else {
@@ -57,12 +59,15 @@ function SearchPage() {
 
         if (authors.length > 0) {
             console.log("filter by author: ", authors)
+            setSearchQuery(searchQuery + '&auteurs=' + authors)
         }
         if (keywords.length > 0) {
             console.log("filter by keywords: ", keywords)
+            setSearchQuery(searchQuery + '&mots_cles=' + keywords)
         }
         if (institutions.length > 0) {
             console.log("filter by institutions: ", institutions)
+            setSearchQuery(searchQuery + '&institutions=' + institutions)
         }
 
         if (startdate && !enddate) {
@@ -71,11 +76,13 @@ function SearchPage() {
             setError("the start date is missing! ")
         } else if (startdate && enddate) {
             console.log("filter by period: ", startdate, " - ", enddate)
+            setSearchQuery(searchQuery + '&start_date=' + startdate + '&end_date=' + enddate)
         }
 
-        // if (!Error) {
-        //     setopenfilter(false)
-        // }
+        if (!Error) {
+            handleSearch()
+            setopenfilter(false)
+        }
     }
 
 
@@ -93,9 +100,7 @@ function SearchPage() {
     const handleSearch = async () => {
         try {
             console.log("you searched for: ", searchQuery);
-            const encodedQuery = encodeURIComponent(searchQuery);
-            const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
-            // const response = await fetch(`http://localhost:8000/nadi/?q=${encodedQuery}`);
+            const response = await fetch(`http://localhost:8000/search/nadi/?q=${searchQuery}`);
             const data = await response.json();
             setResultsData(data.results);
             console.log(results)
@@ -177,7 +182,7 @@ function SearchPage() {
                                     <p className="text-[35px] text-[#434343] font-dmsansbold">Filters</p>
 
                                     {/* choosing filters */}
-                                    <div className="flex flex-col lg:flex-row w-[100%] mt-2">
+                                    <div className="flex flex-col md:flex-row w-[100%] mt-2">
                                         {/* first column  */}
                                         <div className="flex flex-col lg:w-1/2 items-start justify-start text-start p-2">
                                             <p className="text-[17px] text-[#9D9E9D] font-dmsansmedium">You can use the filters below to affine your search: </p>
@@ -216,8 +221,8 @@ function SearchPage() {
 
                                         {/* second column  */}
                                         <div className="flex flex-col lg:w-1/2 items-start justify-start text-start p-2">
-                                            <div className="lg:hidden">
-                                                <p className="text-[17px] text-[#F9F9F9] font-dmsansmedium">empty, juste pour l'espace</p>
+                                            <div className="hidden md:flex">
+                                                <p className="text-[17px] text-[#F9F9F9] font-dmsansmedium">You can use the filters below to affine your search:</p>
                                             </div>
                                             <div className="flex flex-col space-y-4 items-center text-start justify-start">
                                                 {/* institutions */}
