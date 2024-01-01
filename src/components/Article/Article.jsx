@@ -10,7 +10,9 @@ const Article = ({ article, isfav, userRole }) => {
 
     function openArticle() {
         try {
-            navigate(`/article/${article.articleId}`,
+            // article.id
+            console.log("article::", article)
+            navigate(`/article/${article.id}`,
                 {
                     state: {
                         article: article,
