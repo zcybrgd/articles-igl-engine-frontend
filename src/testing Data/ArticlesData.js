@@ -8,7 +8,8 @@ export const articles = [
         institutions: ["intitution 1", "institution 2", "institution 3"],
         keywords: ["keyword 1", "keyword 2", "keyword 3"],
         date: "Tuesday, 02 Oct 2022",
-        authors: ["nada", "kermi", "zaineb"]
+        bibliographie: ["Reference 1", "Reference 2"],
+        authors: ["nada", "kermi", "zaineb"],
     },
     {
         id: 2,
@@ -19,6 +20,7 @@ export const articles = [
         institutions: ["intitution 1", "institution 2", "institution 3"],
         keywords: ["keyword 1", "keyword 2", "keyword 3"],
         date: "Tuesday, 02 Oct 2022",
+        bibliographie: ["Reference 1", "Reference 2"],
         authors: ["nada", "kermi", "zaineb"]
     },
     {
@@ -30,6 +32,7 @@ export const articles = [
         institutions: ["intitution 1", "institution 2", "institution 3"],
         keywords: ["keyword 1", "keyword 2", "keyword 3"],
         date: "Tuesday, 02 Oct 2022",
+        bibliographie: ["Reference 1", "Reference 2"],
         authors: ["nada", "kermi", "zaineb"]
     },
     {
@@ -41,6 +44,7 @@ export const articles = [
         institutions: ["intitution 1", "institution 2", "institution 3"],
         keywords: ["keyword 1", "keyword 2", "keyword 3"],
         date: "Tuesday, 02 Oct 2022",
+        bibliographie: ["Reference 1", "Reference 2"],
         authors: ["nada", "kermi", "zaineb"]
     },
     {
@@ -52,6 +56,7 @@ export const articles = [
         institutions: ["intitution 1", "institution 2", "institution 3"],
         keywords: ["keyword 1", "keyword 2", "keyword 3"],
         date: "Tuesday, 02 Oct 2022",
+        bibliographie: ["Reference 1", "Reference 2"],
         authors: ["nada", "kermi", "zaineb"]
     },
 ]

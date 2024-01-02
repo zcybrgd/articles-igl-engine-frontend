@@ -27,13 +27,14 @@ function HomePage() {
     const handleSearch = async () => {
         try {
             setIsLoading(true);
-            console.log("you searched for: ", searchQuery);
-            const encodedQuery = encodeURIComponent(searchQuery);
-            const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
-            // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
-            const data = await response.json();
-            setResultsData(data.results);
-            console.log(results)
+            // console.log("you searched for: ", searchQuery);
+            // const encodedQuery = encodeURIComponent(searchQuery);
+            // const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
+            // // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
+            // const data = await response.json();
+            // setResultsData(data.results);
+            // console.log(results)
+            setResultsData(articles)
             setIsLoading(false);
             if (results) {
                 goToResultsPage();

@@ -33,6 +33,7 @@ function ArticleDetails() {
     const [editedAuthors, setEditedAuthors] = useState(article.authors.join(',  '));
     const [editedTitle, setEditedTitle] = useState(article.title);
     const [editedAbstract, setEditedAbstract] = useState(article.abstract);
+    const [editedRefrences, setEditedRef] = useState(article.bibliographie.join(',  '));
     const [editedDate, setEditedDate] = useState(article.date);
     const [newText, setnewText] = useState('');
 
@@ -104,12 +105,18 @@ function ArticleDetails() {
         // saving institutions as an array again
         const newInstitutionsArray = editedInstitutions.split(',').map((institution) => institution.trim());
         console.log('new institutions: ', newInstitutionsArray);
+
+        // saving references as an array again
+        const newRefrencesArray = editedRefrences.split(',').map((reference) => reference.trim());
+        console.log('new refrences: ', newRefrencesArray);
+
         const editedData = {
             authors: newAuthorsArray,
             institutions: newInstitutionsArray,
             keywords: editedKeywords,
             title: editedTitle,
             abstract: editedAbstract,
+            bibliographie: newRefrencesArray,
             date: editedDate,
         };
         const isSuccess = await updateArticle(article.id, editedData);
@@ -132,6 +139,7 @@ function ArticleDetails() {
         setEditedKeywords(article.keywords);
         setEditedInstitutions(article.institutions.join(', '));
         setEditedAuthors(article.authors.join(', '));
+        setEditedRef(article.bibliographie.join(', '));
         setEditedTitle(article.title);
         setEditedDate(article.date)
     };
@@ -155,10 +163,14 @@ function ArticleDetails() {
     const handleAbstractChange = (event) => {
         setEditedAbstract(event.target.value);
     };
+
     const handleDateChange = (event) => {
         setEditedDate(event.target.value);
     };
 
+    const handleRefChange = (event) => {
+        setEditedRef(event.target.value);
+    };
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
@@ -352,6 +364,24 @@ function ArticleDetails() {
                                     // Render paragraph when not editing
                                     <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
                                         {editedKeywords}
+                                    </div>)}
+                            </div>
+                            <div className="flex flex-col items-start justify-start text-start space-y-1">
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Références: </p>
+                                {isEditing ? (
+                                    // Render input field when editing
+                                    <textarea
+                                        // rows={Math.max(1, editedKeywords.length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        style={{ width: '100%' }}
+                                        value={editedRefrences}
+                                        onChange={handleRefChange}
+                                    />
+
+                                ) : (
+                                    // Render paragraph when not editing
+                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
+                                        {editedRefrences}
                                     </div>)}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
