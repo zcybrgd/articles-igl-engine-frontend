@@ -5,33 +5,33 @@ import avatar from "../../assets/image.jpg"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { fetchArticles } from "../../services/articlesApi";
-// import { articles } from "../../testing Data/ArticlesData";
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
+import { articles } from "../../testing Data/ArticlesData";
 
 function ModeratorPage() {
     const [moderatorData, setModeratorData] = useState(null);
 
-    const [articles, setArticles] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const [articles, setArticles] = useState([]);
+    // const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const articlesData = await fetchArticles();
-                setArticles(articlesData);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const articlesData = await fetchArticles();
+    //             setArticles(articlesData);
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        fetchData();
-    }, []
-    );
+    //     fetchData();
+    // }, []
+    // );
 
     return (
         <div>
@@ -95,7 +95,7 @@ function ModeratorPage() {
                     {!loading && !error && articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div key={index} className="flex mb-5">
-                                <Article article={article} isfav={false} userRole={"moderator"} />
+                                <Article article={article} isfav={false} userRole={"moderator"} page={'home'} />
                             </div>
                         ))
                     ) : (

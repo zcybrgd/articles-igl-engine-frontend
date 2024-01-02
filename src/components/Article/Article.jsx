@@ -5,21 +5,43 @@ import { FaUserTie } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Paper from "../../assets/paper.svg"
 
-const Article = ({ article, isfav, userRole }) => {
+const Article = ({ article, isfav, userRole, page }) => {
     const navigate = useNavigate();
 
     function openArticle() {
         try {
-            // article.id
-            console.log("article::", article)
-            navigate(`/article/${article.id}`,
-                {
-                    state: {
-                        article: article,
-                        role: userRole,
-                    },
-                },  //pass the article as a prop
-            );
+            if (userRole === 'client') {
+                if (page === 'home') {
+                    navigate(`/searchedArticle/${article.id}`,
+                        {
+                            state: {
+                                article: article,
+                                role: userRole,
+                            },
+                        },  //pass the article as a prop
+                    );
+                } else if (page === 'saved') {
+                    navigate(`/savedArticle/${article.id}`,
+                        {
+                            state: {
+                                article: article,
+                                role: userRole,
+                            },
+                        },  //pass the article as a prop
+                    );
+                }
+            } else {
+                //moderator part 
+                navigate(`/article/${article.id}`,
+                    {
+                        state: {
+                            article: article,
+                            role: userRole,
+                        },
+                    },  //pass the article as a prop
+                );
+            }
+
         } catch (error) {
             console.error("Error loading article:", error);
         }
@@ -35,6 +57,9 @@ const Article = ({ article, isfav, userRole }) => {
 
     function openArticlesPdf() {
         console.log("article opened pdf id:", article.articleId)
+
+        const url = article.urlPdf;
+        window.open(url, '_blank', 'noopener noreferrer');
     }
 
     return (

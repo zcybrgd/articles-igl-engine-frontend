@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Shared/NavBar/NavBar";
 
-const LayoutArticle = ({ userRole }) => {
+const LayoutArticle = ({ userRole, page }) => {
     return (
         <div className="flex bg-[#707F65] w-[100%]">
-            <Navbar userRole={userRole} article={true} />
+            <Navbar userRole={userRole} article={true} pageCallingArticle={page} />
 
             {/* absolute top-0 left-0 right-0 */}
             <div className="absolute top-0 left-0 right-0 bg-[#707F65] justify-center items-center ">

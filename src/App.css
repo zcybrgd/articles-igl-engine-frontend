@@ -19,6 +19,19 @@
   background: #707F65;
 }
 
+.special-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.special-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #797D8C;
+  border-radius: 10px;
+}
+
+.special-scrollbar::-webkit-scrollbar-track {
+  background-color: #BCBCBC;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -127,4 +140,36 @@
   font-weight: 700;
   font-display: swap;
   src: url(./assets/fonts/Open-Sans/OpenSans-Bold.ttf);
+}
+
+/*SpaceMono font face*/
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Regular.ttf);
+}
+
+/*SpaceMonoItalic font face*/
+@font-face {
+  font-family: "SpaceMonoItalic";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Italic.ttf);
+}
+
+/*SpaceMonoBoldItalic font face*/
+@font-face {
+  font-family: "SpaceMonoBoldItalic";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-BoldItalic.ttf);
+}
+
+/*SpaceMonoBold font face*/
+@font-face {
+  font-family: "SpaceMonoBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Bold.ttf);
 }

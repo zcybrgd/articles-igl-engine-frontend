@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../../components/Welcome/heroSection';
 import ContactUs from '../../components/Welcome/contact';
 import OurTeam from '../../components/Welcome/ourTeam';
+import Footer from '../../components/Shared/Footer/Footer';
 
 const WelcomPage = () => {
     return (
@@ -10,6 +11,7 @@ const WelcomPage = () => {
                 < Hero />
                 < OurTeam />
                 <ContactUs />
+                <Footer />
             </div>
         </div>
     );
