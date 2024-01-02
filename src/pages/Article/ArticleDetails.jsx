@@ -315,6 +315,20 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        style={{ width: '100%' }}
+                                        value={editedDate}
+                                        onChange={handleDateChange}
+                                    />
+                                ) : (
+                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedDate}</p>
+                                )}
+                            </div>
+                            <div className="flex flex-col items-start justify-start text-start space-y-1">
                                 <p className="text-black text-[22px] font-dmsansmedium underline">Auteurs:</p>
                                 {isEditing ? (
                                     // Render input field when editing
@@ -384,21 +398,6 @@ function ArticleDetails() {
                                         {editedRefrences}
                                     </div>)}
                             </div>
-                            <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
-                                        style={{ width: '100%' }}
-                                        value={editedDate}
-                                        onChange={handleDateChange}
-                                    />
-                                ) : (
-                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedDate}</p>
-                                )}
-                            </div>
-
                         </div>
                         <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
                     </div>
