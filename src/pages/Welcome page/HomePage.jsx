@@ -5,7 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
 import { HashLoader } from "react-spinners"
-import { articles } from "../../testing Data/ArticlesData";
+// import { articles } from "../../testing Data/ArticlesData";
 
 function HomePage() {
     const navigate = useNavigate();
@@ -27,14 +27,12 @@ function HomePage() {
     const handleSearch = async () => {
         try {
             setIsLoading(true);
-            // console.log("you searched for: ", searchQuery);
-            // const encodedQuery = encodeURIComponent(searchQuery);
-            // const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
-            // // const response = await fetch(`http://localhost:8000/nadi/?q=Author 3`);
-            // const data = await response.json();
-            // setResultsData(data.results);
-            // console.log(results)
-            setResultsData(articles)
+            console.log("you searched for: ", searchQuery);
+            const encodedQuery = encodeURIComponent(searchQuery);
+            const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
+            const data = await response.json();
+            setResultsData(data.results);
+            console.log(results)
             setIsLoading(false);
             if (results) {
                 goToResultsPage();
