@@ -4,6 +4,7 @@ import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
+import { fetchSearchResults } from "../../services/searchApi";
 import { HashLoader } from "react-spinners"
 // import { articles } from "../../testing Data/ArticlesData";
 
@@ -28,15 +29,14 @@ function HomePage() {
         try {
             setIsLoading(true);
             console.log("you searched for: ", searchQuery);
-            const encodedQuery = encodeURIComponent(searchQuery);
-            const response = await fetch(`http://localhost:8000/search/nadi/?q=${encodedQuery}`);
-            const data = await response.json();
-            setResultsData(data.results);
-            console.log(results)
+            const searchResults = await fetchSearchResults(searchQuery);
+            setResultsData(searchResults);
+
             setIsLoading(false);
             if (results) {
                 goToResultsPage();
             }
+
         } catch (error) {
             console.error('Error searching articles:', error);
             setIsLoading(false);

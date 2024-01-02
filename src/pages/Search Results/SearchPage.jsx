@@ -13,6 +13,7 @@ import newsPaperImage from "../../assets/NewsPaper.svg"
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
 import DatePicker from "../../components/filters/DatePicker";
 import { useSearchContext } from "../../context/SearchContext"
+import { fetchFilteredSearchResults } from "../../services/searchApi";
 
 
 function SearchPage() {
@@ -100,10 +101,9 @@ function SearchPage() {
     const handleSearch = async () => {
         try {
             console.log("you searched for: ", searchQuery);
-            const response = await fetch(`http://localhost:8000/search/nadi/?q=${searchQuery}`);
-            const data = await response.json();
-            setResultsData(data.results);
-            console.log(results)
+            const searchResults = await fetchFilteredSearchResults(searchQuery);
+            setResultsData(searchResults);
+
         } catch (error) {
             console.error('Error searching articles:', error);
         }
