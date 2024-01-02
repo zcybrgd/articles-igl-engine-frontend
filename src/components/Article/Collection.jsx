@@ -13,7 +13,6 @@ const Collection = ({
             </div>
             <div className="flex flex-col w-full items-center rounded-2xl bg-[#FFFFFF] pl-10 pr-10 pt-0.5 pb-0.5">
                 <p className="text-[15px] font-dmsansbold text-[#707F65]">{collectionName}</p>
-                {/* <p className="text-[13px] font-dmsansmedium text-[#969796]">{nbArticles} articles</p> */}
             </div>
         </div>
     )

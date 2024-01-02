@@ -32,7 +32,7 @@ function CollectionsPage() {
             </div>
             <div className="flex flex-wrap m-0">
                 {collections.map((collection, index) => (
-                    <div key={index} className=" p-1 lg:p-4 cursor-pointer" onClick={() => openCollection(collection)}>
+                    <div key={index} className="p-1 lg:p-4 cursor-pointer" onClick={() => openCollection(collection)}>
                         <Collection collectionName={collection.collectionName} nbArticles={collection.nbArticles} />
                     </div>
                 ))}
