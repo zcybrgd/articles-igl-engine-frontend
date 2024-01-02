@@ -7,32 +7,5 @@ export const collections = [
         nbArticles: 100,
         articles: articles
     },
-    {
-        collectionId: 2,
-        collectionName: "collection1",
-        nbArticles: 100,
-        articles: articles
 
-    },
-    {
-        collectionId: 3,
-        collectionName: "collection2",
-        nbArticles: 100,
-        articles: articles
-
-    },
-    {
-        collectionId: 4,
-        collectionName: "collection3",
-        nbArticles: 100,
-        articles: articles
-
-    },
-    {
-        collectionId: 5,
-        collectionName: "collection4",
-        nbArticles: 100,
-        articles: articles
-
-    }
 ] 
