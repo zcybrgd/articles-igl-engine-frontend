@@ -11,6 +11,7 @@ const authApi = axios.create({
 
 export const signUp = async (userData) => {
     try {
+        console.log("here is our data: ,", userData)
         const response = await authApi.post('signup/', userData);
         return response;
     } catch (error) {

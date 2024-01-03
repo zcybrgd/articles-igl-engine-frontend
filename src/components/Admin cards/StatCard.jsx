@@ -14,7 +14,7 @@ function StatCard({ title, value }) {
             <div className="flex w-1/3 justify-end items-center">
                 {title === 'Total articles' ? (
                     <HiOutlineDocumentText className="text-[#434343] text-[80px]" />
-                ) : title === 'Waiting for validation' ? (
+                ) : title === 'Unreviewed' ? (
                     <BsHourglass className="text-[#434343] text-[80px]" />
                 ) : title === 'Deleted' && (
                     <MdDeleteOutline className="text-[#434343] text-[80px]" />
@@ -24,4 +24,4 @@ function StatCard({ title, value }) {
     )
 }
 
-export default StatCard
+export default StatCard;

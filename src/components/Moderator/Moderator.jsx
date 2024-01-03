@@ -47,7 +47,7 @@ function Moderator({ moderator, deleteModerator, modifierModerator }) {
             <div className="flex w-1/5">
                 <p className="text-[#F72A1D] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={deleteModerator}>- Retirer</p>
             </div>
-
+            
             {/* "modifier" button part  */}
             <div className="flex w-1/5">
                 <p className="text-[#797D8C] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={modifierModerator}>Modify</p>
@@ -87,6 +87,8 @@ function Moderator({ moderator, deleteModerator, modifierModerator }) {
                                     {moderator.editedArticles && moderator.editedArticles.map((article, index) => (
                                         <p className="text-black text-[10px] md:text-[15px] font-dmsansbold">•{article.title}</p>
                                     ))}
+                                    {/* <button onClick={() => handleModify(moderator.id)} className="block px-5 py-2 text-sm bg-white text-gray-700 ">Modify</button>
+                                     <button onClick={() => handleDelete(moderator.id)} className="block px-5 py-2 text-sm bg-white text-gray-700">  Delete</button> */}
                                 </div>
                             </div>
                         </div>

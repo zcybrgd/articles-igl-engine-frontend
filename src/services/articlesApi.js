@@ -26,12 +26,13 @@ export const fetchArticles = async () => {
     }
   };
 
-  const deleteArticle = async (articleId) => {
+  const deleteArticle = async (articleId,token) => {
     try {
         const response = await fetch(`${BASE_URL}${articleId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `${token}`,
             },
         });
 
@@ -48,11 +49,12 @@ export const fetchArticles = async () => {
     }
 };
 
-const validateArticle = async (id) => {
+const validateArticle = async (id,token) => {
     try {
       const response = await fetch(`${BASE_URL}`, {
         method: 'POST', 
         headers: {
+          Authorization: `${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -72,10 +74,11 @@ const validateArticle = async (id) => {
     }
   };
 
-  const updateArticle = async (articleId, data) => {
+  const updateArticle = async (articleId, data,token )=> {
     try {
         const response = await axios.patch(`${BASE_URL}${articleId}/update/`, data, {
             headers: {
+                Authorization: `${token}`,
                 'Content-Type': 'application/json',
             },
         });

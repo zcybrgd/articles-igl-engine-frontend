@@ -6,9 +6,10 @@ import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteArticle, validateArticle, updateArticle } from "../../services/articlesApi";
+import { useAuth } from "../../context/AuthContext";
 
 function ArticleDetails() {
-
+    const { token } = useAuth()
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
@@ -29,45 +30,41 @@ function ArticleDetails() {
 
     //Data edited
     const [editedKeywords, setEditedKeywords] = useState(article.keywords);
-    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(',  '));
-    const [editedAuthors, setEditedAuthors] = useState(article.authors.join(',  '));
+    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(', '));
+    const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
     const [editedTitle, setEditedTitle] = useState(article.title);
     const [editedAbstract, setEditedAbstract] = useState(article.abstract);
-    const [editedRefrences, setEditedRef] = useState(article.bibliographie.join(',  '));
     const [editedDate, setEditedDate] = useState(article.date);
     const [newText, setnewText] = useState('');
-
     const getText = (text) => {
         setnewText(text)
         console.log('new text:', newText)
     }
-
     const handleValidateArticle = async () => {
-        console.log("article validated")
+        console.log("article validated") 
         try {
-            const isSuccess = await validateArticle(article.id)
+        const isSuccess = await validateArticle(article.id,token)
+    
+        if (isSuccess) {  
+        toast.success('Article validated successfully', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000, 
+        });
 
-            if (isSuccess) {
-                toast.success('Article validated successfully', {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2000,
-                });
-
-                setTimeout(() => {
-                    navigate("/", { state: { userRole } });
-                }, 2000);
+        setTimeout(() => {
+            navigate("/",{ state: {userRole} });
+        }, 2000); 
             } else {
                 toast.error('Failed to validate article', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2000,
+                    autoClose: 2000, 
                 });
             }
         } catch (error) {
             console.error('Error handling delete click', error);
         }
-        // j'ajoute validated count     
+ // j'ajoute validated count     
     };
-
     const handleEditClick = () => {
         setIsEditing(true);
     };
@@ -75,7 +72,8 @@ function ArticleDetails() {
     const handleDeleteClick = async () => {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
         try {
-            const isSuccess = await deleteArticle(article.id);
+            console.log(token)
+            const isSuccess = await deleteArticle(article.id,token);
 
             if (isSuccess) {
                 toast.success('Article deleted successfully', {
@@ -105,21 +103,15 @@ function ArticleDetails() {
         // saving institutions as an array again
         const newInstitutionsArray = editedInstitutions.split(',').map((institution) => institution.trim());
         console.log('new institutions: ', newInstitutionsArray);
-
-        // saving references as an array again
-        const newRefrencesArray = editedRefrences.split(',').map((reference) => reference.trim());
-        console.log('new refrences: ', newRefrencesArray);
-
         const editedData = {
             authors: newAuthorsArray,
             institutions: newInstitutionsArray,
             keywords: editedKeywords,
             title: editedTitle,
             abstract: editedAbstract,
-            bibliographie: newRefrencesArray,
             date: editedDate,
         };
-        const isSuccess = await updateArticle(article.id, editedData);
+        const isSuccess = await updateArticle(article.id, editedData,token);
         if (isSuccess) {
             console.log('Article updated successfully');
             toast.success('Article updated successfully', {
@@ -137,9 +129,8 @@ function ArticleDetails() {
         // Cancel the editing, revert the changes
         setIsEditing(false);
         setEditedKeywords(article.keywords);
-        setEditedInstitutions(article.institutions.join(', '));
-        setEditedAuthors(article.authors.join(', '));
-        setEditedRef(article.bibliographie.join(', '));
+        setEditedInstitutions(article.institutions);
+        setEditedAuthors(article.authors);
         setEditedTitle(article.title);
         setEditedDate(article.date)
     };
@@ -163,14 +154,10 @@ function ArticleDetails() {
     const handleAbstractChange = (event) => {
         setEditedAbstract(event.target.value);
     };
-
     const handleDateChange = (event) => {
         setEditedDate(event.target.value);
     };
-
-    const handleRefChange = (event) => {
-        setEditedRef(event.target.value);
-    };
+    
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
@@ -178,10 +165,7 @@ function ArticleDetails() {
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
-
-        const url = article.urlPdf;
-        window.open(url, '_blank', 'noopener noreferrer');
+        console.log("article opened pdf id:", article.id)
     }
 
     return (
@@ -303,6 +287,7 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
+                                        // rows={Math.max(1, editedTitle.split("\n").length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedTitle}
@@ -311,28 +296,15 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedTitle}</p>
+                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedTitle}</p>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
-                                {isEditing ? (
-                                    <input
-                                        type="text"
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
-                                        style={{ width: '100%' }}
-                                        value={editedDate}
-                                        onChange={handleDateChange}
-                                    />
-                                ) : (
-                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedDate}</p>
-                                )}
-                            </div>
-                            <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline">Auteurs:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Authors:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
+                                        // rows={Math.max(1, editedAuthors.length)}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedAuthors}
@@ -341,7 +313,7 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedAuthors}</p>
+                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedAuthors}</p>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
@@ -358,12 +330,11 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
-                                        {editedInstitutions}
-                                    </div>)}
+                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedInstitutions}</p>
+                                )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline">Mots clé:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Keywords:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
@@ -376,28 +347,24 @@ function ArticleDetails() {
 
                                 ) : (
                                     // Render paragraph when not editing
-                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
-                                        {editedKeywords}
-                                    </div>)}
+                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedKeywords}</p>
+                                )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline">Références: </p>
-                                {isEditing ? (
-                                    // Render input field when editing
-                                    <textarea
-                                        // rows={Math.max(1, editedKeywords.length)}
-                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
-                                        style={{ width: '100%' }}
-                                        value={editedRefrences}
-                                        onChange={handleRefChange}
-                                    />
+                          <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
+                          {isEditing ? (
+                              <input
+                              type="text"
+                              className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                              style={{ width: '100%' }}
+                              value={editedDate}
+                              onChange={handleDateChange}
+                             />
+                          ) : (
+                               <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedDate}</p>
+                               )}
+                          </div>
 
-                                ) : (
-                                    // Render paragraph when not editing
-                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
-                                        {editedRefrences}
-                                    </div>)}
-                            </div>
                         </div>
                         <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
                     </div>

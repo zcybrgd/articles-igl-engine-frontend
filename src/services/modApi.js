@@ -1,16 +1,20 @@
 import axios from "axios";
 const api = 'http://127.0.0.1:8000/us';
-const fetchModerators = async () => {
+const fetchModerators = async (token) => {
     try {
-        const response = await axios.get(`${api}/mods`);
+        const response = await axios.get(`${api}/mods/display`,{
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
         return response.data.mods
     } catch (error) {
         console.error("Error fetching moderators:", error);
     }
 };
 
-const fetchModeratorById = async (id) => {
-    const moderators = await fetchModerators();
+const fetchModeratorById = async (id, token) => {
+    const moderators = await fetchModerators(token);
     const foundModerator = moderators.find((moderator) => moderator.id === id);
     if (foundModerator) {
         print("founddd; ", foundModerator)
@@ -20,8 +24,8 @@ const fetchModeratorById = async (id) => {
         return null;
     }
 }
-const fetchModeratorByUsername = async (username) => {
-    const moderators = await fetchModerators();
+const fetchModeratorByUsername = async (username, token) => {
+    const moderators = await fetchModerators(token);
     const foundModerator = moderators.find((moderator) => moderator.userName === username);
     if (foundModerator) {
         return foundModerator;

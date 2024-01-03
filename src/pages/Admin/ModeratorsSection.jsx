@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
+// import { moderators } from "../../testing Data/ModeratorsList"
 import { useNavigate } from 'react-router-dom';
 import { AdmdeleteModerator, fetchModerators } from "../../services/modApi";
 import { useAuth } from "../../context/AuthContext";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { moderators } from "../../testing Data/ModeratorsList"
-
 function ModeratorsSection() {
     const navigate = useNavigate();
-
     const { token } = useAuth()
-    // const [moderators, setModerators] = useState([]);
+    const [moderators, setModerators] = useState([]);
+    useEffect(() => {
+        const fetchModeratorsData = async () => {
+            try {
+                const mods = await fetchModerators(token);
+                setModerators(mods);
+            } catch (error) {
+                console.error("Error fetching moderators:", error);
+            }
+        };
 
-    // useEffect(() => {
-    //     const fetchModeratorsData = async () => {
-    //         try {
-    //             const mods = await fetchModerators();
-    //             setModerators(mods);
-    //         } catch (error) {
-    //             console.error("Error fetching moderators:", error);
-    //         }
-    //     };
-
-    //     fetchModeratorsData();
-    // }, []);
+        fetchModeratorsData();
+    }, []);
 
     const renderModerators = () => {
         if (moderators && moderators.length <= 5) {
@@ -54,10 +51,10 @@ function ModeratorsSection() {
 
     const deleteModerator = async (modid) => {
         console.log("mod id: ", modid);
-
+        
         try {
             const responsedata = await AdmdeleteModerator(token, modid);
-
+            
             if (Array.isArray(responsedata) && responsedata.length > 0) {
                 const successMessage = responsedata[0];
                 console.log(successMessage); // "Mod deleted successfully!!"
@@ -80,14 +77,14 @@ function ModeratorsSection() {
             });
         }
     };
-
+   
     const modifierModerator = async (modid) => {
         try {
-            navigate(`/modifyModerator/${modid}`, { state: { modid } });
+            navigate(`/modifyModerator/${modid}`,  { state: { modid } });
         } catch (error) {
             console.error("Error loading Add new moderator page:", error);
         }
-    }
+     }
 
     function addModerator() {
         try {
@@ -138,11 +135,6 @@ function ModeratorsSection() {
                     </div>
 
                     {/* "retirer" button part  */}
-                    <div className="flex w-1/5 items-center justify-center">
-                        <p className="text-white font-opensansmedium text-[10px]"></p>
-                    </div>
-
-                    {/* "modifier" button part  */}
                     <div className="flex w-1/5 items-center justify-center">
                         <p className="text-white font-opensansmedium text-[10px]"></p>
                     </div>
