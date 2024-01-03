@@ -135,7 +135,6 @@ const NavbarHome = ({ userRole }) => {
                                     src={avatar}
                                 />
                             </div>
-
                             {isOpen && (
                                 <div className="absolute right-5 top-10 mt-10 w-44 h-16 p-3 items-center justify-center bg-[#FFFFFF] text-base z-40 divide-gray-100 rounded shadow">
                                     {/* logout button  */}
