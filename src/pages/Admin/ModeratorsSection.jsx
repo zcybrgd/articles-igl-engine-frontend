@@ -13,7 +13,7 @@ function ModeratorsSection() {
     useEffect(() => {
         const fetchModeratorsData = async () => {
             try {
-                const mods = await fetchModerators();
+                const mods = await fetchModerators(token);
                 setModerators(mods);
             } catch (error) {
                 console.error("Error fetching moderators:", error);
