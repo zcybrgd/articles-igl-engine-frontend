@@ -1,13 +1,32 @@
-import React from "react"
+import React ,{ useState ,useEffect }from "react"
 import { useLocation } from "react-router-dom";
 import Paper from "../../assets/paper.svg"
 import Article from "../../components/Article/Article";
-import { articles } from "../../testing Data/ArticlesData";
+import { useAuth } from "../../context/AuthContext";
+import { displayFavorites } from "../../services/favoritesApi";
 
 
 function FavoriArticlesListPage() {
+    const { token } = useAuth();
+    const [articles,setArticles] = useState(0)
     const location = useLocation();
-    const collection = location.state;
+    const collection = location.state.collection;
+
+   useEffect(()=>{
+    const favorites = async () =>
+        {
+            const response = await displayFavorites(token)
+            if(response.favorite_articles) {
+                setArticles(response.favorite_articles);
+            } else {
+            console.log(response)
+            console.error("Error loading FavoriArticlesListPage:");
+            } 
+        };
+        favorites();
+   },[articles])
+        
+    
 
     return (
         <div className="flex flex-col items-start w-[100%]">
@@ -20,7 +39,7 @@ function FavoriArticlesListPage() {
                         <img src={Paper} alt="papers icon" className="w-[50px] h-[50px]" />
                     </span>
                 </div>
-                <p className="text-[#707F65] font-dmsansbold text-[15px]">{collection.nbArticles} articles</p>
+                <p className="text-[#707F65] font-dmsansbold text-[15px]">{articles.length} articles</p>
             </div>
             {/* boucle ta3 les articles */}
             <div className="flex flex-col w-[100%]">

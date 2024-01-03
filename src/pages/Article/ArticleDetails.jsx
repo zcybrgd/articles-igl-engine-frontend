@@ -6,9 +6,10 @@ import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteArticle, validateArticle, updateArticle } from "../../services/articlesApi";
+import { useAuth } from "../../context/AuthContext";
 
 function ArticleDetails() {
-
+    const { token } = useAuth()
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
@@ -42,7 +43,7 @@ function ArticleDetails() {
     const handleValidateArticle = async () => {
         console.log("article validated") 
         try {
-        const isSuccess = await validateArticle(article.id)
+        const isSuccess = await validateArticle(article.id,token)
     
         if (isSuccess) {  
         toast.success('Article validated successfully', {
@@ -71,7 +72,8 @@ function ArticleDetails() {
     const handleDeleteClick = async () => {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
         try {
-            const isSuccess = await deleteArticle(article.id);
+            console.log(token)
+            const isSuccess = await deleteArticle(article.id,token);
 
             if (isSuccess) {
                 toast.success('Article deleted successfully', {
@@ -109,7 +111,7 @@ function ArticleDetails() {
             abstract: editedAbstract,
             date: editedDate,
         };
-        const isSuccess = await updateArticle(article.id, editedData);
+        const isSuccess = await updateArticle(article.id, editedData,token);
         if (isSuccess) {
             console.log('Article updated successfully');
             toast.success('Article updated successfully', {

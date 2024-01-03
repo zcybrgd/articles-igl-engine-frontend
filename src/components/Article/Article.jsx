@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { CiCalendarDate } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import Paper from "../../assets/paper.svg"
+import Paper from "../../assets/paper.svg";
+import { useAuth } from "../../context/AuthContext";
+import { addFavorite, deleteFavorite } from "../../services/favoritesApi";
+import { toast, ToastContainer } from 'react-toastify';
 
 const Article = ({ article, isfav, userRole }) => {
+    const { token } = useAuth()
     const navigate = useNavigate();
 
     function openArticle() {
         try {
-            navigate(`/article/${article.articleId}`,
+            navigate(`/article/${article.id}`,
                 {
                     state: {
                         article: article,
@@ -23,16 +27,39 @@ const Article = ({ article, isfav, userRole }) => {
         }
     }
 
-    function deleteArticleFromCollection() {
-        console.log("article deleted id:", article.articleId)
+    async function deleteArticleFromCollection() 
+    {
+        const responsedata = await deleteFavorite(token,article.id)
+        if(!responsedata.error) {
+            toast.success(responsedata.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            toast.error(responsedata.error, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        }
     }
 
-    function addArticleToCollection() {
-        console.log("article added id:", article.articleId)
+    const addArticleToFavorites = async () =>{
+        const responsedata = await addFavorite(token,article.id)
+        if(!responsedata.error) {
+            toast.success(responsedata.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            toast.error(responsedata.error, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        }
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
     }
 
     return (
@@ -81,7 +108,7 @@ const Article = ({ article, isfav, userRole }) => {
                                 </>
                             ) : (
                                 <>
-                                    <p className="text-[12px] md:text-[15px] text-[#F7941D] font-dmsansmedium mr-1 cursor-pointer hover:underline" onClick={addArticleToCollection}>Add to collection</p>
+                                    <p className="text-[12px] md:text-[15px] text-[#F7941D] font-dmsansmedium mr-1 cursor-pointer hover:underline" onClick={addArticleToFavorites}>Add to favorites</p>
                                     <FaRegBookmark className="text-[15px] md:text-[20px] text-[#F7941D] mt-1.5 md:mt-0.5 " />
                                 </>
                             )}
@@ -119,6 +146,17 @@ const Article = ({ article, isfav, userRole }) => {
                 )}
 
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }
