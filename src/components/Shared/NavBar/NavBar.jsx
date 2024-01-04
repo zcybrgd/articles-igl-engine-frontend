@@ -68,7 +68,7 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                         </>
                     ) : (
                         <>
-                            <div className='hidden lg:flex'>
+                            <div className='flex'>
                                 <p
                                     className="rounded-3xl bg-transparent md:text-[15px] text-center p-2  w-25 h-10 cursor-pointer"
                                     onClick={backToModPage}
