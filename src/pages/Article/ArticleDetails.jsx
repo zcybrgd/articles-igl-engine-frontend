@@ -41,29 +41,29 @@ function ArticleDetails() {
         console.log('new text:', newText)
     }
     const handleValidateArticle = async () => {
-        console.log("article validated") 
+        console.log("article validated")
         try {
-        const isSuccess = await validateArticle(article.id,token)
-    
-        if (isSuccess) {  
-        toast.success('Article validated successfully', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 2000, 
-        });
+            const isSuccess = await validateArticle(article.id, token)
 
-        setTimeout(() => {
-            navigate("/",{ state: {userRole} });
-        }, 2000); 
+            if (isSuccess) {
+                toast.success('Article validated successfully', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+
+                setTimeout(() => {
+                    navigate("/", { state: { userRole } });
+                }, 2000);
             } else {
                 toast.error('Failed to validate article', {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 2000, 
+                    autoClose: 2000,
                 });
             }
         } catch (error) {
             console.error('Error handling delete click', error);
         }
- // j'ajoute validated count     
+        // j'ajoute validated count     
     };
     const handleEditClick = () => {
         setIsEditing(true);
@@ -73,7 +73,7 @@ function ArticleDetails() {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
         try {
             console.log(token)
-            const isSuccess = await deleteArticle(article.id,token);
+            const isSuccess = await deleteArticle(article.id, token);
 
             if (isSuccess) {
                 toast.success('Article deleted successfully', {
@@ -111,7 +111,7 @@ function ArticleDetails() {
             abstract: editedAbstract,
             date: editedDate,
         };
-        const isSuccess = await updateArticle(article.id, editedData,token);
+        const isSuccess = await updateArticle(article.id, editedData, token);
         if (isSuccess) {
             console.log('Article updated successfully');
             toast.success('Article updated successfully', {
@@ -157,7 +157,7 @@ function ArticleDetails() {
     const handleDateChange = (event) => {
         setEditedDate(event.target.value);
     };
-    
+
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
@@ -199,7 +199,7 @@ function ArticleDetails() {
                 <div className="flex flex-col md:flex-row items-start justify-start bg-[#F1F1F1] rounded-2xl p-5 pb-10">
                     {/* abstract column */}
                     <div className="order-2 w-[100%] md:order-1 flex flex-col justify-start items-start pl-5 md:w-1/2 md:p-3 md:pt-[150px] space-y-3">
-                        <p className="text-black text-[22px] font-dmsansmedium underline">Résumé :</p>
+                        <p className="text-black text-[22px] font-dmsansmedium underline">Summary :</p>
                         {isEditing ? (
                             // Render input field when editing
                             <textarea
@@ -283,7 +283,7 @@ function ArticleDetails() {
                         {/* article's information part  */}
                         <div className="flex flex-col space-y-3 w-[100%]">
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline ">Titre:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline ">Title:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
@@ -351,19 +351,19 @@ function ArticleDetails() {
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                          <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
-                          {isEditing ? (
-                              <input
-                              type="text"
-                              className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
-                              style={{ width: '100%' }}
-                              value={editedDate}
-                              onChange={handleDateChange}
-                             />
-                          ) : (
-                               <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedDate}</p>
-                               )}
-                          </div>
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        style={{ width: '100%' }}
+                                        value={editedDate}
+                                        onChange={handleDateChange}
+                                    />
+                                ) : (
+                                    <p className="pl-2 text-[#9D9E9D] text-[20px] text-start">{editedDate}</p>
+                                )}
+                            </div>
 
                         </div>
                         <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
