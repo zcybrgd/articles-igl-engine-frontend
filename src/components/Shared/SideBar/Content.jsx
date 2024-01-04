@@ -22,8 +22,8 @@ function Content() {
     };
 
     return (
-        <div class="py-4 overflow-y-auto items-center">
-            <ul class="space-y-2 font-medium">
+        <div className="py-4 h-[90%] overflow-y-auto items-center">
+            <ul className="relative h-full space-y-2 font-medium">
                 {/* butto to come back to home page added in the sidebar for mobile/tabelette version, for large screens, the button is in the navbar */}
                 {mobileOpen && (
                     <li>
@@ -54,38 +54,9 @@ function Content() {
                         <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Settings</span>
                     </Link>
                 </li>
-                {/**  empty buttons to put space between buttons **/}
-                <li>
-                    <Link to="/settings" className="invisible flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
-                        {/* settings icon */}
-                        <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">empty</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/settings" className="invisible flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
-                        {/* settings icon */}
-                        <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">empty</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/settings" className="invisible flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
-                        {/* settings icon */}
-                        <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">empty</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/settings" className="invisible flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
-                        {/* settings icon */}
-                        <IoSettingsOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
-                        <span className="ms-3 whitespace-nowrap transition-colors group-hover:text-white">empty</span>
-                    </Link>
-                </li>
-                {/* ****************** */}
 
-                <li>
+                {/* logout button  */}
+                <li className="absolute bottom-3 w-full">
                     <div className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
                         {/* logOut icon */}
                         <VscSignOut className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
