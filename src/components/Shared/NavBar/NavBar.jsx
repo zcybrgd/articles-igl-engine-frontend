@@ -1,14 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { IoMenu } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import avatar from "../../../assets/image.jpg"
 
 const NavBar = ({ userRole, article, pageCallingArticle }) => {
     const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
+    const [mod, setMod] = useState(null);
+    const { userName } = useAuth()
+
+    useEffect(() => {
+        const fetchModeratorData = async () => {
+            if (userRole === 'moderator') {
+                try {
+                    const modData = await fetchModeratorByUsername(userName);
+                    setMod(modData);
+                } catch (error) {
+                    console.error("Error fetching moderator:", error);
+                }
+            }
+        };
+
+        fetchModeratorData();
+    }, [userRole, userName]);
 
     function backToHome() {
         try {
@@ -89,13 +107,13 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                                 <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                                 <div className='flex'>
                                     <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                        user name
+                                        {userName}
                                     </p>
                                 </div>
                                 <Link to="/profile">
                                     <img
                                         className="w-10 h-10 rounded-full mx-3 cursor-pointer"
-                                        src={avatar}
+                                        src={avatar}  //user.imgurl
                                     />
                                 </Link>
                             </>
@@ -103,7 +121,7 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                             <>
                                 <div className='flex flex-col'>
                                     <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
-                                        user name
+                                        {mod.firstName} {mod.familyName}
                                     </p>
                                     <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
                                         Moderator
@@ -112,7 +130,7 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                                 <div>
                                     <img
                                         className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                        src={avatar}
+                                        src={avatar}  //user.imgurl
                                     />
                                 </div>
                             </>

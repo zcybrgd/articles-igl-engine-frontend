@@ -6,6 +6,7 @@ import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteArticle, validateArticle, updateArticle } from "../../services/articlesApi";
+import { addFavorite } from "../../services/favoritesApi";
 import { useAuth } from "../../context/AuthContext";
 
 function ArticleDetails() {
@@ -176,10 +177,24 @@ function ArticleDetails() {
     function addArticleToCollection() {
         setBookMarkClicked(true)
         console.log("article added id:", article.id)
+
+        //added part 
+        // const responsedata = await addFavorite(token, article.id)
+        // if (!responsedata.error) {
+        //     toast.success(responsedata.message, {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2000,
+        //     });
+        // } else {
+        //     toast.error(responsedata.error, {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2000,
+        //     });
+        // }
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
 
         const url = article.urlPdf;
         window.open(url, '_blank', 'noopener noreferrer');

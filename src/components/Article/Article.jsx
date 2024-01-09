@@ -51,10 +51,9 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
-    async function deleteArticleFromCollection() 
-    {
-        const responsedata = await deleteFavorite(token,article.id)
-        if(!responsedata.error) {
+    async function deleteArticleFromCollection() {
+        const responsedata = await deleteFavorite(token, article.id)
+        if (!responsedata.error) {
             toast.success(responsedata.message, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2000,
@@ -67,9 +66,9 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
-    const addArticleToFavorites = async () =>{
-        const responsedata = await addFavorite(token,article.id)
-        if(!responsedata.error) {
+    const addArticleToFavorites = async () => {
+        const responsedata = await addFavorite(token, article.id)
+        if (!responsedata.error) {
             toast.success(responsedata.message, {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 2000,
@@ -84,7 +83,7 @@ const Article = ({ article, isfav, userRole, page }) => {
 
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
 
         const url = article.urlPdf;
         window.open(url, '_blank', 'noopener noreferrer');

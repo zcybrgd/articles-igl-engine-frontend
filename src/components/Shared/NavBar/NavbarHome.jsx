@@ -76,14 +76,14 @@ const NavbarHome = ({ userRole }) => {
                                 <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                                 <div className='flex'>
                                     <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-dmsansmedium text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                        user name
+                                        {userName}
                                     </b>
                                 </div>
                                 <div>
                                     <img
                                         className="w-10 h-10 rounded-full mx-3 cursor-pointer"
                                         onClick={toggleDropdown}
-                                        src={avatar}
+                                        src={avatar}   //user.imgurl
                                     />
                                 </div>
 
@@ -132,7 +132,7 @@ const NavbarHome = ({ userRole }) => {
                                     <img
                                         className="w-12 h-12 rounded-full mx-3 mt-1.5 cursor-pointer"
                                         onClick={toggleDropdown}
-                                        src={avatar}
+                                        src={avatar}  //user.imgurl
                                     />
                                 </div>
                                 {isOpen && (
@@ -164,7 +164,7 @@ const NavbarHome = ({ userRole }) => {
                                         <div>
                                             <img
                                                 className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                                src={avatar}
+                                                src={avatar}  //user.imgurl
                                             />
                                         </div>
                                     </>
