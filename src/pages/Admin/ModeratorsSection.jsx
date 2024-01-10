@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
-import { moderators } from "../../testing Data/ModeratorsList"
+// import { moderators } from "../../testing Data/ModeratorsList"
 import { useNavigate } from 'react-router-dom';
-import { fetchModerators } from "../../services/modApi";
-
+import { AdmdeleteModerator, fetchModerators } from "../../services/modApi";
+import { useAuth } from "../../context/AuthContext";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function ModeratorsSection() {
     const navigate = useNavigate();
+    const { token } = useAuth()
+    const [moderators, setModerators] = useState([]);
+    useEffect(() => {
+        const fetchModeratorsData = async () => {
+            try {
+                const mods = await fetchModerators(token);
+                setModerators(mods);
+            } catch (error) {
+                console.error("Error fetching moderators:", error);
+            }
+        };
 
-    // const [moderators, setModerators] = useState([]);
-    // useEffect(() => {
-    //     const fetchModeratorsData = async () => {
-    //         try {
-    //             const mods = await fetchModerators();
-    //             setModerators(mods);
-    //             console.log("moderators: ", mods)
-    //         } catch (error) {
-    //             console.error("Error fetching moderators:", error);
-    //         }
-    //     };
-
-    //     fetchModeratorsData();
-    // }, []);
+        fetchModeratorsData();
+    }, []);
 
     const renderModerators = () => {
         if (moderators && moderators.length <= 5) {
@@ -28,7 +29,7 @@ function ModeratorsSection() {
             return (
                 <div className="flex flex-col items-center justify-center space-y-5 mb-5">
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.userId)} />
+                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} modifierModerator={() => modifierModerator(moderator.id)} />
                     ))}
                 </div>
             );
@@ -41,18 +42,49 @@ function ModeratorsSection() {
                         overflowY: 'scroll',
                     }}>
                     {moderators && moderators.map((moderator, index) => (
-                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.userId)} />
+                        <Moderator key={index} moderator={moderator} deleteModerator={() => deleteModerator(moderator.id)} modifierModerator={() => modifierModerator(moderator.id)} />
                     ))}
                 </div>
             );
         }
     };
 
-    function deleteModerator(id) {
-        console.log("moderator ", id, " deleted")
-
-        //delete de moderator that userId = id 
-    }
+    const deleteModerator = async (modid) => {
+        console.log("mod id: ", modid);
+        
+        try {
+            const responsedata = await AdmdeleteModerator(token, modid);
+            
+            if (Array.isArray(responsedata) && responsedata.length > 0) {
+                const successMessage = responsedata[0];
+                console.log(successMessage); // "Mod deleted successfully!!"
+                toast.success(successMessage, {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+            } else {
+                console.log("Unexpected response format");
+                toast.error('An unexpected error occurred', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+            toast.error('An unexpected error occurred', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        }
+    };
+   
+    const modifierModerator = async (modid) => {
+        try {
+            navigate(`/modifyModerator/${modid}`,  { state: { modid } });
+        } catch (error) {
+            console.error("Error loading Add new moderator page:", error);
+        }
+     }
 
     function addModerator() {
         try {
@@ -120,6 +152,17 @@ function ModeratorsSection() {
             </div>
             {/* list of moderators part  */}
             {renderModerators()}
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }

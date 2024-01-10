@@ -6,7 +6,9 @@ import { MdFirstPage, MdLastPage } from "react-icons/md";
 import { BiEditAlt } from "react-icons/bi";
 import { FaRegSave } from "react-icons/fa";
 import AffichageAnimation from "../../assets/gifs/AffichageAnimation.gif"
-
+import { updateArticle } from "../../services/articlesApi";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function calculateMaxLength() {
     const smallScreenMaxLength = 350;
     const mediumScreenMaxLength = 450;
@@ -21,7 +23,7 @@ function calculateMaxLength() {
     }
 }
 
-function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
+function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleId }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(articleContent);
 
@@ -33,11 +35,22 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
         setEditedText(event.target.value);
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
         console.log("text saved")
-
-        //send the text to parent component
         getText(editedText)
+        const editedData = {
+           text: editedText
+        };
+        const isSuccess = await updateArticle(articleId, editedData);
+        if (isSuccess) {
+            console.log('Text of Article updated successfully');
+            toast.success('Text of Article updated successfully', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            console.error('Failed to update article');
+        }
         setIsEditing(false);
     };
 
@@ -156,6 +169,17 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText }) {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div >
     );
 }

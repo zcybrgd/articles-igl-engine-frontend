@@ -4,19 +4,25 @@ import { HashLoader } from "react-spinners"
 const AuthContext = createContext({
     userRole: null,
     userName: null,
+    token: null,
+    id: null,
     login: async () => { },
     logout: () => { },
 });
 
 const AuthProvider = ({ children }) => {
+    const [isLoading, setIsLoading] = useState(false);
     const [userRole, setUserRole] = useState("");
     const [userName, setUserName] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [token, setToken] = useState("");
+    const [id, setId] = useState(0)
 
     const login = async (userData) => {
         setIsLoading(true)
         setUserRole(userData.userRole);
         setUserName(userData.userName);
+        setToken(userData.token);
+        setId(userData.id)
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setIsLoading(false)
     };
@@ -24,7 +30,6 @@ const AuthProvider = ({ children }) => {
     const logout = () => {
         setUserRole(null);
     };
-
 
     if (isLoading) {
         return (
@@ -34,7 +39,7 @@ const AuthProvider = ({ children }) => {
         );
     }
     return (
-        <AuthContext.Provider value={{ userRole, userName, login, logout }}>
+        <AuthContext.Provider value={{ userRole, userName, token, id, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

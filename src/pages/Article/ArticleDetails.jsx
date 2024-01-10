@@ -5,10 +5,12 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { deleteArticle } from "../../services/articlesApi";
+import { deleteArticle, validateArticle, updateArticle } from "../../services/articlesApi";
+import { addFavorite } from "../../services/favoritesApi";
+import { useAuth } from "../../context/AuthContext";
 
 function ArticleDetails() {
-
+    const { token } = useAuth()
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
@@ -31,30 +33,40 @@ function ArticleDetails() {
     const [editedKeywords, setEditedKeywords] = useState(article.keywords);
     const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(', '));
     const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
+    const [editedRefrences, setEditedRef] = useState(article.bibliographie.join(',  '));
     const [editedTitle, setEditedTitle] = useState(article.title);
     const [editedAbstract, setEditedAbstract] = useState(article.abstract);
-
-    //Data to save in Elasticsearch
-    const [newInstitutions, setnewInstitutions] = useState([]);
-    const [newAuthors, setnewAuthors] = useState([]);
-    const [newKeywords, setnewKeywords] = useState('');
-    const [newTitle, setnewTitle] = useState('');
-    const [newAbstract, setnewAbstract] = useState('');
+    const [editedDate, setEditedDate] = useState(article.date);
     const [newText, setnewText] = useState('');
+    const getText = (text) => {
+        setnewText(text)
+        console.log('new text:', newText)
+    }
+    const handleValidateArticle = async () => {
+        console.log("article validated")
+        try {
+            const isSuccess = await validateArticle(article.id, token)
 
-    const handleValidateArticle = () => {
-        console.log("article validated")  //nbdlo etat tae l'article beli "approved" besh n'affichiwh f admin page
+            if (isSuccess) {
+                toast.success('Article validated successfully', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
 
-        // create json fih les attribus tae article hado:
-        //newtitle
-        //newAbstract
-        //newAuthors
-        //newInstitutions
-        // newKeywords
-
-        // Go l elasticsearch 
+                setTimeout(() => {
+                    navigate("/", { state: { userRole } });
+                }, 2000);
+            } else {
+                toast.error('Failed to validate article', {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                });
+            }
+        } catch (error) {
+            console.error('Error handling delete click', error);
+        }
+        // j'ajoute validated count     
     };
-
     const handleEditClick = () => {
         setIsEditing(true);
     };
@@ -62,7 +74,8 @@ function ArticleDetails() {
     const handleDeleteClick = async () => {
         console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
         try {
-            const isSuccess = await deleteArticle(article.id);
+            console.log(token)
+            const isSuccess = await deleteArticle(article.id, token);
 
             if (isSuccess) {
                 toast.success('Article deleted successfully', {
@@ -82,28 +95,41 @@ function ArticleDetails() {
         // j'ajoute deleted count        
     };
 
-    const handleSaveClick = () => {
+    const handleSaveClick = async () => {
         console.log("data saved")
 
         // saving authors as an array again
         const newAuthorsArray = editedAuthors.split(',').map((author) => author.trim());
         console.log('new authors: ', newAuthorsArray);
-        setnewAuthors(newAuthorsArray)
 
         // saving institutions as an array again
         const newInstitutionsArray = editedInstitutions.split(',').map((institution) => institution.trim());
         console.log('new institutions: ', newInstitutionsArray);
-        setnewInstitutions(newInstitutionsArray)
 
-        // saving keywords as a string
-        setnewKeywords(editedKeywords)
+        // saving references as an array again
+        const newRefrencesArray = editedRefrences.split(',').map((reference) => reference.trim());
+        console.log('new refrences: ', newRefrencesArray);
 
-        // saving title as a string
-        setnewTitle(editedTitle)
+        const editedData = {
+            authors: newAuthorsArray,
+            institutions: newInstitutionsArray,
+            keywords: editedKeywords,
+            title: editedTitle,
+            abstract: editedAbstract,
+            bibliographie: newRefrencesArray,
+            date: editedDate,
+        };
 
-        // saving abstract as a string
-        setnewAbstract(editedAbstract)
-
+        const isSuccess = await updateArticle(article.id, editedData, token);
+        if (isSuccess) {
+            console.log('Article updated successfully');
+            toast.success('Article updated successfully', {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            console.error('Failed to update article');
+        }
         setIsEditing(false);
     };
 
@@ -113,9 +139,11 @@ function ArticleDetails() {
         // Cancel the editing, revert the changes
         setIsEditing(false);
         setEditedKeywords(article.keywords);
-        setEditedInstitutions(article.institutions);
-        setEditedAuthors(article.authors);
+        setEditedInstitutions(article.institutions.join(', '));
+        setEditedAuthors(article.authors.join(', '));
+        setEditedRef(article.bibliographie.join(', '));
         setEditedTitle(article.title);
+        setEditedDate(article.date)
     };
 
     const handleKeywordsChange = (event) => {
@@ -130,6 +158,10 @@ function ArticleDetails() {
         setEditedAuthors(event.target.value);
     };
 
+    const handleRefChange = (event) => {
+        setEditedRef(event.target.value);
+    };
+
     const handleTitleChange = (event) => {
         setEditedTitle(event.target.value);
     };
@@ -137,19 +169,32 @@ function ArticleDetails() {
     const handleAbstractChange = (event) => {
         setEditedAbstract(event.target.value);
     };
+    const handleDateChange = (event) => {
+        setEditedDate(event.target.value);
+    };
 
-    const getText = (text) => {
-        setnewText(text)
-        console.log('new text:', newText)
-    }
 
     function addArticleToCollection() {
         setBookMarkClicked(true)
         console.log("article added id:", article.id)
+
+        //added part 
+        // const responsedata = await addFavorite(token, article.id)
+        // if (!responsedata.error) {
+        //     toast.success(responsedata.message, {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2000,
+        //     });
+        // } else {
+        //     toast.error(responsedata.error, {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2000,
+        //     });
+        // }
     }
 
     function openArticlesPdf() {
-        console.log("article opened pdf id:", article.articleId)
+        console.log("article opened pdf id:", article.id)
 
         const url = article.urlPdf;
         window.open(url, '_blank', 'noopener noreferrer');
@@ -186,7 +231,7 @@ function ArticleDetails() {
                 <div className="flex flex-col md:flex-row items-start justify-start bg-[#F1F1F1] rounded-2xl p-5 pb-10">
                     {/* abstract column */}
                     <div className="order-2 w-[100%] md:order-1 flex flex-col justify-start items-start pl-5 md:w-1/2 md:p-3 md:pt-[150px] space-y-3">
-                        <p className="text-black text-[22px] font-dmsansmedium underline">Résumé :</p>
+                        <p className="text-black text-[22px] font-dmsansmedium underline">Summary :</p>
                         {isEditing ? (
                             // Render input field when editing
                             <textarea
@@ -198,7 +243,7 @@ function ArticleDetails() {
                             />
                         ) : (
                             // Render paragraph when not editing
-                            <p className="px-2 text-black text-[20px] text-start">{editedAbstract}</p>
+                            <p className="px-2 text-black font-dmsans text-[20px] text-start">{editedAbstract}</p>
                         )}
                     </div>
 
@@ -260,16 +305,16 @@ function ArticleDetails() {
                                     articleContent={article.text}
                                     userRole={userRole}
                                     getText={getText}
+                                    articleId={article.id}
                                 />
                             )}
                             <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
-
                         </div>
 
                         {/* article's information part  */}
-                        <div className="flex flex-col space-y-3 w-[100%]">
+                        <div className="flex flex-col space-y-5 w-[100%]">
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
-                                <p className="text-black text-[22px] font-dmsansmedium underline ">Titre:</p>
+                                <p className="text-black text-[22px] font-dmsansmedium underline ">Title:</p>
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
@@ -282,6 +327,20 @@ function ArticleDetails() {
                                 ) : (
                                     // Render paragraph when not editing
                                     <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedTitle}</p>
+                                )}
+                            </div>
+                            <div className="flex flex-col items-start justify-start text-start space-y-1">
+                                <p className="text-black text-[22px] font-dmsansmedium underline">Date:</p>
+                                {isEditing ? (
+                                    <input
+                                        type="text"
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        style={{ width: '100%' }}
+                                        value={editedDate}
+                                        onChange={handleDateChange}
+                                    />
+                                ) : (
+                                    <p className="pl-2 text-[#9D9E9D] font-opensansbold text-[18px] text-start">{editedDate}</p>
                                 )}
                             </div>
                             <div className="flex flex-col items-start justify-start text-start space-y-1">
@@ -305,14 +364,14 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={5}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedInstitutions}
                                         onChange={handleInstitutionsChange}
                                     />
+
                                 ) : (
-                                    // Render paragraph when not editing  
+                                    // Render paragraph when not editing
                                     <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
                                         {editedInstitutions}
                                     </div>
@@ -323,7 +382,6 @@ function ArticleDetails() {
                                 {isEditing ? (
                                     // Render input field when editing
                                     <textarea
-                                        rows={5}
                                         className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                         style={{ width: '100%' }}
                                         value={editedKeywords}
@@ -331,11 +389,28 @@ function ArticleDetails() {
                                     />
 
                                 ) : (
-                                    // Render paragraph when not editing  
+                                    // Render paragraph when not editing
                                     <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
                                         {editedKeywords}
                                     </div>
                                 )}
+                            </div>
+                            <div className="flex flex-col items-start justify-start text-start space-y-1">
+                                <p className="text-black text-[22px] font-dmsansmedium underline">References: </p>
+                                {isEditing ? (
+                                    // Render input field when editing
+                                    <textarea
+                                        // rows={Math.max(1, editedKeywords.length)}
+                                        className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
+                                        style={{ width: '100%' }}
+                                        value={editedRefrences}
+                                        onChange={handleRefChange}
+                                    />
+                                ) : (
+                                    // Render paragraph when not editing
+                                    <div className="px-2 bg-[#D9D9D9] rounded-l-xl font-opensansbold text-[#9D9E9D] text-[18px] text-star max-h-20 overflow-y-scroll special-scrollbar whitespace-pre-line">
+                                        {editedRefrences}
+                                    </div>)}
                             </div>
                         </div>
                         <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>

@@ -1,25 +1,25 @@
-import React, { useState } from "react"
+import React from "react"
 import Collection from "../../components/Article/Collection"
 import { useNavigate } from 'react-router-dom';
 import { collections } from "../../testing Data/collectionsData"
-import Paper from "../../assets/paper.svg"
-
+import Paper from "../../assets/paper.svg";
 
 function CollectionsPage() {
     const navigate = useNavigate();
 
-    function openCollection(collection) {
+
+    async function openCollection(collection) {
         try {
-            navigate(`/collection/${collection.collectionId}`,
-                { state: collection },  //pass the collection to the articlesPage
-            );
+            navigate(`/collection/${collection.collectionId}`, {
+                state: { collection: collection },  // Pass the collection and articles as an object
+            });
         } catch (error) {
             console.error("Error loading FavoriArticlesListPage:", error);
         }
     }
 
     return (
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start pl-5 md:pl-0">
             <div className="flex flex-col mb-8 justify-start items-start">
                 <div className="flex flex-row ">
                     <p className="text-black font-dmsansmedium text-[35px] font-semibold">
@@ -33,7 +33,7 @@ function CollectionsPage() {
             <div className="flex flex-wrap m-0">
                 {collections.map((collection, index) => (
                     <div key={index} className="p-1 lg:p-4 cursor-pointer" onClick={() => openCollection(collection)}>
-                        <Collection collectionName={collection.collectionName} nbArticles={collection.nbArticles} />
+                        <Collection collectionName={collection.collectionName} />
                     </div>
                 ))}
             </div>

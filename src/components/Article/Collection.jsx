@@ -2,8 +2,7 @@ import React from "react"
 import { MdFolderOpen } from "react-icons/md";
 
 const Collection = ({
-    collectionName,
-    nbArticles
+    collectionName
 }) => {
 
     return (

@@ -22,9 +22,10 @@ const LayoutHome = ({ userRole }) => {
                     </div>
                 </>
             ) : (
+                //admin and moderator part 
                 <>
                     <NavbarHome userRole={userRole} />
-                    <div className="pt-16 md:p-16">
+                    <div className="pt-16 md:p-8">
                         <Outlet />
                     </div>
                 </>

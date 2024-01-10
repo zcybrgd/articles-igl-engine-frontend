@@ -1,10 +1,11 @@
 import React from "react";
 import UploadSection from "./UploadSection";
-import StatsSection from "./StatsSection";
 import ModeratorsSection from "./ModeratorsSection";
 import Footer from '../../components/Shared/Footer/Footer';
+import StatsSection from "./StatsSection";
 
 function AdminPage() {
+
     return (
         <>
             <div className="flex flex-col space-y-20 mt-10">

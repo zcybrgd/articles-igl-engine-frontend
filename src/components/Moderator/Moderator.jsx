@@ -4,21 +4,13 @@ import { FaCheck } from "react-icons/fa6";
 import ArticleForMod from "../../assets/ArticleForMod.svg"
 import { moderators } from "../../testing Data/ModeratorsList";
 
-function Moderator({ moderator, deleteModerator }) {
+function Moderator({ moderator, deleteModerator, modifierModerator }) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const profilePictureUrl = moderator.profile_picture || '/media/profile_pics/default_profile_pic.jpg';
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };
-
-    // const handleModify = (moderatorId) => {
-    //     console.log(`Modify moderator with ID ${moderatorId}`);
-    // };
-
-    // const handleDelete = (moderatorId) => {
-    //     console.log(`Delete moderator with ID ${moderatorId}`);
-    // };
 
     const [isChecked, setIsChecked] = useState(false);
 
@@ -43,7 +35,7 @@ function Moderator({ moderator, deleteModerator }) {
 
             {/* total edits part  */}
             <div className="flex w-1/5 items-center justify-center">
-                <p className="text-black text-[13px] font-dmsansbold md:text-[16px] ">{moderator.numberedits} edit</p>
+                <p className="text-black text-[13px] font-dmsansbold md:text-[16px] ">{moderator.edit_count} edit</p>
             </div>
 
             {/* user name part */}
@@ -54,6 +46,11 @@ function Moderator({ moderator, deleteModerator }) {
             {/* "retirer" button part  */}
             <div className="flex w-1/5">
                 <p className="text-[#F72A1D] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={deleteModerator}>- Retirer</p>
+            </div>
+            
+            {/* "modifier" button part  */}
+            <div className="flex w-1/5">
+                <p className="text-[#797D8C] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={modifierModerator}>Modify</p>
             </div>
 
             {/* select button part  */}

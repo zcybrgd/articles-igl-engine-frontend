@@ -1,23 +1,122 @@
-import React from "react"
+import React, { useState ,useEffect } from "react"
 import BarChart from '../../components/Admin cards/BarChart';
 import PieChart from "../../components/Admin cards/PieChart";
-import StatCard from "../../components/Article/statCard";
-import { moderators } from "../../testing Data/ModeratorsList";
+import StatCard from "../../components/Admin cards/StatCard";
+import { useAuth } from "../../context/AuthContext";
+import { deletedArticles, totalArticles, unreviewedArticles, addedMods, modifiedArticles, validatedArticles, deletedMods, totalMods } from "../../services/statsApi";
+
 
 
 function StatsSection() {
+    const { token } = useAuth();
+    const [NumberTotalArticles,setNumberTotalArticles] = useState(0)
+    const [NumberWaitingArticles,setNumberWaitingArticles] = useState(0)
+    const [NumberDeletedArticles,setNumberDeletedArticles] = useState(0)
+    const [NumberModifiedArticles,setNumberModifiedArticles] = useState(0)
+    const [NumberValidatedArticles,setNumberValidatedArticles] = useState(0)
+    const [NumberTotalMods,setNumberTotalMods] = useState(0)
+    const [NumberAddedMods,setNumberAddedMods] = useState(0)
+    const [NumberDeletedMods,setNumberDeletedMods] = useState(0)
+
+    useEffect( ()=>{
+        const total = async () =>
+        {
+            const response = await totalArticles()
+            if(response.total) {
+                setNumberTotalArticles(response.total);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const unreviewedTotal = async () =>
+        {
+            const response = await unreviewedArticles()
+            if(response.total) {
+                setNumberWaitingArticles(response.total);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const deletedArticle = async () =>
+        {
+            const response = await deletedArticles(token)
+            if(response.deleted_articles) {
+                setNumberDeletedArticles(response.deleted_articles);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const modifiedArticle = async () =>
+        {
+            const response = await modifiedArticles(token)
+            if(response.modified_articles) {
+                setNumberModifiedArticles(response.modified_articles);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const validatedArticle = async () =>
+        {
+            const response = await validatedArticles(token)
+            if(response.validated_articles) {
+                setNumberValidatedArticles(response.validated_articles);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const NumberTotalMods = async () =>
+        {
+            const response = await totalMods(token)
+            if(response.total_mods) {
+                setNumberTotalMods(response.total_mods);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const NumberAddedMods = async () =>
+        {
+            const response = await addedMods(token)
+            if(response.added_mods) {
+                setNumberAddedMods(response.added_mods);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        const NumberDeletedMods = async () =>
+        {
+            const response = await deletedMods(token)
+            if(response.deleted_mods) {
+                setNumberDeletedMods(response.deleted_mods);
+            } else {
+            console.log(response)
+            console.log('An error occurred :(');
+            } 
+        };
+        total();
+        unreviewedTotal();
+        deletedArticle();
+        modifiedArticle();
+        validatedArticle();
+        NumberTotalMods();
+        NumberAddedMods();
+        NumberDeletedMods();
+    },[]);
 
     // testing data 
-    const BarchartData = [12, 19, 50, 5, 20];
-    const PiechartData = [12, 19];
-    const NumberTotalArticles = 50;
-    const NumberWaitingArticles = 290;
-    const NumberDeletedArticles = 10;
+    const BarchartData = [NumberValidatedArticles, NumberWaitingArticles, NumberDeletedArticles,  NumberModifiedArticles];
+    const PiechartData = [NumberAddedMods, NumberDeletedMods];
 
     //************** */
 
     // Labels: 
-    const BarchartLabels = ['Validated', 'Waiting for validation', 'Deleted', 'Added', 'Modified'];
+    const BarchartLabels = ['Validated', 'Unreviewed', 'Deleted', 'Modified'];
     const PiechartLabels = ['Added', 'Deleted'];
 
     return (
@@ -33,7 +132,7 @@ function StatsSection() {
                 {/* Cards part  */}
                 <div className="flex flex-col md:flex-row w-full justify-center p-5 px-8 items-center space-y-10 md:space-y-0 md:space-x-10">
                     <StatCard title='Total articles' value={NumberTotalArticles} />
-                    <StatCard title='Waiting for validation' value={NumberWaitingArticles} />
+                    <StatCard title='Unreviewed' value={NumberWaitingArticles} />
                     <StatCard title='Deleted' value={NumberDeletedArticles} />
                 </div>
                 <div className="flex flex-col md:flex-row w-full">
@@ -49,7 +148,7 @@ function StatsSection() {
                         <PieChart data={PiechartData} labels={PiechartLabels} />
                         <div className="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
                             <p className="text-black font-dmsansbold" style={{ lineHeight: '0.9' }}>
-                                <span className="text-[50px] m-0 p-0 block">{moderators.length}</span>
+                                <span className="text-[50px] m-0 p-0 block">{NumberTotalMods}</span>
                                 <span className="text-[20px] m-0 p=0 block">Moderators</span>
                             </p>
                         </div>

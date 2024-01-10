@@ -9,8 +9,8 @@ const NavBarWelcome = () => {
 
     return (
         <nav className={`bg-[#FFFFFF] border-b-2 border-[#F1F1F1] fixed w-full z-20 top-0 start-0 `}>
-            <div className="max-w-screen-xl flex flex-row items-center justify-between mx-auto p-4">
-                <div className="flex mr-auto items-start justify-between md:w-auto order-1" id="navbar-sticky">
+            <div className="max-w-screen-xl flex flex-row relative h-20 items-center justify-between mx-auto p-4">
+                <div className="absolute left-3 items-start justify-between md:w-auto order-1" id="navbar-sticky">
                     <div >
                         <button
                             className='lg:hidden bg-transparent'
@@ -34,19 +34,21 @@ const NavBarWelcome = () => {
                 </div>
 
                 {/* profile part  */}
-                <div className="flex ml-auto order-2 md:space-x-0 rtl:space-x-reverse">
-                    <RouterLink to="/signup" className="p-2 mr-6">
-                        {/* signup button  */}
-                        <p className="text-[15px] font-dmsans text-black mt-1 mr-1 cursor-pointer hover:underline">Sign Up</p>
-                    </RouterLink>
-                    <RouterLink to="/login" className="p-0 mr-6">
-                        {/* login button  */}
-                        <button
-                            className="rounded-3xl bg-transparent text-black font-dmsans text-[15px] text-center pt-0.5 pb-0.5 border-2 border-black px-5 h-10"
-                        >
-                            Login
-                        </button>
-                    </RouterLink>
+                <div className='absolute right-0 md:right-4'>
+                    <div className="flex order-2 md:space-x-0 rtl:space-x-reverse">
+                        <RouterLink to="/signup" className="p-2 mr-6">
+                            {/* signup button  */}
+                            <p className="text-[15px] font-dmsans text-black mt-1 mr-1 cursor-pointer hover:underline">Sign Up</p>
+                        </RouterLink>
+                        <RouterLink to="/login" className="mr-3">
+                            {/* login button  */}
+                            <button
+                                className="rounded-3xl bg-transparent text-black font-dmsans text-[15px] text-center pt-0.5 pb-0.5 border-2 border-black px-5 h-10"
+                            >
+                                Login
+                            </button>
+                        </RouterLink>
+                    </div>
                 </div>
             </div>
         </nav>

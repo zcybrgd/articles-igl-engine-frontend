@@ -29,7 +29,6 @@ const Settings = () => {
     };
 
     return (
-        // <div className="flex flex-col items-start">
         <div className="flex flex-col w-full justify-start items-start">
             <div className='flex flex-row justify-start px-4 items-center text-start mb-5'>
                 <p className='text-black text-[45px] font-dmsansmedium'>Setting</p>
@@ -125,7 +124,6 @@ const Settings = () => {
                 )}
             </div>
         </div>
-        // </div>
     );
 };
 

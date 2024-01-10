@@ -56,7 +56,7 @@ function Router() {
                         <Route path="/" element={<LayoutHome userRole={"moderator"} />}>
                             <Route path="/" element={<ModeratorPage />} />
                         </Route>
-                        <Route path="/" element={<LayoutArticle userRole={"moderator"} />}>
+                        <Route path="/" element={<LayoutArticle userRole={"moderator"} page={'home'} />}>
                             <Route path="/article/:articleId" element={<ArticleDetails />} />
                         </Route>
                     </>
@@ -67,6 +67,7 @@ function Router() {
                             <Route path="/" element={<AdminPage />} />
                         </Route>
                         <Route path="/newModerator" element={<AddNewModeratorPage />} />
+                        <Route path="/modifyModerator/:modId" element={<AddNewModeratorPage />} />
                     </>
                 )
             ) : (

@@ -43,6 +43,8 @@ const LoginPage = () => {
                     userName: username,
                     password: password,
                     userRole: userRole,
+                    token : response.data.token,
+                    id: response.data.user.id
                 };
 
 
