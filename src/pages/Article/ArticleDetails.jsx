@@ -174,23 +174,22 @@ function ArticleDetails() {
     };
 
 
-    function addArticleToCollection() {
+    const addArticleToCollection = async () => {
         setBookMarkClicked(true)
         console.log("article added id:", article.id)
 
-        //added part 
-        // const responsedata = await addFavorite(token, article.id)
-        // if (!responsedata.error) {
-        //     toast.success(responsedata.message, {
-        //         position: toast.POSITION.TOP_CENTER,
-        //         autoClose: 2000,
-        //     });
-        // } else {
-        //     toast.error(responsedata.error, {
-        //         position: toast.POSITION.TOP_CENTER,
-        //         autoClose: 2000,
-        //     });
-        // }
+        const responsedata = await addFavorite(token, article.id)
+        if (!responsedata.error) {
+            toast.success(responsedata.message, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        } else {
+            toast.error(responsedata.error, {
+                position: toast.POSITION.TOP_CENTER,
+                autoClose: 2000,
+            });
+        }
     }
 
     function openArticlesPdf() {
