@@ -8,7 +8,7 @@ const ContactUs = () => {
                 </div>
             </div>
             <div className="w-full px-8 bg-white rounded-lg flex flex-col items-center">
-                <div class="border-b-2 border-[#707F65] w-1/2 mb-10"></div>
+                <div className="border-b-2 border-[#707F65] w-1/2 mb-10"></div>
 
                 <h2 className="text-4xl md:text-5xl font-dmsansmedium mb-6 text-[#707F65]">Contact Us</h2>
 

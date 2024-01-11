@@ -8,14 +8,17 @@ import { useAuth } from "../../context/AuthContext";
 import { addFavorite, deleteFavorite } from "../../services/favoritesApi";
 import { toast, ToastContainer } from 'react-toastify';
 
-
 const Article = ({ article, isfav, userRole, page }) => {
     const navigate = useNavigate();
     const { token } = useAuth()
+
     function openArticle() {
         try {
             if (userRole === 'client') {
+                console.log("cliennnnnnnt")
+                console.log(page)
                 if (page === 'home') {
+
                     navigate(`/searchedArticle/${article.id}`,
                         {
                             state: {
@@ -81,7 +84,6 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
-
     function openArticlesPdf() {
         console.log("article opened pdf id:", article.id)
 
@@ -111,9 +113,7 @@ const Article = ({ article, isfav, userRole, page }) => {
                     <p className="text-black text-[15px] mb-2">
                         <span className="font-dmsansmedium">Authors: </span>
                         {article.authors && article.authors.map((author, index) => (
-                            <>
-                                <span className="font-dmsans mr-1">{author},</span>
-                            </>
+                            <span key={index} className="font-dmsans mr-1">{author},</span>
                         ))}
                     </p>
                 </div>

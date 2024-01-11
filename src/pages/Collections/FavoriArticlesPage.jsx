@@ -4,6 +4,7 @@ import Paper from "../../assets/paper.svg"
 import Article from "../../components/Article/Article";
 import { useAuth } from "../../context/AuthContext";
 import { displayFavorites } from "../../services/favoritesApi";
+// import { articles } from "../../testing Data/ArticlesData";
 
 
 function FavoriArticlesListPage() {
@@ -40,11 +41,12 @@ function FavoriArticlesListPage() {
                 </div>
                 <p className="text-[#707F65] font-dmsansbold text-[15px]">{articles.length} articles</p>
             </div>
-            {/* boucle ta3 les articles */}
+
+            {/* affichage des articles  */}
             <div className="flex flex-col w-[100%]">
-                {articles && articles.map((article, index) => (
-                    <div key={index} className="flex mb-5">
-                        <Article article={article} isfav={true} userRole={"client"} />
+                {articles && articles.map((article) => (
+                    <div key={article.id} className="flex mb-5">
+                        <Article article={article} isfav={true} userRole={"client"} page={'saved'} />
                     </div>
                 ))}
 

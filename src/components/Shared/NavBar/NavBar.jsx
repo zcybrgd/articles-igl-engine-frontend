@@ -119,20 +119,26 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                             </>
                         ) : userRole === "moderator" && (
                             <>
-                                <div className='flex flex-col'>
-                                    <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
-                                        {mod.firstName} {mod.familyName}
-                                    </p>
-                                    <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
-                                        Moderator
-                                    </p>
-                                </div>
-                                <div>
-                                    <img
-                                        className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                        src={avatar}  //user.imgurl
-                                    />
-                                </div>
+                                {mod && (
+                                    <>
+
+                                        <div className='flex flex-col'>
+                                            <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
+                                                {mod.firstName} {mod.familyName}
+                                            </p>
+                                            <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
+                                                Moderator
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img
+                                                className="w-12 h-12 rounded-full mx-3 mt-1.5"
+                                                src={avatar}  //user.imgurl
+                                            />
+                                        </div>
+
+                                    </>
+                                )}
                             </>
                         )}
                     </div>

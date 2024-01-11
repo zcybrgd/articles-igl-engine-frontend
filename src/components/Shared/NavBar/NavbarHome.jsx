@@ -96,7 +96,7 @@ const NavbarHome = ({ userRole }) => {
                                                     <FaUser className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
                                                     <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">User Info</span>
                                                 </Link>
-                                                <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
+                                                <div className="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
                                             </li>
                                             <li>
                                                 <Link to="/collections" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
@@ -104,7 +104,7 @@ const NavbarHome = ({ userRole }) => {
                                                     <IoBookmarkOutline className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
                                                     <span className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Saved</span>
                                                 </Link>
-                                                <div class="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
+                                                <div className="border-b-2 text-[#707F65] w-3/4 ml-5"></div>
                                             </li>
                                             <li>
                                                 <Link to="/settings" className="flex items-center p-2 pl-8 text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white">
