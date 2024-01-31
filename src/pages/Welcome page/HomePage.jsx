@@ -31,7 +31,7 @@ function HomePage() {
             console.log("you searched for: ", searchQuery);
             const searchResults = await fetchSearchResults(searchQuery);
             setResultsData(searchResults);
-
+            console.log(results)
             setIsLoading(false);
             if (results) {
                 goToResultsPage();
@@ -82,12 +82,28 @@ function HomePage() {
                             placeholder="Search"
                         />
                     </div>
-                    <div className="flex ml-auto">
+                    <div id="search-button" className="flex ml-auto">
                         <FaRegArrowAltCircleRight className="text-black text-[20px] cursor-pointer" onClick={handleSearch} />
                     </div>
                 </div>
             </div>
 
+            {/* for testing  */}
+            {results && (
+                <>
+                    <div id="search-results-indicator" style={{ display: results.length > 0 ? 'block' : 'none' }}>
+                        {/* Content to indicate search results are present */}
+                    </div>
+
+                    <ul>
+                        {results.map((result, index) => (
+                            <li key={index} className="search-result">
+                                {result.title} {/* Adjust this based on your actual data structure */}
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </div>
     )
 }

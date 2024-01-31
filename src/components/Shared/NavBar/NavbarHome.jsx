@@ -5,6 +5,7 @@ import { FaUser } from "react-icons/fa6";
 import { VscSignOut } from "react-icons/vsc";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import avatar from "../../../assets/image.jpg"
+import logo from "../../../assets/Logo/logo.png"
 import { useAuth } from '../../../context/AuthContext';
 import { fetchModeratorByUsername } from '../../../services/modApi';
 
@@ -53,15 +54,26 @@ const NavbarHome = ({ userRole }) => {
                         </>
                     ) : userRole === "admin" ? (
                         <>
-                            <div className="p-0 mr-6">
-                                <p className='text-black font-dmsansbold text-lg'>Articles Web Engine</p>
+                            <div className="flex flex-row items-center p-0 mr-6">
+                                <img
+                                    className="w-20 h-20 "
+                                    alt='logo'
+                                    src={logo}
+                                />
+                                <p className='text-black font-dmsansbold text-xl'>Savantia</p>
                             </div>
                         </>
                     ) : (
+                        // moderator 
                         <>
-                            <div className='flex ml-3'>
+                            <div className='flex flex-row ml-3 items-center'>
+                                <img
+                                    className="w-16 h-16 "
+                                    alt='logo'
+                                    src={logo}
+                                />
                                 <b className=" xl:px-[40px] mr-3 font-dmsansbold text-black text-[20px] lg:text-[25px] xl:text-[32px]">
-                                    Articles Web Engine
+                                    Savantia
                                 </b>
                             </div>
                         </>
