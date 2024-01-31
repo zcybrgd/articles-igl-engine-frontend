@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Article from "../../components/Article/Article";
 import Paper from "../../assets/paper.svg"
-import avatar from "../../assets/image.jpg"
+import logo from "../../assets/Logo/logo.png"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { fetchArticles } from "../../services/articlesApi";
@@ -59,8 +59,9 @@ function ModeratorPage() {
                 {/* logo part  */}
                 <div className="hidden md:flex w-1/4 p-5 justify-end">
                     <img
-                        className="w-25 h-25 "
-                        src={avatar}
+                        className="w-60 h-60 "
+                        alt='logo'
+                        src={logo}
                     />
                 </div>
             </div>
