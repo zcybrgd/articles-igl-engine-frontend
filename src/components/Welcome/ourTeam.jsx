@@ -4,8 +4,6 @@ import Slider from 'react-slick';
 import arrowPrev from '../.././assets/icons/arrowPrev.svg';
 import arrowNext from '../.././assets/icons/arrowNext.svg';
 import Karou from '../.././assets/icons/Karou.png';
-import line from "../../assets/line.svg"
-
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

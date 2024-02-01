@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react"
 import Moderator from "../../components/Moderator/Moderator"
-// import { moderators } from "../../testing Data/ModeratorsList"
 import { useNavigate } from 'react-router-dom';
 import { AdmdeleteModerator, fetchModerators } from "../../services/modApi";
 import { useAuth } from "../../context/AuthContext";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import { moderators } from "../../testing Data/ModeratorsList"
+
 function ModeratorsSection() {
     const navigate = useNavigate();
     const { token } = useAuth()
     const [moderators, setModerators] = useState([]);
+
     useEffect(() => {
         const fetchModeratorsData = async () => {
             try {
@@ -51,10 +53,10 @@ function ModeratorsSection() {
 
     const deleteModerator = async (modid) => {
         console.log("mod id: ", modid);
-        
+
         try {
             const responsedata = await AdmdeleteModerator(token, modid);
-            
+
             if (Array.isArray(responsedata) && responsedata.length > 0) {
                 const successMessage = responsedata[0];
                 console.log(successMessage); // "Mod deleted successfully!!"
@@ -77,14 +79,14 @@ function ModeratorsSection() {
             });
         }
     };
-   
+
     const modifierModerator = async (modid) => {
         try {
-            navigate(`/modifyModerator/${modid}`,  { state: { modid } });
+            navigate(`/modifyModerator/${modid}`, { state: { modid } });
         } catch (error) {
             console.error("Error loading Add new moderator page:", error);
         }
-     }
+    }
 
     function addModerator() {
         try {

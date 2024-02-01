@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import ArticleMainIcon from "../../assets/ArticlemainIcon.svg"
+import ArticleMainIcon from "../../assets/styling/ArticlemainIcon.svg"
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import FulldetailsPopUp from "./FulldetailsPopUp";
 import { toast, ToastContainer } from 'react-toastify';

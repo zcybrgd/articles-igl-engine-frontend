@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
-import ArticleForMod from "../../assets/ArticleForMod.svg"
-import { moderators } from "../../testing Data/ModeratorsList";
+import ArticleForMod from "../../assets/styling/ArticleForMod.svg"
+// import { moderators } from "../../testing Data/ModeratorsList";
 
 function Moderator({ moderator, deleteModerator, modifierModerator }) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -47,7 +47,7 @@ function Moderator({ moderator, deleteModerator, modifierModerator }) {
             <div className="flex w-1/5">
                 <p className="text-[#F72A1D] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={deleteModerator}>- Retirer</p>
             </div>
-            
+
             {/* "modifier" button part  */}
             <div className="flex w-1/5">
                 <p className="text-[#797D8C] text-[13px] font-dmsansmedium md:text-[16px] cursor-pointer" onClick={modifierModerator}>Modify</p>

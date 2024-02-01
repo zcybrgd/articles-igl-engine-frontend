@@ -5,7 +5,6 @@ import { FaUser } from "react-icons/fa6";
 import { IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
 import { VscSignOut } from "react-icons/vsc";
 import { openSidebarContext } from '../../../context/openSidebarContext';
-import Cookies from "js-cookie";
 
 function Content() {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import newsPaperImage from "../../assets/FilteredNewsPaper.svg"
+import newsPaperImage from "../../assets/styling/FilteredNewsPaper.svg"
 import { IoIosSearch } from "react-icons/io";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"

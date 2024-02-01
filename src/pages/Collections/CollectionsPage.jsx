@@ -2,7 +2,7 @@ import React from "react"
 import Collection from "../../components/Article/Collection"
 import { useNavigate } from 'react-router-dom';
 import { collections } from "../../testing Data/collectionsData"
-import Paper from "../../assets/paper.svg";
+import Paper from "../../assets/styling/paper.svg";
 
 function CollectionsPage() {
     const navigate = useNavigate();

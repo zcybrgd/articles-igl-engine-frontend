@@ -5,12 +5,15 @@ import LeftQuotes from "../../assets/whiteQuotes/LeftQuotesW.svg";
 import { IoArrowBack } from "react-icons/io5";
 import { addModerator, fetchModeratorById, AdmModifyMod } from "../../services/modApi";
 import { useAuth } from "../../context/AuthContext";
+
 function AddNewModeratorPage() {
-    const { token } = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
+    const { token } = useAuth()
+
     const modId = location.state?.modid || null;
     console.log("mod idddd:", modId)
+
     const [firstName, setFirstName] = useState('');
     const [familyName, setFamilyName] = useState('');
     const [userName, setUserName] = useState('');
@@ -19,6 +22,7 @@ function AddNewModeratorPage() {
     const [erreur, setErreur] = useState(null);
     const [successfulMessage, setSuccessfulMessage] = useState(null);
     const [isModifying, setIsModifying] = useState(false);
+
     useEffect(() => {
         if (modId) {
             const fetchExistingModerator = async () => {
@@ -34,32 +38,30 @@ function AddNewModeratorPage() {
                     console.error("Error fetching existing moderator data:", error);
                 }
             };
-    
+
             fetchExistingModerator();
         }
     }, []);
 
-   const AddModerator = async () => {
-       const moddata = {
-           userName: userName,
-           firstName: firstName,
-           familyName: familyName,
-           email: email,
-           password: password
-       };
+    const AddModerator = async () => {
+        const moddata = {
+            userName: userName,
+            firstName: firstName,
+            familyName: familyName,
+            email: email,
+            password: password
+        };
 
-       const responsedata = await (isModifying ? AdmModifyMod(token, modId, moddata) : addModerator(token, moddata));
+        const responsedata = await (isModifying ? AdmModifyMod(token, modId, moddata) : addModerator(token, moddata));
 
-       if (!responsedata.error) {
-           setSuccessfulMessage(isModifying ? 'Moderator modified successfully!' : 'Moderator added successfully!');
-           setErreur(null);
-       } else {
-           setSuccessfulMessage(null);
-           setErreur(responsedata.error ? responsedata.error : 'An error occurred :(');
-       }
-   };
-
-
+        if (!responsedata.error) {
+            setSuccessfulMessage(isModifying ? 'Moderator modified successfully!' : 'Moderator added successfully!');
+            setErreur(null);
+        } else {
+            setSuccessfulMessage(null);
+            setErreur(responsedata.error ? responsedata.error : 'An error occurred :(');
+        }
+    };
 
     function backtoAdminPage() {
         try {
@@ -94,11 +96,11 @@ function AddNewModeratorPage() {
                     </div>
                     <div className="flex relative w-2/3 justify-start items-center">
                         <div class="grid grid-cols-3 gap-3">
-                        <div className="col-span-1">
-                     <p className="text-[25px] md:text-[40px] text-white font-dmsansbold whitespace-nowrap">
-                           {isModifying ? 'Modify' : 'New'} 
-                                     </p>
-                               </div>
+                            <div className="col-span-1">
+                                <p className="text-[25px] md:text-[40px] text-white font-dmsansbold whitespace-nowrap">
+                                    {isModifying ? 'Modify' : 'New'}
+                                </p>
+                            </div>
                             {/* ignore these  */}
                             <div></div>
                             <div></div>
@@ -186,12 +188,12 @@ function AddNewModeratorPage() {
                                             </div>
                                         )}
 
-                                      <button
-                                     className="my-1 rounded-full max-sm:text-base max-sm:font-bold max-sm:ml-8 bg-[#434343] hover:white text-white font-opensansbold py-2 px-6 max-sm:mr-6 ml-6 max-sm:w-3/4 max-sm:bg-white max-sm:placeholder:text-white max-sm:text-black"
-                                     onClick={AddModerator}
-                                      >
-                                      {isModifying ? 'Modify moderator' : 'Add new moderator'}
-                                      </button>
+                                        <button
+                                            className="my-1 rounded-full max-sm:text-base max-sm:font-bold max-sm:ml-8 bg-[#434343] hover:white text-white font-opensansbold py-2 px-6 max-sm:mr-6 ml-6 max-sm:w-3/4 max-sm:bg-white max-sm:placeholder:text-white max-sm:text-black"
+                                            onClick={AddModerator}
+                                        >
+                                            {isModifying ? 'Modify moderator' : 'Add new moderator'}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

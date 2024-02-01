@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Article from "../../components/Article/Article";
-import Paper from "../../assets/paper.svg"
+import Paper from "../../assets/styling/paper.svg"
 import logo from "../../assets/Logo/logo.png"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"

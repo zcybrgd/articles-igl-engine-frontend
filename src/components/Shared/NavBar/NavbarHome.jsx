@@ -4,7 +4,7 @@ import { openSidebarContext } from '../../../context/openSidebarContext';
 import { FaUser } from "react-icons/fa6";
 import { VscSignOut } from "react-icons/vsc";
 import { IoMenu, IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
-import avatar from "../../../assets/image.jpg"
+import avatar from "../../../assets/styling/image.jpg"
 import logo from "../../../assets/Logo/logo.png"
 import { useAuth } from '../../../context/AuthContext';
 import { fetchModeratorByUsername } from '../../../services/modApi';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Green from '../../assets/green.svg'
+import Green from '../../assets/styling/green.svg'
 
 const UserProfile = () => {
     // You would typically get these user details from props or state

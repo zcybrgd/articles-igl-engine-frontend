@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CiCalendarDate } from "react-icons/ci";
 import { FaUserTie } from "react-icons/fa6";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import Paper from "../../assets/paper.svg";
+import Paper from "../../assets/styling/paper.svg";
 import { useAuth } from "../../context/AuthContext";
 import { addFavorite, deleteFavorite } from "../../services/favoritesApi";
 import { toast, ToastContainer } from 'react-toastify';

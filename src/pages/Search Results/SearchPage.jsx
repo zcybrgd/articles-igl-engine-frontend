@@ -8,8 +8,8 @@ import { HiOutlineKey } from "react-icons/hi";
 import { RiBankLine } from "react-icons/ri";
 import { BsCalendarEvent } from "react-icons/bs";
 import Article from "../../components/Article/Article";
-import Paper from "../../assets/paper.svg"
-import newsPaperImage from "../../assets/NewsPaper.svg"
+import Paper from "../../assets/styling/paper.svg"
+import newsPaperImage from "../../assets/styling/NewsPaper.svg"
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
 import DatePicker from "../../components/filters/DatePicker";
 import { useSearchContext } from "../../context/SearchContext"

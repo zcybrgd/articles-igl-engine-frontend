@@ -2,7 +2,6 @@ import React from 'react';
 import quoteIcon from '../.././assets/icons/quote.svg';
 import quote2Icon from '../.././assets/icons/quote2.svg';
 import Animation from '../../components/Welcome/animation.jsx';
-import line from "../../assets/line.svg"
 
 const Hero = () => {
 

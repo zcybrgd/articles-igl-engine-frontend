@@ -5,7 +5,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
-import avatar from "../../../assets/image.jpg"
+import avatar from "../../../assets/styling/image.jpg"
 
 const NavBar = ({ userRole, article, pageCallingArticle }) => {
     const navigate = useNavigate();

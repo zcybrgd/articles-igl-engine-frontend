@@ -9,6 +9,7 @@ import AffichageAnimation from "../../assets/gifs/AffichageAnimation.gif"
 import { updateArticle } from "../../services/articlesApi";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function calculateMaxLength() {
     const smallScreenMaxLength = 350;
     const mediumScreenMaxLength = 450;
@@ -39,7 +40,7 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleI
         console.log("text saved")
         getText(editedText)
         const editedData = {
-           text: editedText
+            text: editedText
         };
         const isSuccess = await updateArticle(articleId, editedData);
         if (isSuccess) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useLocation } from "react-router-dom";
-import Paper from "../../assets/paper.svg"
+import Paper from "../../assets/styling/paper.svg"
 import Article from "../../components/Article/Article";
 import { useAuth } from "../../context/AuthContext";
 import { displayFavorites } from "../../services/favoritesApi";
