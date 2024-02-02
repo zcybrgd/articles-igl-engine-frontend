@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import arrowPrev from '../.././assets/icons/arrowPrev.svg';
 import arrowNext from '../.././assets/icons/arrowNext.svg';
 import MemberBox from './memberBox';
-import image from "../../assets/styling/image.jpg";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -13,6 +12,7 @@ import Zaineb from "../../assets/members/Zaineb.jpg";
 import Meriem from "../../assets/members/Meriem.jpg";
 import Yasmine from "../../assets/members/Yasmine.svg";
 import Nada from "../../assets/members/Nada.jpg";
+import Maroua from "../../assets/members/Maroua.jpg"
 
 const members = [
     {
@@ -47,7 +47,7 @@ const members = [
     },
     {
         id: 5,
-        image: image,
+        image: Maroua,
         name: "Djabri Maroua",
         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem.",
     }

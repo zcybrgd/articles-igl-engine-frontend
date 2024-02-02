@@ -81,7 +81,6 @@ function AddNewModeratorPage() {
                         onClick={backtoAdminPage}
                     >
                         <IoArrowBack className={`text-white text-3xl`} />
-
                     </p>
                 </div>
 

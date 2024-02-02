@@ -8,10 +8,10 @@ import { useAuth } from '../../../context/AuthContext';
 import avatar from "../../../assets/styling/image.jpg"
 
 const NavBar = ({ userRole, article, pageCallingArticle }) => {
+    const { token, id, userName } = useAuth();
     const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
     const [mod, setMod] = useState(null);
-    const { userName } = useAuth()
 
     useEffect(() => {
         const fetchModeratorData = async () => {

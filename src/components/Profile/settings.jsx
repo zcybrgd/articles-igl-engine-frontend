@@ -1,37 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CiSettings } from "react-icons/ci";
+import { modifyClient } from '../../services/clientApi';
+import { useAuth } from '../../context/AuthContext';
 
 const Settings = () => {
     const [showChangePassword, setShowChangePassword] = useState(false);
-    const [username, setUsername] = useState('Maroumarou');
-    const [password, setPassword] = useState('happy to help');
+    const [password, setPassword] = useState('default');
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [erreur, setErreur] = useState('');
+    const [successfulMessage, setSuccessfulMessage] = useState(null);
+    const { token, id, userName } = useAuth();
+    const [username, setUsername] = useState(userName);
+
 
     const handleChangePasswordClick = () => {
         setShowChangePassword(true);
     };
 
-    const handleSavePassword = () => {
-        // Logic to change password
-        if (newPassword === confirmPassword) {
-            // Implement your password change functionality here
-            console.log('Changing password:', newPassword);
-            // Reset password fields
+    const handleSaveChanges = async (e) => {
+        e.preventDefault();
+        try {
+            setErreur('');
+            setSuccessfulMessage(null);
+
+            const clientId = id; // Replace with your actual client ID
+
+            const clientData = {
+                current_password: currentPassword, // Verify old password for security measures
+                new_password: newPassword, // Use the newPassword if provided, otherwise keep the existing password
+                confirmNewPassword: confirmPassword, // Add the confirmNewPassword field
+            };
+
+            const response = await modifyClient(token, clientId, clientData);
+            console.log('Response from modifyClient:', response);
+
+            // Reset fields
             setCurrentPassword('');
             setNewPassword('');
             setConfirmPassword('');
             setShowChangePassword(false);
-        } else {
-            console.log('New password and confirm password do not match');
+            setSuccessfulMessage(response.message);
+            setErreur(response.error);
+
+        } catch (error) {
+            setErreur(response.error);
         }
     };
 
     return (
         <div className="flex flex-col w-full justify-start items-start">
             <div className='flex flex-row justify-start px-4 items-center text-start mb-5'>
-                <p className='text-black text-[45px] font-dmsansmedium'>Setting</p>
+                <p className='text-black text-[45px] font-dmsansmedium'>Settings</p>
                 <CiSettings className='text-black text-[40px] ml-4' />
             </div>
 
@@ -73,8 +94,19 @@ const Settings = () => {
                                 Change Password
                             </button>
                         </div>
+                        <div className='flex flex-col w-full justify-start items-start'>
+                            {successfulMessage && (
+                                <p className="text-green-500 mt-2 text-lg">{successfulMessage}</p>
+                            )}
+                            {erreur && (
+                                <p className="text-red-500 mt-2 text-lg">
+                                    {erreur}
+                                </p>
+                            )}
+                        </div>
                     </div>
                 ) : (
+
                     <div>
                         <div className="mb-4">
                             <label htmlFor="currentPassword" className="block text-black text-sm font-dmsansbold mb-2 ">
@@ -82,7 +114,7 @@ const Settings = () => {
                             </label>
                             <input
                                 id="currentPassword"
-                                type="text"
+                                type="password"
                                 value={currentPassword}
                                 onChange={(e) => setCurrentPassword(e.target.value)}
                                 className="border-2 text-black font-spacemono rounded-md border-[#707F65] px-4 py-2 w-full focus:outline-none focus:ring focus:border-[#707F65] bg-white shadow-lg"
@@ -114,13 +146,14 @@ const Settings = () => {
                         </div>
                         <div className="flex justify-center">
                             <button
-                                onClick={handleSavePassword}
+                                onClick={handleSaveChanges}
                                 className="px-4 py-2 bg-[#707F65] text-white font-spacemono rounded-md "
                             >
                                 Save Password
                             </button>
                         </div>
                     </div>
+
                 )}
             </div>
         </div>
