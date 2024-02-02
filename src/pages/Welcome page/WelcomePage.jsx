@@ -6,16 +6,15 @@ import Footer from '../../components/Shared/Footer/Footer';
 
 const WelcomPage = () => {
     return (
-        <div className='absolute right-0 left-0 top-0 mt-20 grid grid-cols-2 max-sm:h-full  '>
+        <div className='absolute right-0 left-0 top-0 mt-20 grid grid-cols-2 max-sm:h-full'>
             <div className="App absolute w-full top-0">
-                < Hero />
-                < OurTeam />
+                <Hero />
+                <OurTeam />
                 <ContactUs />
                 <Footer />
             </div>
         </div>
     );
 };
-
 
 export default WelcomPage;

@@ -4,7 +4,7 @@ import UploadSection from "./UploadSection";
 import ModeratorsSection from "./ModeratorsSection";
 import Footer from '../../components/Shared/Footer/Footer';
 import StatsSection from "./StatsSection";
-import uploadAnimation from "../../assets/Loader.mp4"
+import uploadAnimation from "../../assets/loader/Loader.mp4"
 
 function AdminPage() {
     const [isUploading, setIsUploading] = useState(false);
