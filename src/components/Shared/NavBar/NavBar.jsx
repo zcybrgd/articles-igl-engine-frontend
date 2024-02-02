@@ -4,9 +4,11 @@ import { openSidebarContext } from '../../../context/openSidebarContext';
 import { IoMenu } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import avatar from "../../../assets/image.jpg"
 
 const NavBar = ({ userRole, article, pageCallingArticle }) => {
+    const {token, id, userName} = useAuth();
     const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
 
@@ -88,8 +90,8 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                                 {/* font DM sans */}
                                 <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                                 <div className='flex'>
-                                    <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                        user name
+                                    <p className="xl:px-[40px] font-dmsansmedium mr-1 mt-1 lg:mt-2 font-semibold text-black text-[20px] lg:text-[20px] xl:text-[20px]">
+                                        {userName}
                                     </p>
                                 </div>
                                 <Link to="/profile">
@@ -103,7 +105,7 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                             <>
                                 <div className='flex flex-col'>
                                     <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
-                                        user name
+                                    {userName}
                                     </p>
                                     <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
                                         Moderator

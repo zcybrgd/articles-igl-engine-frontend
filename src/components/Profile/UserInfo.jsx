@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import Green from '../../assets/green.svg'
+import { useAuth } from '../../context/AuthContext';
 
 const UserProfile = () => {
+    const {token, id, userName} = useAuth();
     // You would typically get these user details from props or state
     const [editing, setEditing] = useState(false);
 
     //for testing
     const [user, setUser] = useState({
-        userName: 'Maroumarou',
+        userName: userName,
         firstName: 'Noneed',
         lastName: 'happy to help',
         email: 'nano@example.com',

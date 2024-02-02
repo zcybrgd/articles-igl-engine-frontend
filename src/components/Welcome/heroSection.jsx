@@ -34,7 +34,7 @@ const Hero = () => {
                             </h1>
                         </div>
                         <div className="flex w-4/5 md:w-4/5 text-start h-4 md:h-4 mt-20 ml-0 space-x-10 sm:w-4/5 max-sm:space-x-0 max-sm:right-0">
-                            <p className="text-black text-2xl md:text-3xl font-dmsansmedium ml-2 mt-44 "> Whoever relies upon Allah then He is sufficient for him</p>
+                            <p className="text-black text-xl md:text-2xl font-dmsansmedium ml-2 mt-44 ">Navigate the Vast Realm of Knowledge with Savantia. <br></br> Explore, Discover, and Elevate Your Understanding.</p>
                             <img src={quote2Icon} alt="quote2 Icon" className="w-14 h-14 md:h-16 md:w-16 ml-10 mt-64 " />
 
                             <div className="left-0 ">
@@ -43,7 +43,7 @@ const Hero = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex w-3/5 md:w-3/5 h-4 md:h-4 mt-16 ml-4 max-sm:w-48">
+                    <div className="flex w-3/5 md:w-3/5 h-4 md:h-4 mt-5 ml-4 max-sm:w-48">
                         <button className="rounded-2xl bg-[#707F65] hover:white text-white text-xl font-dmsansmedium py-1 px-4 h-12 justify-center mt-80 max-sm:w-3/5 max-sm:mt-80">
                             Search
                         </button>

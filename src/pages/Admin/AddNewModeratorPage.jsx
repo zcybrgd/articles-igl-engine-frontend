@@ -19,6 +19,7 @@ function AddNewModeratorPage() {
     const [erreur, setErreur] = useState(null);
     const [successfulMessage, setSuccessfulMessage] = useState(null);
     const [isModifying, setIsModifying] = useState(false);
+    
     useEffect(() => {
         if (modId) {
             const fetchExistingModerator = async () => {
