@@ -1,9 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import quoteIcon from '../.././assets/icons/quote.svg';
 import quote2Icon from '../.././assets/icons/quote2.svg';
 import Animation from '../../components/Welcome/animation.jsx';
 
 const Hero = () => {
+    const navigate = useNavigate();
+
+    function searchArticles() {
+        try {
+            navigate(`/login`);
+        } catch (error) {
+            console.error("Error loading login page:", error);
+        }
+    }
 
     return (
         <div id="home" className="text-white flex ">
@@ -43,7 +53,8 @@ const Hero = () => {
                         </div>
                     </div>
                     <div className="flex w-3/5 md:w-3/5 h-4 md:h-4 mt-16 ml-4 max-sm:w-48">
-                        <button className="rounded-2xl bg-[#707F65] hover:white text-white text-xl font-dmsansmedium py-1 px-4 h-12 justify-center mt-80 max-sm:w-3/5 max-sm:mt-80">
+                        <button className="rounded-2xl bg-[#707F65] hover:white text-white text-xl font-dmsansmedium py-1 px-4 h-12 justify-center mt-80 max-sm:w-3/5 max-sm:mt-80"
+                            onClick={searchArticles} >
                             Search
                         </button>
                     </div>

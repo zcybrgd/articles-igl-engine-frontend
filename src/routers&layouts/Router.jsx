@@ -75,11 +75,6 @@ function Router() {
                 <Route>
                     <Route path="/" element={<LayoutWelcome />}>
                         <Route path="/" element={<WelcomePage />} />
-
-                        {/* for testing  */}
-                        {/* <Route path="/" element={<HomePage />} />
-                        <Route path="/search" element={<SearchPage />} /> */}
-                        {/* ****** */}
                     </Route>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/signup" element={<SignUpPage />} />

@@ -6,7 +6,6 @@ import { useAuth } from "../../context/AuthContext";
 import { displayFavorites } from "../../services/favoritesApi";
 // import { articles } from "../../testing Data/ArticlesData";
 
-
 function FavoriArticlesListPage() {
     const { token } = useAuth();
     const [articles, setArticles] = useState(0)

@@ -103,7 +103,6 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                     <div className="flex order-2 md:space-x-0 rtl:space-x-reverse">
                         {userRole === "client" ? (
                             <>
-                                {/* font DM sans */}
                                 <div className="h-8 border-l-2 border-solid border-[#F1F1F1] mr-5 mt-1"></div>
                                 <div className='flex'>
                                     <p className="xl:px-[40px] font-dmsansmedium mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">

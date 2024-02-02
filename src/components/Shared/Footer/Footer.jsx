@@ -24,7 +24,7 @@ const Footer = () => {
                     <p className='text-black text-[15px] font-dmsansbold'>Savantia</p>
                 </div>
                 <div className='justify-center items-center text-center'>
-                    <p className='text-black text-[14px] font-dmsans'>Searching for an article? name got you</p>
+                    <p className='text-black text-[14px] font-dmsans'>Searching for an article? Savantia got you</p>
                 </div>
             </div>
             <div className='flex flex-row w-full md:w-auto'>

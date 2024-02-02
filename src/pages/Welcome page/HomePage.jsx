@@ -6,7 +6,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
 import { fetchSearchResults } from "../../services/searchApi";
 import { HashLoader } from "react-spinners"
-// import { articles } from "../../testing Data/ArticlesData";
+import { articles } from "../../testing Data/ArticlesData";
 
 function HomePage() {
     const navigate = useNavigate();
@@ -31,6 +31,7 @@ function HomePage() {
             console.log("you searched for: ", searchQuery);
             const searchResults = await fetchSearchResults(searchQuery);
             setResultsData(searchResults);
+            // setResultsData(articles);
             console.log(results)
             setIsLoading(false);
             if (results) {
@@ -87,23 +88,6 @@ function HomePage() {
                     </div>
                 </div>
             </div>
-
-            {/* for testing  */}
-            {results && (
-                <>
-                    <div id="search-results-indicator" style={{ display: results.length > 0 ? 'block' : 'none' }}>
-                        {/* Content to indicate search results are present */}
-                    </div>
-
-                    <ul>
-                        {results.map((result, index) => (
-                            <li key={index} className="search-result">
-                                {result.title} {/* Adjust this based on your actual data structure */}
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
         </div>
     )
 }
