@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import Green from '../../assets/green.svg'
+import { useAuth } from '../../context/AuthContext';
 
 const UserProfile = () => {
+    const { firstName, familyName, email, userName } = useAuth();
     // You would typically get these user details from props or state
     const [editing, setEditing] = useState(false);
 
-    //for testing
+    // for testing
     const [user, setUser] = useState({
-        userName: 'Maroumarou',
+        userName: userName,
         firstName: 'Noneed',
         lastName: 'happy to help',
         email: 'nano@example.com',
         // imageUrl: 'https://via.placeholder.com/150',
         imageUrl: ''
     });
-
+    console.log("firstName" ,firstName);
+    console.log("familyName",familyName);
     const [profileImg, setProfileImg] = useState(user.imageUrl.length > 0 ? user.imageUrl : Green)
 
     const toggleEdit = () => {
@@ -24,8 +27,6 @@ const UserProfile = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
-
-
     };
 
     const handleImageChange = (e) => {
@@ -62,7 +63,7 @@ const UserProfile = () => {
                     />
                 </div>
                 <div className='flex justify-center items-center text-center md:text-start'>
-                    <p className='text-black text-[28px] md:text-[35px] font-dmsansbold'>{user.userName}</p>
+                    <p className='text-black text-[28px] md:text-[35px] font-dmsansbold'>{userName}</p>
                 </div>
             </div>
             <div className='flex flex-col w-full p-4'>
@@ -75,7 +76,7 @@ const UserProfile = () => {
                             id="userName"
                             name="userName"
                             type="text"
-                            value={user.userName}
+                            value={userName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -90,7 +91,7 @@ const UserProfile = () => {
                             id="firstName"
                             name="firstName"
                             type="text"
-                            value={user.firstName}
+                            value={firstName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -108,7 +109,7 @@ const UserProfile = () => {
                             id="email"
                             name="email"
                             type="email"
-                            value={user.email}
+                            value={email}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -116,13 +117,13 @@ const UserProfile = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center mb-4 mr-auto p-1 w-full md:w-1/2 md:pr-2">
                         <label className="w-4/5 font-dmsansbold text-black text-start text-sm mb-2" htmlFor="lastName">
-                            Last Name
+                            Family Name
                         </label>
                         <input
                             id="lastName"
                             name="lastName"
                             type="text"
-                            value={user.lastName}
+                            value={familyName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}

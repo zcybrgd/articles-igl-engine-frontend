@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from "../../../assets/articleIcon.svg"
+import logo from "../../../assets/Logo/logo.png"
 import { FaPhone } from "react-icons/fa6";
 import { IoMail } from "react-icons/io5";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -20,8 +20,8 @@ const Footer = () => {
         <footer className="flex flex-col md:flex-row bg-[#F3F3F3] justify-center items-start p-5 space-x-5">
             <div className='flex flex-col w-full md:w-auto space-y-5 justify-start items-center md:items-start p-5'>
                 <div className='flex flex-row justify-center items-center text-center'>
-                    <img src={logo} alt="logo" className='w-[35px] h-[35px] mr-3' />
-                    <p className='text-black text-[15px] font-dmsansbold'>appname</p>
+                    <img src={logo} alt="logo" className='w-[40px] h-[40px] mr-3' />
+                    <p className='text-black text-[15px] font-dmsansbold'>Savantia</p>
                 </div>
                 <div className='justify-center items-center text-center'>
                     <p className='text-black text-[14px] font-dmsans'>Searching for an article? name got you</p>

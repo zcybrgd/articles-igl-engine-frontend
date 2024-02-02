@@ -31,7 +31,7 @@ function HomePage() {
             console.log("you searched for: ", searchQuery);
             const searchResults = await fetchSearchResults(searchQuery);
             setResultsData(searchResults);
-
+            console.log(results)
             setIsLoading(false);
             if (results) {
                 goToResultsPage();
@@ -82,7 +82,7 @@ function HomePage() {
                             placeholder="Search"
                         />
                     </div>
-                    <div className="flex ml-auto">
+                    <div id="search-button" className="flex ml-auto">
                         <FaRegArrowAltCircleRight className="text-black text-[20px] cursor-pointer" onClick={handleSearch} />
                     </div>
                 </div>

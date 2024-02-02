@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useNavigate } from 'react-router-dom';
-import { logIn } from "../../services/authApi";
+import { logIn , clientInfo } from "../../services/authApi";
 import { useAuth } from "../../context/AuthContext";
 import articleIcon from '../.././assets/icons/article.svg';
 import LoginAnimation from "../../assets/gifs/LoginAnimation.gif"
@@ -13,6 +13,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [erreur, setErreur] = useState(null);
     const [successfulMessage, setSuccessfulMessage] = useState(null)
+
 
     const handleLogin = async () => {
         try {
@@ -37,18 +38,28 @@ const LoginPage = () => {
 
             if (response && response.data && response.data.token) {
                 setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
-
-                const userRole = response.data.user.role.toLowerCase();
-                const userDataAndRole = {
-                    userName: username,
-                    password: password,
-                    userRole: userRole,
-                    token : response.data.token,
-                    id: response.data.user.id
-                };
-
-                await login(userDataAndRole);
-
+                const fullResponse = await clientInfo(response.data.user.id);
+                if(fullResponse.client)
+                {
+                    const userRole = response.data.user.role.toLowerCase();
+                    const userDataAndRole = {
+                        userName: username,
+                        password: password,
+                        userRole: userRole,
+                        token : response.data.token,
+                        id: response.data.user.id,
+                        firstName: fullResponse.client.firstName,
+                        familyName: fullResponse.client.familyName,
+                        email: fullResponse.client.email
+                    };
+    
+                    await login(userDataAndRole);
+                    navigate("/", { state: { userRole, user: response.data.user } });
+                }
+                else
+                {
+                    console.log("error in retrieving the client info ",fullResponse.error)
+                }
                 // hihi :)
                 // const userDataAndRole = {
                 //     userName: 'nadadjg',
@@ -57,7 +68,6 @@ const LoginPage = () => {
                 // };
                 // navigate("/", { state: { userRole: userDataAndRole.userRole, user: userDataAndRole } });
 
-                navigate("/", { state: { userRole, user: response.data.user } });
 
             } else {
                 if (response && response.data && response.data.error) {

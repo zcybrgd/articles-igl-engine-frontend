@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
 import ArticleIcon from "../../assets/articleIcon.svg"
-import avatar from "../../assets/image.jpg"
+import logo from "../../assets/Logo/logo.png"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
@@ -92,10 +92,11 @@ function UploadSection() {
                 </div>
 
                 {/* logo part  */}
-                <div className="hidden md:flex w-1/4 p-5 justify-end">
+                <div className="hidden md:flex w-1/4 p-5 justify-center items-center">
                     <img
-                        className="w-25 h-25 "
-                        src={avatar}
+                        className="w-50 h-50 "
+                        alt='logo'
+                        src={logo}
                     />
                 </div>
             </div>

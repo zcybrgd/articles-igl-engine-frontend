@@ -6,6 +6,9 @@ const AuthContext = createContext({
     userName: null,
     token: null,
     id: null,
+    firstName : null,
+    familyName : null,
+    email : null,
     login: async () => { },
     logout: () => { },
 });
@@ -14,6 +17,9 @@ const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userRole, setUserRole] = useState("");
     const [userName, setUserName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [familyName, setFamilyName] = useState("");
+    const [email, setEmail] = useState("");
     const [token, setToken] = useState("");
     const [id, setId] = useState(0)
 
@@ -22,7 +28,10 @@ const AuthProvider = ({ children }) => {
         setUserRole(userData.userRole);
         setUserName(userData.userName);
         setToken(userData.token);
-        setId(userData.id)
+        setId(userData.id);
+        setFirstName(userData.firstName);
+        setFamilyName(userData.familyName);
+        setEmail(userData.email);
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setIsLoading(false)
     };
@@ -39,7 +48,7 @@ const AuthProvider = ({ children }) => {
         );
     }
     return (
-        <AuthContext.Provider value={{ userRole, userName, token, id, login, logout }}>
+        <AuthContext.Provider value={{ userRole, userName, token, id,firstName,familyName,email, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

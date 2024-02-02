@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { openSidebarContext } from '../../../context/openSidebarContext';
 import { IoMenu } from "react-icons/io5";
+import logo from "../../../assets/Logo/logo.png"
 
 const NavBarWelcome = () => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
@@ -19,8 +20,17 @@ const NavBarWelcome = () => {
                             <IoMenu className="text-[#707F65] text-2xl " />
                         </button>
                     </div>
+
                     {/* Buttons for scrolling to sections */}
-                    <div className="hidden lg:flex ml-3 space-x-6">
+                    <div className="hidden lg:flex ml-3 space-x-6 items-center">
+                        {/* logo part  */}
+                        <img
+                            className="w-14 h-14"
+                            alt='logo'
+                            src={logo}
+                        />
+
+                        {/* buttons part  */}
                         <ScrollLink to="home" smooth={true} duration={500}>
                             <p className="text-black hover:underline cursor-pointer">Home</p>
                         </ScrollLink>

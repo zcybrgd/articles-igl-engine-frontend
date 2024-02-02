@@ -1,13 +1,41 @@
 import axios from "axios";
+ 
+const testApi = "http://localhost:57262/us";
+let BASE_URL = "";
+let authApi = "";
 
-const BASE_URL = 'http://127.0.0.1:8000/us';
+// Function to check if the URL is reachable
+async function isUrlReachable(url) {
+    try {
+        const response = await axios.get(url);
+        // fetch(url, { method: 'HEAD' });
+        return true;
+    } catch (error) {
+        // console.clear();
+        return false;
+    }
+}
 
-const authApi = axios.create({
-    baseURL: `${BASE_URL}/`,
-    headers: {
-        'Content-Type': 'multipart/form-data',
-    },
-});
+// Check if testApi is reachable
+isUrlReachable(testApi)
+    .then((reachable) => {
+        if (reachable) {
+            BASE_URL = testApi;
+        } else {
+            BASE_URL = 'http://127.0.0.1:8000/us';
+        }
+        authApi = axios.create({
+            baseURL: `${BASE_URL}/`,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+    })
+    .catch((error) => {
+        console.error('Error checking URL reachability:', error);
+    });
+
+
 
 export const signUp = async (userData) => {
     try {
@@ -23,6 +51,18 @@ export const logIn = async (userData) => {
     try {
         const response = await authApi.post('login/', userData)
         return response
+    } catch (error) {
+        console.error('Error in login: ', error);
+        throw error;
+    }
+}
+
+export const clientInfo = async (id)=>
+{
+    try {
+        const response = await authApi.get(`client/${id}`)
+        console.log("reponse ",response);
+        return response.data
     } catch (error) {
         console.error('Error in login: ', error);
         throw error;

@@ -15,8 +15,6 @@ const Article = ({ article, isfav, userRole, page }) => {
     function openArticle() {
         try {
             if (userRole === 'client') {
-                console.log("cliennnnnnnt")
-                console.log(page)
                 if (page === 'home') {
 
                     navigate(`/searchedArticle/${article.id}`,
