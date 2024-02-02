@@ -1,0 +1,19 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Shared/NavBar/NavBar";
+
+const LayoutArticle = ({ userRole, page }) => {
+    return (
+        <div className="flex bg-[#707F65] w-[100%]">
+            <Navbar userRole={userRole} article={true} pageCallingArticle={page} />
+
+            {/* absolute top-0 left-0 right-0 */}
+            <div className="absolute top-0 left-0 right-0 bg-[#707F65] justify-center items-center ">
+                <div className="flex items-center justify-center mt-20 md:mt-10 ">
+                    <Outlet />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default LayoutArticle;

@@ -1,3 +1,37 @@
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #707F65;
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #707F65;
+}
+
+.special-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.special-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #797D8C;
+  border-radius: 10px;
+}
+
+.special-scrollbar::-webkit-scrollbar-track {
+  background-color: #BCBCBC;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -11,9 +45,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +58,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,4 +76,100 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/*DMSans font face*/
+@font-face {
+  font-family: "DMSans";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Regular.ttf);
+}
+
+/*DMSansLight font face*/
+@font-face {
+  font-family: "DMSansLight";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Light.ttf);
+}
+
+/*DMSansMedium font face*/
+@font-face {
+  font-family: "DMSansMedium";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Medium.ttf);
+}
+
+/*DMSansBold font face*/
+@font-face {
+  font-family: "DMSansBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/DM-Sans/DMSans-Bold.ttf);
+}
+
+/*OpenSans font face*/
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Regular.ttf);
+}
+
+/*OpenSansLight font face*/
+@font-face {
+  font-family: "OpenSansLight";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Light.ttf);
+}
+
+/*OpenSansMedium font face*/
+@font-face {
+  font-family: "OpenSansMedium";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Medium.ttf);
+}
+
+/*OpenSansBold font face*/
+@font-face {
+  font-family: "OpenSansBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/Open-Sans/OpenSans-Bold.ttf);
+}
+
+/*SpaceMono font face*/
+@font-face {
+  font-family: "SpaceMono";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Regular.ttf);
+}
+
+/*SpaceMonoItalic font face*/
+@font-face {
+  font-family: "SpaceMonoItalic";
+  font-weight: 300;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Italic.ttf);
+}
+
+/*SpaceMonoBoldItalic font face*/
+@font-face {
+  font-family: "SpaceMonoBoldItalic";
+  font-weight: 500;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-BoldItalic.ttf);
+}
+
+/*SpaceMonoBold font face*/
+@font-face {
+  font-family: "SpaceMonoBold";
+  font-weight: 700;
+  font-display: swap;
+  src: url(./assets/fonts/Space-Mono/SpaceMono-Bold.ttf);
 }
