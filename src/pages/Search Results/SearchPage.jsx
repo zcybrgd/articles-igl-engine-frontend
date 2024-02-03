@@ -305,7 +305,7 @@ function SearchPage() {
                         {/* number of results found  */}
                         <p className="text-[#43BE83] font-dmsansbold text-[15px]">{results.length} result found</p>
                     </div>
-                    <div class="border border-[#D8DAD7] w-full mb-3"></div>
+                    <div className="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                     {/* displaying results */}

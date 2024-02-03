@@ -203,15 +203,15 @@ function ArticleDetails() {
         <div className="flex w-[100%] p-10 md:p-20 md:pl-20">
             <div className="flex flex-col relative w-[100%]">
                 {/* icon part  */}
-                <div class="hidden md:flex absolute inset-0 top-0 left-10 w-[225px] h-[271px]">
+                <div className="hidden md:flex absolute inset-0 top-0 left-10 w-[225px] h-[271px]">
                     <img src={ArticleMainIcon} alt="main article icon" />
                 </div>
 
                 {/* relative */}
                 {/* title and validate button part  */}
-                <div class="flex flex-row md:pl-[280px] py-5 md:p-10 items-center justify-start">
+                <div className="flex flex-row md:pl-[280px] py-5 md:p-10 items-center justify-start">
                     {/* article title  */}
-                    <div class=" justify-center items-center mr-auto">
+                    <div className=" justify-center items-center mr-auto">
                         <p className="text-[#FFFFFF] text-[25px] lg:text-[32px] font-dmsansbold">{article.title}</p>
                     </div>
                     {userRole === "moderator" && (
@@ -307,7 +307,7 @@ function ArticleDetails() {
                                     articleId={article.id}
                                 />
                             )}
-                            <div class="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
+                            <div className="border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
                         </div>
 
                         {/* article's information part  */}
@@ -412,7 +412,7 @@ function ArticleDetails() {
                                     </div>)}
                             </div>
                         </div>
-                        <div class="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
+                        <div className="md:hidden flex border-b-2 text-[#D9D9D9] w-4/5 my-4 m-auto"></div>
                     </div>
                 </div>
             </div>

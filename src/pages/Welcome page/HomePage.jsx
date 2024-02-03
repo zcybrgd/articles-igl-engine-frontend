@@ -30,8 +30,10 @@ function HomePage() {
             setIsLoading(true);
             console.log("you searched for: ", searchQuery);
             const searchResults = await fetchSearchResults(searchQuery);
-            setResultsData(searchResults);
-            // setResultsData(articles);
+            if (searchResults) {
+                setResultsData(searchResults);
+                console.log(results)
+            }
             console.log(results)
             setIsLoading(false);
             if (results) {
