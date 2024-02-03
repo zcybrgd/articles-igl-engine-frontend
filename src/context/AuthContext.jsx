@@ -29,9 +29,11 @@ const AuthProvider = ({ children }) => {
         setUserName(userData.userName);
         setToken(userData.token);
         setId(userData.id);
-        setFirstName(userData.firstName);
-        setFamilyName(userData.familyName);
-        setEmail(userData.email);
+        if (userData.userRole === 'client') {
+            setFirstName(userData.firstName);
+            setFamilyName(userData.familyName);
+            setEmail(userData.email);
+        }
         await new Promise((resolve) => setTimeout(resolve, 1000));
         setIsLoading(false)
     };

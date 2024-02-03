@@ -41,29 +41,49 @@ const LoginPage = () => {
                 const fullResponse = await clientInfo(response.data.user.id);
                 if (fullResponse.client) {
                     const userRole = response.data.user.role.toLowerCase();
-                    const userDataAndRole = {
-                        userName: username,
-                        password: password,
-                        userRole: userRole,
-                        token: response.data.token,
-                        id: response.data.user.id,
-                        firstName: fullResponse.client.firstName,
-                        familyName: fullResponse.client.familyName,
-                        email: fullResponse.client.email
-                    };
 
-                    await login(userDataAndRole);
-                    navigate("/", { state: { userRole, user: response.data.user } });
+                    if (userRole === 'client') {
+                        const userDataAndRole = {
+                            userName: username,
+                            password: password,
+                            userRole: userRole,
+                            token: response.data.token,
+                            id: response.data.user.id,
+                            firstName: fullResponse.client.firstName,
+                            familyName: fullResponse.client.familyName,
+                            email: fullResponse.client.email
+                        };
+
+                        await login(userDataAndRole);
+                        navigate("/", { state: { userRole, user: response.data.user } });
+                    }
+                    else {
+                        const userDataAndRole = {
+                            userName: username,
+                            password: password,
+                            userRole: userRole,
+                            token: response.data.token,
+                            id: response.data.user.id,
+                        };
+
+                        await login(userDataAndRole);
+                        navigate("/", { state: { userRole, user: response.data.user } });
+                    }
                 }
                 else {
                     console.log("error in retrieving the client info ", fullResponse.error)
                 }
+
                 // hihi :)
                 // const userDataAndRole = {
                 //     userName: 'nadadjg',
                 //     password: 'password',
-                //     userRole: 'admin',
+                //     firstName: 'nada',
+                //     familyName: 'djedjig',
+                //     email: 'mail@gmail.com',
+                //     userRole: 'client',
                 // };
+                // await login(userDataAndRole);
                 // navigate("/", { state: { userRole: userDataAndRole.userRole, user: userDataAndRole } });
 
 
