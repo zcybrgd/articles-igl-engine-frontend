@@ -39,19 +39,22 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleI
     const handleSaveClick = async () => {
         console.log("text saved")
         getText(editedText)
-        const editedData = {
-            text: editedText
-        };
-        const isSuccess = await updateArticle(articleId, editedData);
-        if (isSuccess) {
-            console.log('Text of Article updated successfully');
-            toast.success('Text of Article updated successfully', {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 2000,
-            });
-        } else {
-            console.error('Failed to update article');
-        }
+
+        // const editedData = {
+        //     text: editedText
+        // };
+        // console.log('edited data: ', editedData)
+        // const isSuccess = await updateArticle(articleId, editedData);
+        // if (isSuccess) {
+        //     console.log('Text of Article updated successfully');
+        //     toast.success('Text of Article updated successfully', {
+        //         position: toast.POSITION.TOP_CENTER,
+        //         autoClose: 2000,
+        //     });
+        // } else {
+        //     console.error('Failed to update article');
+        // }
+
         setIsEditing(false);
     };
 
@@ -136,7 +139,7 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleI
                                     rows={15}
                                     className="pl-2 bg-[#F1F1F1] text-[#9D9E9D] font-opensans text-[20px] text-start border-b shadow-[#9ECDB6] shadow-md"
                                     style={{ width: '100%' }}
-                                    value={pages[currentPage]}
+                                    value={editedText}
                                     onChange={handleTextChange}
                                 />
                             ) : (
@@ -145,6 +148,7 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleI
                                 </p>
                             )}
                         </div>
+
                         {/* Navigation buttons */}
                         <div className={`flex flex-row w-[100%] h-1/8`}>
                             <div className="flex mr-auto">

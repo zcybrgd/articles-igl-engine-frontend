@@ -1,5 +1,5 @@
 # Savantia : Scientific Articles Search Engine - frontend repository
-[link to the backend repo]
+[backend repository link](https://github.com/zcybrgd/articles-igl-engine-backend)
 # Project Overview
 
 This project is a 2 month assignment that is apart of the "Introduction to Software Engineering" course that we take in our 3rd year at the Computer Science Enginnering school *Ecole nationale Supérieure d’Informatique, ESI Alger*

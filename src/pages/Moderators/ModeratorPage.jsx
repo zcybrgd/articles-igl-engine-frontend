@@ -80,7 +80,7 @@ function ModeratorPage() {
                     {/* number of articles added by admins  */}
                     <p className="text-[#707F65] font-dmsansbold text-[15px]">{articles.length} articles</p>
                 </div>
-                <div class="border border-[#D8DAD7] w-full mb-3"></div>
+                <div className="border border-[#D8DAD7] w-full mb-3"></div>
 
 
                 {/* displaying articles */}

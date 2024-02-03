@@ -6,7 +6,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import avatar from "../../../assets/styling/image.jpg"
-
+import { fetchModeratorByUsername } from '../../../services/modApi';
 const NavBar = ({ userRole, article, pageCallingArticle }) => {
     const { token, id, userName } = useAuth();
     const navigate = useNavigate();

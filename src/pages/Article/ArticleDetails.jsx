@@ -30,19 +30,20 @@ function ArticleDetails() {
     const [isFullModeOpen, setFullModeOpen] = useState(false);
 
     //Data edited
-    const [editedKeywords, setEditedKeywords] = useState(article.keywords);
-    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(', '));
-    const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
+    const [editedKeywords, setEditedKeywords] = useState(article.keywords ? article.keywords : '');
+    const [editedInstitutions, setEditedInstitutions] = useState(article.institutions ? article.institutions.join(', ') : '');
+    const [editedAuthors, setEditedAuthors] = useState(article.authors ? article.authors.join(', ') : '');
     const [editedRefrences, setEditedRef] = useState(article.bibliographie ? article.bibliographie.join(',  ') : '');
-    const [editedTitle, setEditedTitle] = useState(article.title);
-    const [editedAbstract, setEditedAbstract] = useState(article.abstract);
-    const [editedDate, setEditedDate] = useState(article.date);
-    const [newText, setnewText] = useState('');
+    const [editedTitle, setEditedTitle] = useState(article.title ? article.title : '');
+    const [editedAbstract, setEditedAbstract] = useState(article.abstract ? article.abstract : '');
+    const [editedDate, setEditedDate] = useState(article.date ? article.date : '');
+    const [newText, setnewText] = useState(article.text ? article.text : '');
 
     const getText = (text) => {
         setnewText(text)
-        console.log('new text:', newText)
+        handleSaveClick()
     }
+
     const handleValidateArticle = async () => {
         console.log("article validated")
         try {
@@ -108,19 +109,21 @@ function ArticleDetails() {
         console.log('new institutions: ', newInstitutionsArray);
 
         // saving references as an array again
-        const newRefrencesArray = article.bibliographie ? editedRefrences.split(',').map((reference) => reference.trim()) : '';
+        const newRefrencesArray = (editedRefrences != '') ? editedRefrences.split(',').map((reference) => reference.trim()) : '';
         console.log('new refrences: ', newRefrencesArray);
 
         const editedData = {
-            authors: newAuthorsArray,
-            institutions: newInstitutionsArray,
-            keywords: editedKeywords,
-            title: editedTitle,
-            abstract: editedAbstract,
-            bibliographie: newRefrencesArray,
-            date: editedDate,
+            authors: newAuthorsArray ? newAuthorsArray : " " ,
+            institutions: newInstitutionsArray ? newInstitutionsArray : " ",
+            keywords: editedKeywords ? editedKeywords : " ",
+            title: editedTitle ? editedTitle : " ",
+            abstract: editedAbstract ? editedAbstract : " ",
+            bibliographie: newRefrencesArray ? newRefrencesArray : "",
+            date: editedDate ? editedDate : " ",
+            text: newText ? newText : article.text,
         };
 
+        console.log("article: ", editedData)
         const isSuccess = await updateArticle(article.id, editedData, token);
         if (isSuccess) {
             console.log('Article updated successfully');

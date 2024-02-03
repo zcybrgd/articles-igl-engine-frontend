@@ -7,11 +7,9 @@ let authApi = "";
 // Function to check if the URL is reachable
 async function isUrlReachable(url) {
     try {
-        const response = await axios.get(url);
-        // fetch(url, { method: 'HEAD' });
+        const response = await fetch("http://localhost:57262", { method: 'HEAD' });
         return true;
     } catch (error) {
-        // console.clear();
         return false;
     }
 }
@@ -24,6 +22,7 @@ isUrlReachable(testApi)
         } else {
             BASE_URL = 'http://127.0.0.1:8000/us';
         }
+        console.log("base url",BASE_URL);
         authApi = axios.create({
             baseURL: `${BASE_URL}/`,
             headers: {
@@ -57,16 +56,14 @@ export const logIn = async (userData) => {
     }
 }
 
-let retirveApi = axios.create({
-    baseURL: `http://127.0.0.1:8000/us/`,
-});
 export const clientInfo = async (token,id) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:8000/us/client/${id}`,{
+        const response = await axios.get(`${BASE_URL}/client/${id}`, {
             headers: {
                 Authorization: `Token ${token}`,
             },
         });
+        console.log("reponse ", response);
         return response.data
     } catch (error) {
         console.error('Error in login: ', error);
