@@ -8,19 +8,19 @@ Savantia is a comprehensive web application designed to facilitate the search, r
 
 # Key Features
 
-# # # For Moderators:
+### For Moderators:
 
 - View unvalidated articles.
 - Ability to modify, delete, and validate articles.
 - View extracted information from PDF articles and correct any errors if necessary.
-# # # For Clients (Authenticated Users):
+### For Clients (Authenticated Users):
 
 - Search for scientific articles based on keywords in the title, keywords, authors, and full text.
 - Filter search results based on keywords, authors, institutions, or publication date range.
 - View details of each article including full text in text and PDF format.
 - Save favorite articles for later consultation.
 - Access the list of previously saved favorite scientific articles.
-# # # For Admins:
+### For Admins:
 
 - Add, delete, or modify one or more moderators.
 - Launch an upload operation of scientific articles in PDF format.
