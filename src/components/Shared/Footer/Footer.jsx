@@ -24,7 +24,7 @@ const Footer = () => {
                     <p className='text-black text-[15px] font-dmsansbold'>Savantia</p>
                 </div>
                 <div className='justify-center items-center text-center'>
-                    <p className='text-black text-[14px] font-dmsans'>Searching for an article? Savantia got you</p>
+                    <p className='text-black text-[14px] font-dmsans'>The home for thousands of Scientific Articles</p>
                 </div>
             </div>
             <div className='flex flex-row w-full md:w-auto'>
@@ -37,13 +37,7 @@ const Footer = () => {
                         Demo
                     </p>
                 </div>
-                <div className='flex flex-col w-1/2 md:w-auto space-y-5 justify-start items-start text-start p-5'>
-                    <p className='text-black text-[15px] font-dmsansbold'>Service</p>
-                    <p className='text-black text-[14px] font-dmsans'>
-                        Browsing articles <br /><br />
-                        Viewing articles
-                    </p>
-                </div>
+                
             </div>
             <div className='flex flex-row w-full md:w-auto'>
                 <div className='flex flex-col w-1/2 md:w-auto space-y-5 justify-start items-start text-start p-5'>
