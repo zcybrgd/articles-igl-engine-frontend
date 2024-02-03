@@ -30,11 +30,6 @@ const ContactUs = () => {
         }
     };
 
-
-
-
-
-
     return (
         <div id="contact" className="flex flex-row w-full justify-center bg-white">
             <div className="flex">
@@ -51,7 +46,7 @@ const ContactUs = () => {
                         type="text"
                         id="name"
                         name="name"
-                        className="w-full font-dmsans border-gray-300 bg-[#F1F1F1] rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full text-black font-dmsans border-gray-300 bg-[#F1F1F1] rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your name"
                         onChange={handleChange}
                     />
@@ -63,7 +58,7 @@ const ContactUs = () => {
                         type="email"
                         id="email"
                         name="email"
-                        className="w-full font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full text-black font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your email"
                         onChange={handleChange}
                     />
@@ -75,7 +70,7 @@ const ContactUs = () => {
                         id="message"
                         name="message"
                         rows="4"
-                        className="w-full font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
+                        className="w-full text-black font-dmsans bg-[#F1F1F1] border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg py-2 px-3 mt-1"
                         placeholder="Enter your message"
                         onChange={handleChange}
                     ></textarea>

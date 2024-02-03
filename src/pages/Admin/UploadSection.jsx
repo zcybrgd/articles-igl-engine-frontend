@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
-import ArticleIcon from "../../assets/styling/articleIcon.svg"
+import ArticleIcon from "../../assets/icons/article.svg"
 import logo from "../../assets/Logo/logo.png"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
 
-function UploadSection({ setIsUploading }) {
+function UploadSection() {
 
     const [fileType, setFileType] = useState('file');
     const [file, setFile] = useState(null);
@@ -24,6 +24,7 @@ function UploadSection({ setIsUploading }) {
     };
 
 
+
     const handleUrlChange = (e) => {
         setUrl(e.target.value);
     };
@@ -35,9 +36,8 @@ function UploadSection({ setIsUploading }) {
             setIsSearchActive(true);
         } else {
             try {
-                setIsUploading(true)
                 if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
-                    console.log("inside the if");
+                    console.log("inside the iff");
 
                     const response = await uploadPDF(fileType === 'file' ? files : url);
 
@@ -48,7 +48,6 @@ function UploadSection({ setIsUploading }) {
                         console.log("Unexpected response structure:", response);
                     }
                 }
-                setIsUploading(false)
             } catch (error) {
                 console.error('Error during upload:', error);
                 setError('Error during upload. Please try again.');

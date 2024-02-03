@@ -118,21 +118,21 @@ function ModeratorsSection() {
                 <div className="flex flex-row md:p-3 md:px-10 px-5 space-x-2 md:space-x-8 lg:space-x-15 w-[95%] md:w-[90%]">
                     {/* profile image  part  */}
                     <div className="hidden md:flex w-1/10">
-                        <div className="w-10"></div>
+                        <div className="w-20"></div>
                     </div>
 
                     {/* name part  */}
-                    <div className="flex w-1/5 justify-end items-center">
+                    <div className="flex w-1/7 justify-end items-center">
                         <p className="text-white font-opensansmedium text-[10px]">Fullname</p>
                     </div>
 
                     {/* total edits part  */}
-                    <div className="flex w-1/5 items-center justify-end">
+                    <div className="flex w-1/5 items-center justify-center">
                         <p className="text-white font-opensansmedium text-[10px]">Total edits</p>
                     </div>
 
                     {/* user name part */}
-                    <div className="flex w-1/5 items-center justify-end">
+                    <div className="flex w-1/10 items-center justify-end">
                         <p className="text-white font-opensansmedium text-[10px]">Username</p>
                     </div>
 

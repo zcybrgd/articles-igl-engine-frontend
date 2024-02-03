@@ -22,7 +22,6 @@ const AuthProvider = ({ children }) => {
     const [email, setEmail] = useState("");
     const [token, setToken] = useState("");
     const [id, setId] = useState(0)
-
     const login = async (userData) => {
         setIsLoading(true)
         setUserRole(userData.userRole);

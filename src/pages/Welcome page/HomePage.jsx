@@ -6,7 +6,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
 import { fetchSearchResults } from "../../services/searchApi";
 import { HashLoader } from "react-spinners"
-import { articles } from "../../testing Data/ArticlesData";
+// import { articles } from "../../testing Data/ArticlesData";
 
 function HomePage() {
     const navigate = useNavigate();
@@ -32,14 +32,10 @@ function HomePage() {
             const searchResults = await fetchSearchResults(searchQuery);
             if (searchResults) {
                 setResultsData(searchResults);
-                console.log(results)
-            }
-            console.log(results)
-            setIsLoading(false);
-            if (results) {
+                console.log(results);
                 goToResultsPage();
             }
-
+            setIsLoading(false);
         } catch (error) {
             console.error('Error searching articles:', error);
             setIsLoading(false);

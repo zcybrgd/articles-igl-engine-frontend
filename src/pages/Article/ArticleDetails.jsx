@@ -33,11 +33,12 @@ function ArticleDetails() {
     const [editedKeywords, setEditedKeywords] = useState(article.keywords);
     const [editedInstitutions, setEditedInstitutions] = useState(article.institutions.join(', '));
     const [editedAuthors, setEditedAuthors] = useState(article.authors.join(', '));
-    const [editedRefrences, setEditedRef] = useState(article.bibliographie.join(',  '));
+    const [editedRefrences, setEditedRef] = useState(article.bibliographie ? article.bibliographie.join(',  ') : '');
     const [editedTitle, setEditedTitle] = useState(article.title);
     const [editedAbstract, setEditedAbstract] = useState(article.abstract);
     const [editedDate, setEditedDate] = useState(article.date);
     const [newText, setnewText] = useState('');
+
     const getText = (text) => {
         setnewText(text)
         console.log('new text:', newText)
@@ -107,7 +108,7 @@ function ArticleDetails() {
         console.log('new institutions: ', newInstitutionsArray);
 
         // saving references as an array again
-        const newRefrencesArray = editedRefrences.split(',').map((reference) => reference.trim());
+        const newRefrencesArray = article.bibliographie ? editedRefrences.split(',').map((reference) => reference.trim()) : '';
         console.log('new refrences: ', newRefrencesArray);
 
         const editedData = {

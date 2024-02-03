@@ -25,7 +25,7 @@ export const uploadPDF = async (pdfFiles) => {
                 'X-CSRFToken': csrfToken,
             },
         });
-
+        console.log("data retrieved: ", response.data)
         return response.data;
     } catch (error) {
         console.error('Error uploading PDF:', error);

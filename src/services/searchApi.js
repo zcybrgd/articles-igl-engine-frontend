@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const testApi = "http://localhost:57262/search/nadi"
-let api = "http://localhost:57262/search/nadi";
+let api = "http://localhost:8000/search/nadi";
 
 // Function to check if the URL is reachable
 async function isUrlReachable(url) {

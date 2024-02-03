@@ -38,11 +38,10 @@ const LoginPage = () => {
 
             if (response && response.data && response.data.token) {
                 setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
-                const fullResponse = await clientInfo(response.data.user.id);
-                if (fullResponse.client) {
                     const userRole = response.data.user.role.toLowerCase();
 
                     if (userRole === 'client') {
+                        const fullResponse = await clientInfo(response.data.token,response.data.user.id);
                         const userDataAndRole = {
                             userName: username,
                             password: password,
@@ -69,10 +68,7 @@ const LoginPage = () => {
                         await login(userDataAndRole);
                         navigate("/", { state: { userRole, user: response.data.user } });
                     }
-                }
-                else {
-                    console.log("error in retrieving the client info ", fullResponse.error)
-                }
+                
 
                 // hihi :)
                 // const userDataAndRole = {
@@ -194,4 +190,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default LoginPage; 

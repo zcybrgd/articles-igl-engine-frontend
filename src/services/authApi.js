@@ -57,10 +57,16 @@ export const logIn = async (userData) => {
     }
 }
 
-export const clientInfo = async (id) => {
+let retirveApi = axios.create({
+    baseURL: `http://127.0.0.1:8000/us/`,
+});
+export const clientInfo = async (token,id) => {
     try {
-        const response = await authApi.get(`client/${id}`)
-        console.log("reponse ", response);
+        const response = await axios.get(`http://127.0.0.1:8000/us/client/${id}`,{
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
         return response.data
     } catch (error) {
         console.error('Error in login: ', error);
