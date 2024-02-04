@@ -2,18 +2,42 @@ import React, { useState } from "react"
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import ArticleForMod from "../../assets/styling/ArticleForMod.svg"
-// import { moderators } from "../../testing Data/ModeratorsList";
 
+
+
+/**
+ * Display moderator's information
+ * @date 2/4/2024 - 8:25:41 PM
+ *
+ * @param {{ moderator: any; deleteModerator: any; modifierModerator: any; }} param0
+ * @param {*} param0.moderator
+ * @param {*} param0.deleteModerator
+ * @param {*} param0.modifierModerator
+ * @returns {*}
+ */
 function Moderator({ moderator, deleteModerator, modifierModerator }) {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const profilePictureUrl = moderator.profile_picture || '/media/profile_pics/default_profile_pic.jpg';
+    const [isChecked, setIsChecked] = useState(false);
 
+    /**
+     * Toggles the visibility of a dropdown, changing its state between visible and hidden.
+     *
+     * @function
+     * @returns {void}
+     */
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };
 
-    const [isChecked, setIsChecked] = useState(false);
-
+    /**
+     * Handles the change event when a checkbox state is modified.
+     *
+     * @function
+     * @param {Object} event 
+     * @param {boolean} event.target.checked 
+     * @returns {void}
+     */
     const handleCheckboxChange = (event) => {
         setIsChecked(event.target.checked);
     };

@@ -1,6 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
+/**
+ * React component representing a HalfDonut Chart.
+ *
+ * @component
+ * @param {Object} props 
+ * @param {Array<number>} props.data 
+ * @param {Array<string>} props.labels 
+ * @returns {JSX.Element} 
+ */
 const HalfDonutChart = ({ data, labels }) => {
     const chartRef = useRef(null);
     const chartInstance = useRef(null);
@@ -12,6 +21,14 @@ const HalfDonutChart = ({ data, labels }) => {
 
         const ctx = chartRef.current.getContext('2d');
 
+        /**
+         * Create a new Chart instance and assign it to the current ref.
+         *
+         * @function
+         * @param {Object} ctx - The context for the Chart.
+         * @param {Object} options - The configuration options for the Chart.
+         * @returns {void}
+         */
         chartInstance.current = new Chart(ctx, {
             type: 'doughnut',
             data: {

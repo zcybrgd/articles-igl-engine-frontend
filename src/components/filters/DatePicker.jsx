@@ -3,10 +3,29 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import 'flatpickr/dist/themes/light.css';
 
+/**
+ * DatePicker component for selecting a date, triggering the `onDateSelect` callback with the selected date.
+ *
+ * @component
+ * @param {Object} props
+ * @param {Function} props.onDateSelect 
+ * @returns {JSX.Element} 
+ */
 const DatePicker = ({ onDateSelect }) => {
     const inputRef = useRef();
 
     useEffect(() => {
+        /**
+         * Configures a datepicker using flatpickr for selecting a date.
+         *
+         * @constant
+         * @type {Object}
+         * @property {string} dateFormat 
+         * @property {string} altFormat 
+         * @property {boolean} altInput 
+         * @property {string} altInputClass
+         * @property {Function} onClose 
+         */
         const datepicker = flatpickr(inputRef.current, {
             dateFormat: 'd.m.Y',
             altFormat: 'd\t\tm\t\tY',

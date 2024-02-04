@@ -1,6 +1,14 @@
 import React from "react"
 import { MdFolderOpen } from "react-icons/md";
 
+/**
+ * React component representing a Collection.
+ *
+ * @component
+ * @param {Object} props 
+ * @param {string} props.collectionName 
+ * @returns {JSX.Element} 
+ */
 const Collection = ({
     collectionName
 }) => {

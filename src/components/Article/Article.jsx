@@ -8,10 +8,27 @@ import { useAuth } from "../../context/AuthContext";
 import { addFavorite, deleteFavorite } from "../../services/favoritesApi";
 import { toast, ToastContainer } from 'react-toastify';
 
+/**
+ * Article component for displaying detailed information about an article.
+ *
+ * @component
+ * @param {Object} props 
+ * @param {Object} props.article 
+ * @param {boolean} props.isfav
+ * @param {string} props.userRole 
+ * @param {string} props.page 
+ * @returns {JSX.Element} 
+ */
 const Article = ({ article, isfav, userRole, page }) => {
     const navigate = useNavigate();
     const { token } = useAuth()
 
+    /**
+     * Opens the detailed view of an article.
+     *
+     * @function
+     * @returns {void}
+     */
     function openArticle() {
         try {
             if (userRole === 'client') {
@@ -51,6 +68,13 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
+    /**
+     * Deletes an article from the user's collection.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>}
+     */
     async function deleteArticleFromCollection() {
         const responsedata = await deleteFavorite(token, article.id)
         if (!responsedata.error) {
@@ -66,6 +90,13 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
+    /**
+     * Adds an article to the user's favorites.
+     *
+     * @async
+     * @function
+     * @returns {Promise<void>}
+     */
     const addArticleToFavorites = async () => {
         const responsedata = await addFavorite(token, article.id)
         if (!responsedata.error) {
@@ -81,6 +112,11 @@ const Article = ({ article, isfav, userRole, page }) => {
         }
     }
 
+    /**
+     * Opens the PDF document associated with the article in a new browser tab.
+     *
+     * @function
+     */
     function openArticlesPdf() {
         console.log("article opened pdf id:", article.id)
 

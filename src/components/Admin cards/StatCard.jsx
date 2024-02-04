@@ -3,6 +3,15 @@ import { HiOutlineDocumentText } from "react-icons/hi2";
 import { BsHourglass } from "react-icons/bs";
 import { MdDeleteOutline } from "react-icons/md";
 
+/**
+ * Functional component representing a statistical card with a title and value.
+ *
+ * @function
+ * @param {Object} props 
+ * @param {string} props.title 
+ * @param {string | number} props.value 
+ * @returns {JSX.Element} 
+ */
 function StatCard({ title, value }) {
 
     return (
