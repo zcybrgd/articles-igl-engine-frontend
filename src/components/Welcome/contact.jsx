@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import { contactInfo } from '../../services/contactsApi';
 
+/**
+ * ContactUs component 
+ *
+ * @function
+ * @returns {JSX.Element} The rendered ContactUs component.
+ */
 const ContactUs = () => {
 
     const [formData, setFormData] = useState({});
     const [erreur, setErreur] = useState(null);
     const [successfulMessage, setSuccessfulMessage] = useState(null)
 
+    /**
+     * Handles the change event for form input fields, updating the form data state.
+     *
+     * @function
+     * @param {Object} e - The event object representing the change event.
+     * @param {string} e.target.name - The name attribute of the input field.
+     * @param {string} e.target.value - The new value of the input field.
+     */
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -14,13 +28,29 @@ const ContactUs = () => {
         })
     }
 
+    /**
+     * Handles the form submission by preventing the default form behavior,
+     * sending a contact information request, and updating the component's state
+     * with success or error messages.
+     *
+     * @async
+     * @function
+     * @param {Object} e 
+     * @throws {Error} 
+     */
     const submitInfo = async (e) => {
         e.preventDefault()
 
         try {
             setErreur(null);
             setSuccessfulMessage(null)
+
+            // Send a contact information request.
+            /**
+             * @type {Object} The response object containing the message.
+             */
             const response = await contactInfo(formData);
+
             console.log("Form Data:", formData);
             console.log(response)
             setSuccessfulMessage(response.message);

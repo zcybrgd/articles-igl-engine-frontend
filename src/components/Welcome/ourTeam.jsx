@@ -53,9 +53,23 @@ const members = [
     }
 ];
 
+/**
+ * OurTeam component showcasing information about the team members.
+ *
+ * @component
+ * @returns {JSX.Element} 
+ */
 const OurTeam = () => {
     const [imgIndex, setImgIndex] = useState(0);
 
+    /**
+     * NextArrow component for a carousel, providing a clickable button to navigate to the next item.
+     *
+     * @component
+     * @param {Object} props - The properties passed to the component.
+     * @param {Function} props.onClick - The function to be executed when the arrow is clicked.
+     * @returns {JSX.Element} The rendered NextArrow component.
+     */
     const NextArrow = ({ onClick }) => (
         <div className="bg-black top-0">
             <div className="arrow prev bg-transparent -right-6 top-40 max-sm:-right-2 cursor-pointer absolute z-10" onClick={onClick}>
@@ -64,6 +78,14 @@ const OurTeam = () => {
         </div>
     );
 
+    /**
+     * PrevArrow component for a carousel, providing a clickable button to navigate to the previous item.
+     *
+     * @component
+     * @param {Object} props - The properties passed to the component.
+     * @param {Function} props.onClick - The function to be executed when the arrow is clicked.
+     * @returns {JSX.Element} The rendered PrevArrow component.
+     */
     const PrevArrow = ({ onClick }) => (
         <div className="bg-black top-0">
             <div className="arrow prev bg-transparent -left-4 top-40 max-sm:-left-2 cursor-pointer absolute z-10" onClick={onClick}>

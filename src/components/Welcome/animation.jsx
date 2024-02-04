@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
-
 import Article from '../../assets/icons/holearticle.png';
 
 const images = [
@@ -18,6 +16,12 @@ const images = [
     Article,
 ];
 
+/**
+ * Animation component rendering dynamic content or effects.
+ *
+ * @function
+ * @returns {JSX.Element} The rendered Animation component.
+ */
 const Animation = () => {
     return (
 

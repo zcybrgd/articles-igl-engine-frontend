@@ -1,5 +1,16 @@
 import React from 'react'
 
+/**
+ * MemberBox component displaying information about a team member.
+ *
+ * @component
+ * @param {Object} props 
+ * @param {string} props.image 
+ * @param {string} props.name 
+ * @param {string} props.description 
+ * @param {boolean} props.isActive 
+ * @returns {JSX.Element} 
+ */
 const MemberBox = ({ image, name, description, isActive }) => {
 
     return (

@@ -4,9 +4,20 @@ import quoteIcon from '../.././assets/icons/quote.svg';
 import quote2Icon from '../.././assets/icons/quote2.svg';
 import Animation from '../../components/Welcome/animation.jsx';
 
+/**
+ * Hero component 
+ *
+ * @function
+ * @returns {JSX.Element} 
+ */
 const Hero = () => {
     const navigate = useNavigate();
 
+    /**
+     * Navigates to the login page for users attempting to search articles.
+     *
+     * @function
+     */
     function searchArticles() {
         try {
             navigate(`/login`);
