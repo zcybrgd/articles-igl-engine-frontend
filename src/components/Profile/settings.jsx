@@ -14,11 +14,23 @@ const Settings = () => {
     const { token, id, userName } = useAuth();
     const [username, setUsername] = useState(userName);
 
-
+    /**
+     * Handles the click event to initiate the change password process.
+     *
+     * @function
+     */
     const handleChangePasswordClick = () => {
         setShowChangePassword(true);
     };
 
+    /**
+     * Handles the event to save changes asynchronously.
+     *
+     * @async
+     * @function
+     * @param {Event} e 
+     * @throws {Error} 
+     */
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         try {
@@ -33,6 +45,17 @@ const Settings = () => {
                 confirmNewPassword: confirmPassword, // Add the confirmNewPassword field
             };
 
+            /**
+             * Modifies a client's information asynchronously.
+             *
+             * @async
+             * @function
+             * @param {string} token 
+             * @param {string} clientId
+             * @param {Object} clientData 
+             * @returns {Object}
+             * @throws {Error} 
+             */
             const response = await modifyClient(token, clientId, clientData);
             console.log('Response from modifyClient:', response);
 

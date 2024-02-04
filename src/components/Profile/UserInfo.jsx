@@ -26,33 +26,109 @@ const UserProfile = () => {
 
     const [profileImg, setProfileImg] = useState(user.imageUrl.length > 0 ? user.imageUrl : Green)
 
+    /**
+     * Toggles the editing state between true and false.
+     *
+     * @function
+     */
     const toggleEdit = () => {
-        setEditing(!editing);
-    }
+        /**
+         * Set the editing state to its opposite value.
+         *
+         * @function
+         * @param {boolean} editing - The current editing state.
+         */
+        setEditing((editing) => !editing);
+    };
 
+
+    /**
+     * Toggles the editing state, saves user information, and logs the result.
+     *
+     * @async
+     * @function
+     */
     const toggleSave = async () => {
-        setEditing(!editing);
-        const data = {
-            userName: user.userName,
-            firstName: user.firstName,
-            familyName: user.familyName,
-            email: user.email,
-        };
-        const response = await modifyUserInfo(token, data);
-        if (response.data) {
-            console.log("client modified successfully!!")
-        }
-        else {
-            console.log("error in modifying the client info", response.error)
+        try {
+            /**
+             * Set the editing state to its opposite value.
+             *
+             * @function
+             * @param {boolean} editing 
+             */
+            setEditing((editing) => !editing);
+
+            /**
+             * Prepare user information for modification.
+             *
+             * @constant
+             * @type {Object}
+             */
+            const data = {
+                userName: user.userName,
+                firstName: user.firstName,
+                familyName: user.familyName,
+                email: user.email,
+            };
+
+            /**
+             * Modify user information asynchronously.
+             *
+             * @async
+             * @function
+             * @param {string} token 
+             * @param {Object} data 
+             * @returns {Object} 
+             */
+            const response = await modifyUserInfo(token, data);
+
+            if (response.data) {
+                console.log("User information modified successfully!");
+            } else {
+                console.log("Error in modifying user information:", response.error);
+            }
+        } catch (error) {
+            /**
+             * Handles errors that may occur during the asynchronous operation.
+             *
+             * @param {Error} error 
+             */
+            console.error('Error during toggleSave:', error);
         }
     };
 
+    /**
+     * Handles the change event for input fields and updates the corresponding property in the user state.
+     *
+     * @function
+     * @param {Event} e - The event object representing the change event.
+     * @param {Object} e.target - The target element that triggered the event.
+     * @param {string} e.target.name - The name attribute of the target element, representing the property to update.
+     * @param {string} e.target.value - The new value of the target element.
+     */
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
 
+        /**
+         * Update the corresponding property in the user state.
+         *
+         * @function
+         * @param {Object} user - The current user state.
+         * @param {string} name - The name of the property to update.
+         * @param {string} value - The new value for the property.
+         */
+        setUser({ ...user, [name]: value });
     };
 
+    /**
+     * Handles the change event for selecting a new image file, updates the profile image preview, and sets the image URL in the user state.
+     *
+     * @function
+     * @param {Event} e - The event object representing the change event.
+     * @param {Object} e.target - The target element that triggered the event.
+     * @param {FileList} e.target.files - The array-like object representing the selected files.
+     * @param {File} e.target.files[0] - The first selected file, representing the new image file.
+     */
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -64,6 +140,7 @@ const UserProfile = () => {
             reader.readAsDataURL(file);
         }
     };
+
     return (
         <div className="flex flex-col relative w-full p-3 rounded-md justify-center md:justify-start items-center md:items-start mt-4">
 
