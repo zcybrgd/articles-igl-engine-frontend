@@ -6,7 +6,7 @@ import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
 
-function UploadSection() {
+function UploadSection({ setIsUploading }) {
 
     const [fileType, setFileType] = useState('file');
     const [file, setFile] = useState(null);
@@ -35,6 +35,7 @@ function UploadSection() {
         if (!isSearchActive) {
             setIsSearchActive(true);
         } else {
+            setIsUploading(true)
             try {
                 if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
                     console.log("inside the iff");
@@ -52,6 +53,7 @@ function UploadSection() {
                 console.error('Error during upload:', error);
                 setError('Error during upload. Please try again.');
             }
+            setIsUploading(false)
         }
     };
 
