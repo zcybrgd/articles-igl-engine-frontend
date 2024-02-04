@@ -163,24 +163,40 @@ const NavbarHome = ({ userRole }) => {
                         ) : (
                             //moderator part
                             <>
-                                {mod && (
-                                    <>
-                                        <div className='flex flex-col'>
-                                            <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                                {mod.firstName} {mod.familyName}
-                                            </b>
-                                            <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
-                                                Moderator
-                                            </b>
+                                <>
+                                    <div className='flex flex-col'>
+                                        {mod && (
+                                            <>
+                                                <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
+                                                    {mod.firstName} {mod.familyName}
+                                                </b>
+                                                <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
+                                                    Moderator
+                                                </b>
+                                            </>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <img
+                                            className="w-12 h-12 rounded-full mx-3 mt-1.5 cursor-pointer"
+                                            onClick={toggleDropdown}
+                                            src={avatar}  //user.imgurl
+                                        />
+                                    </div>
+                                    {isOpen && (
+                                        <div className="absolute right-3 top-7 mt-10 w-44 h-16 p-3 items-center justify-center bg-[#FFFFFF] text-base z-40 divide-gray-100 rounded shadow">
+                                            {/* logout button  */}
+                                            <div
+                                                onClick={handleLogout}
+                                                className="flex items-center p-2 pl-8 cursor-pointer border-2 border-[#707F65] text-black rounded-lg group transition-colors hover:bg-[#707F65] hover:text-white"
+                                            >
+                                                <VscSignOut className="text-2xl text-[#707F65] transition-colors group-hover:text-white" />
+                                                <p className="ms-3 whitespace-nowrap font-dmsansmedium transition-colors group-hover:text-white">Logout</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <img
-                                                className="w-12 h-12 rounded-full mx-3 mt-1.5"
-                                                src={avatar}  //user.imgurl
-                                            />
-                                        </div>
-                                    </>
-                                )}
+                                    )}
+                                </>
+
                             </>
                         )}
                     </div>
