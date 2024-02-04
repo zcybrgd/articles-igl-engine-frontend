@@ -1,34 +1,56 @@
 import React, { useState } from 'react';
 import Green from '../../assets/styling/green.svg'
 import { useAuth } from '../../context/AuthContext';
+import { modifyUserInfo } from '../../services/clientApi';
 
 const UserProfile = () => {
-    const { firstName, familyName, email, userName } = useAuth();
-    // You would typically get these user details from props or state
+    const { firstName, familyName, email, userName, token } = useAuth();
+
     const [editing, setEditing] = useState(false);
 
     // for testing
     const [user, setUser] = useState({
         userName: userName,
-        firstName: 'Noneed',
-        lastName: 'happy to help',
-        email: 'nano@example.com',
+        firstName: firstName,
+        familyName: familyName,
+        email: email,
         // imageUrl: 'https://via.placeholder.com/150',
         imageUrl: ''
     });
 
     console.log("firstName", firstName);
     console.log("familyName", familyName);
+    console.log("email", email)
+    console.log("username", userName)
+    console.log("token", token)
 
     const [profileImg, setProfileImg] = useState(user.imageUrl.length > 0 ? user.imageUrl : Green)
 
     const toggleEdit = () => {
         setEditing(!editing);
+    }
+
+    const toggleSave = async () => {
+        setEditing(!editing);
+        const data = {
+            userName: user.userName,
+            firstName: user.firstName,
+            familyName: user.familyName,
+            email: user.email,
+        };
+        const response = await modifyUserInfo(token, data);
+        if (response.data) {
+            console.log("client modified successfully!!")
+        }
+        else {
+            console.log("error in modifying the client info", response.error)
+        }
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
+
     };
 
     const handleImageChange = (e) => {
@@ -78,7 +100,7 @@ const UserProfile = () => {
                             id="userName"
                             name="userName"
                             type="text"
-                            value={userName}
+                            value={user.userName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -93,7 +115,7 @@ const UserProfile = () => {
                             id="firstName"
                             name="firstName"
                             type="text"
-                            value={firstName}
+                            value={user.firstName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -111,7 +133,7 @@ const UserProfile = () => {
                             id="email"
                             name="email"
                             type="email"
-                            value={email}
+                            value={user.email}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -122,10 +144,10 @@ const UserProfile = () => {
                             Family Name
                         </label>
                         <input
-                            id="lastName"
-                            name="lastName"
+                            id="familyName"
+                            name="familyName"
                             type="text"
-                            value={familyName}
+                            value={user.familyName}
                             readOnly={!editing}
                             onChange={handleChange}
                             className={`border-2 rounded-md border-[#707F65] w-4/5 text-black font-spacemono px-4 py-2 ${editing ? 'bg-white shadow-lg' : 'bg-[#F1F1F1]'} focus:outline-none focus:ring focus:border-[#707F65]`}
@@ -137,11 +159,11 @@ const UserProfile = () => {
             <div className="flex w-full justify-center items-center">
                 {editing ? (
                     <button
-                        onClick={toggleEdit}
+                        onClick={toggleSave}
                         className="px-4 py-2 bg-[#707F65] text-white font-spacemono rounded-md focus:outline-none focus:ring focus:border-blue-300 w-36"
                     >
                         Save changes
-                    </button>
+                    </button >
                 ) : (
                     <button
                         onClick={toggleEdit}

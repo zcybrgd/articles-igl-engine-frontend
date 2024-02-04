@@ -5,6 +5,11 @@ import { useAuth } from "../../context/AuthContext";
 import articleIcon from '../.././assets/icons/article.svg';
 import LoginAnimation from "../../assets/gifs/LoginAnimation.gif"
 
+/**
+ * Represents the login page component.
+ *
+ * @component
+ */
 const LoginPage = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
@@ -15,6 +20,12 @@ const LoginPage = () => {
     const [successfulMessage, setSuccessfulMessage] = useState(null)
 
 
+    /**
+     * Handles the login action asynchronously.
+     *
+     * @function
+     * @async
+     */
     const handleLogin = async () => {
         try {
             setErreur(null);
@@ -34,6 +45,10 @@ const LoginPage = () => {
                 password: password,
             }
 
+            /**
+             * The response from the login operation.
+             * @type {object}
+             */
             const response = await logIn(userData)
 
             if (response && response.data && response.data.token) {
@@ -41,7 +56,15 @@ const LoginPage = () => {
                 const userRole = response.data.user.role.toLowerCase();
 
                 if (userRole === 'client') {
+                    /**
+                     * The full response after logging in and fetching client information.
+                     * @type {object}
+                     * @property {string} token - The authentication token obtained during login.
+                     * @property {string} userId - The user ID obtained during login.
+                     * @property {object} clientInfo - Additional information about the client.
+                     */
                     const fullResponse = await clientInfo(response.data.token, response.data.user.id);
+
                     const userDataAndRole = {
                         userName: username,
                         password: password,
@@ -53,7 +76,18 @@ const LoginPage = () => {
                         email: fullResponse.client.email
                     };
 
+                    /**
+                     * The response from the login operation with extended user data and role.
+                     * @type {object}
+                     */
                     await login(userDataAndRole);
+
+                    /**
+                     * Navigates to the home page ("/") with the user's role and user data.
+                     *
+                     * @param {string} userRole - The role of the logged-in user.
+                     * @param {object} userData - Information about the logged-in user.
+                     */
                     navigate("/", { state: { userRole, user: response.data.user } });
                 }
                 else {
@@ -65,7 +99,18 @@ const LoginPage = () => {
                         id: response.data.user.id,
                     };
 
+                    /**
+                     * The response from the login operation with extended user data and role.
+                     * @type {object}
+                     */
                     await login(userDataAndRole);
+
+                    /**
+                     * Navigates to the home page ("/") with the user's role and user data.
+                     *
+                     * @param {string} userRole - The role of the logged-in user.
+                     * @param {object} userData - Information about the logged-in user.
+                     */
                     navigate("/", { state: { userRole, user: response.data.user } });
                 }
 
@@ -99,13 +144,24 @@ const LoginPage = () => {
         borderBottomLeftRadius: '20px',
     };
 
+    /**
+     * Navigates to the SignUp page ("/signup").
+     *
+     * @function
+     */
     function openSignUpPage() {
         try {
             navigate(`/signup`);
         } catch (error) {
+            /**
+             * Handles errors that may occur while navigating to the SignUp page.
+             *
+             * @param {Error} error - The error object thrown during navigation.
+             */
             console.error("Error loading SignUp Page:", error);
         }
     }
+
 
     return (
         <div className='absolute top-0 right-0 left-0 bg-black grid grid-cols-2 max-sm:h-full'>

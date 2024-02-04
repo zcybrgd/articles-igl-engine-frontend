@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
         setUserName(userData.userName);
         setToken(userData.token);
         setId(userData.id);
-        if (userData.userRole === 'client') {
+        if (userData.userRole === "client") {
             setFirstName(userData.firstName);
             setFamilyName(userData.familyName);
             setEmail(userData.email);

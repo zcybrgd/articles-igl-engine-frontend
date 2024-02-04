@@ -7,7 +7,6 @@ import LayoutWelcome from "./LayoutWelcome";
 import WelcomePage from "../pages/Welcome page/WelcomePage";
 import HomePage from "../pages/Welcome page/HomePage";
 import ProfilePage from "../pages/Profile/ProfilePage";
-import PageError404 from "../pages/Error/PageError404";
 import SettingsPage from "../pages/Settings/SettingsPage";
 import CollectionsPage from "../pages/Collections/CollectionsPage";
 import AdminPage from "../pages/Admin/AdminPage";
@@ -25,7 +24,6 @@ function Router() {
 
     return (
         <Routes>
-            <Route path="/404error" element={<PageError404 />} />
             {userRole ? (
                 userRole === "client" ? (
                     // client part 

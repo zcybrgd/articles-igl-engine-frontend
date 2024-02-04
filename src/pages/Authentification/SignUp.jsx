@@ -5,6 +5,11 @@ import SignupAnimation from "../../assets/gifs/SignUpAnimation.gif"
 import { AiFillPicture } from "react-icons/ai";
 import { signUp } from "../../services/authApi";
 
+/**
+ * Represents the SignUp page component.
+ *
+ * @component
+ */
 const SignUpPage = () => {
     const navigate = useNavigate();
 
@@ -19,6 +24,14 @@ const SignUpPage = () => {
 
     useEffect(() => {
         if (successfulMessage) {
+            /**
+             * Initiates a timer using setTimeout for a delayed operation.
+             *
+             * @function
+             * @param {Function} callback 
+             * @param {number} delay 
+             * @returns {number} 
+             */
             const timerId = setTimeout(() => {
                 openLogInPage();
             }, 4000);
@@ -27,10 +40,25 @@ const SignUpPage = () => {
         }
     }, [successfulMessage]);
 
+    /**
+     * Handles the change event when selecting a new profile picture.
+     *
+     * @function
+     * @param {Object} e - The event object representing the change event.
+     * @param {FileList} e.target.files - The array-like object representing the selected files.
+     * @param {File} e.target.files[0] - The first selected file, representing the new profile picture.
+     */
     const handleProfilePictureChange = (e) => {
         const file = e.target.files[0];
         setProfilePicture(file);
     };
+
+    /**
+     * Navigates to the Log In page ("/login").
+     *
+     * @function
+     * @throws {Error} Throws an error if there is an issue loading the Log In page.
+     */
     const openLogInPage = () => {
         try {
             navigate(`/login`);
@@ -39,6 +67,13 @@ const SignUpPage = () => {
         }
     };
 
+    /**
+     * Handles the sign-up action asynchronously.
+     *
+     * @function
+     * @async
+     * @throws {Error} Throws an error if there is an issue during the sign-up process.
+     */
     const handleSignUp = async () => {
         try {
             // reset the error 
@@ -53,6 +88,10 @@ const SignUpPage = () => {
                 userData.append('profile_picture', profilePicture);
             }
 
+            /**
+             * The response from the signup operation.
+             * @type {object}
+             */
             const response = await signUp(userData);
 
 

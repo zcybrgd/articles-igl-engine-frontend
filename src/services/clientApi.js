@@ -14,4 +14,17 @@ const modifyClient = async (token, clientId, clientData) => {
     }
 }
 
-export { modifyClient };
+const modifyUserInfo = async (token, data) => {
+    try {
+        const response = await axios.put("http://127.0.0.1:8000/us/client/modify", data, {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        });
+        return response.data
+    } catch (error) {
+        return error.response ? error.response.data : { error: 'An error occurred' };
+    }
+}
+
+export { modifyClient, modifyUserInfo };
