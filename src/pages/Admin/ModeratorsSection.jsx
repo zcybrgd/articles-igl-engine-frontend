@@ -5,26 +5,55 @@ import { AdmdeleteModerator, fetchModerators } from "../../services/modApi";
 import { useAuth } from "../../context/AuthContext";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { moderators } from "../../testing Data/ModeratorsList"
 
+
+/**
+ * List Of Moderators' part in the admin page
+ * @date 2/4/2024 - 5:38:52 PM
+ *
+ * @returns {*}
+ */
 function ModeratorsSection() {
     const navigate = useNavigate();
     const { token } = useAuth()
     const [moderators, setModerators] = useState([]);
 
+
     useEffect(() => {
+        /**
+        * Fetches moderators' data using the provided token and updates the component state with the obtained data.
+        *
+        * @throws {Error} 
+        */
         const fetchModeratorsData = async () => {
             try {
+                /**
+                 * Fetches moderators' data using the provided token.
+                 *
+                 * @param {string} token - The authentication token.
+                 * @returns {Promise<Array>} A promise that resolves to an array of moderators' data.
+                 */
                 const mods = await fetchModerators(token);
+
+                // Update the component state with the obtained moderators' data.
                 setModerators(mods);
             } catch (error) {
+                // Log an error message if there's an issue fetching moderators' data.
                 console.error("Error fetching moderators:", error);
             }
         };
 
+
         fetchModeratorsData();
     }, []);
 
+    /**
+    * Renders a list of moderators based on the current state. If there are 5 or fewer moderators,
+    * they are rendered without a scrollable container. If there are more than 5 moderators,
+    * a scrollable container is rendered.
+    *
+    * @returns {JSX.Element} 
+    */
     const renderModerators = () => {
         if (moderators && moderators.length <= 5) {
             // If there are 5 or fewer moderators, render them all.
@@ -51,10 +80,23 @@ function ModeratorsSection() {
         }
     };
 
+    /**
+    * Deletes a moderator with the specified ID and provides feedback via console logs and toasts.
+    *
+    * @param {string} modid - The ID of the moderator to be deleted.
+    * @throws {Error} Throws an error if there's an issue deleting the moderator.
+    */
     const deleteModerator = async (modid) => {
         console.log("mod id: ", modid);
 
         try {
+            /**
+            * Deletes a moderator using the provided token and moderator ID.
+            *
+            * @param {string} token 
+            * @param {string} modId 
+            * @returns {Promise<Array>} 
+            */
             const responsedata = await AdmdeleteModerator(token, modid);
 
             if (Array.isArray(responsedata) && responsedata.length > 0) {
@@ -80,16 +122,38 @@ function ModeratorsSection() {
         }
     };
 
+    /**
+    * Navigates to the 'modifyModerator' page with the specified moderator ID.
+    *
+    * @param {string} modid 
+    * @throws {Error} 
+    */
     const modifierModerator = async (modid) => {
         try {
+            /**
+            * Navigates to the 'modifyModerator' page with the specified moderator ID.
+            *
+            * @param {string} path 
+            * @param {Object} state 
+            */
             navigate(`/modifyModerator/${modid}`, { state: { modid } });
         } catch (error) {
             console.error("Error loading Add new moderator page:", error);
         }
     }
 
+    /**
+    * Navigates to the 'newModerator' page for adding a new moderator.
+    *
+    * @throws {Error} 
+    */
     function addModerator() {
         try {
+            /**
+            * Navigates to the 'newModerator' page for adding a new moderator.
+            *
+            * @param {string} path
+            */
             navigate(`/newModerator`);
         } catch (error) {
             console.error("Error loading Add new moderator page:", error);

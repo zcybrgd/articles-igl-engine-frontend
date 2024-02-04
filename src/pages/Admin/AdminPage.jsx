@@ -6,6 +6,13 @@ import Footer from '../../components/Shared/Footer/Footer';
 import StatsSection from "./StatsSection";
 import uploadAnimation from "../../assets/loader/Loader.mp4"
 
+
+/**
+ * Administrator's page
+ * @date 2/4/2024 - 5:38:04 PM
+ *
+ * @returns {*}
+ */
 function AdminPage() {
 
     const [isUploading, setIsUploading] = useState(false);

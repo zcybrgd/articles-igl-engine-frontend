@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { FiUpload } from "react-icons/fi";
-import ArticleIcon from "../../assets/icons/article.svg"
+import ArticleIcon from "../../assets/styling/articleIcon.svg"
 import logo from "../../assets/Logo/logo.png"
 import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { uploadPDF } from '../../services/uploadApi';
 
+
+/**
+ * Upload part in the admin page 
+ * @date 2/4/2024 - 5:01:10 PM
+ *
+ * @param {{ setIsUploading: any; }} param0
+ * @param {*} param0.setIsUploading
+ * @returns {*}
+ */
 function UploadSection({ setIsUploading }) {
 
     const [fileType, setFileType] = useState('file');
@@ -13,8 +22,14 @@ function UploadSection({ setIsUploading }) {
     const [url, setUrl] = useState('');
     const [error, setError] = useState(null);
     const [files, setFiles] = useState([]);
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
-
+    /**
+    * Handles the change event for file input. Filters selected files to only include
+    * valid PDF files and updates the component state accordingly.
+    *
+    * @param {ChangeEvent<HTMLInputElement>} e - The change event from the file input.
+    */
     const handleFileChange = (e) => {
         const selectedFiles = e.target.files;
         const validFiles = Array.from(selectedFiles).filter(files => files.type === 'application/pdf');
@@ -24,21 +39,36 @@ function UploadSection({ setIsUploading }) {
     };
 
 
-
+    /**
+    * Handles the change event for a URL input. Updates the component state with the new URL..
+    *
+    * @param {ChangeEvent<HTMLInputElement>} e - The change event from the file input.
+    */
     const handleUrlChange = (e) => {
         setUrl(e.target.value);
     };
 
-    const [isSearchActive, setIsSearchActive] = useState(false);
-
+    /**
+    * Handles the upload process based on the selected file type (file or URL).
+    * If the search is not active, it activates the search.
+    * If the search is active, it attempts to upload the selected files or URL.
+    * Logs information about the upload process.
+    *
+    * @throws {Error} Throws an error if an issue occurs during the upload process.
+    */
     const handleUpload = async () => {
+        /**
+        * Activates the search if it is not already active.
+        *
+        * @throws {Error} Throws an error if setting the search active state fails.
+        */
         if (!isSearchActive) {
             setIsSearchActive(true);
         } else {
-            setIsUploading(true)
             try {
+                setIsUploading(true)
                 if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
-                    console.log("inside the iff");
+                    console.log("inside the if");
 
                     const response = await uploadPDF(fileType === 'file' ? files : url);
 
@@ -49,11 +79,11 @@ function UploadSection({ setIsUploading }) {
                         console.log("Unexpected response structure:", response);
                     }
                 }
+                setIsUploading(false)
             } catch (error) {
                 console.error('Error during upload:', error);
                 setError('Error during upload. Please try again.');
             }
-            setIsUploading(false)
         }
     };
 

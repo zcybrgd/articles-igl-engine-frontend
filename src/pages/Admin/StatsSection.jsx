@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import BarChart from '../../components/Admin cards/BarChart';
 import PieChart from "../../components/Admin cards/PieChart";
 import StatCard from "../../components/Admin cards/StatCard";
@@ -6,98 +6,207 @@ import { useAuth } from "../../context/AuthContext";
 import { deletedArticles, totalArticles, unreviewedArticles, addedMods, modifiedArticles, validatedArticles, deletedMods, totalMods } from "../../services/statsApi";
 
 
-
+/**
+ * Statistics part in the admin page 
+ * @date 2/4/2024 - 5:47:20 PM
+ *
+ * @returns {*}
+ */
 function StatsSection() {
     const { token } = useAuth();
-    const [NumberTotalArticles,setNumberTotalArticles] = useState(0)
-    const [NumberWaitingArticles,setNumberWaitingArticles] = useState(0)
-    const [NumberDeletedArticles,setNumberDeletedArticles] = useState(0)
-    const [NumberModifiedArticles,setNumberModifiedArticles] = useState(0)
-    const [NumberValidatedArticles,setNumberValidatedArticles] = useState(0)
-    const [NumberTotalMods,setNumberTotalMods] = useState(0)
-    const [NumberAddedMods,setNumberAddedMods] = useState(0)
-    const [NumberDeletedMods,setNumberDeletedMods] = useState(0)
+    const [NumberTotalArticles, setNumberTotalArticles] = useState(0)
+    const [NumberWaitingArticles, setNumberWaitingArticles] = useState(0)
+    const [NumberDeletedArticles, setNumberDeletedArticles] = useState(0)
+    const [NumberModifiedArticles, setNumberModifiedArticles] = useState(0)
+    const [NumberValidatedArticles, setNumberValidatedArticles] = useState(0)
+    const [NumberTotalMods, setNumberTotalMods] = useState(0)
+    const [NumberAddedMods, setNumberAddedMods] = useState(0)
+    const [NumberDeletedMods, setNumberDeletedMods] = useState(0)
 
-    useEffect( ()=>{
-        const total = async () =>
-        {
+    useEffect(() => {
+
+        /**
+        * Fetches the total number of articles and updates the component state with the obtained total.
+        *
+        * @throws {Error} 
+        */
+        const total = async () => {
+            /**
+            * Fetches the total number of articles.
+            *
+            * @returns {Promise<{ total: number }>} 
+            */
             const response = await totalArticles()
-            if(response.total) {
+
+            if (response.total) {
                 setNumberTotalArticles(response.total);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const unreviewedTotal = async () =>
-        {
+
+
+        /**
+         * Fetches the total number of unreviewed articles and updates the component state with the obtained total.
+         *
+         * @throws {Error} 
+         */
+        const unreviewedTotal = async () => {
+            /**
+             * Fetches the total number of unreviewed articles.
+             *
+             * @returns {Promise<{ total: number }>} 
+             */
             const response = await unreviewedArticles()
-            if(response.total) {
+
+            if (response.total) {
                 setNumberWaitingArticles(response.total);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const deletedArticle = async () =>
-        {
+
+        /**
+         * Fetches the total number of deleted articles and updates the component state with the obtained total.
+         *
+         * @param {string} token - The authentication token.
+         * @throws {Error} Throws an error if there's an issue fetching the total number of deleted articles.
+         */
+        const deletedArticle = async () => {
+
+            /**
+             * Fetches the total number of deleted articles using the provided token.
+             *
+             * @param {string} token 
+             * @returns {Promise<{ deleted_articles: number }>} 
+             */
             const response = await deletedArticles(token)
-            if(response.deleted_articles) {
+
+            if (response.deleted_articles) {
                 setNumberDeletedArticles(response.deleted_articles);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const modifiedArticle = async () =>
-        {
+
+
+        /**
+         * Fetches the total number of modified articles and updates the component state with the obtained total.
+         *
+         * @param {string} token 
+         * @throws {Error}
+         */
+        const modifiedArticle = async () => {
+            /**
+             * Fetches the total number of modified articles using the provided token.
+             *
+             * @param {string} token 
+             * @returns {Promise<{ modified_articles: number }>} 
+             */
             const response = await modifiedArticles(token)
-            if(response.modified_articles) {
+
+            if (response.modified_articles) {
                 setNumberModifiedArticles(response.modified_articles);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const validatedArticle = async () =>
-        {
+
+        /**
+         * Fetches the total number of validated articles and updates the component state with the obtained total.
+         *
+         * @param {string} token 
+         * @throws {Error} 
+         */
+        const validatedArticle = async () => {
+            /**
+             * Fetches the total number of validated articles using the provided token.
+             *
+             * @param {string} token - The authentication token.
+             * @returns {Promise<{ validated_articles: number }>} A promise that resolves to an object containing the total number of validated articles.
+             */
             const response = await validatedArticles(token)
-            if(response.validated_articles) {
+
+            if (response.validated_articles) {
                 setNumberValidatedArticles(response.validated_articles);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const NumberTotalMods = async () =>
-        {
+
+        /**
+         * Fetches the total number of moderators and updates the component state with the obtained total.
+         *
+         * @param {string} token - The authentication token.
+         * @throws {Error} Throws an error if there's an issue fetching the total number of moderators.
+         */
+        const NumberTotalMods = async () => {
+            /**
+             * Fetches the total number of moderators using the provided token.
+             *
+             * @param {string} token - The authentication token.
+             * @returns {Promise<{ total_mods: number }>} A promise that resolves to an object containing the total number of moderators.
+             */
             const response = await totalMods(token)
-            if(response.total_mods) {
+
+            if (response.total_mods) {
                 setNumberTotalMods(response.total_mods);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const NumberAddedMods = async () =>
-        {
+
+        /**
+         * Fetches the total number of added moderators and updates the component state with the obtained total.
+         *
+         * @param {string} token - The authentication token.
+         * @throws {Error} Throws an error if there's an issue fetching the total number of added moderators.
+         */
+        const NumberAddedMods = async () => {
+            /**
+             * Fetches the total number of added moderators using the provided token.
+             *
+             * @param {string} token - The authentication token.
+             * @returns {Promise<{ added_mods: number }>} A promise that resolves to an object containing the total number of added moderators.
+             */
             const response = await addedMods(token)
-            if(response.added_mods) {
+
+            if (response.added_mods) {
                 setNumberAddedMods(response.added_mods);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
-        const NumberDeletedMods = async () =>
-        {
+
+        /**
+         * Fetches the total number of deleted moderators and updates the component state with the obtained total.
+         *
+         * @param {string} token - The authentication token.
+         * @throws {Error} Throws an error if there's an issue fetching the total number of deleted moderators.
+         */
+        const NumberDeletedMods = async () => {
+
+            /**
+             * Fetches the total number of deleted moderators using the provided token.
+             *
+             * @param {string} token - The authentication token.
+             * @returns {Promise<{ deleted_mods: number }>} A promise that resolves to an object containing the total number of deleted moderators.
+             */
             const response = await deletedMods(token)
-            if(response.deleted_mods) {
+
+            if (response.deleted_mods) {
                 setNumberDeletedMods(response.deleted_mods);
             } else {
-            console.log(response)
-            console.log('An error occurred :(');
-            } 
+                console.log(response)
+                console.log('An error occurred :(');
+            }
         };
         total();
         unreviewedTotal();
@@ -107,10 +216,10 @@ function StatsSection() {
         NumberTotalMods();
         NumberAddedMods();
         NumberDeletedMods();
-    },[]);
+    }, []);
 
     // testing data 
-    const BarchartData = [NumberValidatedArticles, NumberWaitingArticles, NumberDeletedArticles,  NumberModifiedArticles];
+    const BarchartData = [NumberValidatedArticles, NumberWaitingArticles, NumberDeletedArticles, NumberModifiedArticles];
     const PiechartData = [NumberAddedMods, NumberDeletedMods];
 
     //************** */

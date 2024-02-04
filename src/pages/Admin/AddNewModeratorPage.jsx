@@ -6,6 +6,13 @@ import { IoArrowBack } from "react-icons/io5";
 import { addModerator, fetchModeratorById, AdmModifyMod } from "../../services/modApi";
 import { useAuth } from "../../context/AuthContext";
 
+
+/**
+ * Add a new moderator to the list of moderators in the admin page
+ * @date 2/4/2024 - 6:49:59 PM
+ *
+ * @returns {*}
+ */
 function AddNewModeratorPage() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -25,9 +32,22 @@ function AddNewModeratorPage() {
 
     useEffect(() => {
         if (modId) {
+            /**
+             * Fetches existing moderator data by ID and updates the component state with the obtained data.
+             *
+             * @throws {Error} Throws an error if there's an issue fetching existing moderator data.
+             */
             const fetchExistingModerator = async () => {
                 try {
+                    /**
+                     * Fetches existing moderator data by ID.
+                     *
+                     * @param {string} modId - The ID of the moderator to fetch.
+                     * @param {string} token - The authentication token.
+                     * @returns {Promise<ExistingModerator>} A promise that resolves to an object containing existing moderator data.
+                     */
                     const existingModerator = await fetchModeratorById(modId, token);
+
                     setFirstName(existingModerator.firstName || '');
                     setFamilyName(existingModerator.familyName || '');
                     setUserName(existingModerator.userName || '');
@@ -43,6 +63,13 @@ function AddNewModeratorPage() {
         }
     }, []);
 
+
+    /**
+     * Add the new moderator 
+     * @date 2/4/2024 - 6:51:29 PM
+     *
+     * @async
+     */
     const AddModerator = async () => {
         const moddata = {
             userName: userName,
@@ -52,6 +79,14 @@ function AddNewModeratorPage() {
             password: password
         };
 
+        /**
+         * Handles the addition of a moderator based on moddata state.
+         *
+         * @param {string} token 
+         * @param {string} modId 
+         * @param {ModeratorData} moddata 
+         * @returns {Promise<ResponseData>} 
+         */
         const responsedata = await (isModifying ? AdmModifyMod(token, modId, moddata) : addModerator(token, moddata));
 
         if (!responsedata.error) {
@@ -63,8 +98,18 @@ function AddNewModeratorPage() {
         }
     };
 
+    /**
+     * Navigates back to the Admin page.
+     *
+     * @throws {Error} 
+     */
     function backtoAdminPage() {
         try {
+            /**
+             * Navigates back to the Admin page.
+             *
+             * @param {string} path 
+             */
             navigate(`/`);
         } catch (error) {
             console.error("Error loading Admin page:", error);
