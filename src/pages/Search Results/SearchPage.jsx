@@ -16,6 +16,12 @@ import { useSearchContext } from "../../context/SearchContext"
 import { fetchFilteredSearchResults } from "../../services/searchApi";
 
 
+/**
+ * Display results (articles) of the search + filters
+ * @date 2/4/2024 - 7:52:15 PM
+ *
+ * @returns {*}
+ */
 function SearchPage() {
     const navigate = useNavigate();
     const { results, setResultsData } = useSearchContext();
@@ -31,6 +37,12 @@ function SearchPage() {
     const [startdate, setstartdate] = useState(null);
     const [enddate, setenddate] = useState(null);
 
+    /**
+     * Handles the selection of a start date, formats it, and updates the state.
+     *
+     * @function
+     * @param {Date} date - The selected start date.
+     */
     const handleStartDateSelect = (date) => {
         if (date) {
             console.log("selected start date: ", date)
@@ -42,6 +54,12 @@ function SearchPage() {
         }
     };
 
+    /**
+     * Handles the selection of an end date, formats it, and updates the state.
+     *
+     * @function
+     * @param {Date} date - The selected end date.
+     */
     const handleEndDateSelect = (date) => {
         if (date) {
             console.log("selected end date: ", date)
@@ -53,6 +71,11 @@ function SearchPage() {
         }
     };
 
+
+    /**
+     * Validate the filters chosen 
+     * @date 2/4/2024 - 7:53:51 PM
+     */
     function handleValidateFilters() {
         if (Error) {
             setError(null)
@@ -86,18 +109,38 @@ function SearchPage() {
         }
     }
 
-
-    // search controlers 
+    /**
+     * Handles input change events, updating the search query state.
+     *
+     * @function
+     * @param {Object} event - The event object representing the input change event.
+     * @param {string} event.target.value - The new value of the input field.
+     */
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
+    /**
+     * Handles keydown events, triggering a search if the Enter key is pressed.
+     *
+     * @function
+     * @param {Object} event - The event object representing the keydown event.
+     * @param {string} event.key - The key that was pressed.
+     */
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             handleSearch();
         }
     };
 
+
+    /**
+     * Handles the asynchronous search action, logging the search query and updating the state with the search results.
+     *
+     * @async
+     * @function
+     * @throws {Error} Throws an error if fetching filtered search results fails.
+     */
     const handleSearch = async () => {
         try {
             console.log("you searched for: ", searchQuery);
@@ -108,13 +151,22 @@ function SearchPage() {
             console.error('Error searching articles:', error);
         }
     };
-    // **************
 
+    /**
+     * Opens the filter, logging the action and updating the state.
+     *
+     * @function
+     */
     function openFilter() {
         console.log("filter opened")
         setopenfilter(true)
     }
 
+    /**
+     * Navigates back to the home page.
+     *
+     * @function
+     */
     function backToHome() {
         try {
             navigate(`/`);

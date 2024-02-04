@@ -6,8 +6,14 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import { useSearchContext } from "../../context/SearchContext"
 import { fetchSearchResults } from "../../services/searchApi";
 import { HashLoader } from "react-spinners"
-// import { articles } from "../../testing Data/ArticlesData";
 
+
+/**
+ * Display the home page 
+ * @date 2/4/2024 - 7:58:46 PM
+ *
+ * @returns {*}
+ */
 function HomePage() {
     const navigate = useNavigate();
     const { results, setResultsData } = useSearchContext();
@@ -15,16 +21,38 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
+    /**
+     * Handles input change events, updating the search query state.
+     *
+     * @function
+     * @param {Object} event - The event object representing the input change event.
+     * @param {string} event.target.value - The new value of the input field.
+     */
     const handleInputChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
+    /**
+     * Handles keydown events, triggering a search if the Enter key is pressed.
+     *
+     * @function
+     * @param {Object} event - The event object representing the keydown event.
+     * @param {string} event.key - The key that was pressed.
+     */
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
             handleSearch();
         }
     };
 
+    /**
+     * Handles the asynchronous search action, logging the search query, fetching search results,
+     * updating the state with the results, and navigating to the results page.
+     *
+     * @async
+     * @function
+     * @throws {Error} Throws an error if fetching search results fails.
+     */
     const handleSearch = async () => {
         try {
             setIsLoading(true);
@@ -42,6 +70,11 @@ function HomePage() {
         }
     };
 
+    /**
+     * Navigates to the results page.
+     *
+     * @function
+     */
     function goToResultsPage() {
         try {
             navigate(`/search`);
