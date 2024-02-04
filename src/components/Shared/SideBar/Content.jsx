@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TiHomeOutline } from "react-icons/ti";
 import { FaUser } from "react-icons/fa6";
 import { IoBookmarkOutline, IoSettingsOutline } from "react-icons/io5";
@@ -8,11 +8,17 @@ import { openSidebarContext } from '../../../context/openSidebarContext';
 import { useAuth } from '../../../context/AuthContext';
 
 function Content() {
+    const navigate = useNavigate();
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
     const { logout } = useAuth()
 
     const logOutHandler = async () => {
-        logout();
+        try {
+            navigate(`/`);
+            logout()
+        } catch (error) {
+            console.error("Error loading FavoriArticlesListPage:", error);
+        }
     };
 
     return (
