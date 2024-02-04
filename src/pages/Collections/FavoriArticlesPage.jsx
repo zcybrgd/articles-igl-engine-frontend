@@ -4,8 +4,14 @@ import Paper from "../../assets/styling/paper.svg"
 import Article from "../../components/Article/Article";
 import { useAuth } from "../../context/AuthContext";
 import { displayFavorites } from "../../services/favoritesApi";
-// import { articles } from "../../testing Data/ArticlesData";
 
+
+/**
+ * Displays Articles in the collection
+ * @date 2/4/2024 - 7:39:02 PM
+ *
+ * @returns {*}
+ */
 function FavoriArticlesListPage() {
     const { token } = useAuth();
     const [articles, setArticles] = useState(0)
@@ -13,19 +19,54 @@ function FavoriArticlesListPage() {
     const collection = location.state.collection;
 
     useEffect(() => {
+        /**
+         * Fetches and displays the user's favorite articles asynchronously.
+         *
+         * @async
+         * @function
+         * @throws {Error} Throws an error if there is an issue loading the favorite articles.
+         */
         const favorites = async () => {
-            const response = await displayFavorites(token)
-            if (response.favorite_articles) {
-                setArticles(response.favorite_articles);
-            } else {
-                console.log(response)
-                console.error("Error loading FavoriArticlesListPage:");
+            try {
+                /**
+                 * Fetch and display the user's favorite articles.
+                 *
+                 * @function
+                 * @param {string} token 
+                 * @returns {Object}
+                 */
+                const response = await displayFavorites(token);
+
+                if (response.favorite_articles) {
+                    /**
+                     * Set the favorite articles in the component state.
+                     *
+                     * @function
+                     * @param {Array} articles 
+                     */
+                    setArticles(response.favorite_articles);
+                } else {
+                    console.log(response);
+                    /**
+                     * Handles errors when there is an issue loading the favorite articles.
+                     *
+                     * @throws {Error} 
+                     */
+                    console.error("Error loading Favorite Articles:", response);
+                }
+            } catch (error) {
+                /**
+                 * Handles errors that may occur during the asynchronous operation.
+                 *
+                 * @param {Error} error 
+                 */
+                console.error("Error during favorites operation:", error);
+                throw new Error("Failed to load favorite articles. Please try again.");
             }
         };
+
         favorites();
     }, [articles])
-
-
 
     return (
         <div className="flex flex-col items-start w-[100%] pl-5 md:pl-0">
