@@ -6,21 +6,38 @@ import quotesRight from "../../assets/blackQuotes/QuotesRight.svg"
 import quotesLeft from "../../assets/blackQuotes/QuotesLeft.svg"
 import { fetchArticles } from "../../services/articlesApi";
 import sorryAnimation from "../../assets/gifs/Noresults.gif"
-// import { articles } from "../../testing Data/ArticlesData";
 
+
+/**
+ * Display the moderator page
+ * @date 2/4/2024 - 7:40:54 PM
+ *
+ * @returns {*}
+ */
 function ModeratorPage() {
     const [moderatorData, setModeratorData] = useState(null);
-
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // const [loading, setLoading] = useState(false);
-
     useEffect(() => {
+        /**
+         * Fetches articles data asynchronously and updates the component state.
+         *
+         * @async
+         * @function
+         * @throws {Error} Throws an error if there is an issue fetching the articles.
+         */
         const fetchData = async () => {
             try {
+                /**
+                 * Fetch articles data using the fetchArticles function.
+                 *
+                 * @function
+                 * @returns {Array} An array of articles data.
+                 */
                 const articlesData = await fetchArticles();
+
                 setArticles(articlesData);
             } catch (error) {
                 setError(error.message);
