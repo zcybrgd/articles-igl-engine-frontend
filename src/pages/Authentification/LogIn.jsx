@@ -38,39 +38,39 @@ const LoginPage = () => {
 
             if (response && response.data && response.data.token) {
                 setSuccessfulMessage(`successful login, ${username} ! gonna redirect you in a sec`)
-                    const userRole = response.data.user.role.toLowerCase();
+                const userRole = response.data.user.role.toLowerCase();
 
-                    if (userRole === 'client') {
-                        const fullResponse = await clientInfo(response.data.token,response.data.user.id);
-                        const userDataAndRole = {
-                            userName: username,
-                            password: password,
-                            userRole: userRole,
-                            token: response.data.token,
-                            id: response.data.user.id,
-                            firstName: fullResponse.client.firstName,
-                            familyName: fullResponse.client.familyName,
-                            email: fullResponse.client.email
-                        };
+                if (userRole === 'client') {
+                    const fullResponse = await clientInfo(response.data.token, response.data.user.id);
+                    const userDataAndRole = {
+                        userName: username,
+                        password: password,
+                        userRole: userRole,
+                        token: response.data.token,
+                        id: response.data.user.id,
+                        firstName: fullResponse.client.firstName,
+                        familyName: fullResponse.client.familyName,
+                        email: fullResponse.client.email
+                    };
 
-                        await login(userDataAndRole);
-                        navigate("/", { state: { userRole, user: response.data.user } });
-                    }
-                    else {
-                        const userDataAndRole = {
-                            userName: username,
-                            password: password,
-                            userRole: userRole,
-                            token: response.data.token,
-                            id: response.data.user.id,
-                        };
+                    await login(userDataAndRole);
+                    navigate("/", { state: { userRole, user: response.data.user } });
+                }
+                else {
+                    const userDataAndRole = {
+                        userName: username,
+                        password: password,
+                        userRole: userRole,
+                        token: response.data.token,
+                        id: response.data.user.id,
+                    };
 
-                        await login(userDataAndRole);
-                        navigate("/", { state: { userRole, user: response.data.user } });
-                    }
-                
+                    await login(userDataAndRole);
+                    navigate("/", { state: { userRole, user: response.data.user } });
+                }
 
-                // hihi :)
+
+                // for testing
                 // const userDataAndRole = {
                 //     userName: 'nadadjg',
                 //     password: 'password',
