@@ -17,39 +17,39 @@ import Maroua from "../../assets/members/Maroua.jpg"
 const members = [
     {
         id: 0,
-        image: Yasmine,
-        name: "Karou Yasmine",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem.",
+        image: Zaineb,
+        name: "Boukhetala Zaineb",
+        description: "Backend developer , DevOps and ML enthusiast",
     },
     {
         id: 1,
-        image: Zaineb,
-        name: "Boukhetala Zaineb",
-        description: "Part time student, full time anxious person",
+        image: Meriem,
+        name: "Bouyahiaoui Meriem",
+        description: "Backend developer , a tester and a hardworker",
     },
     {
         id: 2,
-        image: Meriem,
-        name: "Bouyahiaoui Meriem",
-        description: "A random student, but a queen most of the time",
+        image: Nada,
+        name: "Djedjig Nada",
+        description: "A deidcated frontend developer , a tester and is always learning and exploring new technologies",
     },
     {
         id: 3,
-        image: Nada,
-        name: "Djedjig Nada",
-        description: "Coder by choice, coffee by necessity.",
+        image: Dina,
+        name: "Mallek Dina",
+        description: "The team Leader, UI/UX Designer, Fullstack developer and a devoted Database Enthusiast",
     },
     {
         id: 4,
-        image: Dina,
-        name: "Mallek Dina",
-        description: "Proud Azazga Girl, Team lead and Gojo Saturo gf",
+        image: Maroua,
+        name: "Djabri Maroua",
+        description: "A Frontend Explorer, AI Enthusiast, and Mobile Dev with an insatiable thirst for learning!",
     },
     {
         id: 5,
-        image: Maroua,
-        name: "Djabri Maroua",
-        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem.",
+        image: Yasmine,
+        name: "Karou Yasmine",
+        description: "A Design and Backend enthusiast with a constant eagerness for learning and growth.",
     }
 ];
 
