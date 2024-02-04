@@ -10,57 +10,117 @@ import { updateArticle } from "../../services/articlesApi";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ * Calculates the maximum length based on the current window width.
+ *
+ * @returns {number} The maximum length determined by the current screen size.
+ */
 function calculateMaxLength() {
+    /**
+     * The maximum length for small screens (width <= 600 pixels).
+     * @type {number}
+     */
     const smallScreenMaxLength = 350;
+
+    /**
+     * The maximum length for medium screens (width <= 1024 pixels).
+     * @type {number}
+     */
     const mediumScreenMaxLength = 450;
+
+    /**
+     * The maximum length for large screens (width > 1024 pixels).
+     * @type {number}
+     */
     const largeScreenMaxLength = 600;
 
-    if (window.innerWidth <= 600) {
+    /**
+     * The current window width.
+     * @type {number}
+     */
+    const windowWidth = window.innerWidth;
+
+    if (windowWidth <= 600) {
         return smallScreenMaxLength;
-    } else if (window.innerWidth <= 1024) {
+    } else if (windowWidth <= 1024) {
         return mediumScreenMaxLength;
     } else {
         return largeScreenMaxLength;
     }
 }
 
+
+/**
+ * Displaying the whole text of an article 
+ * @date 2/4/2024 - 7:10:04 PM
+ *
+ * @param {{ onClose: any; articleContent: any; userRole: any; getText: any; articleId: any; }} param0
+ * @param {*} param0.onClose
+ * @param {*} param0.articleContent
+ * @param {*} param0.userRole
+ * @param {*} param0.getText
+ * @param {*} param0.articleId
+ * @returns {*}
+ */
 function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleId }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(articleContent);
 
+    /**
+ * Sets the component state to indicate that the user is in editing mode.
+ */
     const handleEditClick = () => {
+        /**
+         * Sets the component state to indicate that the user is in editing mode.
+         *
+         * @param {boolean} isEditing 
+         */
         setIsEditing(true);
     };
 
+    /**
+     * Handles the change in the text input and updates the corresponding state.
+     *
+     * @param {Object} event 
+     */
     const handleTextChange = (event) => {
+        /**
+         * Sets the component state with the edited text.
+         *
+         * @param {string} editedText 
+         */
         setEditedText(event.target.value);
     };
 
+    /**
+     * Handles the click on the save button, saves the edited text, and exits editing mode.
+     */
     const handleSaveClick = async () => {
-        console.log("text saved")
-        getText(editedText)
+        console.log("Text saved");
 
-        // const editedData = {
-        //     text: editedText
-        // };
-        // console.log('edited data: ', editedData)
-        // const isSuccess = await updateArticle(articleId, editedData);
-        // if (isSuccess) {
-        //     console.log('Text of Article updated successfully');
-        //     toast.success('Text of Article updated successfully', {
-        //         position: toast.POSITION.TOP_CENTER,
-        //         autoClose: 2000,
-        //     });
-        // } else {
-        //     console.error('Failed to update article');
-        // }
+        /**
+         * Calls the `getText` function with the edited text and exits editing mode.
+         *
+         * @param {string} editedText 
+         */
+        getText(editedText);
 
+        // Set the editing mode to false.
         setIsEditing(false);
     };
+
 
     const [currentPage, setCurrentPage] = useState(0);
 
     const maxLength = calculateMaxLength();
+
+    /**
+     * Splits a given string into parts with a specified maximum length.
+     *
+     * @param {string} str - The input string to be split.
+     * @param {number} maxLength - The maximum length for each part.
+     * @returns {string[]} An array containing parts of the input string based on the specified maximum length.
+     */
     function splitString(str, maxLength) {
         const parts = [];
         for (let i = 0; i < str.length; i += maxLength) {
@@ -69,15 +129,37 @@ function FulldetailsPopUp({ onClose, articleContent, userRole, getText, articleI
         return parts;
     }
 
+    /**
+     * An array containing parts of the edited text based on the specified maximum length.
+     * @type {string[]}
+     */
     const pages = splitString(editedText, maxLength);
 
+    /**
+     * Handles the action to navigate to the next page.
+     */
     const handleNextPage = () => {
+        /**
+         * Sets the current page based on the previous page value.
+         *
+         * @param {number} prevPage - The previous page index.
+         * @returns {number} The updated current page index.
+         */
         setCurrentPage((prevPage) =>
             prevPage < pages.length - 1 ? prevPage + 1 : prevPage
         );
     };
 
+    /**
+     * Handles the action to navigate to the previous page.
+     */
     const handlePrevPage = () => {
+        /**
+         * Sets the current page based on the previous page value.
+         *
+         * @param {number} prevPage 
+         * @returns {number} The updated current page index.
+         */
         setCurrentPage((prevPage) => (prevPage > 0 ? prevPage - 1 : prevPage));
     };
 

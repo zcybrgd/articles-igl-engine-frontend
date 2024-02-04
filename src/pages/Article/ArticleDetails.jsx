@@ -9,21 +9,19 @@ import { deleteArticle, validateArticle, updateArticle } from "../../services/ar
 import { addFavorite } from "../../services/favoritesApi";
 import { useAuth } from "../../context/AuthContext";
 
+
+/**
+ * Display all details of the article (title, summary, authors, ...) and allows editing for moderators
+ * @date 2/4/2024 - 6:56:41 PM
+ *
+ * @returns {*}
+ */
 function ArticleDetails() {
     const { token } = useAuth()
     const location = useLocation();
     const article = location.state.article;
     const userRole = location.state.role;
     const navigate = useNavigate();
-
-    //open and close full article popup
-    const viewFullArticle = () => {
-        setFullModeOpen(true);
-    };
-
-    const closeCard = () => {
-        setFullModeOpen(false);
-    };
 
     const [isEditing, setIsEditing] = useState(false);
     const [bookMarkClicked, setBookMarkClicked] = useState(false);
@@ -39,14 +37,62 @@ function ArticleDetails() {
     const [editedDate, setEditedDate] = useState(article.date ? article.date : '');
     const [newText, setnewText] = useState(article.text ? article.text : '');
 
+
+    /**
+     * Open the full article popup
+     */
+    const viewFullArticle = () => {
+        /**
+         * Sets the component state to open the full mode for viewing the article.
+         *
+         * @param {boolean} isFullModeOpen - 
+         */
+        setFullModeOpen(true);
+    };
+
+    /**
+     * Close the full article popup
+     */
+    const closeCard = () => {
+        /**
+         * Sets the component state to close the full mode.
+         *
+         * @param {boolean} isFullModeOpen - 
+         */
+        setFullModeOpen(false);
+    };
+
+    /**
+     * Sets the component state with the provided text and triggers the save action.
+     *
+     * @param {string} text - The text to be set in the component state.
+     */
     const getText = (text) => {
+        /**
+         * Sets the component state with the provided text.
+         *
+         * @param {string} newText 
+         */
         setnewText(text)
+
         handleSaveClick()
     }
 
+    /**
+     * Handles the validation of an article and navigates back to the main page upon success.
+     *
+     * @throws {Error} Throws an error if there's an issue validating the article.
+     */
     const handleValidateArticle = async () => {
         console.log("article validated")
         try {
+            /**
+             * Validates the article with the provided ID using the authentication token.
+             *
+             * @param {string} articleId - The ID of the article to validate.
+             * @param {string} authToken - The authentication token.
+             * @returns {Promise<boolean>} A promise that resolves to a boolean indicating the success of the validation.
+             */
             const isSuccess = await validateArticle(article.id, token)
 
             if (isSuccess) {
@@ -67,16 +113,37 @@ function ArticleDetails() {
         } catch (error) {
             console.error('Error handling delete click', error);
         }
-        // j'ajoute validated count     
     };
+
+    /**
+     * Sets the component state to indicate that the editing mode should be enabled.
+     */
     const handleEditClick = () => {
+        /**
+         * Sets the component state to indicate that the editing mode should be enabled.
+         *
+         * @param {boolean} isEditing 
+         */
         setIsEditing(true);
     };
 
+    /**
+     * Handles the deletion of an article and navigates back to the main page upon success.
+     *
+     * @throws {Error} Throws an error if there's an issue deleting the article.
+     */
     const handleDeleteClick = async () => {
-        console.log("article deleted")    //nbdlo etat tae l'article beli "deleted" besh n'affichiwh f admin page
+        console.log("article deleted")
         try {
             console.log(token)
+
+            /**
+             * Deletes the article with the provided ID using the authentication token.
+             *
+             * @param {string} articleId - The ID of the article to delete.
+             * @param {string} authToken - The authentication token.
+             * @returns {Promise<boolean>} A promise that resolves to a boolean indicating the success of the deletion.
+             */
             const isSuccess = await deleteArticle(article.id, token);
 
             if (isSuccess) {
@@ -97,6 +164,9 @@ function ArticleDetails() {
         // j'ajoute deleted count        
     };
 
+    /**
+     * Handles the saving of edited article data and updates the article upon success.     
+     */
     const handleSaveClick = async () => {
         console.log("data saved")
 
@@ -113,7 +183,7 @@ function ArticleDetails() {
         console.log('new refrences: ', newRefrencesArray);
 
         const editedData = {
-            authors: newAuthorsArray ? newAuthorsArray : " " ,
+            authors: newAuthorsArray ? newAuthorsArray : " ",
             institutions: newInstitutionsArray ? newInstitutionsArray : " ",
             keywords: editedKeywords ? editedKeywords : " ",
             title: editedTitle ? editedTitle : " ",
@@ -124,6 +194,15 @@ function ArticleDetails() {
         };
 
         console.log("article: ", editedData)
+
+        /**
+         * Updates the article with the provided ID using the edited data and authentication token.
+         *
+         * @param {string} articleId - The ID of the article to update.
+         * @param {Object} editedArticleData - The edited data for updating the article.
+         * @param {string} authToken - The authentication token.
+         * @returns {Promise<boolean>} A promise that resolves to a boolean indicating the success of the update.
+         */
         const isSuccess = await updateArticle(article.id, editedData, token);
         if (isSuccess) {
             console.log('Article updated successfully');
@@ -137,10 +216,22 @@ function ArticleDetails() {
         setIsEditing(false);
     };
 
+    /**
+     * Cancels the editing process and reverts the changes to the original article data.
+     */
     const handleCancelClick = () => {
         console.log("editing cancelled")
 
-        // Cancel the editing, revert the changes
+        /**
+         * Reverts the changes to the original article data in the component state.
+         *
+         * @param {string} 
+         * @param {string} 
+         * @param {string} 
+         * @param {string} 
+         * @param {string} 
+         * @param {string} 
+         */
         setIsEditing(false);
         setEditedKeywords(article.keywords);
         setEditedInstitutions(article.institutions.join(', '));
@@ -150,38 +241,125 @@ function ArticleDetails() {
         setEditedDate(article.date)
     };
 
+    /**
+     * Handles the change in keywords input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleKeywordsChange = (event) => {
+        /**
+         * Sets the component state with the edited keywords.
+         *
+         * @param {string} editedKeywords - The edited keywords to be set in the component state.
+         */
         setEditedKeywords(event.target.value);
     };
 
+    /**
+     * Handles the change in institutions input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleInstitutionsChange = (event) => {
+        /**
+         * Sets the component state with the edited institutions.
+         *
+         * @param {string} editedInstitutions - The edited institutions to be set in the component state.
+         */
         setEditedInstitutions(event.target.value);
     };
 
+    /**
+     * Handles the change in authors input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleAuthorsChange = (event) => {
+        /**
+         * Sets the component state with the edited authors.
+         *
+         * @param {string} editedAuthors - The edited authors to be set in the component state.
+         */
         setEditedAuthors(event.target.value);
     };
 
+    /**
+     * Handles the change in references input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleRefChange = (event) => {
-        setEditedRef(event.target.value);
+        /**
+         * Sets the component state with the edited references.
+         *
+         * @param {string} editedReferences - The edited references to be set in the component state.
+         */
+        setEditedReferences(event.target.value);
     };
 
+    /**
+     * Handles the change in title input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleTitleChange = (event) => {
+        /**
+         * Sets the component state with the edited title.
+         *
+         * @param {string} editedTitle - The edited title to be set in the component state.
+         */
         setEditedTitle(event.target.value);
     };
 
+    /**
+     * Handles the change in abstract input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleAbstractChange = (event) => {
+        /**
+         * Sets the component state with the edited abstract.
+         *
+         * @param {string} editedAbstract - The edited abstract to be set in the component state.
+         */
         setEditedAbstract(event.target.value);
     };
+
+    /**
+     * Handles the change in date input and updates the corresponding state.
+     *
+     * @param {Object} event - The change event object.
+     */
     const handleDateChange = (event) => {
+        /**
+         * Sets the component state with the edited date.
+         *
+         * @param {string} editedDate - The edited date to be set in the component state.
+         */
         setEditedDate(event.target.value);
     };
 
-
+    /**
+     * Adds the article to the user's collection of favorites.
+     *
+     * @throws {Error} Throws an error if there's an issue adding the article to the collection.
+     */
     const addArticleToCollection = async () => {
+        /**
+         * Sets the component state to indicate that the bookmark button is clicked.
+         *
+         * @param {boolean} isBookMarkClicked - The state indicating whether the bookmark button is clicked or not.
+         */
         setBookMarkClicked(true)
         console.log("article added id:", article.id)
 
+        /**
+         * Adds the article with the provided ID to the user's favorites using the authentication token.
+         *
+         * @param {string} authToken - The authentication token.
+         * @param {string} articleId - The ID of the article to add to the favorites.
+         * @returns {Promise<{error: string, message: string}>} A promise that resolves to an object containing an error message or a success message.
+         */
         const responsedata = await addFavorite(token, article.id)
         if (!responsedata.error) {
             toast.success(responsedata.message, {
@@ -196,9 +374,16 @@ function ArticleDetails() {
         }
     }
 
+    /**
+     * Opens the PDF version of the article in a new browser tab.
+     */
     function openArticlesPdf() {
         console.log("article opened pdf id:", article.id)
 
+        /**
+         * The URL of the PDF version of the article.
+         * @type {string}
+         */
         const url = article.urlPdf;
         window.open(url, '_blank', 'noopener noreferrer');
     }
