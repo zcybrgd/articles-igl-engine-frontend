@@ -2,7 +2,7 @@ import axios from "axios";
 const api = 'http://127.0.0.1:8000/us';
 const fetchModerators = async (token) => {
     try {
-        const response = await axios.get(`${api}/mods`,{
+        const response = await axios.get(`${api}/mods/display`,{
             headers: {
                 Authorization: `Token ${token}`,
             },

@@ -13,20 +13,6 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
     const { mobileOpen, setMobileOpen } = useContext(openSidebarContext);
     const [mod, setMod] = useState(null);
 
-    useEffect(() => {
-        const fetchModeratorData = async () => {
-            if (userRole === 'moderator') {
-                try {
-                    const modData = await fetchModeratorByUsername(userName);
-                    setMod(modData);
-                } catch (error) {
-                    console.error("Error fetching moderator:", error);
-                }
-            }
-        };
-
-        fetchModeratorData();
-    }, [userRole, userName]);
 
     function backToHome() {
         try {
@@ -118,12 +104,12 @@ const NavBar = ({ userRole, article, pageCallingArticle }) => {
                             </>
                         ) : userRole === "moderator" && (
                             <>
-                                {mod && (
+                                {mod || (
                                     <>
 
                                         <div className='flex flex-col'>
                                             <p className={`xl:px-[40px] mr-3 mt-1 lg:mt-0 ${!article ? 'text-black' : 'text-[#F1F1F1]'} font-dmsansmedium text-[20px] lg:text-[24px] xl:text-[32px]`}>
-                                                {mod.firstName} {mod.familyName}
+                                                {userName} 
                                             </p>
                                             <p className={`ml-7 xl:px-[40px]  lg:mt-0 ${!article ? 'text-[#969796]' : 'text-[#0C0C0C91]'} font-dmsansmedium text-[15px]`}>
                                                 Moderator

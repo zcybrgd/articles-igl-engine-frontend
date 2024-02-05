@@ -30,7 +30,7 @@ const Footer = () => {
      * @returns {void} 
      */
     function goGithub() {
-        const url = 'https://github.com/zcybrgd/articles-igl-engine-frontend';
+        const url = 'https://github.com/zcybrgd';
         window.open(url, '_blank', 'noopener noreferrer');
     }
 
@@ -42,7 +42,7 @@ const Footer = () => {
                     <p className='text-black text-[15px] font-dmsansbold'>Savantia</p>
                 </div>
                 <div className='justify-center items-center text-center'>
-                    <p className='text-black text-[14px] font-dmsans'>The home for thousands of Scientific Articles</p>
+                    <p className='text-black text-[14px] font-dmsans'>The home for thousands of Scientific Articles. Search, Filter, Explore and Learn </p>
                 </div>
             </div>
             <div className='flex flex-row w-full md:w-auto'>

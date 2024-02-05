@@ -56,13 +56,13 @@ function UploadSection({ setIsUploading }) {
     *
     * @throws {Error} Throws an error if an issue occurs during the upload process.
     */
-    const handleUpload = async () => {
+    /*const handleUpload = async () => {
         /**
         * Activates the search if it is not already active.
         *
         * @throws {Error} Throws an error if setting the search active state fails.
         */
-        if (!isSearchActive) {
+      /*  if (!isSearchActive) {
             setIsSearchActive(true);
         } else {
             try {
@@ -85,8 +85,35 @@ function UploadSection({ setIsUploading }) {
                 setError('Error during upload. Please try again.');
             }
         }
+    };*/
+    const handleUpload = async () => {
+        if (!isSearchActive) {
+            setIsSearchActive(true);
+        } else {
+            try {
+                setIsUploading(true); // Start loader
+
+                if ((fileType === 'file' && files.length > 0) || (fileType === 'url' && url)) {
+                    console.log("inside the if");
+
+                    const response = await uploadPDF(fileType === 'file' ? files : url);
+
+                    if (response && response.message) {
+                        console.log("Here is our response message: " + response.message);
+                    } else {
+                        console.log("Unexpected response structure:", response);
+                    }
+                }
+            } catch (error) {
+                console.error('Error during upload:', error);
+                setError('Error during upload. Please try again.');
+            } finally {
+                setIsUploading(false); // Stop loader regardless of success or failure
+            }
+        }
     };
 
+ 
     return (
         <div className="flex flex-col pb-10 border-2 rounded-3xl">
             <div className="flex flex-row rounded-t-3xl bg-[#707F65] p-2 items-center justify-start">

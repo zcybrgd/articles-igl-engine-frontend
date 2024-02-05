@@ -18,20 +18,20 @@ const members = [
     {
         id: 0,
         image: Zaineb,
-        name: "Boukhetala Zaineb",
-        description: "Backend developer , DevOps and ML enthusiast",
+        name: "Boukhetala Zaïneb",
+        description: "Backend Developer, DevOps and ML enthusiast",
     },
     {
         id: 1,
         image: Meriem,
         name: "Bouyahiaoui Meriem",
-        description: "Backend developer , a tester and a hardworker",
+        description: "Backend Developer , a tester and a hardworker",
     },
     {
         id: 2,
         image: Nada,
         name: "Djedjig Nada",
-        description: "A deidcated frontend developer , a tester and is always learning and exploring new technologies",
+        description: "A dedicated Frontend Developer, a tester and is always learning and exploring new technologies",
     },
     {
         id: 3,

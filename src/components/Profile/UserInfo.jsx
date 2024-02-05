@@ -18,12 +18,6 @@ const UserProfile = () => {
         imageUrl: ''
     });
 
-    console.log("firstName", firstName);
-    console.log("familyName", familyName);
-    console.log("email", email)
-    console.log("username", userName)
-    console.log("token", token)
-
     const [profileImg, setProfileImg] = useState(user.imageUrl.length > 0 ? user.imageUrl : Green)
 
     /**

@@ -20,20 +20,6 @@ const NavbarHome = ({ userRole }) => {
         logout();
     };
 
-    useEffect(() => {
-        const fetchModeratorData = async () => {
-            if (userRole === 'moderator') {
-                try {
-                    const modData = await fetchModeratorByUsername(userName);
-                    setMod(modData);
-                } catch (error) {
-                    console.error("Error fetching moderator:", error);
-                }
-            }
-        };
-
-        fetchModeratorData();
-    }, [userRole, userName]);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -165,10 +151,10 @@ const NavbarHome = ({ userRole }) => {
                             <>
                                 <>
                                     <div className='flex flex-col'>
-                                        {mod && (
+                                        {mod || (
                                             <>
                                                 <b className="xl:px-[40px] mr-3 mt-1 lg:mt-0 font-semibold text-black text-[20px] lg:text-[24px] xl:text-[32px]">
-                                                    {mod.firstName} {mod.familyName}
+                                                   {userName}
                                                 </b>
                                                 <b className="ml-7 xl:px-[40px]  lg:mt-0 font-semibold text-[#969796] text-[15px]">
                                                     Moderator
